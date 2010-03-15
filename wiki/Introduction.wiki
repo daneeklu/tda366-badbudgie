@@ -1,0 +1,11 @@
+#summary introduction to bad budgie
+
+= Introduction =
+
+Here you will see some information about *bad budgie*
+
+
+= Details =
+
+Bad budgie is a sidescrolling game for PC, made in Java using OpenGL (?)
+The game is made as part of the IT programme at Chalmers.
