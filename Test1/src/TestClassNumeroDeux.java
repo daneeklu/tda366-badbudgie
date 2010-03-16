@@ -19,5 +19,10 @@ public class TestClassNumeroDeux {
 		System.out.println(1+1);
 		
 	}
+	
+	//This comment is commenting the previous comment; it was a good comment to comment.
+	public int bond(){
+		return 007;
+	}
 
 }
