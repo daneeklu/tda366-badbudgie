@@ -9,6 +9,13 @@ public class TestClassNumeroDeux {
 	
 	
 	public void doesStuff(){
+		
+		int femton = 15;
+		
+		for (int i = 0; i < femton; i++) {
+			System.out.println(i + " is less than " + femton);
+		}
+
 		System.out.println(1+1);
 		
 	}
