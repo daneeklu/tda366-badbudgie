@@ -3,7 +3,7 @@
  * 
  * Integral part which does some important thing very good and cannot be deleted, ever!
  * @author jesper
- *
+ *Blablabal
  */
 public class TestClassNumeroDeux {
 	
