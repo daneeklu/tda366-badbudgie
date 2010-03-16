@@ -8,6 +8,9 @@
 public class TestClassNumeroDeux {
 	
 	
-	public void doesStuff(){}
+	public void doesStuff(){
+		System.out.println(1+1);
+		
+	}
 
 }
