@@ -1,4 +1,4 @@
-import javax.media.opengl.*;
+import javax.media.opengl.GL;
 /**
  * Allows an object of the implementing class to draw 
  * graphic content to a canvas through a GL object.
@@ -7,6 +7,7 @@ import javax.media.opengl.*;
  * 
  */
 public interface Drawable {
+	
 	/**
 	 * Draws graphical shapes or textures using OpenGL.
 	 * @param gl the GL object which will handle the calls to the primitive functions.
