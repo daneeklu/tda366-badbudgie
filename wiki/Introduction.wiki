@@ -7,5 +7,6 @@ Here you will see some information about *bad budgie*
 
 = Details =
 
-Bad budgie is a sidescrolling game for PC, made in Java using OpenGL (?)
+Bad budgie is a sidescrolling game for the java runtime engine, using the JOGL wrapper library for hardware rendering.
+
 The game is made as part of the IT programme at Chalmers.
