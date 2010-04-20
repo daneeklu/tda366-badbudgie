@@ -34,7 +34,7 @@ public class Polygon {
 	 * @return the list of vertices.
 	 */
 	public List<Vector> getVertices() {
-		return vertices.;
+		return vertices;
 	}
 	
 	
