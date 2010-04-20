@@ -138,5 +138,10 @@ public class Vector {
 	public Vector perpendicularCCW() {
 		return new Vector(-y, x);
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + x + " , " + y + "]";
+	}
 
 }

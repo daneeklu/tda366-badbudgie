@@ -17,6 +17,7 @@ public class Physics implements IPhysics{
 
 	/**
 	 * Checks to see it there is a collision between two convex polygons. 
+	 * The vertices must be positioned counter-clockwise or the opposite vector will be returned.
 	 * If there is a collision it returns a vector representing the minimal 
 	 * translation necessary to move 'a' so that it is not overlapping 'b', else null.
 	 * 
@@ -27,7 +28,7 @@ public class Physics implements IPhysics{
 	 * @return The minimum translation vector directed towards the first 
 	 * polygon, or null if there is no overlap.
 	 */
-	private Vector checkCollisionSAT(Polygon a, Polygon b) {
+	public Vector checkCollisionSAT(Polygon a, Polygon b) { // public for the sake of testing
 
 		ArrayList<Vector> aVerts = new ArrayList<Vector>();
 		ArrayList<Vector> bVerts = new ArrayList<Vector>();
@@ -43,8 +44,8 @@ public class Physics implements IPhysics{
 			p1 = aVerts.get(i);
 			p2 = aVerts.get((i + 1 == aVerts.size()) ? 0 : i + 1);
 			
-			Vector normal = p2.subtract(p1).perpendicularCW();
-			normal = normal.normalize().scalarMultiplication(-1);
+			Vector normal = p2.subtract(p1).perpendicularCCW();
+			normal = normal.normalize();
 			
 			normals.add(normal);
 			
@@ -57,8 +58,8 @@ public class Physics implements IPhysics{
 			p1 = bVerts.get(i);
 			p2 = bVerts.get((i + 1 == bVerts.size()) ? 0 : i + 1);
 			
-			Vector normal = p2.subtract(p1).perpendicularCW();
-			normal = normal.normalize();
+			Vector normal = p2.subtract(p1).perpendicularCCW();
+			normal = normal.normalize().scalarMultiplication(-1);
 			
 			normals.add(normal);
 			
