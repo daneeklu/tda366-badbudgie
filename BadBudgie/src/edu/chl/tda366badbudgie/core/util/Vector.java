@@ -73,14 +73,6 @@ public class Vector {
 	public double dotProduct(Vector v) {
 		return x * v.x + y * v.y;
 	}
-	/**
-	 * Returns the cross product of this vector with a second vector v.
-	 * @param v the vector which will be multiplied to this.
-	 * @return the resulting vector.
-	 */
-	public Vector vectorProduct(Vector v) {
-		return new Vector(x * v.y - y * v.x, y * v.x - x * v.y);
-	}
 
 	/**
 	 * Returns the projection of this vector on a second vector c.
