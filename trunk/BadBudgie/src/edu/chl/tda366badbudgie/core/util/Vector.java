@@ -1,14 +1,14 @@
-package edu.chl.tda366badbudgie.core.physics;
+package edu.chl.tda366badbudgie.core.util;
 
 /**
  * Vector2D
  * 
  * Immutable class holding fields and methods for two-dimensional vectors with double precision.
  * 
- * @author kvarfordt, jesper
+ * @author dkvarfordt, jesper
  * 
  */
-public class Vector2D {
+public class Vector {
 	protected double x;
 	protected double y;
 
@@ -17,7 +17,7 @@ public class Vector2D {
 	 * @param x the x-coordinate.
 	 * @param y the y-coordinate.
 	 */
-	public Vector2D(double x, double y) {
+	public Vector(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -52,8 +52,8 @@ public class Vector2D {
 	 * @param s value of the scalar.
 	 * @return the multiplied vector
 	 */
-	public Vector2D scalarMultiplication(double s) {
-		return new Vector2D(x * s, y * s);
+	public Vector scalarMultiplication(double s) {
+		return new Vector(x * s, y * s);
 	}
 
 	/**
@@ -61,8 +61,8 @@ public class Vector2D {
 	 * @param s the scalar number to divide by.
 	 * @return the resulting vector.
 	 */
-	public Vector2D scalarDivision(double s) {
-		return new Vector2D(x / s, y / s);
+	public Vector scalarDivision(double s) {
+		return new Vector(x / s, y / s);
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class Vector2D {
 	 * @param v the vector which will be multiplied to this.
 	 * @return the resulting vector.
 	 */
-	public double dotProduct(Vector2D v) {
+	public double dotProduct(Vector v) {
 		return x * v.x + y * v.y;
 	}
 	/**
@@ -78,8 +78,8 @@ public class Vector2D {
 	 * @param v the vector which will be multiplied to this.
 	 * @return the resulting vector.
 	 */
-	public Vector2D vectorProduct(Vector2D v) {
-		return new Vector2D(x * v.y - y * v.x, y * v.x - x * v.y);
+	public Vector vectorProduct(Vector v) {
+		return new Vector(x * v.y - y * v.x, y * v.x - x * v.y);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Vector2D {
 	 * @param v the vector which this vector will be projected on.
 	 * @return the resulting vector.
 	 */
-	public Vector2D project(Vector2D v) {
+	public Vector project(Vector v) {
 		double vLengthSquared = v.x * v.x + v.y * v.y;
 		double scalarProd = dotProduct(v);
 		return v.scalarMultiplication(scalarProd / vLengthSquared);
@@ -98,8 +98,8 @@ public class Vector2D {
 	 * @param v the vector to be added to this vector.
 	 * @return the resulting vector.
 	 */
-	public Vector2D add(Vector2D v) {
-		return new Vector2D(x + v.x, y + v.y);
+	public Vector add(Vector v) {
+		return new Vector(x + v.x, y + v.y);
 	}
 	
 	/**
@@ -107,8 +107,8 @@ public class Vector2D {
 	 * @param v the vector to be subtracted from this vector.
 	 * @return the resulting vector.
 	 */
-	public Vector2D subtract(Vector2D v) {
-		return new Vector2D(x - v.x, y - v.y);
+	public Vector subtract(Vector v) {
+		return new Vector(x - v.x, y - v.y);
 	}
 	
 	/**
@@ -116,9 +116,9 @@ public class Vector2D {
 	 * The new vector will maintain the direction but have a length of 1.
 	 * @return the normalized vector.
 	 */
-	public Vector2D normalize() {
+	public Vector normalize() {
 		double mag = Math.sqrt(x * x + y * y);
-		return new Vector2D(x / mag, y / mag);
+		return new Vector(x / mag, y / mag);
 	}
 
 	/**
@@ -126,8 +126,8 @@ public class Vector2D {
 	 * perpendicular to the original and rotated clockwise. 
 	 * @return the clockwise perpendicular vector.
 	 */
-	public Vector2D perpendicularCW() {
-		return new Vector2D(y, -x);
+	public Vector perpendicularCW() {
+		return new Vector(y, -x);
 	}
 
 	/**
@@ -135,8 +135,8 @@ public class Vector2D {
 	 * perpendicular to the original and rotated conter-clockwise. 
 	 * @return the counter-clockwise perpendicular vector.
 	 */
-	public Vector2D perpendicularCCW() {
-		return new Vector2D(-y, x);
+	public Vector perpendicularCCW() {
+		return new Vector(-y, x);
 	}
 
 }
