@@ -78,19 +78,7 @@ public class VectorTest {
 
 		Vector cn = c.normalize();
 		
-		assertTrue(Math.abs(cn.getLength() - 1) < 0.000000000000001);
-		
-	}
-
-	@Test
-	public void testPerpendicularCW() {
-		
-		
-		
-	}
-
-	@Test
-	public void testPerpendicularCCW() {
+		assertTrue(Math.abs(cn.getLength() - 1) < 0.000000000000001); // not equal because of rounding errors
 		
 	}
 
