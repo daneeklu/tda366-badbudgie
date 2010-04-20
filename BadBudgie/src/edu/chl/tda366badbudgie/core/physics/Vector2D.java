@@ -3,7 +3,7 @@ package edu.chl.tda366badbudgie.core.physics;
 /**
  * Vector2D
  * 
- * Immutable class holding fields and methods for two-dimensional vectors.
+ * Immutable class holding fields and methods for two-dimensional vectors with double precision.
  * 
  * @author kvarfordt, jesper
  * 
@@ -23,7 +23,31 @@ public class Vector2D {
 	}
 	
 	/**
-	 * Multiples the values of the vector with a give scalar
+	 * Returns the length of the vectors x-component.
+	 * @return the length of the vectors x-component.
+	 */
+	public double getX() {
+		return x;
+	}
+	
+	/**
+	 * Returns the length of the vectors y-component.
+	 * @return the length of the vectors y-component.
+	 */
+	public double getY() {
+		return y;
+	}
+	
+	/**
+	 * Returns the length of the vector.
+	 * @return the length of the vector.
+	 */
+	public double getLength() {
+		return Math.sqrt(x * x + y * y);
+	}
+	
+	/**
+	 * Multiples the values of the vector with a given scalar
 	 * and returns the result.
 	 * @param s value of the scalar.
 	 * @return the multiplied vector
@@ -32,7 +56,11 @@ public class Vector2D {
 		return new Vector2D(x * s, y * s);
 	}
 
-	//Is this strictly speaking necessary? -Jesper
+	/**
+	 * Divides the vector length by a scalar number
+	 * @param s the scalar number to divide by.
+	 * @return the resulting vector.
+	 */
 	public Vector2D scalarDivision(double s) {
 		return new Vector2D(x / s, y / s);
 	}
@@ -42,7 +70,7 @@ public class Vector2D {
 	 * @param v the vector which will be multiplied to this.
 	 * @return the resulting vector.
 	 */
-	public double dot(Vector2D v) {
+	public double dotProduct(Vector2D v) {
 		return x * v.x + y * v.y;
 	}
 	/**
@@ -50,7 +78,7 @@ public class Vector2D {
 	 * @param v the vector which will be multiplied to this.
 	 * @return the resulting vector.
 	 */
-	public Vector2D cross(Vector2D v) {
+	public Vector2D vectorProduct(Vector2D v) {
 		return new Vector2D(x * v.y - y * v.x, y * v.x - x * v.y);
 	}
 
@@ -61,24 +89,26 @@ public class Vector2D {
 	 */
 	public Vector2D project(Vector2D v) {
 		double vLengthSquared = v.x * v.x + v.y * v.y;
-		double scalarProd = dot(v);
+		double scalarProd = dotProduct(v);
 		return v.scalarMultiplication(scalarProd / vLengthSquared);
 	}
+
+	/**
+	 * Returns the sum of a given vector and this vector.
+	 * @param v the vector to be added to this vector.
+	 * @return the resulting vector.
+	 */
+	public Vector2D add(Vector2D v) {
+		return new Vector2D(x + v.x, y + v.y);
+	}
+	
 	/**
 	 * Returns the subtraction of a given vector from this vector.
 	 * @param v the vector to be subtracted from this vector.
 	 * @return the resulting vector.
 	 */
-	public Vector2D minus(Vector2D v) {
+	public Vector2D subtract(Vector2D v) {
 		return new Vector2D(x - v.x, y - v.y);
-	}
-
-	/**
-	 * Returns the length of the vector.
-	 * @return the length of the vector.
-	 */
-	public double getLength() {
-		return Math.sqrt(x * x + y * y);
 	}
 	
 	/**
@@ -91,7 +121,21 @@ public class Vector2D {
 		return new Vector2D(x / mag, y / mag);
 	}
 
-	public Vector2D perp() {
+	/**
+	 * Returns a vector of the same length that is 
+	 * perpendicular to the original and rotated clockwise. 
+	 * @return the clockwise perpendicular vector.
+	 */
+	public Vector2D perpendicularCW() {
+		return new Vector2D(y, -x);
+	}
+
+	/**
+	 * Returns a vector of the same length that is 
+	 * perpendicular to the original and rotated conter-clockwise. 
+	 * @return the counter-clockwise perpendicular vector.
+	 */
+	public Vector2D perpendicularCCW() {
 		return new Vector2D(-y, x);
 	}
 
