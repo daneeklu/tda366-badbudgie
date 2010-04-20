@@ -1,7 +1,7 @@
 package edu.chl.tda366badbudgie.core.util;
 
 /**
- * Vector2D
+ * Vector
  * 
  * Immutable class holding fields and methods for two-dimensional vectors with double precision.
  * 
