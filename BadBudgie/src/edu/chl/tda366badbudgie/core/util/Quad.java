@@ -1,8 +1,5 @@
 package edu.chl.tda366badbudgie.core.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Quad extends Polygon {
 
 	/**
