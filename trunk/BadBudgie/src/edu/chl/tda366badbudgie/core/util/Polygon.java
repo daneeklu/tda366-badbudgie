@@ -26,13 +26,15 @@ public class Polygon {
 		this.vertices.addAll(vertices);
 	}
 	
+	protected Polygon(){}
+	
 	/**
 	 * Returns a list of the vertices representing the polygon.
 	 * 
 	 * @return the list of vertices.
 	 */
 	public List<Vector> getVertices() {
-		return vertices;
+		return vertices.;
 	}
 	
 	
