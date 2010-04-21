@@ -1,6 +1,6 @@
 package edu.chl.tda366badbudgie.core.physics;
 
-import edu.chl.tda366badbudgie.core.content.IPositioned;
+import edu.chl.tda366badbudgie.core.content.IGameObject;
 import edu.chl.tda366badbudgie.core.content.Polygon;
 
 /**
@@ -12,21 +12,29 @@ import edu.chl.tda366badbudgie.core.content.Polygon;
  * @author jesper
  *
  */
-public interface ICollidable extends IPositioned {
+public abstract class ICollidable extends IGameObject {
 	
 	/**
 	 * Returns the collision data of the object.
 	 * 
 	 * @return the collision data.
 	 */
-	public Polygon getCollisionData();
+	public abstract Polygon getCollisionData();
 	
 	/**
+	 * Returns the friction coefficient.
+	 * 1 = instant stop, 0 = no friction
 	 * 
-	 * @return
+	 * @return the friction coefficient
 	 */
-	public double getFriction();
+	public abstract double getFriction();
 	
-	public double getElasticity();
+	/**
+	 * Returns the elasticity coefficient.
+	 * 1 = superball, 0 = lump of clay
+	 * 
+	 * @return the elasticity coefficient
+	 */
+	public abstract double getElasticity();
 	
 }
