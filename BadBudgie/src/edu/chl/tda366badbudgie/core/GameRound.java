@@ -11,6 +11,7 @@ public class GameRound {
 	
 	private Level currentLevel;
 	private Physics physics;
+
 	
 	public List<ICollidable> getCollidableObjects() {
 		return currentLevel.getCollidableObjects();
@@ -21,6 +22,7 @@ public class GameRound {
 	}
 	
 	public void doLogic() {
+		if(physics == null) return;
 		physics.doPhysics();
 	}
 	

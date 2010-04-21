@@ -24,9 +24,16 @@ public class TextureManager {
 	}
 
 	public void setActiveTexture(String id) {
-
+		
 		activeTexture = id;
 		Texture tex = textures.get(id);
+		
+		if(id == null) {
+			tex = null;
+			return;
+		}
+
+
 		
 		if(tex == null) {
 			System.out.println("setActiveTexture: no such texture!");
