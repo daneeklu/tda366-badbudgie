@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.gui.graphics;
 
 import java.awt.Canvas;
+import java.awt.image.BufferedImage;
 
 import edu.chl.tda366badbudgie.core.content.Rectangle;
 
@@ -28,6 +29,9 @@ public interface IGraphics {
 	 * 
 	 */
 	public void drawRect(Rectangle r);
+	
+	public void addTexture(String id, BufferedImage data);
+
 	
 	public void setActiveTexture(String id);
 	public String getActiveTexture();

@@ -32,6 +32,8 @@ public class TextureManager {
 
 		Texture tex = textures.get(id);
 		
+		if(tex == null) return;
+		
 		tex.enable();
 		tex.bind();
 		

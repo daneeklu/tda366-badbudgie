@@ -12,6 +12,8 @@ import edu.chl.tda366badbudgie.ctrl.FlowController;
 import edu.chl.tda366badbudgie.gui.graphics.GLGraphics;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.AppRenderer;
+import edu.chl.tda366badbudgie.io.FileManager;
+import edu.chl.tda366badbudgie.io.IFileManager;
 
 @SuppressWarnings("serial")
 public class GraphicsFrame extends JFrame {
@@ -22,6 +24,8 @@ public class GraphicsFrame extends JFrame {
 		add(ig.getCanvas());
 		setSize(500, 500);
 		setVisible(true);
+		
+
 	
 		Timer timer = new Timer(17, (ActionListener) (new FlowController(new App(), ig)));
 		timer.start();
