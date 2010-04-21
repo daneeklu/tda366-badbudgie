@@ -20,7 +20,6 @@ public class App {
 		}
 		
 		if (appState == AppState.Menu) {
-			gameRound = new GameRound();
 			if (true) {
 				// TODO: Add menu logic, temporary jumps to new game
 				appState = AppState.Newgame;
