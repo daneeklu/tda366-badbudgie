@@ -19,9 +19,14 @@ public interface IGraphics {
 	public void startRendering();
 	
 	/**
-	 * Stops the rendering process, will not shut it down completely.
+	 * 
+	 * @param x - x coordinate for the Quad
+	 * @param y - y coordinate for the Quad
+	 * @param w - width of the Quad
+	 * @param h - height of the Quad
+	 * Draws a rectangle with the specified parameters.
+	 * 
 	 */
-	
 	public void drawRect(double x, double y, double w, double h);
 
 	
