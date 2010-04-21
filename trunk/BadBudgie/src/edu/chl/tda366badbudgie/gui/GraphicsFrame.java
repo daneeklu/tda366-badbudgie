@@ -9,6 +9,7 @@ import javax.swing.Timer;
 
 import edu.chl.tda366badbudgie.core.App;
 import edu.chl.tda366badbudgie.ctrl.FlowController;
+import edu.chl.tda366badbudgie.ctrl.KeyController;
 import edu.chl.tda366badbudgie.gui.graphics.GLGraphics;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.AppRenderer;
@@ -25,9 +26,11 @@ public class GraphicsFrame extends JFrame {
 		setSize(500, 500);
 		setVisible(true);
 		
-
+		App app = new App();
+		
+		addKeyListener(new KeyController(app));
 	
-		Timer timer = new Timer(17, (ActionListener) (new FlowController(new App(), ig)));
+		Timer timer = new Timer(17, (ActionListener) (new FlowController(app, ig)));
 		timer.start();
 		
 		addWindowListener(new WindowAdapter() {

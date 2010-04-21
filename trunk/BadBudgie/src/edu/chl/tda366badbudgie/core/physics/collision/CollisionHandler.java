@@ -8,6 +8,7 @@ import edu.chl.tda366badbudgie.core.content.Vector;
 import edu.chl.tda366badbudgie.core.physics.ICollidable;
 
 /**
+ * A collision detection and handling class.
  * 
  * @author dkvarfordt
  *
