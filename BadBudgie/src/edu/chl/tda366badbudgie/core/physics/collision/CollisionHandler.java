@@ -10,7 +10,7 @@ import edu.chl.tda366badbudgie.core.physics.ICollidable;
 /**
  * A collision detection and handling class.
  * 
- * @author dkvarfordt
+ * @author tda366-badbudgie
  *
  */
 public class CollisionHandler {

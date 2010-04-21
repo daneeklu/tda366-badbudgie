@@ -8,12 +8,11 @@ public class App {
 
 	public void buttonStateChanged(String id, boolean down) {
 		if (down) {
-			System.out.println("button pressed:" + id);			
+			System.out.println("button pressed:" + id);
 		}
 		else {
 			System.out.println("button released:" + id);
 		}
-		
 		
 	}
 }

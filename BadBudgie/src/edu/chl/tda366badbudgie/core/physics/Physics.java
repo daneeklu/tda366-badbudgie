@@ -16,6 +16,8 @@ public class Physics implements IPhysics{
 	@Override
 	public void doPhysics() {
 		
+		//updatePositions()
+		
 		collisionHandler.handleCollisions(gameRound);
 		
 	}
