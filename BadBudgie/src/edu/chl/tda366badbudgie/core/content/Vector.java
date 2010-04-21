@@ -142,5 +142,10 @@ public class Vector {
 	public String toString() {
 		return "[" + x + " , " + y + "]";
 	}
+	
+	@Override
+	public Object clone() {
+		return new Vector(x, y);
+	}
 
 }

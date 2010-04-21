@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.content.Polygon;
-import edu.chl.tda366badbudgie.core.content.TerrainQuad;
+import edu.chl.tda366badbudgie.core.content.TerrainSection;
 import edu.chl.tda366badbudgie.core.content.Vector;
 
 public class Physics implements IPhysics{
@@ -15,8 +15,8 @@ public class Physics implements IPhysics{
 		ArrayList<ICollidable> collidableObjects = new ArrayList<ICollidable>();
 		collidableObjects.addAll(gr.getCollidableObjects());
 		
-		ArrayList<TerrainQuad> terrainQuads = new ArrayList<TerrainQuad>();
-		terrainQuads.addAll(gr.getTerrainQuads());
+		ArrayList<ICollidable> terrainSections = new ArrayList<ICollidable>();
+		terrainSections.addAll(gr.getTerrainSections());
 		
 		// for every object in the list...
 		for(int i = 0; i < collidableObjects.size(); i++) {
@@ -33,7 +33,7 @@ public class Physics implements IPhysics{
 			}
 			
 			// ...and all terrain segments.
-			for(TerrainQuad t : terrainQuads) {
+			for(ICollidable t : terrainSections) {
 				Vector mtv = checkCollisionSAT(o1.getCollisionData(), t.getCollisionData());
 				if (mtv.getLength() != 0) {
 					handleCollision(o1, t, mtv);
@@ -154,48 +154,36 @@ public class Physics implements IPhysics{
 	 */
 	private void handleCollision(ICollidable a, ICollidable b, Vector mtv) {
 		
-		if (a instanceof IPhysical && b instanceof IPhysical) {
-			// both objects are physical and therefore have mass
-			
-			IPhysical pa = (IPhysical) a;
-			IPhysical pb = (IPhysical) b;
-			
-			double aMassRatio = pa.getMass() / (pb.getMass() + pa.getMass());
+		
+		if (!a.isStationary() && !b.isStationary()) {
+			// Both objects are movable
+			double aMassRatio = a.getMass() / (b.getMass() + a.getMass());
 			double bMassRatio = 1 - aMassRatio;
 			
-			pa.translate(mtv.scalarMultiplication(bMassRatio));
-			pb.translate(mtv.scalarMultiplication(aMassRatio * -1));
+			a.translate(mtv.scalarMultiplication(bMassRatio));
+			b.translate(mtv.scalarMultiplication(aMassRatio * -1));
 			
-			//TODO: handle speed and direction
+			Vector collisionNormal = mtv.normalize();
+			
+			
 		}
-		else if (a instanceof IPhysical) {
-			// only a has mass eg. b has infinite mass
-			IPhysical pa = (IPhysical) a;
+		else if (a.isStationary()) {
 			
-			//TODO: handle speed and direction
+			//TODO: handle b's speed and direction
+			
 		}
-		else if (b instanceof IPhysical) {
-			// b has mass eg. a has infinite mass
-			IPhysical pb = (IPhysical) b;
+		else if (b.isStationary()) {
 			
-			//TODO: handle speed and direction
+			//TODO: handle a's speed and direction
+			
 		}
 		else {
+			// Both objects stationary
 			a.translate(mtv.scalarMultiplication(0.5));
 			b.translate(mtv.scalarMultiplication(-0.5));
 		}
 	}
 	
-	/**
-	 * Handles the collision of an ICollidable object with a terrain segment
-	 * 
-	 * @param a the colliding object
-	 * @param t the terrain segment
-	 * @param mtv the minimal translation vector for the collision, given by checkCollision()
-	 */
-	private void handleCollision(ICollidable a, TerrainQuad t, Vector mtv) {
-		//TODO: Implement collision handling
-	}
 	
 	
 }
