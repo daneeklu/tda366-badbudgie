@@ -24,6 +24,7 @@ public class Polygon {
 	public Polygon(List<Vector> vertices) {
 		this.vertices = new ArrayList<Vector>();
 		this.vertices.addAll(vertices);
+		//TODO: check validity of the polygon (convex, counter-clockwise ordered vertices, simple polygon) somehow in every class extending Polygon, or in Polygon
 	}
 	
 	protected Polygon(){}
@@ -34,7 +35,9 @@ public class Polygon {
 	 * @return the list of vertices.
 	 */
 	public List<Vector> getVertices() {
-		return vertices;
+		ArrayList<Vector> r = new ArrayList<Vector>();
+		r.addAll(vertices);
+		return r;
 	}
 	
 	

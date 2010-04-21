@@ -9,8 +9,8 @@ package edu.chl.tda366badbudgie.core.content;
  * 
  */
 public class Vector {
-	protected double x;
-	protected double y;
+	private double x;
+	private double y;
 
 	/**
 	 * Creates a new 2DVector with give x- and y-coordinates.
@@ -43,6 +43,13 @@ public class Vector {
 	 * @return the length of the vector.
 	 */
 	public double getLength() {
+		if (x == 0) {
+			return y;
+		}
+		else if (y == 0) {
+			return x;
+		}
+		
 		return Math.sqrt(x * x + y * y);
 	}
 	

@@ -22,10 +22,11 @@ public interface ICollidable extends IPositioned {
 	public Polygon getCollisionData();
 	
 	/**
-	 * Sets the collision data of the object.
 	 * 
-	 * @param collisionData collision data.
+	 * @return
 	 */
-	public void setCollisionData(Polygon collisionData);
+	public double getFriction();
+	
+	public double getElasticity();
 	
 }
