@@ -25,7 +25,7 @@ public class FileManager implements IFileManager{
 		
 		BufferedImage image;
 		try {
-			image = ImageIO.read(new File("test.png"));
+			image = ImageIO.read(new File("res/test.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
