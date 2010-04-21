@@ -7,13 +7,14 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 
-//import edu.chl.tda366badbudgie.gui.render.AppRenderer;
+import edu.chl.tda366badbudgie.core.content.Rectangle;
 
 
 public class GLGraphics implements GLEventListener, IGraphics{
 	private GL gl;
 	private GLCanvas canvas;
 	private IRenderer rend;
+	private TextureManager textureManager;
 	public GLGraphics(IRenderer r){
 		rend = r;
 
@@ -38,12 +39,16 @@ public class GLGraphics implements GLEventListener, IGraphics{
 
 	@Override
 	public void init(GLAutoDrawable glDraw) {
+		
 		gl = glDraw.getGL();
+		textureManager = new TextureManager(gl);
 		
 	}
 	
 	@Override
 	public void display(GLAutoDrawable glDraw) {
+
+		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
 		rend.render(this);
@@ -65,7 +70,9 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawRect(double x, double y, double w, double h) {
+	public void drawRect(Rectangle r) {
+		double x = r.getX(), y = r.getY();
+		double w = r.getWidth(), h = r.getHeight();
 		gl.glBegin(GL.GL_QUADS);
 		
 		gl.glVertex2d(x, y );
@@ -74,6 +81,17 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glVertex2d(x + w, y);
 		
 		gl.glEnd();		
+	}
+
+	@Override
+	public String getActiveTexture() {
+		return textureManager.getActiveTexture();
+	}
+
+	@Override
+	public void setActiveTexture(String id) {
+		textureManager.setActiveTexture(id);
+		
 	}
 	
 }

@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core;
 
-public abstract class App {
+public class App {
 
+	public void doLogic() {
+		//TODO: add logic here
+	}
 }
