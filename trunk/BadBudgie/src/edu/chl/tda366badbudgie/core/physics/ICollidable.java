@@ -1,7 +1,7 @@
 package edu.chl.tda366badbudgie.core.physics;
 
 import edu.chl.tda366badbudgie.core.content.IPositioned;
-import edu.chl.tda366badbudgie.core.util.Polygon;
+import edu.chl.tda366badbudgie.core.content.Polygon;
 
 /**
  * ICollidable
