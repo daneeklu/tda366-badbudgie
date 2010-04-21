@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLContext;
 import javax.media.opengl.GLEventListener;
 
 import edu.chl.tda366badbudgie.core.content.Rectangle;
@@ -14,53 +15,74 @@ import edu.chl.tda366badbudgie.io.IFileManager;
 
 
 public class GLGraphics implements GLEventListener, IGraphics{
-	private GL gl;
 	private GLCanvas canvas;
-	private IRenderer rend;
+	private GLContext con;
+	private GL gl;
+	
+	//Has the program been properly inited? (resources etc)
+	private boolean ready;
+	
 	private TextureManager textureManager;
-	public GLGraphics(IRenderer r){
-		rend = r;
-
+	
+	public GLGraphics(){
+		canvas = new GLCanvas();
+		canvas.createContext(null).makeCurrent();
+		canvas.addGLEventListener(this);
+		canvas.setAutoSwapBufferMode(false);
+		ready = false;
 	}
 	
 	@Override
 	public Canvas getCanvas() {
-		if(canvas != null) return canvas;
-		
-		canvas = new GLCanvas();
-		canvas.addGLEventListener(this);
-		canvas.setAutoSwapBufferMode(false);
 		return (Canvas)canvas;
 	}
 	
 	@Override
-	public void startRendering() {
-		canvas.repaint();
+	public boolean startRendering() {
+		
+		gl = canvas.getGL();
+		con = canvas.getContext();
+
+		if(con.makeCurrent() == GLContext.CONTEXT_NOT_CURRENT) {
+				return false;
+		}
+		
+		if(!ready) {
+			init(canvas);
+		}
+		
+		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+		gl.glLoadIdentity();
+
+		return true;
 	}
 
+	@Override
+	public void stopRendering() {
+		// TODO Auto-generated method stub
+		
+
+
+		canvas.swapBuffers();
+		canvas.getContext().release();
+		con = null;
+		gl = null;
+	}
 	
 
 	@Override
 	public void init(GLAutoDrawable glDraw) {
-
 		
-		gl = glDraw.getGL();
-		textureManager = new TextureManager(gl);
-		
+		System.out.println("OpenGL init");
+		textureManager = new TextureManager();
 		IFileManager fm = new FileManager(this);
 		fm.loadData();
-		
+		ready = true;
 	}
 	
 	@Override
 	public void display(GLAutoDrawable glDraw) {
-
-		
-		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-
-		rend.render(this);
-		canvas.swapBuffers();
-
+		//Don't render, rendering is done elsewhere
 	}
 
 	@Override
@@ -80,6 +102,12 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void drawRect(Rectangle r) {
 		double x = r.getX(), y = r.getY();
 		double w = r.getWidth(), h = r.getHeight();
+		
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
 		gl.glBegin(GL.GL_QUADS);
 		
 		gl.glTexCoord2d(0.0, 1.0);
@@ -99,17 +127,22 @@ public class GLGraphics implements GLEventListener, IGraphics{
 
 	@Override
 	public String getActiveTexture() {
+		if(textureManager == null) return null;
 		return textureManager.getActiveTexture();
 	}
 
 	@Override
 	public void setActiveTexture(String id) {
+		if(textureManager == null) return;
 		textureManager.setActiveTexture(id);
 		
 	}
 	
 	public void addTexture(String id, BufferedImage data) {
+		if(textureManager == null) { return;} 
 		textureManager.addTexture(id, data);
 	}
+
+
 	
 }
