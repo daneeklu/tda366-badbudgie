@@ -12,15 +12,12 @@ import edu.chl.tda366badbudgie.ctrl.FlowController;
 import edu.chl.tda366badbudgie.ctrl.KeyController;
 import edu.chl.tda366badbudgie.gui.graphics.GLGraphics;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
-import edu.chl.tda366badbudgie.gui.render.AppRenderer;
-import edu.chl.tda366badbudgie.io.FileManager;
-import edu.chl.tda366badbudgie.io.IFileManager;
 
 @SuppressWarnings("serial")
 public class GraphicsFrame extends JFrame {
 	private IGraphics ig;
 	public GraphicsFrame(){
-		ig = new GLGraphics(new AppRenderer());
+		ig = new GLGraphics();
 		
 		add(ig.getCanvas());
 		setSize(500, 500);

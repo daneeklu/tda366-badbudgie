@@ -12,29 +12,49 @@ import edu.chl.tda366badbudgie.core.content.Rectangle;
  */
 public interface IGraphics {
 	/**
-	 *  If a canvas doesn't exist, a canvas object will be made and returned.
-	 *  If a canvas do exist, the canvas will just be returned.
+	 *  Get the canvas for the Graphics object
 	 */
 	public Canvas getCanvas();
 	
 	/**
-	 * Starts the rendering
+	 * Start the rendering
+	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
 	 */
-	public void startRendering();
+	public boolean startRendering();
 	
 	/**
-	 * 
+	 * Draws a rectangle 
 	 * @param r the rectangle to be drawn
-	 * Draws a rectangle with the specified parameters.
 	 * 
 	 */
 	public void drawRect(Rectangle r);
 	
+	/**
+	 * Add a texture to the texture library
+	 * @param id the id for the texture
+	 * @param data a bufferedimage containing the image
+	 */
 	public void addTexture(String id, BufferedImage data);
 
-	
+	/**
+	 * Set the active texture to the one in the library with
+	 * corresponding id
+	 * @param id the id for the texture
+	 */
 	public void setActiveTexture(String id);
+	
+	/**
+	 * Get which texture is currently set in the library
+	 * as the active texture
+	 * @return the id for the texture, or null if no texture is set
+	 */
 	public String getActiveTexture();
+
+	/**
+	 * Call stopRendering when you are done drawing to
+	 * tell the system you're finished
+	 */
+	public void stopRendering();
 
 	
 }
