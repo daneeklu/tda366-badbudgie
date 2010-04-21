@@ -7,14 +7,18 @@ import javax.swing.JFrame;
 
 import edu.chl.tda366badbudgie.gui.graphics.GLGraphics;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.gui.render.AppRenderer;
 
 public class GraphicsFrame extends JFrame {
 	private IGraphics ig;
 	public GraphicsFrame(){
-		ig = new GLGraphics(this);
+		ig = new GLGraphics(new AppRenderer());
 		
+		add(ig.getCanvas());
 		setSize(500, 500);
 		setVisible(true);
+	
+		ig.startRendering();
 		
 		addWindowListener(new WindowAdapter() {
 			@Override

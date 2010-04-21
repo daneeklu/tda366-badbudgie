@@ -1,6 +1,6 @@
 package edu.chl.tda366badbudgie.gui.graphics;
 
-import javax.media.opengl.GLCanvas;
+import java.awt.Canvas;
 
 /**
  * 
@@ -11,7 +11,7 @@ public interface IGraphics {
 	/**
 	 *  Creates a canvas for the GL graphics
 	 */
-	public void createCanvas();
+	public Canvas getCanvas();
 	
 	/**
 	 * Starts the rendering
@@ -21,6 +21,8 @@ public interface IGraphics {
 	/**
 	 * Stops the rendering process, will not shut it down completely.
 	 */
-	public void stopRendering();
+	
+	public void drawRect(double x, double y, double w, double h);
+
 	
 }

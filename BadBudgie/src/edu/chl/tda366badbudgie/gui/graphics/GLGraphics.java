@@ -1,47 +1,39 @@
 package edu.chl.tda366badbudgie.gui.graphics;
 
+import java.awt.Canvas;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 
-import com.sun.opengl.util.FPSAnimator;
-
-import edu.chl.tda366badbudgie.gui.GraphicsFrame;
+//import edu.chl.tda366badbudgie.gui.render.AppRenderer;
 
 
 public class GLGraphics implements GLEventListener, IGraphics{
 	private GL gl;
 	private GLCanvas canvas;
-	private final FPSAnimator animator;
-	private GraphicsFrame gf;
-	public GLGraphics(GraphicsFrame gf){
-		this.gf = gf;
-		createCanvas();
-		
-		canvas.addGLEventListener(this);
-		animator = new FPSAnimator(canvas, 30);
-		animator.start();
-		
+	private IRenderer rend;
+	public GLGraphics(IRenderer r){
+		rend = r;
 
 	}
 	
 	@Override
-	public void createCanvas() {
-		canvas = new GLCanvas();
-		gf.add(canvas);
+	public Canvas getCanvas() {
+		if(canvas != null) return canvas;
 		
+		canvas = new GLCanvas();
+		canvas.addGLEventListener(this);
+		canvas.setAutoSwapBufferMode(false);
+		return (Canvas)canvas;
 	}
 	
 	@Override
 	public void startRendering() {
-		animator.start();
+		canvas.repaint();
 	}
 
-	@Override
-	public void stopRendering() {
-		canvas.swapBuffers();
-	}
 	
 
 	@Override
@@ -53,18 +45,11 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	@Override
 	public void display(GLAutoDrawable glDraw) {
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-		
-		//gl.glLoadIdentity();
-		gl.glBegin(GL.GL_QUADS);
-		
-		gl.glVertex2f(0.1f, 0.1f);
-		gl.glVertex2f(0.1f, 0.3f);
-		gl.glVertex2f(0.3f, 0.3f);
-		gl.glVertex2f(0.3f, 0.1f);
-		
-		gl.glEnd();
-	}
 
+		rend.render(this);
+		canvas.swapBuffers();
+
+	}
 
 	@Override
 	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
@@ -77,6 +62,18 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			int arg4) {
 		//Nothing to be implemented
 		
+	}
+
+	@Override
+	public void drawRect(double x, double y, double w, double h) {
+		gl.glBegin(GL.GL_QUADS);
+		
+		gl.glVertex2d(x, y );
+		gl.glVertex2d(x, y + h);
+		gl.glVertex2d(x + w, y + h);
+		gl.glVertex2d(x + w, y);
+		
+		gl.glEnd();		
 	}
 	
 }
