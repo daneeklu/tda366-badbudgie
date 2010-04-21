@@ -1,7 +1,6 @@
 package edu.chl.tda366badbudgie.core.content;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Rectangle
@@ -21,12 +20,39 @@ public class Rectangle extends Polygon {
 	 */
 	public Rectangle(double width, double height){
 		
-		this.vertices.add(new Vector(0,0));
-		this.vertices.add(new Vector(0,height));
-		this.vertices.add(new Vector(width,height));
-		this.vertices.add(new Vector(width,0));
+		this.vertices = new ArrayList<Vector>();
+		
+		this.vertices.add(new Vector(0, 0));
+		this.vertices.add(new Vector(0, height));
+		this.vertices.add(new Vector(width, height));
+		this.vertices.add(new Vector(width, 0));
 	}
 
+	public Rectangle(double x, double y, double width, double height){
+		
+		this.vertices = new ArrayList<Vector>();
+		
+		this.vertices.add(new Vector(x, y));
+		this.vertices.add(new Vector(x, y + height));
+		this.vertices.add(new Vector(x + width, y + height));
+		this.vertices.add(new Vector(x + width,y ));
+	}
+	
+	public double getWidth() {
+		return this.vertices.get(2).getX() - this.vertices.get(0).getX();
+	}
+	
+	public double getHeight() {
+		return this.vertices.get(2).getY() - this.vertices.get(0).getY();
+	}
+	
+	public double getX() {
+		return this.vertices.get(0).getX();
+	}
+	
+	public double getY() {
+		return this.vertices.get(0).getY();
+	}
 	
 	
 }

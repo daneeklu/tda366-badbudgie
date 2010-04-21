@@ -2,6 +2,8 @@ package edu.chl.tda366badbudgie.gui.graphics;
 
 import java.awt.Canvas;
 
+import edu.chl.tda366badbudgie.core.content.Rectangle;
+
 /**
  * 
  * @author Andreas
@@ -21,14 +23,14 @@ public interface IGraphics {
 	
 	/**
 	 * 
-	 * @param x - x coordinate for the Quad
-	 * @param y - y coordinate for the Quad
-	 * @param w - width of the Quad
-	 * @param h - height of the Quad
+	 * @param r the rectangle to be drawn
 	 * Draws a rectangle with the specified parameters.
 	 * 
 	 */
-	public void drawRect(double x, double y, double w, double h);
+	public void drawRect(Rectangle r);
+	
+	public void setActiveTexture(String id);
+	public String getActiveTexture();
 
 	
 }
