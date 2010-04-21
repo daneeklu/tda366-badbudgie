@@ -2,8 +2,8 @@ package edu.chl.tda366badbudgie.core.physics;
 
 import java.util.ArrayList;
 
-import edu.chl.tda366badbudgie.core.util.Polygon;
-import edu.chl.tda366badbudgie.core.util.Vector;
+import edu.chl.tda366badbudgie.core.content.Polygon;
+import edu.chl.tda366badbudgie.core.content.Vector;
 
 public class Physics implements IPhysics{
 
@@ -114,7 +114,6 @@ public class Physics implements IPhysics{
 		return minOverlapVector;
 		
 	}
-	
 	
 	
 }

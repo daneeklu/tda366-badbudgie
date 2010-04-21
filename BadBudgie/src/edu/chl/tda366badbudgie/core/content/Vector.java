@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core.util;
+package edu.chl.tda366badbudgie.core.content;
 
 /**
  * Vector
