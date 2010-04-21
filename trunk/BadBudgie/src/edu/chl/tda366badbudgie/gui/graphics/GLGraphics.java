@@ -9,6 +9,8 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.GLEventListener;
 
+import com.sun.opengl.util.GLUT;
+
 import edu.chl.tda366badbudgie.core.content.Rectangle;
 import edu.chl.tda366badbudgie.io.FileManager;
 import edu.chl.tda366badbudgie.io.IFileManager;
@@ -59,9 +61,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 
 	@Override
 	public void stopRendering() {
-		// TODO Auto-generated method stub
-		
-
 
 		canvas.swapBuffers();
 		canvas.getContext().release();
@@ -141,6 +140,19 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void addTexture(String id, BufferedImage data) {
 		if(textureManager == null) { return;} 
 		textureManager.addTexture(id, data);
+	}
+
+	@Override
+	public void drawText(String text) {
+		
+		GLUT glut = new GLUT();
+		
+		gl.glRasterPos2d(-0.8, -0.9);
+		gl.glDisable(GL.GL_TEXTURE_2D);
+		gl.glColor3d(1.0,1.0,1.0);
+		glut.glutBitmapString(7, text);
+		gl.glEnable(GL.GL_TEXTURE_2D);
+		
 	}
 
 

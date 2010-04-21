@@ -55,6 +55,12 @@ public interface IGraphics {
 	 * tell the system you're finished
 	 */
 	public void stopRendering();
+	
+	/**
+	 * Draw text in the lower left corner
+	 * @param text the text to be drawn
+	 */
+	public void drawText(String text);
 
 	
 }

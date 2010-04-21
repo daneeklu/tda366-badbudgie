@@ -4,12 +4,23 @@ package edu.chl.tda366badbudgie.core;
 public class App {
 	
 	// Feel free to change this implementation if you like
-	private enum AppState{Intro, Menu, Newgame, Ingame, IngameMenu};
+	public enum AppState{Intro, Menu, Newgame, Ingame, IngameMenu};
 	private AppState appState;
 	
 	
 	private GameRound gameRound;
 	
+	private Menu menu;
+	
+	public App() {
+		appState = AppState.Menu;
+		menu = new Menu();
+	}
+	
+	
+	public AppState getState() {
+		return appState;
+	}
 	
 	public void doLogic() {
 		//System.out.println("app logic is being done");
@@ -20,8 +31,8 @@ public class App {
 		}
 		
 		if (appState == AppState.Menu) {
-			if (true) {
-				// TODO: Add menu logic, temporary jumps to new game
+			if (false) {
+				// TODO: Add menu logic for when choosing something in the menu
 				appState = AppState.Newgame;
 			}
 		}
@@ -49,5 +60,10 @@ public class App {
 		else {
 			System.out.println("button released:" + id);
 		}
+	}
+
+	public Object getMenu() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
