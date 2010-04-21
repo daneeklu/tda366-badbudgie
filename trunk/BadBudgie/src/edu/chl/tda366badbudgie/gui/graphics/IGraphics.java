@@ -9,7 +9,8 @@ import java.awt.Canvas;
  */
 public interface IGraphics {
 	/**
-	 *  Creates a canvas for the GL graphics
+	 *  If a canvas doesn't exist, a canvas object will be made and returned.
+	 *  If a canvas do exist, the canvas will just be returned.
 	 */
 	public Canvas getCanvas();
 	
