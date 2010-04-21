@@ -33,7 +33,7 @@ public class CollisionHandler {
 		for(int i = 0; i < collidableObjects.size(); i++) {
 			ICollidable o1 = collidableObjects.get(i);
 			
-			// ...check it against all following objects...
+			// ...check it against all following objects in the list...
 			for(int j = i + 1; j < collidableObjects.size(); j++) {
 				ICollidable o2 = collidableObjects.get(j);
 				
@@ -259,7 +259,7 @@ public class CollisionHandler {
 			
 		}
 		else {
-			// Both objects stationary, just move out of collision
+			// Both objects stationary, just move out of collision by equal distance
 			a.translate(mtv.scalarMultiplication(0.5));
 			b.translate(mtv.scalarMultiplication(-0.5));
 		}

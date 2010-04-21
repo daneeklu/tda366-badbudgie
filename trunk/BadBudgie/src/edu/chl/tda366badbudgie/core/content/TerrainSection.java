@@ -13,7 +13,7 @@ import edu.chl.tda366badbudgie.core.physics.ICollidable;
 public class TerrainSection extends ICollidable {
 	
 	private Quad quad;			//The Quad object that stores the terrain data.
-	private double friction;	// Friction coefficient. 1 = instant stop, 0 = no friction
+	private double friction;	// Friction coefficient. 100 = a lot, 0 = no friction
 	private double elasticity;	// Elasticity coefficient. 1 = superball, 0 = lump of clay
 	
 	/**

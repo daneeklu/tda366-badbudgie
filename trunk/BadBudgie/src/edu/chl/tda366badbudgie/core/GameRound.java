@@ -1,23 +1,27 @@
 package edu.chl.tda366badbudgie.core;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import edu.chl.tda366badbudgie.core.content.Level;
 import edu.chl.tda366badbudgie.core.content.TerrainSection;
 import edu.chl.tda366badbudgie.core.physics.ICollidable;
+import edu.chl.tda366badbudgie.core.physics.Physics;
 
 public class GameRound {
 	
-	private ArrayList<ICollidable> collidables;
-	private ArrayList<TerrainSection> terrainQuads;
-	
+	private Level currentLevel;
+	private Physics physics;
 	
 	public List<ICollidable> getCollidableObjects() {
-		return collidables;
+		return currentLevel.getCollidableObjects();
 	}
 	
 	public List<TerrainSection> getTerrainSections() {
-		return terrainQuads;
+		return currentLevel.getTerrainSections();
+	}
+	
+	public void doLogic() {
+		physics.doPhysics();
 	}
 	
 	
