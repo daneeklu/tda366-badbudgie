@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.gui.graphics;
 
 import java.awt.Canvas;
+import java.awt.image.BufferedImage;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -8,6 +9,8 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 
 import edu.chl.tda366badbudgie.core.content.Rectangle;
+import edu.chl.tda366badbudgie.io.FileManager;
+import edu.chl.tda366badbudgie.io.IFileManager;
 
 
 public class GLGraphics implements GLEventListener, IGraphics{
@@ -39,9 +42,13 @@ public class GLGraphics implements GLEventListener, IGraphics{
 
 	@Override
 	public void init(GLAutoDrawable glDraw) {
+
 		
 		gl = glDraw.getGL();
 		textureManager = new TextureManager(gl);
+		
+		IFileManager fm = new FileManager(this);
+		fm.loadData();
 		
 	}
 	
@@ -75,9 +82,16 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		double w = r.getWidth(), h = r.getHeight();
 		gl.glBegin(GL.GL_QUADS);
 		
+		gl.glTexCoord2d(0.0, 1.0);
 		gl.glVertex2d(x, y );
+		
+		gl.glTexCoord2d(0.0, 0.0);
 		gl.glVertex2d(x, y + h);
+		
+		gl.glTexCoord2d(1.0, 0.0);
 		gl.glVertex2d(x + w, y + h);
+		
+		gl.glTexCoord2d(1.0, 1.0);
 		gl.glVertex2d(x + w, y);
 		
 		gl.glEnd();		
@@ -92,6 +106,10 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void setActiveTexture(String id) {
 		textureManager.setActiveTexture(id);
 		
+	}
+	
+	public void addTexture(String id, BufferedImage data) {
+		textureManager.addTexture(id, data);
 	}
 	
 }
