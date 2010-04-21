@@ -1,5 +1,7 @@
 package edu.chl.tda366badbudgie.core.content;
 
+import java.util.List;
+
 public class Quad extends Polygon {
 
 	/**
@@ -16,5 +18,12 @@ public class Quad extends Polygon {
 		vertices.add(v3);
 		vertices.add(v4);
 	}
+	
+	public Quad(List<Vector> vertices) {
+		super(vertices);
+		//TODO: somehow the number of vertices should be checked in all the constructors
+	}
+	
+	protected Quad() {}
 	
 }

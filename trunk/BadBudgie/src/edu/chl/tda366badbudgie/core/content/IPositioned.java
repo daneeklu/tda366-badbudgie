@@ -37,4 +37,11 @@ public interface IPositioned {
 	 * @param y the value of the new y-coordinate.
 	 */
 	public void setY(double y);
+	
+	/**
+	 * Translate the object by the given vector.
+	 * 
+	 * @param v the translation vector
+	 */
+	public void translate(Vector v);
 }
