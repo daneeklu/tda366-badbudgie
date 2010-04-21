@@ -27,9 +27,11 @@ public class GraphicsFrame extends JFrame {
 		setVisible(true);
 		
 		App app = new App();
+		KeyController kc = new KeyController(app);
 		
-		addKeyListener(new KeyController(app));
-	
+		addKeyListener(kc);
+		ig.getCanvas().addKeyListener(kc);
+		
 		Timer timer = new Timer(17, (ActionListener) (new FlowController(app, ig)));
 		timer.start();
 		

@@ -26,7 +26,7 @@ public class KeyController extends KeyAdapter{
 		keyDown = new boolean[500]; 				// TODO: find exact value needed 
 		Arrays.fill(keyDown, false);
 		
-		// temp key bindings, will be loaded from xml later
+		// TODO: temp key bindings, will be loaded from xml later
 		keyMap.put(KeyEvent.VK_LEFT, "left");
 		keyMap.put(KeyEvent.VK_RIGHT, "right");
 		keyMap.put(KeyEvent.VK_UP, "up");
