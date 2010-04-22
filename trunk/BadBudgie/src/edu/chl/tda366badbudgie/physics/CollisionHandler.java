@@ -1,11 +1,10 @@
-package edu.chl.tda366badbudgie.physics.collision;
+package edu.chl.tda366badbudgie.physics;
 
 import java.util.ArrayList;
 
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Polygon;
 import edu.chl.tda366badbudgie.core.Vector;
-import edu.chl.tda366badbudgie.physics.ICollidable;
 
 /**
  * A collision detection and handling class.
@@ -23,11 +22,15 @@ public class CollisionHandler {
 	 * @param gr
 	 */
 	public void handleCollisions(GameRound gr) {
-		ArrayList<ICollidable> collidableObjects = new ArrayList<ICollidable>();
-		collidableObjects.addAll(gr.getCollidableObjects());
 		
-		ArrayList<ICollidable> terrainSections = new ArrayList<ICollidable>();
-		terrainSections.addAll(gr.getTerrainSections());
+		// TODO: broader checking for possible collisions before using SAT
+		// TODO: perhaps handle collisions between all AbstractGameObjects (powerups etc)
+		
+		ArrayList<ICollidable> collidableObjects = 
+			new ArrayList<ICollidable>(gr.getLevel().getCollidableObjects());
+		
+		ArrayList<ICollidable> terrainSections = 
+			new ArrayList<ICollidable>(gr.getLevel().getTerrainSections());
 		
 		// for every object in the list...
 		for(int i = 0; i < collidableObjects.size(); i++) {
@@ -39,7 +42,7 @@ public class CollisionHandler {
 				
 				Vector mtv = getCollisionSAT(o1.getCollisionData(), o2.getCollisionData());
 				if (mtv.getLength() != 0) {
-					resolveCollision(o1, o2, mtv);
+					checkCollisionEffect(o1, o2, mtv);
 				}
 			}
 			
@@ -53,6 +56,11 @@ public class CollisionHandler {
 		}
 	}
 	
+	
+	private void checkCollisionEffect(ICollidable o1, ICollidable o2, Vector mtv) {
+		// TODO: find out what effect the collision has and act accordingly
+		resolveCollision(o1, o2, mtv);
+	}
 	
 	
 	/**

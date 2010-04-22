@@ -43,7 +43,6 @@ public class KeyController extends KeyAdapter{
 	
 	
 	
-	
 	@Override
 	public void keyPressed(KeyEvent ke) {
 
