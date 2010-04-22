@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core.physics;
+package edu.chl.tda366badbudgie.core.physics.collision;
 
 import static org.junit.Assert.*;
 
@@ -7,19 +7,17 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.content.Polygon;
 import edu.chl.tda366badbudgie.core.content.Vector;
-import edu.chl.tda366badbudgie.core.physics.collision.CollisionHandler;
 
-public class SATCollisionTest {
+public class CollisionHandlerTest {
 
 	private Polygon a, b, c;
-	private Physics p;
-	/*
+	private CollisionHandler ch;
+	
 	@Before
 	public void init() {
-		p = new Physics(new GameRound(), new CollisionHandler());
+		ch = new CollisionHandler();
 		
 		ArrayList<Vector> aVerts = new ArrayList<Vector>();
 		aVerts.add(new Vector(0,0));
@@ -52,27 +50,24 @@ public class SATCollisionTest {
 		 * |--------------------
 		 * 
 		 */
-	/*
+	
 	}
-	*/
-	/*
+	
+	
 	@Test
-	public void testCheckCollisionSAT() {
+	public void testGetCollisionSAT() {
 		
-		/*
-		 * TODO: Use Guice to get this test working?
-		 *
-		Vector abCol = p.getCollisionSAT(a, b);
-		Vector bcCol = p.getCollisionSAT(b, c);
-		Vector acCol = p.getCollisionSAT(a, c);
+		Vector abCol = ch.getCollisionSAT(a, b);
+		Vector bcCol = ch.getCollisionSAT(b, c);
+		Vector acCol = ch.getCollisionSAT(a, c);
 		
-		assertNotNull(abCol);
-		assertNotNull(bcCol);
-		assertNull(acCol);
+		assertTrue(abCol.getLength() != 0);
+		assertTrue(bcCol.getLength() != 0);
+		assertTrue(acCol.getLength() == 0);
 		
 		assertTrue(bcCol.dotProduct(new Vector(1,1)) < 0);
-		 */
-	/*
+		
 	}
-	*/
+
+
 }
