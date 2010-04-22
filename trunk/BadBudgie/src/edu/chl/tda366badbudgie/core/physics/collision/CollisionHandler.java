@@ -65,12 +65,14 @@ public class CollisionHandler {
 	 * 
 	 * The returned vector is pointing towards the first polygon 'a'.
 	 * 
+	 * Uses the separating axis theorem for convex polygons.
+	 * 
 	 * @param a The first polygon
 	 * @param b The second polygon
 	 * @return The minimum translation vector directed towards the first 
 	 * polygon, or a Vector with (x,y)==(0,0) if there is no overlap.
 	 */
-	private Vector getCollisionSAT(Polygon a, Polygon b) {
+	Vector getCollisionSAT(Polygon a, Polygon b) {
 
 		ArrayList<Vector> aVerts = new ArrayList<Vector>();
 		ArrayList<Vector> bVerts = new ArrayList<Vector>();
