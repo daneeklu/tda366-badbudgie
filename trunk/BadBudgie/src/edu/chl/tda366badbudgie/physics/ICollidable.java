@@ -1,6 +1,6 @@
 package edu.chl.tda366badbudgie.physics;
 
-import edu.chl.tda366badbudgie.core.IGameObject;
+import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.Polygon;
 
 /**
@@ -12,7 +12,7 @@ import edu.chl.tda366badbudgie.core.Polygon;
  * @author jesper
  *
  */
-public abstract class ICollidable extends IGameObject {
+public abstract class ICollidable extends AbstractGameObject {
 	
 	/**
 	 * Returns the collision data of the object.

@@ -8,7 +8,7 @@ package edu.chl.tda366badbudgie.core;
  * @author jesper
  * 
  */
-public abstract class IGameObject {
+public abstract class AbstractGameObject {
 
 	private Vector position;
 	private Vector velocity;
