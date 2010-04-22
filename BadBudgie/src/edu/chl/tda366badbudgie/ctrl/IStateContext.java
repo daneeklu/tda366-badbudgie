@@ -7,7 +7,7 @@ public interface IStateContext {
 		
 		public void doLogic();
 		public void draw(IGraphics g);
-		
-		public void buttonStateChanged(String id, boolean down);
 
+		public void setState(String string);
+		
 }
