@@ -3,7 +3,7 @@ package edu.chl.tda366badbudgie.gui.graphics;
 import java.awt.Canvas;
 import java.awt.image.BufferedImage;
 
-import edu.chl.tda366badbudgie.core.content.Rectangle;
+import edu.chl.tda366badbudgie.core.Rectangle;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core.content;
+package edu.chl.tda366badbudgie.core;
 
 import java.util.ArrayList;
 import java.util.List;

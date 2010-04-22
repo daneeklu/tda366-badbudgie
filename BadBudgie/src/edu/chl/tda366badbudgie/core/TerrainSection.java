@@ -1,8 +1,8 @@
-package edu.chl.tda366badbudgie.core.content;
+package edu.chl.tda366badbudgie.core;
 
 import java.util.List;
 
-import edu.chl.tda366badbudgie.core.physics.ICollidable;
+import edu.chl.tda366badbudgie.physics.ICollidable;
 
 /**
  * Class representing a segment of the level terrain.

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.chl.tda366badbudgie.core.content.Vector;
+import edu.chl.tda366badbudgie.core.Vector;
 
 public class VectorTest {
 

@@ -1,12 +1,14 @@
-package edu.chl.tda366badbudgie.ctrl;
+package edu.chl.tda366badbudgie.ctrl.impl;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import edu.chl.tda366badbudgie.core.App;
+import edu.chl.tda366badbudgie.ctrl.IStateContext;
+
+
+
 
 /**
  * Controller class for keyboard input.
@@ -16,11 +18,11 @@ import edu.chl.tda366badbudgie.core.App;
  */
 public class KeyController extends KeyAdapter{
 
-	private App app;
+	private IStateContext app;
 	private HashMap<Integer, String> keyMap;
 	private boolean[] keyDown;
 	
-	public KeyController(App app) {
+	public KeyController(IStateContext app) {
 		this.app = app;
 		keyMap = new HashMap<Integer, String>();
 		keyDown = new boolean[500]; 				// TODO: find exact value needed 

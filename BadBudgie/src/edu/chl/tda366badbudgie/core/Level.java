@@ -1,9 +1,9 @@
-package edu.chl.tda366badbudgie.core.content;
+package edu.chl.tda366badbudgie.core;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.chl.tda366badbudgie.core.physics.ICollidable;
+import edu.chl.tda366badbudgie.physics.ICollidable;
 
 public class Level {
 
