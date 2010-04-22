@@ -24,7 +24,7 @@ public class GraphicsFrame extends JFrame {
 		setSize(500, 500);
 		setVisible(true);
 		
-		IStateContext app = new StateContext();
+		IStateContext app = StateContext.getInstance();
 		KeyController kc = new KeyController(app);
 		
 		addKeyListener(kc);

@@ -29,4 +29,9 @@ public class InGameState implements IState {
 		GameRenderer.render(gameRound,g);
 	}
 
+	@Override
+	public void keyboardAction(String id, boolean down) {
+		System.out.println("In game keypress: " + id + " " + down);
+	}
+
 }

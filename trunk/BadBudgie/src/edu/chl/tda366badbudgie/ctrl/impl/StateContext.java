@@ -1,5 +1,6 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
+import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.ctrl.IStateContext;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
@@ -19,12 +20,21 @@ public class StateContext implements IStateContext {
 	// The current state of the game.
 	private IState currentState;
 	
-	public StateContext() {
+	private static StateContext instance;
+	
+	private StateContext() {
 		menuState = new MenuState();
+		inGameState = new InGameState(new GameRound());
 		currentState = menuState;
 	}
 	
-
+	public static IStateContext getInstance() {
+		if (instance == null) {
+			instance = new StateContext();
+		}
+		return instance;
+	}
+	
 	public IState getState() {
 		return currentState;
 	}
@@ -32,19 +42,20 @@ public class StateContext implements IStateContext {
 	public void doLogic() {
 		currentState.logic();
 	}
+	
 	public void draw(IGraphics g) {
 		currentState.draw(g);
 	}
 
-	
-	public void buttonStateChanged(String id, boolean down) {
-		if (down) {
-			System.out.println("button pressed:" + id);
-		}
-		else {
-			System.out.println("button released:" + id);
+	@Override
+	public void setState(String stateid) {
+		if (stateid.equals("startGame")) {
+			currentState = inGameState;
 		}
 	}
 
 
+
+	
+	
 }

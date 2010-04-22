@@ -7,5 +7,7 @@ public interface IState {
 	public void logic();
 	
 	public void draw(IGraphics g);
+
+	public void keyboardAction(String id, boolean down);
 	
 }
