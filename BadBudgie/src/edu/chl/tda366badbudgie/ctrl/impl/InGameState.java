@@ -4,6 +4,9 @@ import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.GameRenderer;
+import edu.chl.tda366badbudgie.physics.CollisionHandler;
+import edu.chl.tda366badbudgie.physics.MovementHandler;
+import edu.chl.tda366badbudgie.physics.Physics;
 
 /**
  * This class represents a running game state.
@@ -14,14 +17,16 @@ import edu.chl.tda366badbudgie.gui.render.GameRenderer;
 public class InGameState implements IState {
 
 	private GameRound gameRound;
+	private Physics physics;
 	
 	public InGameState(GameRound gr) {
 		gameRound = gr;
+		physics = new Physics(gr,new CollisionHandler(), new MovementHandler());
 	}
 	
 	@Override
 	public void logic() {
-		
+		physics.doPhysics(gameRound);
 	}
 	
 	@Override

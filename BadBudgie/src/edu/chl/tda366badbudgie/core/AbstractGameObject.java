@@ -12,6 +12,7 @@ public abstract class AbstractGameObject {
 
 	private Vector position;
 	private Vector velocity;
+	private Vector force;
 	private double mass;
 	protected boolean stationary = false;
 	
@@ -49,6 +50,15 @@ public abstract class AbstractGameObject {
 	 */
 	public Vector getVelocity() {
 		return (Vector) velocity.clone();
+	}
+	
+	/**
+	 * Returns the force acting on the object
+	 * 
+	 * @return the objects velocity vector
+	 */
+	public Vector getForce() {
+		return (Vector) force.clone();
 	}
 	
 	/**
@@ -105,6 +115,24 @@ public abstract class AbstractGameObject {
 		velocity = (Vector) v.clone();
 	}
 
+	/**
+	 * Sets the current force acting on the object
+	 * 
+	 * @param v the velocity vector
+	 */
+	public void setForce(Vector v) {
+		force = (Vector) v.clone();
+	}
+
+	/**
+	 * Sets the current force acting on the object
+	 * 
+	 * @param v the velocity vector
+	 */
+	public void applyForce(Vector v) {
+		force = force.add(v);
+	}
+	
 	/**
 	 * Returns whether the object is stationary. That is if it is immovable.
 	 * @return
