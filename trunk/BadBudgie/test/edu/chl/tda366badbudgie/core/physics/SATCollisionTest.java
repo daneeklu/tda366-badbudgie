@@ -16,7 +16,7 @@ public class SATCollisionTest {
 
 	private Polygon a, b, c;
 	private Physics p;
-	
+	/*
 	@Before
 	public void init() {
 		p = new Physics(new GameRound(), new CollisionHandler());
@@ -52,9 +52,10 @@ public class SATCollisionTest {
 		 * |--------------------
 		 * 
 		 */
-		
+	/*
 	}
-	
+	*/
+	/*
 	@Test
 	public void testCheckCollisionSAT() {
 		
@@ -71,6 +72,7 @@ public class SATCollisionTest {
 		
 		assertTrue(bcCol.dotProduct(new Vector(1,1)) < 0);
 		 */
+	/*
 	}
-
+	*/
 }
