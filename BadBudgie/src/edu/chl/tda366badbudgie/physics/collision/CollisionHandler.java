@@ -229,7 +229,7 @@ public class CollisionHandler {
 			// Normal and tangential velocity
 			double vbNormal = b.getVelocity().dotProduct(collisionNormal);
 			double vbTangent = b.getVelocity().dotProduct(collisionTangent);
-
+			
 			// Affect velocities
 			vbNormal = -1.0 * vbNormal / totalRestitution;
 			vbTangent = vbTangent / totalFriction;
