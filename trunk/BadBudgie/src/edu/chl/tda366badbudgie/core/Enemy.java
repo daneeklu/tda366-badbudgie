@@ -1,6 +1,5 @@
 package edu.chl.tda366badbudgie.core;
 
-public class Menu {
+public class Enemy extends IGameObject {
 	
-
 }

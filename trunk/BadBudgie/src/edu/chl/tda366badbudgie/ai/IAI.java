@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core.ai;
+package edu.chl.tda366badbudgie.ai;
 
 public interface IAI {
 	//public void doA(Unit);

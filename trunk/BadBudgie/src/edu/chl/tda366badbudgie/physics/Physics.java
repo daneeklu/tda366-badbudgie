@@ -1,7 +1,7 @@
-package edu.chl.tda366badbudgie.core.physics;
+package edu.chl.tda366badbudgie.physics;
 
 import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.physics.collision.CollisionHandler;
+import edu.chl.tda366badbudgie.physics.collision.CollisionHandler;
 
 public class Physics implements IPhysics{
 

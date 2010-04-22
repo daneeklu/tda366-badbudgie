@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.gui.graphics;
+package edu.chl.tda366badbudgie.gui.graphics.impl;
 
 import java.awt.Canvas;
 import java.awt.image.BufferedImage;
@@ -11,7 +11,8 @@ import javax.media.opengl.GLEventListener;
 
 import com.sun.opengl.util.GLUT;
 
-import edu.chl.tda366badbudgie.core.content.Rectangle;
+import edu.chl.tda366badbudgie.core.Rectangle;
+import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.io.FileManager;
 import edu.chl.tda366badbudgie.io.IFileManager;
 

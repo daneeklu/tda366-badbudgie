@@ -7,11 +7,12 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import edu.chl.tda366badbudgie.core.App;
-import edu.chl.tda366badbudgie.ctrl.FlowController;
-import edu.chl.tda366badbudgie.ctrl.KeyController;
-import edu.chl.tda366badbudgie.gui.graphics.GLGraphics;
+import edu.chl.tda366badbudgie.ctrl.IStateContext;
+import edu.chl.tda366badbudgie.ctrl.impl.FlowController;
+import edu.chl.tda366badbudgie.ctrl.impl.KeyController;
+import edu.chl.tda366badbudgie.ctrl.impl.StateContext;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.gui.graphics.impl.GLGraphics;
 
 @SuppressWarnings("serial")
 public class GraphicsFrame extends JFrame {
@@ -23,7 +24,7 @@ public class GraphicsFrame extends JFrame {
 		setSize(500, 500);
 		setVisible(true);
 		
-		App app = new App();
+		IStateContext app = new StateContext();
 		KeyController kc = new KeyController(app);
 		
 		addKeyListener(kc);

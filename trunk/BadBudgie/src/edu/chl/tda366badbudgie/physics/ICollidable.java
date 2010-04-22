@@ -1,7 +1,7 @@
-package edu.chl.tda366badbudgie.core.physics;
+package edu.chl.tda366badbudgie.physics;
 
-import edu.chl.tda366badbudgie.core.content.IGameObject;
-import edu.chl.tda366badbudgie.core.content.Polygon;
+import edu.chl.tda366badbudgie.core.IGameObject;
+import edu.chl.tda366badbudgie.core.Polygon;
 
 /**
  * ICollidable

@@ -1,6 +1,6 @@
 package edu.chl.tda366badbudgie.gui.render;
 
-import edu.chl.tda366badbudgie.core.content.Rectangle;
+import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
 public class MenuRenderer {

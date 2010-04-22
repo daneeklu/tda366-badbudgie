@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.gui.graphics;
+package edu.chl.tda366badbudgie.gui.graphics.impl;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
