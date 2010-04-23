@@ -69,7 +69,17 @@ public class GameRound {
 	
 	
 	public void keyboardAction(String id, boolean down) {
-		// TODO Auto-generated method stub
+		
+		if (id.equals("moveleft")) {
+			player.moveLeft(down);
+		}
+		if (id.equals("moveright")) {
+			player.moveRight(down);
+		}
+		if (id.equals("jump")) {
+			player.jump(down);
+		}
+		
 		
 	}
 	
