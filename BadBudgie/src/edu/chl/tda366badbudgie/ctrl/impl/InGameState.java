@@ -36,6 +36,14 @@ public class InGameState implements IState {
 
 	@Override
 	public void keyboardAction(String id, boolean down) {
+		
+		gameRound.keyboardAction(id, down);
+		
+		if (down && id.equals("escape")) {
+			StateContext.getInstance().setState("menu");
+			return;
+		}
+		
 		System.out.println("In game keypress: " + id + " " + down);
 	}
 
