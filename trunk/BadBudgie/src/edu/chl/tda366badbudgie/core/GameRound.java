@@ -27,6 +27,11 @@ public class GameRound {
 	public Level getLevel() {
 		return currentLevel;
 	}
+
+	public void keyboardAction(String id, boolean down) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

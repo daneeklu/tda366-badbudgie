@@ -51,6 +51,8 @@ public class StateContext implements IStateContext {
 	public void setState(String stateid) {
 		if (stateid.equals("startGame")) {
 			currentState = inGameState;
+		} else if (stateid.equals("menu")) {
+			currentState = menuState;
 		}
 	}
 
