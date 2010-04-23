@@ -28,7 +28,6 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Returns a double which is the world coordinate in the x-axis.
-	 * 
 	 * @return the x-coordinate of the position.
 	 */
 	public double getX() {
@@ -37,7 +36,6 @@ public abstract class AbstractGameObject {
 
 	/**
 	 * Returns a double which is the world coordinate in the y-axis.
-	 * 
 	 * @return the y-coordinate of the position.
 	 */
 	public double getY() {
@@ -46,7 +44,6 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Returns a vector to the objects world coordinate.
-	 * 
 	 * @return position vector
 	 */
 	public Vector getPosition() {
@@ -55,7 +52,6 @@ public abstract class AbstractGameObject {
 
 	/**
 	 * Returns the velocity vector of the object
-	 * 
 	 * @return the objects velocity vector
 	 */
 	public Vector getVelocity() {
@@ -64,7 +60,6 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Returns the force acting on the object
-	 * 
 	 * @return the objects velocity vector
 	 */
 	public Vector getForce() {
@@ -73,7 +68,6 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Returns the mass of the object.
-	 * 
 	 * @return the mass
 	 */
 	public double getMass() {
@@ -82,7 +76,6 @@ public abstract class AbstractGameObject {
 
 	/**
 	 * Assigns a double to the world coordinate in the x-axis.
-	 * 
 	 * @param x the value of the new x-coordinate.
 	 */
 	public void setX(double x) {
@@ -91,7 +84,6 @@ public abstract class AbstractGameObject {
 
 	/**
 	 * Assigns a double to the world coordinate in the y-axis.
-	 * 
 	 * @param y the value of the new y-coordinate.
 	 */
 	public void setY(double y) {
@@ -100,7 +92,6 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Set the world coordinate of the object to the given vector.
-	 * 
 	 * @param v the new position
 	 */
 	public void setPosition(Vector v) {
@@ -109,7 +100,6 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Translate the object by the given vector.
-	 * 
 	 * @param v the translation vector
 	 */
 	public void translate(Vector v) {
@@ -118,7 +108,6 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Sets the velocity of the object to the given vector
-	 * 
 	 * @param v the velocity vector
 	 */
 	public void setVelocity(Vector v) {
@@ -127,7 +116,6 @@ public abstract class AbstractGameObject {
 
 	/**
 	 * Sets the current force acting on the object
-	 * 
 	 * @param v the velocity vector
 	 */
 	public void setForce(Vector v) {
@@ -136,11 +124,18 @@ public abstract class AbstractGameObject {
 
 	/**
 	 * Sets the current force acting on the object
-	 * 
 	 * @param v the velocity vector
 	 */
 	public void applyForce(Vector v) {
 		force = force.add(v);
+	}
+	
+	/**
+	 * Sets the mass of the object.
+	 * @param mass
+	 */
+	public void setMass(double mass) {
+		this.mass = mass;
 	}
 	
 	/**
@@ -150,5 +145,10 @@ public abstract class AbstractGameObject {
 	public boolean isStationary() {
 		return stationary;
 	}
+
+	/**
+	 * Method to be overridden by objects that have movement logic.
+	 */
+	public void updateForces() {}
 	
 }

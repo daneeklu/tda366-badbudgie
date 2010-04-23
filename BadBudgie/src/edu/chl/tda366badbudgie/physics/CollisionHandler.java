@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.AbstractCollidable;
+import edu.chl.tda366badbudgie.core.Player;
 import edu.chl.tda366badbudgie.core.Polygon;
+import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.core.Vector;
 
 /**
@@ -62,6 +64,8 @@ public class CollisionHandler {
 	private void checkCollisionEffect(AbstractCollidable o1, AbstractCollidable o2, Vector mtv) {
 		// A collision has occured, what should happen?
 		// TODO: find out what effect the collision has and act accordingly (powerups, weapons, enemies). Or just resolve the collision:
+		
+		
 		resolveCollision(o1, o2, mtv);
 	}
 	

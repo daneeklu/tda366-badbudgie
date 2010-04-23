@@ -38,10 +38,10 @@ public class KeyController extends KeyAdapter{
 		menuKeyMap.put(KeyEvent.VK_ESCAPE, "escape");
 		
 		// TODO: Temp in game key bindings
-		inGameKeyMap.put(KeyEvent.VK_LEFT, "left");
-		inGameKeyMap.put(KeyEvent.VK_RIGHT, "right");
-		inGameKeyMap.put(KeyEvent.VK_UP, "up");
-		inGameKeyMap.put(KeyEvent.VK_DOWN, "down");
+		inGameKeyMap.put(KeyEvent.VK_LEFT, "moveleft");
+		inGameKeyMap.put(KeyEvent.VK_RIGHT, "moveright");
+		inGameKeyMap.put(KeyEvent.VK_UP, "moveup");
+		inGameKeyMap.put(KeyEvent.VK_DOWN, "movedown");
 		inGameKeyMap.put(KeyEvent.VK_ENTER, "enter");
 		inGameKeyMap.put(KeyEvent.VK_ESCAPE, "escape");
 		inGameKeyMap.put(KeyEvent.VK_SPACE, "jump");
