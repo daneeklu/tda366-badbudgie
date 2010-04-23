@@ -19,8 +19,8 @@ public class GameRound {
 		currentLevel = new Level();
 		
 		player = new Player();
-		player.setX(0.3);
-		player.setY(1);
+		player.setX(0.0);
+		player.setY(0.8);
 		LinkedList<Vector> pcd = new LinkedList<Vector>();
 		pcd.add(new Vector(-0.1, -0.1));
 		pcd.add(new Vector(0.1, -0.1));
@@ -30,13 +30,12 @@ public class GameRound {
 		
 		currentLevel.addGameObject(player);
 		
-		
 		List<Vector> tVerts = new LinkedList<Vector>();
 		tVerts.add(new Vector(0, 0));
 		tVerts.add(new Vector(1, 0));
 		tVerts.add(new Vector(1, 0.2));
 		tVerts.add(new Vector(0, 0.1));
-		TerrainSection t = new TerrainSection(tVerts, 0.5, 0.5);
+		TerrainSection t = new TerrainSection(tVerts, 0.3, 0.5);
 		currentLevel.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
@@ -44,7 +43,7 @@ public class GameRound {
 		tVerts.add(new Vector(0, -1));
 		tVerts.add(new Vector(0, -0.8));
 		tVerts.add(new Vector(-1, -0.9));
-		t = new TerrainSection(tVerts, 0.5, 0.5);
+		t = new TerrainSection(tVerts, 0.01, 4);
 		currentLevel.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
