@@ -123,8 +123,8 @@ public class CollisionHandler {
 		
 		for (Vector normal : normals) {
 			
-			double aMin = aVerts.get(0).dotProduct(normal); // some value in the range, Double.MAX_DOUBLE seems to give precision issues
-			double aMax = aMin;
+			double aMin = Double.MAX_VALUE;// aVerts.get(0).dotProduct(normal); // some value in the range, Double.MAX_DOUBLE seems to give precision issues
+			double aMax = Double.MIN_VALUE;//aMin;
 			
 			// Project each vertex of a onto the current normal and save the min and max value
 			for (Vector v : aVerts) {
@@ -137,8 +137,8 @@ public class CollisionHandler {
 				}
 			}
 			
-			double bMin = bVerts.get(0).dotProduct(normal); // some value in the range
-			double bMax = bMin;
+			double bMin = Double.MAX_VALUE;// bVerts.get(0).dotProduct(normal); // some value in the range
+			double bMax = Double.MIN_VALUE;//bMin;
 			
 			// Do the same for b
 			for (Vector v : bVerts) {
