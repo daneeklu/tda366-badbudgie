@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.physics;
 import java.util.ArrayList;
 
 import edu.chl.tda366badbudgie.core.GameRound;
+import edu.chl.tda366badbudgie.core.AbstractCollidable;
 import edu.chl.tda366badbudgie.core.Polygon;
 import edu.chl.tda366badbudgie.core.Vector;
 
@@ -22,23 +23,22 @@ public class CollisionHandler {
 	 * @param gr
 	 */
 	public void handleCollisions(GameRound gr) {
-		
+
 		// TODO: broader checking for possible collisions before using SAT
-		// TODO: perhaps handle collisions between all AbstractGameObjects (powerups etc)
 		
-		ArrayList<ICollidable> collidableObjects = 
-			new ArrayList<ICollidable>(gr.getLevel().getCollidableObjects());
+		ArrayList<AbstractCollidable> collidableObjects = 
+			new ArrayList<AbstractCollidable>(gr.getLevel().getCollidableObjects());
 		
-		ArrayList<ICollidable> terrainSections = 
-			new ArrayList<ICollidable>(gr.getLevel().getTerrainSections());
+		ArrayList<AbstractCollidable> terrainSections = 
+			new ArrayList<AbstractCollidable>(gr.getLevel().getTerrainSections());
 		
 		// for every object in the list...
 		for(int i = 0; i < collidableObjects.size(); i++) {
-			ICollidable o1 = collidableObjects.get(i);
+			AbstractCollidable o1 = collidableObjects.get(i);
 			
 			// ...check it against all following objects in the list...
 			for(int j = i + 1; j < collidableObjects.size(); j++) {
-				ICollidable o2 = collidableObjects.get(j);
+				AbstractCollidable o2 = collidableObjects.get(j);
 				
 				Vector mtv = getCollisionSAT(o1.getCollisionData(), o2.getCollisionData());
 				if (mtv.getLength() != 0) {
@@ -47,9 +47,11 @@ public class CollisionHandler {
 			}
 			
 			// ...and all terrain segments.
-			for(ICollidable t : terrainSections) {
+			for(AbstractCollidable t : terrainSections) {
 				Vector mtv = getCollisionSAT(o1.getCollisionData(), t.getCollisionData());
+				
 				if (mtv.getLength() != 0) {
+					System.out.println(mtv);
 					resolveCollision(o1, t, mtv);
 				}
 			}
@@ -57,7 +59,8 @@ public class CollisionHandler {
 	}
 	
 	
-	private void checkCollisionEffect(ICollidable o1, ICollidable o2, Vector mtv) {
+	private void checkCollisionEffect(AbstractCollidable o1, AbstractCollidable o2, Vector mtv) {
+		// A collision has occured, what should happen?
 		// TODO: find out what effect the collision has and act accordingly
 		resolveCollision(o1, o2, mtv);
 	}
@@ -82,10 +85,8 @@ public class CollisionHandler {
 	 */
 	Vector getCollisionSAT(Polygon a, Polygon b) {
 
-		ArrayList<Vector> aVerts = new ArrayList<Vector>();
-		ArrayList<Vector> bVerts = new ArrayList<Vector>();
-		aVerts.addAll(a.getVertices());
-		bVerts.addAll(b.getVertices());
+		ArrayList<Vector> aVerts = new ArrayList<Vector>(a.getVertices());
+		ArrayList<Vector> bVerts = new ArrayList<Vector>(b.getVertices());
 		
 		ArrayList<Vector> normals = new ArrayList<Vector>();
 		
@@ -110,8 +111,8 @@ public class CollisionHandler {
 			p1 = bVerts.get(i);
 			p2 = bVerts.get((i + 1 == bVerts.size()) ? 0 : i + 1);
 			
-			Vector normal = p2.subtract(p1).perpendicularCCW();
-			normal = normal.normalize().scalarMultiplication(-1);
+			Vector normal = p2.subtract(p1).perpendicularCW();
+			normal = normal.normalize();
 			
 			normals.add(normal);
 			
@@ -150,10 +151,12 @@ public class CollisionHandler {
 				}
 			}
 			
+			
 			// Compare min and max values to see if there is an overlap
 			if (aMin > bMax || bMin > aMax) {
-				return new Vector(0,0); //no collision
+				return new Vector(0,0); // no overlap - no collision
 			}
+			
 			else {
 				double overlap = Math.min(aMax - bMin, bMax - aMin); 
 				if (overlap < minOverlap) {
@@ -175,16 +178,11 @@ public class CollisionHandler {
 	 * @param mtv the minimal translation vector for the collision, 
 	 * given by getCollisionSAT().
 	 */
-	private void resolveCollision(ICollidable a, ICollidable b, Vector mtv) {
-		
-		if (a.getVelocity().dotProduct(mtv) > 0) {
-			// a is moving away from b, ignore collision
-			return;
-		}
-		
+	private void resolveCollision(AbstractCollidable a, AbstractCollidable b, Vector mtv) {
+			
 		if (!a.isStationary() && !b.isStationary()) {
 			// Both objects are movable
-			
+
 			double aMassRatio = a.getMass() / (b.getMass() + a.getMass());
 			double bMassRatio = 1 - aMassRatio;
 			
@@ -228,6 +226,9 @@ public class CollisionHandler {
 		}
 		else if (a.isStationary()) {
 			
+			// Move objects out of each other
+			b.translate(mtv);
+			
 			// Needed vectors and constants
 			Vector collisionNormal = mtv.normalize();
 			Vector collisionTangent = mtv.normalize().perpendicularCCW();
@@ -249,18 +250,21 @@ public class CollisionHandler {
 		}
 		else if (b.isStationary()) {
 			
+			// Move objects out of each other
+			a.translate(mtv.scalarMultiplication(-1));
+			
 			// Needed vectors and constants
 			Vector collisionNormal = mtv.normalize();
 			Vector collisionTangent = mtv.normalize().perpendicularCCW();
-			double totalRestitution = a.getElasticity() * b.getElasticity();
-			double totalFriction = a.getFriction() + b.getFriction();
+			double totalRestitution = 1;//a.getElasticity() * b.getElasticity();
+			double totalFriction = 1;//a.getFriction() + b.getFriction();
 			
 			// Normal and tangential velocity
 			double vaNormal = a.getVelocity().dotProduct(collisionNormal);
 			double vaTangent = a.getVelocity().dotProduct(collisionTangent);
-
+			
 			// Affect velocities
-			vaNormal = -1.0 * vaNormal / totalRestitution;
+			vaNormal = -1.0 * vaNormal * totalRestitution;
 			vaTangent = vaTangent / totalFriction;
 			
 			// Apply result

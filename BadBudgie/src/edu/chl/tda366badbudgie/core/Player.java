@@ -1,5 +1,5 @@
 package edu.chl.tda366badbudgie.core;
 
-public class Player extends AbstractGameObject {
+public class Player extends AbstractCollidable {
 	
 }

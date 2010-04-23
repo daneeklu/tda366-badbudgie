@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core.physics.collision;
+package edu.chl.tda366badbudgie.physics;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.physics.CollisionHandler;
 
 public class CollisionHandlerTest {
-/*
+
 	private Polygon a, b, c;
 	private CollisionHandler ch;
 	
@@ -39,7 +39,7 @@ public class CollisionHandlerTest {
 		cVerts.add(new Vector(4,4));
 		cVerts.add(new Vector(1,4));
 		c = new Polygon(cVerts);
-		*/
+		
 		/*
 		 * |        _____
 		 * |        \  c |
@@ -51,25 +51,25 @@ public class CollisionHandlerTest {
 		 * |--------------------
 		 * 
 		 */
-	/*
+	
 	}
 	
 	
 	@Test
 	public void testGetCollisionSAT() {
-		return;*/
-		/*
+		
 		Vector abCol = ch.getCollisionSAT(a, b);
 		Vector bcCol = ch.getCollisionSAT(b, c);
 		Vector acCol = ch.getCollisionSAT(a, c);
 		
 		assertTrue(abCol.getLength() != 0);
 		assertTrue(bcCol.getLength() != 0);
+		System.out.println(acCol.getLength());
 		assertTrue(acCol.getLength() == 0);
 		
 		assertTrue(bcCol.dotProduct(new Vector(1,1)) < 0);
-		*/
-	/*}*/
+		
+	}
 
 
 }

@@ -14,7 +14,17 @@ public abstract class AbstractGameObject {
 	private Vector velocity;
 	private Vector force;
 	private double mass;
-	protected boolean stationary = false;
+	protected boolean stationary;
+	
+	
+	public AbstractGameObject() {
+		position = new Vector();
+		velocity = new Vector();
+		force = new Vector();
+		mass = 1;
+		stationary = false;
+	}
+	
 	
 	/**
 	 * Returns a double which is the world coordinate in the x-axis.

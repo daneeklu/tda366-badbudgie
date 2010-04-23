@@ -3,9 +3,6 @@ package edu.chl.tda366badbudgie.core;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.chl.tda366badbudgie.physics.CollisionHandler;
-import edu.chl.tda366badbudgie.physics.ICollidable;
-import edu.chl.tda366badbudgie.physics.Physics;
 
 public class GameRound {
 	
@@ -20,7 +17,44 @@ public class GameRound {
 		 */
 		
 		currentLevel = new Level();
+		
 		player = new Player();
+		player.setX(0.3);
+		player.setY(1);
+		LinkedList<Vector> pcd = new LinkedList<Vector>();
+		pcd.add(new Vector(-0.1, -0.1));
+		pcd.add(new Vector(0.1, -0.1));
+		pcd.add(new Vector(0.1, 0.1));
+		pcd.add(new Vector(-0.1, 0.1));
+		player.setCollisionData(new Polygon(pcd));
+		
+		currentLevel.addGameObject(player);
+		
+		
+		List<Vector> tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(0, 0));
+		tVerts.add(new Vector(1, 0));
+		tVerts.add(new Vector(1, 0.2));
+		tVerts.add(new Vector(0, 0.1));
+		TerrainSection t = new TerrainSection(tVerts, 0.5, 0.5);
+		currentLevel.addTerrainSection(t);
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-1, -0.95));
+		tVerts.add(new Vector(0, -1));
+		tVerts.add(new Vector(0, -0.8));
+		tVerts.add(new Vector(-1, -0.9));
+		t = new TerrainSection(tVerts, 0.5, 0.5);
+		currentLevel.addTerrainSection(t);
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-1, 0.2));
+		tVerts.add(new Vector(-0.2, 1));
+		tVerts.add(new Vector(-0.5, 1));
+		tVerts.add(new Vector(-1, 0.5 ));
+		t = new TerrainSection(tVerts, 0.5, 0.5);
+		currentLevel.addTerrainSection(t);
+		
 		
 	}
 	
@@ -28,10 +62,16 @@ public class GameRound {
 		return currentLevel;
 	}
 
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	
+	
 	public void keyboardAction(String id, boolean down) {
 		// TODO Auto-generated method stub
 		
 	}
-	
 	
 }

@@ -2,6 +2,7 @@ package edu.chl.tda366badbudgie.gui.graphics.impl;
 
 import java.awt.Canvas;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -11,7 +12,10 @@ import javax.media.opengl.GLEventListener;
 
 import com.sun.opengl.util.GLUT;
 
+import edu.chl.tda366badbudgie.core.Polygon;
+import edu.chl.tda366badbudgie.core.Quad;
 import edu.chl.tda366badbudgie.core.Rectangle;
+import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.io.FileManager;
 import edu.chl.tda366badbudgie.io.IFileManager;
@@ -125,6 +129,29 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glEnd();		
 	}
 
+
+	@Override
+	public void drawQuad(Quad q) {
+		
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
+		
+		//List<Vector> verts = q.getVertices();
+		
+		gl.glBegin(GL.GL_QUADS);
+		
+		gl.glColor3d(1.0, 0.5, 1.0);
+		
+		for (Vector v : q.getVertices()) {
+			gl.glVertex2d(v.getX(), v.getY() );
+		}
+		
+		gl.glEnd();		
+	}
+	
 	@Override
 	public String getActiveTexture() {
 		if(textureManager == null) return null;
@@ -156,6 +183,50 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 	}
 
+	@Override
+	public void drawPolygon(Polygon p) {
+
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
+		
+		
+		gl.glBegin(GL.GL_POLYGON);
+		
+		gl.glColor3d(1.0, 0.5, 1.0);
+		
+		for (Vector v : p.getVertices()) {
+			gl.glVertex2d(v.getX(), v.getY() );
+		}
+		
+		gl.glEnd();	
+		
+	}
+
+	@Override
+	public void drawLine(Vector start, Vector end) {
+
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
+		
+		
+		gl.glBegin(GL.GL_LINE);
+		
+		gl.glColor3d(0.0, 0.5, 1.0);
+		
+		
+		gl.glVertex2d(start.getX(), start.getY());
+		gl.glVertex2d(end.getX(), end.getY());
+		
+		
+		gl.glEnd();	
+		
+	}
 
 	
 }
