@@ -1,5 +1,6 @@
 package edu.chl.tda366badbudgie.gui;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -25,6 +26,7 @@ public class GraphicsFrame extends JFrame {
 		setVisible(true);
 		
 		IStateContext app = StateContext.getInstance();
+		app.setFrame(this);
 		KeyController kc = new KeyController(app);
 		
 		addKeyListener(kc);
@@ -40,5 +42,11 @@ public class GraphicsFrame extends JFrame {
 			}
 		});
 	}
+	
+    public void scheduleShutdown() {
+        WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+    }
+	
 
 }

@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.ctrl.impl;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.ctrl.IStateContext;
+import edu.chl.tda366badbudgie.gui.GraphicsFrame;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
 /**
@@ -13,6 +14,8 @@ import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
  *
  */
 public class StateContext implements IStateContext {
+	
+	private GraphicsFrame graphicsFrame;
 	
 	private IState menuState;
 	private IState inGameState;
@@ -56,9 +59,21 @@ public class StateContext implements IStateContext {
 		}
 	}
 
-
+	/**
+	 * Tells the GraphicsFrame to shut down the program.
+	 */
 	public void shutDown() {
-		
+		if (graphicsFrame != null) {
+			graphicsFrame.scheduleShutdown();
+		}
+		else {
+			throw new IllegalStateException("The GraphicsFrame has not been set.");
+		}
+	}
+
+	@Override
+	public void setFrame(GraphicsFrame graphicsFrame) {
+		this.graphicsFrame = graphicsFrame;
 	}
 	
 	

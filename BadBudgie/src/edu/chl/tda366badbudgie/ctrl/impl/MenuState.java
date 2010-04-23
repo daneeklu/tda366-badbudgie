@@ -43,8 +43,7 @@ public class MenuState implements IState {
 				//TODO: add switch to options state here
 				;
 			} else if (selected.equals("Exit")) {
-				//TODO: make program shutdown here
-				;
+				StateContext.getInstance().shutDown();
 			} 
 
 			return;
