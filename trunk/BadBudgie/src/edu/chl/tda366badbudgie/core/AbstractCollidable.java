@@ -16,14 +16,34 @@ import java.util.List;
 public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	private Polygon collisionData;
-	private double friction;
-	private double elasticity;
+	private double friction; // Friction coefficient. (100 = a lot, 0 = no friction)  
+	private double elasticity; // Elasticity coefficient. 1 = superball, 0 = lump of clay
+	
+	
+	
+	/**
+	 * Creates a new AbstractCollidable object with the given properties.
+	 * 
+	 * @param collisionData
+	 * @param friction
+	 * @param elasticity
+	 */
+	public AbstractCollidable(Polygon collisionData, double friction, double elasticity) {
+		this.collisionData = collisionData;
+		this.friction = friction;
+		this.elasticity = elasticity;
+	}
+	
+	protected AbstractCollidable() {
+		
+	}
 	
 	/**
 	 * Returns the collision data of the object.
 	 * @return the collision data.
 	 */
 	public Polygon getCollisionData() {
+		// Move the collision data to the objects current position.
 		List<Vector> offsetCollisionData = new LinkedList<Vector>();
 		for (Vector v : collisionData.getVertices()) {
 			offsetCollisionData.add(v.add(getPosition()));

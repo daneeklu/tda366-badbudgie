@@ -15,6 +15,7 @@ import edu.chl.tda366badbudgie.core.Vector;
  */
 public class CollisionHandler {
 	
+	
 	/**
 	 * Checks all game objects for collision with each other,
 	 * and all game objects for collision with terrain.
@@ -51,8 +52,7 @@ public class CollisionHandler {
 				Vector mtv = getCollisionSAT(o1.getCollisionData(), t.getCollisionData());
 				
 				if (mtv.getLength() != 0) {
-					System.out.println(mtv);
-					resolveCollision(o1, t, mtv);
+					checkCollisionEffect(o1, t, mtv);
 				}
 			}
 		}
@@ -61,7 +61,7 @@ public class CollisionHandler {
 	
 	private void checkCollisionEffect(AbstractCollidable o1, AbstractCollidable o2, Vector mtv) {
 		// A collision has occured, what should happen?
-		// TODO: find out what effect the collision has and act accordingly
+		// TODO: find out what effect the collision has and act accordingly (powerups, weapons, enemies). Or just resolve the collision:
 		resolveCollision(o1, o2, mtv);
 	}
 	
@@ -123,8 +123,8 @@ public class CollisionHandler {
 		
 		for (Vector normal : normals) {
 			
-			double aMin = Double.MAX_VALUE;// aVerts.get(0).dotProduct(normal); // some value in the range, Double.MAX_DOUBLE seems to give precision issues
-			double aMax = Double.MIN_VALUE;//aMin;
+			double aMin = aVerts.get(0).dotProduct(normal); // some value in the range
+			double aMax = aMin;
 			
 			// Project each vertex of a onto the current normal and save the min and max value
 			for (Vector v : aVerts) {
@@ -137,8 +137,8 @@ public class CollisionHandler {
 				}
 			}
 			
-			double bMin = Double.MAX_VALUE;// bVerts.get(0).dotProduct(normal); // some value in the range
-			double bMax = Double.MIN_VALUE;//bMin;
+			double bMin = bVerts.get(0).dotProduct(normal); // some value in the range
+			double bMax = bMin;
 			
 			// Do the same for b
 			for (Vector v : bVerts) {
@@ -179,7 +179,7 @@ public class CollisionHandler {
 	 * given by getCollisionSAT().
 	 */
 	private void resolveCollision(AbstractCollidable a, AbstractCollidable b, Vector mtv) {
-			
+		
 		if (!a.isStationary() && !b.isStationary()) {
 			// Both objects are movable
 
@@ -251,18 +251,18 @@ public class CollisionHandler {
 		else if (b.isStationary()) {
 			
 			// Move objects out of each other
-			a.translate(mtv.scalarMultiplication(-1));
+			a.translate(mtv);
 			
 			// Needed vectors and constants
 			Vector collisionNormal = mtv.normalize();
 			Vector collisionTangent = mtv.normalize().perpendicularCCW();
-			double totalRestitution = 1;//a.getElasticity() * b.getElasticity();
-			double totalFriction = 1;//a.getFriction() + b.getFriction();
+			double totalRestitution = a.getElasticity() * b.getElasticity();
+			double totalFriction = a.getFriction() * b.getFriction() + 1; 
 			
 			// Normal and tangential velocity
 			double vaNormal = a.getVelocity().dotProduct(collisionNormal);
 			double vaTangent = a.getVelocity().dotProduct(collisionTangent);
-			
+
 			// Affect velocities
 			vaNormal = -1.0 * vaNormal * totalRestitution;
 			vaTangent = vaTangent / totalFriction;

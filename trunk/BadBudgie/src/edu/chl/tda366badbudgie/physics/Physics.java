@@ -4,7 +4,7 @@ import edu.chl.tda366badbudgie.core.GameRound;
 
 public class Physics implements IPhysics{
 
-	public static final double g = 0.0002;
+	public static final double g = 0.002;
 	
 	private CollisionHandler collisionHandler;
 	private MovementHandler movementHandler;
