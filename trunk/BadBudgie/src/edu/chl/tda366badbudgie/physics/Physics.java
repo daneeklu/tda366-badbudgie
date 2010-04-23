@@ -4,7 +4,7 @@ import edu.chl.tda366badbudgie.core.GameRound;
 
 public class Physics implements IPhysics{
 
-	public static final double g = 0.1;
+	public static final double g = 0.0002;
 	
 	private CollisionHandler collisionHandler;
 	private MovementHandler movementHandler;
@@ -22,6 +22,13 @@ public class Physics implements IPhysics{
 		
 		movementHandler.handleMovement(gameRound);
 		collisionHandler.handleCollisions(gameRound);
+		
+		//System.out.println("player vel:" + gr.getPlayer().getVelocity());
+		
+//		System.out.println(gr.getLevel().getTerrainSections().get(0).getCollisionData().getVertices());
+//
+//		System.out.println(gr.getPlayer().getCollisionData().getVertices());
+//		System.out.println(gr.getPlayer().getPosition());
 		
 	}
 	

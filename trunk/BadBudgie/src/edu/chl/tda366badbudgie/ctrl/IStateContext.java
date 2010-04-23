@@ -10,4 +10,6 @@ public interface IStateContext {
 
 		public void setState(String string);
 		
+		public void shutDown();
+		
 }

@@ -3,7 +3,10 @@ package edu.chl.tda366badbudgie.gui.graphics;
 import java.awt.Canvas;
 import java.awt.image.BufferedImage;
 
+import edu.chl.tda366badbudgie.core.Polygon;
+import edu.chl.tda366badbudgie.core.Quad;
 import edu.chl.tda366badbudgie.core.Rectangle;
+import edu.chl.tda366badbudgie.core.Vector;
 
 /**
  * 
@@ -21,13 +24,34 @@ public interface IGraphics {
 	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
 	 */
 	public boolean startRendering();
-	
+
 	/**
 	 * Draws a rectangle 
 	 * @param r the rectangle to be drawn
 	 * 
 	 */
 	public void drawRect(Rectangle r);
+	
+	/**
+	 * Draws a quad 
+	 * @param r the rectangle to be drawn
+	 * 
+	 */
+	public void drawQuad(Quad q);
+	
+	/**
+	 * Draws a polygon
+	 * @param p the polygon to draw
+	 * 
+	 */
+	public void drawPolygon(Polygon p);
+	
+	/**
+	 * Draws a line
+	 * @param start
+	 * @param end
+	 */
+	public void drawLine(Vector start, Vector end);
 	
 	/**
 	 * Add a texture to the texture library

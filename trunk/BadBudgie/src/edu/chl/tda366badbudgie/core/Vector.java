@@ -13,13 +13,20 @@ public class Vector {
 	private double y;
 
 	/**
-	 * Creates a new 2DVector with give x- and y-coordinates.
+	 * Creates a new 2DVector with given x- and y-coordinates.
 	 * @param x the x-coordinate.
 	 * @param y the y-coordinate.
 	 */
 	public Vector(double x, double y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	/**
+	 * Creates a new vector with length zero.
+	 */
+	public Vector() {
+		this(0, 0);
 	}
 	
 	/**

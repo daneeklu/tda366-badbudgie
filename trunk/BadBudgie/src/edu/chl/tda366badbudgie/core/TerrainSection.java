@@ -2,7 +2,6 @@ package edu.chl.tda366badbudgie.core;
 
 import java.util.List;
 
-import edu.chl.tda366badbudgie.physics.ICollidable;
 
 /**
  * Class representing a segment of the level terrain.
@@ -10,10 +9,10 @@ import edu.chl.tda366badbudgie.physics.ICollidable;
  * @author dkvarfordt
  *
  */
-public class TerrainSection extends ICollidable {
+public class TerrainSection extends AbstractCollidable {
 	
 	private Quad quad;			//The Quad object that stores the terrain data.
-	private double friction;	// Friction coefficient. 100 = a lot, 0 = no friction
+	private double friction;	// Friction coefficient. ((100 = a lot, 0 = no friction) might change) 
 	private double elasticity;	// Elasticity coefficient. 1 = superball, 0 = lump of clay
 	
 	/**
@@ -45,6 +44,14 @@ public class TerrainSection extends ICollidable {
 	@Override
 	public double getElasticity() {
 		return elasticity;
+	}
+
+	/**
+	 * Returns the Quad object making this TerrainSection
+	 * @return the Quad object
+	 */
+	public Quad getQuad() {
+		return quad;
 	}
 
 }
