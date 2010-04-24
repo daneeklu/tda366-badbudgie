@@ -16,9 +16,9 @@ import java.util.List;
 public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	private Polygon collisionData;
-	private double friction; // Friction coefficient. (100 = a lot, 0 = no friction)  
-	private double elasticity; // Elasticity coefficient. 1 = superball, 0 = lump of clay
-	
+	private double friction; 		// Friction coefficient. (100 = a lot, 0 = no friction)  
+	private double elasticity; 		// Elasticity coefficient. 1 = superball, 0 = lump of clay
+	private Vector groundContactVector;
 	
 	
 	/**
@@ -32,14 +32,17 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		this.collisionData = collisionData;
 		this.friction = friction;
 		this.elasticity = elasticity;
+		setGroundContactVector(new Vector());
 	}
 	
 	protected AbstractCollidable() {
-		
+		setGroundContactVector(new Vector());
 	}
 	
 	/**
 	 * Returns the collision data of the object.
+	 * If no collision data is set an empty list will be returned.
+	 * 
 	 * @return the collision data.
 	 */
 	public Polygon getCollisionData() {
@@ -53,7 +56,8 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	/**
 	 * Returns the friction coefficient.
-	 * 1 = instant stop, 0 = no friction 
+	 * 100 = lots of friction, 0 = no friction
+	 * 
 	 * @return the friction coefficient
 	 */
 	public double getFriction() {
@@ -91,6 +95,28 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 */
 	public void setElasticity(double e) {
 		elasticity = e;
+	}
+	
+	/**
+	 * Sets the ground contact vector for the unit.
+	 * The magnitude signifies the friction of the contact.
+	 * 
+	 * @param groundContactVector
+	 *            the vector of the ground contact
+	 */
+	public void setGroundContactVector(Vector groundContactVector) {
+		this.groundContactVector = groundContactVector;
+	}
+
+	/**
+	 * Returns the ground contact normal of the unit. If the unit does not have
+	 * ground contact, a vector of length zero will be returned.
+	 * The magnitude signifies the friction of the contact.
+	 * 
+	 * @return the ground contact vector
+	 */
+	public Vector getGroundContactVector() {
+		return groundContactVector;
 	}
 	
 }
