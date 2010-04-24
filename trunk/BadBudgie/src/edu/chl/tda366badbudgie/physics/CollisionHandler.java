@@ -170,6 +170,28 @@ public class CollisionHandler {
 			}	
 		}
 		
+		
+		// The following is not optimal but is used to find the correct 
+		// direction of minOverlapVector until a better solution is found.
+		Vector aMidPoint = new Vector();
+		Vector bMidPoint = new Vector();
+		for ( Vector v : aVerts) {
+			aMidPoint = aMidPoint.add(v);
+		}
+		for ( Vector v : bVerts) {
+			bMidPoint = bMidPoint.add(v);
+		}
+		aMidPoint = aMidPoint.scalarDivision(aVerts.size());
+		bMidPoint = bMidPoint.scalarDivision(bVerts.size());
+		
+		Vector ba = aMidPoint.subtract(bMidPoint);
+		
+		if (ba.dotProduct(minOverlapVector) < 0) {
+			minOverlapVector = minOverlapVector.scalarMultiplication(-1);
+			System.out.println("switch");
+		}
+		
+		
 		return minOverlapVector;
 		
 	}

@@ -26,7 +26,7 @@ public class KeyController extends KeyAdapter{
 		this.stateContext = stateContext;
 		menuKeyMap = new HashMap<Integer, String>();
 		inGameKeyMap = new HashMap<Integer, String>();
-		keyDown = new boolean[500]; 				// TODO: find exact value needed 
+		keyDown = new boolean[65536];
 		Arrays.fill(keyDown, false);
 		
 		// Menu key bindings

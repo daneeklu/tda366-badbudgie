@@ -61,6 +61,7 @@ public class StateContext implements IStateContext {
 
 	/**
 	 * Tells the GraphicsFrame to shut down the program.
+	 * @throws an IllegalStateException if graphicsframe has not been set.
 	 */
 	public void shutDown() {
 		if (graphicsFrame != null) {
