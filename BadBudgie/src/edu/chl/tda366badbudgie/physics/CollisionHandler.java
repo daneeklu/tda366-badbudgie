@@ -70,6 +70,7 @@ public class CollisionHandler {
 	private void checkCollisionEffect(AbstractCollidable o1,
 			AbstractCollidable o2, Vector mtv) {
 		
+		// Set the ground contact vector
 		double friction = o1.getFriction() * o2.getFriction() + 1;
 		if (mtv.getY() > 0) {
 			// o1 on top of o2

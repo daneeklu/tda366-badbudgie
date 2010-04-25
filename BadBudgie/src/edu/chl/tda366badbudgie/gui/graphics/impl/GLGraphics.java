@@ -2,6 +2,7 @@ package edu.chl.tda366badbudgie.gui.graphics.impl;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 import javax.media.opengl.GL;
@@ -139,11 +140,9 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			return;
 		}
 		
-		//List<Vector> verts = q.getVertices();
-		
 		gl.glBegin(GL.GL_QUADS);
 		
-		gl.glColor3d(1.0, 0.5, 1.0);
+		gl.glColor3d(0.5, 0.5, 0.5);
 		
 		for (Vector v : q.getVertices()) {
 			gl.glVertex2d(v.getX(), v.getY() );
@@ -171,15 +170,19 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawText(String text) {
+	public void drawText(String text, int x, int y) {
 		
 		GLUT glut = new GLUT();
+		System.out.println(text + " " + x + " " + y);
+		Dimension gSize = getCanvas().getSize();
 		
-		gl.glRasterPos2d(-0.8, -0.9);
+		gl.glColor3d(1, 1, 1);
+		gl.glRasterPos2d(((double) x / gSize.width) - 1, 1 - ((double) y / gSize.height) - 0.06);
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glColor3d(1.0,1.0,1.0);
 		glut.glutBitmapString(7, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);
+		gl.glRasterPos2d(0, 0);
 		
 	}
 
@@ -214,16 +217,17 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			return;
 		}
 		
-		
+
+		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glBegin(GL.GL_LINE_STRIP);
 		gl.glColor3d(((double) c.getRed()) / 256, ((double) c.getGreen()) / 256, ((double) c.getBlue()) / 256);
-		gl.glColor3d(0.0, 0.5, 1.0);
 		
 		gl.glLineWidth(2f);
 		
 		gl.glVertex2d(start.getX(), start.getY());
 		gl.glVertex2d(end.getX(), end.getY());
-		
+
+		gl.glEnable(GL.GL_TEXTURE_2D);
 		
 		gl.glEnd();	
 		

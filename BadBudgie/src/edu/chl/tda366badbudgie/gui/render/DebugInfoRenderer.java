@@ -10,12 +10,14 @@ import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 public class DebugInfoRenderer {
 
 	private List<DebugLine> debugLines;
+	private List<String> debugText;
 	private boolean debugInfoEnabled = true;
 	
 	private static DebugInfoRenderer instance;
 	
 	private DebugInfoRenderer() {
 		debugLines = new LinkedList<DebugLine>();
+		debugText = new LinkedList<String>();
 	}
 	
 	public static DebugInfoRenderer getInstance() {
@@ -29,13 +31,22 @@ public class DebugInfoRenderer {
 		debugLines.add(new DebugLine(start, end, c));
 	}
 	
+	public void addDebugText(String string) {
+		debugText.add(string);
+	}
 
 	public void drawDebugInfo(IGraphics g) {
 		if (isDebugInfoEnabled()) {
 			for (DebugLine d : debugLines) {
 				g.drawLine(d.start, d.end, d.c);
 			}
+			int i = 0;
+			for (String s : debugText) {
+				g.drawText(s, 10, 25 * i++);
+			}
+			
 			debugLines.clear();
+			debugText.clear();
 		}
 	}
 	
@@ -63,5 +74,7 @@ public class DebugInfoRenderer {
 		}		
 		
 	}
+
+
 	
 }

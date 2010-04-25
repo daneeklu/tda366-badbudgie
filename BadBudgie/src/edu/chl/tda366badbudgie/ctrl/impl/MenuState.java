@@ -4,6 +4,7 @@ package edu.chl.tda366badbudgie.ctrl.impl;
 import edu.chl.tda366badbudgie.core.Menu;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 import edu.chl.tda366badbudgie.gui.render.MenuRenderer;
 
 public class MenuState implements IState {
@@ -25,6 +26,8 @@ public class MenuState implements IState {
 	
 	@Override
 	public void draw(IGraphics g) {
+		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled())
+			DebugInfoRenderer.getInstance().addDebugText("AppState: menu. Item: " + menu.getSelected());
 		MenuRenderer.render(menu, g);
 	}
 
