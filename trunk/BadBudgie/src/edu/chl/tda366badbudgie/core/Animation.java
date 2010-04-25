@@ -43,6 +43,10 @@ public class Animation {
 		this.animId = id;
 	}
 	
+	public int getFrameIndex(int frame) {
+		return frames.get(frame).getIndex();
+	}
+	
 	/**
 	 * Frame
 	 * Used to hold frame-specific data of the animation.

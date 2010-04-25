@@ -26,7 +26,7 @@ public class GameRound {
 
 		currentLevel = new Level();
 
-		player = new Player();
+		player = new Player("budgie");
 		player.setX(0.0);
 		player.setY(0.8);
 		LinkedList<Vector> pcd = new LinkedList<Vector>();

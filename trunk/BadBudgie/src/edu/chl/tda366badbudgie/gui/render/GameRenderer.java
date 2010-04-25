@@ -6,6 +6,7 @@ import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.TerrainSection;
+import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
 /**
@@ -43,7 +44,10 @@ public class GameRenderer {
 	private static void drawGameObjects(List<AbstractGameObject> gos, IGraphics g) {
 		for (AbstractGameObject go : gos) {
 			g.setActiveTexture("test");
-			g.drawRect(new Rectangle(go.getX()-0.1, go.getY()-0.1,0.2,0.2 ));
+			g.drawSprite(go.getSprite(), 
+					new Vector(go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2),
+					new Vector(go.getWidth(), go.getHeight()));
+			//g.drawRect(new Rectangle(go.getX()-0.1, go.getY()-0.1,0.2,0.2 ));
 		}
 	}
 

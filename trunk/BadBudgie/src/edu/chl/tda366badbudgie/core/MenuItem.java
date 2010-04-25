@@ -16,6 +16,7 @@ public class MenuItem {
 	private Sprite sprite;
 	private Vector position;
 	private Vector size;
+	private boolean selected;
 	
 	public MenuItem(String id, Vector position, Vector size) {
 		
@@ -30,7 +31,20 @@ public class MenuItem {
 		sprite = new Sprite(id, 1, 4, animList);
 		this.position = position;
 		this.size = size;
+		this.selected = false;
 		
+	}
+	
+	public void setSelected(boolean value) {
+		selected = value;
+		if (selected) 
+			sprite.setAnimation("selected");
+		else
+			sprite.setAnimation("idle");
+	}
+	
+	public boolean getSelected() {
+		return selected;
 	}
 	
 	public Sprite getSprite() {
@@ -43,6 +57,10 @@ public class MenuItem {
 	
 	public Vector getSize() {
 		return size;
+	}
+
+	public void logic() {
+		// TODO Should menuitem have logic?
 	}
 	
 	
