@@ -15,6 +15,7 @@ public abstract class AbstractGameObject {
 	private Vector force;
 	private double mass;
 	protected boolean stationary;
+	private Sprite sprite;
 	
 	
 	public AbstractGameObject() {

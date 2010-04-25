@@ -13,33 +13,33 @@ import java.util.List;
 public class Animation {
 
 	private List<Frame> frames;
-	private String id;
+	private String animId;
 	private boolean loop;
 	
-	public Animation(String id, List<Integer> indices, List<Double> durationTimes, boolean loop){
+	public Animation(String animId, List<Integer> indices, List<Double> durationTimes, boolean loop){
 		frames = new ArrayList<Frame>(indices.size());
 		
 		for(int i = 0; i < indices.size(); i ++){
 			frames.add(new Frame(indices.get(i), durationTimes.get(i)));
 		}
 		this.loop = loop;
-		this.id = id;
+		this.animId = animId;
 	}
 	
-	public Animation(String id, List<Integer> indices, List<Double> durationTimes){
-		this(id, indices, durationTimes, false);
+	public Animation(String animId, List<Integer> indices, List<Double> durationTimes){
+		this(animId, indices, durationTimes, false);
 	}
 	
 	/**
 	 * Creates a single frame animation.
 	 * Useful for still images.
-	 * @param id
+	 * @param animId
 	 */
 	public Animation(String id, int index){
 		frames = new ArrayList<Frame>(1);
 		frames.add(new Frame(index, 1));
 		this.loop = false;
-		this.id = id;
+		this.animId = id;
 	}
 	
 	/**
@@ -78,6 +78,10 @@ public class Animation {
 		public double getDuration(){
 			return duration;
 		}
+	}
+
+	public String getId() {
+		return animId;
 	}
 	
 }

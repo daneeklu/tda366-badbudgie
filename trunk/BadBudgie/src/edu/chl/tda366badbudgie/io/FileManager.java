@@ -22,19 +22,28 @@ public class FileManager implements IFileManager{
 		
 		//load a test image with texture id "test"
 		//later all resources will be defined in an xml file
-		
-		BufferedImage image;
+
 		try {
-			image = ImageIO.read(new File("res/test.png"));
+			loadImage("test", "res/test.png");
+			loadImage("newgame", "res/newgame.png");
+
+			//image = ImageIO.read(new File("res/test.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
 		
-		g.addTexture("test", image);
+		//g.addTexture("test", image);
 		
 		
 		
+	}
+	
+	private void loadImage(String id, String path) throws IOException {
+		BufferedImage image;
+
+		image = ImageIO.read(new File(path));
+		g.addTexture(id, image);
 	}
 
 }
