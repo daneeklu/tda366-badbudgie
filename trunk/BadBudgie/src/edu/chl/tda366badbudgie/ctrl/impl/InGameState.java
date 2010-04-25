@@ -28,10 +28,11 @@ public class InGameState implements IState {
 	
 	@Override
 	public void logic() {
-		if(gameRound.getPlayer().getEnergy() < 100){
-			gameRound.getPlayer().setEnergy(gameRound.getPlayer().getEnergy()+0.1);
-		}
+		
 		physics.doPhysics(gameRound);
+		
+		gameRound.updateGameObjects();
+		
 	}
 	
 	@Override

@@ -96,5 +96,15 @@ public class GameRound {
 		
 		
 	}
+
+	/**
+	 * This method calls the updateInnerState on all objects 
+	 * inheriting AbstractGameObject.
+	 */
+	public void updateGameObjects() {
+		for (AbstractGameObject ago : currentLevel.getGameObjects()) {
+			ago.updateState();
+		}
+	}
 	
 }
