@@ -53,6 +53,11 @@ public class StateContext implements IStateContext {
 	@Override
 	public void setState(String stateid) {
 		if (stateid.equals("startGame")) {
+			if(inGameState != null)
+				currentState = new InGameState(new GameRound());
+			else
+				currentState = inGameState;
+		} else if(stateid.equals("resumeGame")){
 			currentState = inGameState;
 		} else if (stateid.equals("menu")) {
 			currentState = menuState;
