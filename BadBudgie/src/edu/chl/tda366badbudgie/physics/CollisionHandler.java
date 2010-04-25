@@ -1,14 +1,13 @@
 package edu.chl.tda366badbudgie.physics;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
-import edu.chl.tda366badbudgie.core.AbstractUnit;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.AbstractCollidable;
-import edu.chl.tda366badbudgie.core.Player;
 import edu.chl.tda366badbudgie.core.Polygon;
-import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.core.Vector;
+import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 
 /**
  * A collision detection and handling class.
@@ -44,7 +43,7 @@ public class CollisionHandler {
 
 				Vector mtv = getCollisionSAT(o1.getCollisionData(), o2
 						.getCollisionData());
-				if (mtv.getLength() != 0) {
+				if (mtv.hasZeroLength()) {
 					checkCollisionEffect(o1, o2, mtv);
 				}
 			}
@@ -56,6 +55,7 @@ public class CollisionHandler {
 
 				if (mtv.getLength() != 0) {
 					checkCollisionEffect(o1, t, mtv);
+					System.out.println("collision with normal " + mtv.normalize());
 				}
 			}
 		}
@@ -88,8 +88,8 @@ public class CollisionHandler {
 					.scalarDivision(2));
 		}
 		
+		DebugInfoRenderer.getInstance().addDebugLine(o1.getPosition(), o1.getPosition().add(mtv.scalarMultiplication(100)), Color.green);
 		
-
 		// Resolve the collision by translating one or both of the objects
 		resolveCollision(o1, o2, mtv);
 

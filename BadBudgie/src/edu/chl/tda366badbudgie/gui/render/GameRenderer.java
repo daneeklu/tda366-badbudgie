@@ -6,7 +6,6 @@ import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.TerrainSection;
-import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
 public class GameRenderer {
@@ -18,6 +17,11 @@ public class GameRenderer {
 		drawTerrain(gameRound.getLevel().getTerrainSections(), g);
 		drawGameObjects(gameRound.getLevel().getGameObjects(), g);
 		g.drawText("AppState: ingame");
+		
+		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
+			DebugInfoRenderer.getInstance().drawDebugInfo(g);
+		}
+		
 		g.stopRendering();
 		
 	}
