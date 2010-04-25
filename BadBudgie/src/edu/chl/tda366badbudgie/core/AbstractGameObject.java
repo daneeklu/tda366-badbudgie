@@ -15,7 +15,8 @@ public abstract class AbstractGameObject {
 	private Vector force;
 	private double mass;
 	protected boolean stationary;
-	private Sprite sprite;
+	protected Sprite sprite;
+	private Vector size;
 	
 	
 	public AbstractGameObject() {
@@ -24,6 +25,9 @@ public abstract class AbstractGameObject {
 		force = new Vector();
 		mass = 1;
 		stationary = false;
+		
+		//TODO: Add actual size param to constructor
+		size = new Vector(0.2,0.2);
 	}
 	
 	
@@ -156,6 +160,22 @@ public abstract class AbstractGameObject {
 	 * Method to be overridden by objects that have inner state logic.
 	 */
 	public void updateState() {}
+
+
+	public Sprite getSprite() {
+		// TODO Auto-generated method stub
+		return sprite;
+	}
+
+
+	public double getWidth() {
+		return size.getX();
+	}
+
+
+	public double getHeight() {
+		return size.getY();
+	}
 	
 	
 	

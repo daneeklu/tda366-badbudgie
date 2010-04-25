@@ -33,11 +33,7 @@ public class MenuRenderer {
 	}
 	
 	private static void renderMenuItem(MenuItem item, IGraphics g) {
-		//if(item == null) return;
-		//if(g == null) return;
-		//System.out.println("tex:" + item.getSprite().getId());
 		g.setActiveTexture(item.getSprite().getId());
-		//System.out.println("???");
-		g.drawSprite(item.getSprite(), item.getPosition(), item.getSize());//new Rectangle(item.getPosition(),item.getSize()));
+		g.drawSprite(item.getSprite(), item.getPosition(), item.getSize());
 	}
 }

@@ -19,22 +19,39 @@ public class Menu {
 	private int currentItem;
 	
 	public Menu() {
-		currentItem = 0;
 		
 		menuItems = new MenuItem[3];
 		
 		menuItems[0] = new MenuItem("newgame",
-				new Vector(-0.5, 0.5),
+				new Vector(-0.5, 0.2),
 				new Vector(1.0, 0.3));
 		
-		menuItems[1] = new MenuItem("newgame",
-				new Vector(-0.5, 0.0),
+		menuItems[1] = new MenuItem("options",
+				new Vector(-0.5, -0.3),
 				new Vector(1.0, 0.3));
 		
-		menuItems[2] = new MenuItem("newgame",
-				new Vector(-0.5, -0.5),
+		menuItems[2] = new MenuItem("exit",
+				new Vector(-0.5, -0.8),
 				new Vector(1.0, 0.3));
 		
+		setCurrentItem(0);
+	}
+	
+	public void setCurrentItem(int item) {
+		
+		if (item == -1) {
+			setCurrentItem(numItems - 1);
+			return;
+		}
+		if (item == numItems) {
+			setCurrentItem(0);
+			return;
+		}
+		
+		menuItems[currentItem].setSelected(false);
+		menuItems[item].setSelected(true);
+		
+		currentItem = item;
 	}
 
 	public void keyboardAction(String id, boolean down) {
@@ -42,13 +59,10 @@ public class Menu {
 		if (!down) return;
 		
 		if (id.equals("down"))
-			currentItem++;
+			setCurrentItem(currentItem + 1);
 		
 		if (id.equals("up"))
-			currentItem--;
-		
-		if(currentItem < 0) currentItem += numItems;
-		if(currentItem >= numItems) currentItem -= numItems;
+			setCurrentItem(currentItem - 1);
 	}
 	
 	public String getSelected() {
@@ -57,6 +71,13 @@ public class Menu {
 	
 	public MenuItem[] getMenuItems() {
 		return menuItems;
+	}
+
+	public void logic() {
+		for (MenuItem mi : menuItems) {
+			mi.logic();
+		}
+		
 	}
 	
 	

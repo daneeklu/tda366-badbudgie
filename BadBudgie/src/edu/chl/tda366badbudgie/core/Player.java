@@ -21,12 +21,13 @@ public class Player extends AbstractUnit {
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
 	
-	public Player() {
+	public Player(String texId) {
 		setFriction(0.5);
 		setElasticity(0.5);
 		setMass(1);
 		health = 100;
 		flyingEnergy = 100;
+		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
 	}
 
 	public void moveLeft(boolean down) {

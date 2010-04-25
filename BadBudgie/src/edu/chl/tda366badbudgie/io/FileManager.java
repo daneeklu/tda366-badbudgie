@@ -20,30 +20,25 @@ public class FileManager implements IFileManager{
 	@Override
 	public void loadData() {
 		
-		//load a test image with texture id "test"
-		//later all resources will be defined in an xml file
+		//TODO: Should load images using the texture xml file
 
-		try {
-			loadImage("test", "res/test.png");
-			loadImage("newgame", "res/newgame.png");
+		loadImage("newgame", "res/newgame.png");
+		loadImage("test", "res/test.png");
+		loadImage("smurf", "res/SmurfSpin.png");
+		loadImage("budgie", "res/test_alpha.png");		
 
-			//image = ImageIO.read(new File("res/test.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		
-		//g.addTexture("test", image);
-		
-		
-		
+		loadImage("options", "res/options.png");
+		loadImage("exit", "res/exit.png");
 	}
 	
-	private void loadImage(String id, String path) throws IOException {
+	private void loadImage(String id, String path) {
 		BufferedImage image;
 
-		image = ImageIO.read(new File(path));
-		g.addTexture(id, image);
+		try {
+			image = ImageIO.read(new File(path));
+			g.addTexture(id, image);
+		} catch (IOException e) {
+			System.out.println("COULDN'T LOAD TEXTURE: " + id + " at \"" + path + "\"");
+		}
 	}
-
 }

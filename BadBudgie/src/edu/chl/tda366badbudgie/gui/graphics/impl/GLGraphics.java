@@ -183,6 +183,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		for (Vector v : q.getVertices()) {
 			gl.glVertex2d(v.getX(), v.getY() );
 		}
+		
+		gl.glColor3d(1.0, 1.0, 1.0);
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glEnd();		
 	}
@@ -271,8 +273,17 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void drawSprite(Sprite s, Vector pos, Vector size) {
 		String texId = s.getId();
 		
+		double tx, ty;
+		double frameWidth = 1.0 / s.getHorFrames();
+		double frameHeight = 1.0 / s.getVerFrames();
+		
+		int frameIndex = s.getFrameIndex();
+		
+		tx = (double)(frameIndex % s.getHorFrames() ) * frameWidth;
+		ty = (double)(frameIndex / s.getHorFrames() ) * frameHeight;
+		
 		setActiveTexture(texId);
-		drawRect(new Rectangle(pos, size), new Rectangle(0.0,0.0,1.0,0.25));
+		drawRect(new Rectangle(pos, size), new Rectangle(tx, ty, frameWidth, frameHeight));
 		
 	}
 

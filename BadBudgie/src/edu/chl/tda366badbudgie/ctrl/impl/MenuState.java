@@ -21,6 +21,8 @@ public class MenuState implements IState {
 	public void logic() {
 		if (startGame) {
 			StateContext.getInstance().setState("startGame");
+		} else {
+			menu.logic();
 		}
 	}
 	
