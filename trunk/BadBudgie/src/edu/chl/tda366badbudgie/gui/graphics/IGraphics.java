@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.gui.graphics;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import edu.chl.tda366badbudgie.core.Polygon;
@@ -51,7 +52,7 @@ public interface IGraphics {
 	 * @param start
 	 * @param end
 	 */
-	public void drawLine(Vector start, Vector end);
+	public void drawLine(Vector start, Vector end, Color c);
 	
 	/**
 	 * Add a texture to the texture library
