@@ -5,9 +5,10 @@ public class Player extends AbstractUnit {
 	private static final double moveForce = 0.005;
 	private static final double airMoveForce = 0.001;
 	private static final double jumpStrength = 0.04;
+	private static final double flyingStrength = 0.03;
 	
 	private int health;
-	private int flyingEnergy;
+	private double flyingEnergy;
 	
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
@@ -30,12 +31,28 @@ public class Player extends AbstractUnit {
 	
 	public void jump(boolean down) {
 		if (down) {
+			System.out.println("Current Energy: " + flyingEnergy);
 			Vector groundContactVector = getGroundContactVector();
+			Vector vector = getPosition();
 			if (!groundContactVector.hasZeroLength()) {
 				applyForce(groundContactVector.normalize().scalarMultiplication(jumpStrength));
 			}
-			
+			else{
+				if(flyingEnergy > 30){
+					flyingEnergy -= 30;
+					vector = new Vector(0, vector.getY());
+					applyForce(vector.scalarMultiplication(flyingStrength));
+				}
+			}	
 		}
+	}
+	
+	public double getEnergy(){
+		return flyingEnergy;
+	}
+	
+	public void setEnergy(double i){
+		flyingEnergy = i;
 	}
 	
 	@Override
@@ -60,9 +77,11 @@ public class Player extends AbstractUnit {
 		setGroundContactVector(new Vector(0, 0));
 	}
 	
-	@Override
-	public void updateState() {
-		
+	
+	public void updateState(){
+		if(flyingEnergy < 100){
+			flyingEnergy += 0.1;
+		}
 	}
 	
 }
