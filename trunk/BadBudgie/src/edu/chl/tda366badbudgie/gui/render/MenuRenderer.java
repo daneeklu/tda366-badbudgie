@@ -10,8 +10,12 @@ public class MenuRenderer {
 		if(!g.startRendering()) 
 			return;
 		g.setActiveTexture("test");
+		
 		g.drawRect(new Rectangle(-1.0, -1.0, 2.0, 2.0));
-		g.drawText("AppState: menu. Item: " + menu.getSelected());
+		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
+			DebugInfoRenderer.getInstance().drawDebugInfo(g);
+		}
+		
 		g.stopRendering();
 	}
 }

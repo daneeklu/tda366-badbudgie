@@ -82,10 +82,10 @@ public interface IGraphics {
 	public void stopRendering();
 	
 	/**
-	 * Draw text in the lower left corner
+	 * Draw text at the specified pixel position from the upper left corner.
 	 * @param text the text to be drawn
 	 */
-	public void drawText(String text);
+	public void drawText(String text, int x, int y);
 
 	
 }

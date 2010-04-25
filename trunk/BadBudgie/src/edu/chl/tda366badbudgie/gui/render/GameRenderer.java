@@ -16,7 +16,6 @@ public class GameRenderer {
 		
 		drawTerrain(gameRound.getLevel().getTerrainSections(), g);
 		drawGameObjects(gameRound.getLevel().getGameObjects(), g);
-		g.drawText("AppState: ingame");
 		
 		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
 			DebugInfoRenderer.getInstance().drawDebugInfo(g);
