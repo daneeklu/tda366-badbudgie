@@ -5,6 +5,7 @@ public class Player extends AbstractUnit {
 	private static final double moveForce = 0.005;
 	private static final double airMoveForce = 0.001;
 	private static final double jumpStrength = 0.04;
+	private static double energy = 100;
 	
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
@@ -25,14 +26,25 @@ public class Player extends AbstractUnit {
 	
 	public void jump(boolean down) {
 		if (down) {
+			System.out.println(energy);
 			Vector groundContactVector = getGroundContactVector();
 			if (!groundContactVector.hasZeroLength()) {
-				applyForce(groundContactVector.normalize().scalarMultiplication(jumpStrength));
+				if(energy > 30){
+					energy -= 30;
+					applyForce(groundContactVector.normalize().scalarMultiplication(jumpStrength));
+				}
 			}
 			
 		}
 	}
 	
+	public double getEnergy(){
+		return energy;
+	}
+	
+	public void setEnergy(double i){
+		energy = i;
+	}
 	
 	@Override
 	public void updateForces() {

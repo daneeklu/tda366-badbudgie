@@ -19,6 +19,7 @@ public class InGameState implements IState {
 	private GameRound gameRound;
 	private Physics physics;
 	
+	
 	public InGameState(GameRound gr) {
 		gameRound = gr;
 		physics = new Physics(gr,new CollisionHandler(), new MovementHandler());
@@ -26,6 +27,9 @@ public class InGameState implements IState {
 	
 	@Override
 	public void logic() {
+		if(gameRound.getPlayer().getEnergy() < 100){
+			gameRound.getPlayer().setEnergy(gameRound.getPlayer().getEnergy()+0.1);
+		}
 		physics.doPhysics(gameRound);
 	}
 	
