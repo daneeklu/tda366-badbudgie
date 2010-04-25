@@ -16,7 +16,6 @@ public class MovementHandler {
 		
 		for(AbstractGameObject ago : gameObjects) {
 			
-			
 			ago.updateForces();
 			
 			// Apply gravity
@@ -27,12 +26,6 @@ public class MovementHandler {
 			
 			// Set the new position of the object
 			ago.setPosition(ago.getPosition().add(ago.getVelocity()));
-			
-			if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
-				DebugInfoRenderer.getInstance().addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getForce().scalarMultiplication(100)), Color.red);
-				DebugInfoRenderer.getInstance().addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getVelocity().scalarMultiplication(100)), Color.blue);
-				DebugInfoRenderer.getInstance().addDebugText("pos: " + "x:" + ago.getX() + " y:" + ago.getY());
-			}
 			
 			// Reset the force on the object
 			ago.setForce(new Vector(0, 0));
