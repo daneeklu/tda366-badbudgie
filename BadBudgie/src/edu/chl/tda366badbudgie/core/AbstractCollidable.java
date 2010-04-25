@@ -10,7 +10,7 @@ import java.util.List;
  * Abstract class inherited by objects handled by the 
  * collision engine.
  * 
- * @author jesper
+ * @author dkvarfordt
  *
  */
 public abstract class AbstractCollidable extends AbstractGameObject {
