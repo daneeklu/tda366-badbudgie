@@ -1,8 +1,8 @@
 package edu.chl.tda366badbudgie.gui.graphics.impl;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.List;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -206,7 +206,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawLine(Vector start, Vector end) {
+	public void drawLine(Vector start, Vector end, Color c) {
 
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
@@ -215,10 +215,11 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		}
 		
 		
-		gl.glBegin(GL.GL_LINE);
-		
+		gl.glBegin(GL.GL_LINE_STRIP);
+		gl.glColor3d(((double) c.getRed()) / 256, ((double) c.getGreen()) / 256, ((double) c.getBlue()) / 256);
 		gl.glColor3d(0.0, 0.5, 1.0);
 		
+		gl.glLineWidth(2f);
 		
 		gl.glVertex2d(start.getX(), start.getY());
 		gl.glVertex2d(end.getX(), end.getY());
