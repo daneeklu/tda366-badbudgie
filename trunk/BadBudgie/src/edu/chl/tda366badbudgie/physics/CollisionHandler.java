@@ -33,7 +33,12 @@ public class CollisionHandler {
 		ArrayList<AbstractCollidable> terrainSections = new ArrayList<AbstractCollidable>(
 				gr.getLevel().getTerrainSections());
 
-		// for every object in the list...
+		// Reset ground contact vectors
+		for (AbstractCollidable ac : collidableObjects) {
+			ac.setGroundContactVector(new Vector(0, 0));
+		}
+		
+		// For every object in the list...
 		for (int i = 0; i < collidableObjects.size(); i++) {
 			AbstractCollidable o1 = collidableObjects.get(i);
 
@@ -58,6 +63,7 @@ public class CollisionHandler {
 				}
 			}
 		}
+		
 	}
 
 	/**
