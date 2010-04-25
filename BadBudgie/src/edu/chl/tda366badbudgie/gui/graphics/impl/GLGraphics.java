@@ -176,14 +176,14 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			return;
 		}
 		
+		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glBegin(GL.GL_QUADS);
 		
 		gl.glColor3d(0.5, 0.5, 0.5);
-		
 		for (Vector v : q.getVertices()) {
 			gl.glVertex2d(v.getX(), v.getY() );
 		}
-		
+		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glEnd();		
 	}
 	
@@ -209,13 +209,11 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void drawText(String text, int x, int y) {
 		
 		GLUT glut = new GLUT();
-		System.out.println(text + " " + x + " " + y);
 		Dimension gSize = getCanvas().getSize();
 		
-		gl.glColor3d(1, 1, 1);
+		gl.glColor3d(1.0,1.0,1.0);
 		gl.glRasterPos2d(((double) x / gSize.width) - 1, 1 - ((double) y / gSize.height) - 0.06);
 		gl.glDisable(GL.GL_TEXTURE_2D);
-		gl.glColor3d(1.0,1.0,1.0);
 		glut.glutBitmapString(7, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glRasterPos2d(0, 0);
