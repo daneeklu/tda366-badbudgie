@@ -55,7 +55,6 @@ public class CollisionHandler {
 
 				if (mtv.getLength() != 0) {
 					checkCollisionEffect(o1, t, mtv);
-					System.out.println("collision with normal " + mtv.normalize());
 				}
 			}
 		}
