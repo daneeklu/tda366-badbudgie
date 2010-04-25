@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import edu.chl.tda366badbudgie.core.Polygon;
 import edu.chl.tda366badbudgie.core.Quad;
 import edu.chl.tda366badbudgie.core.Rectangle;
+import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.Vector;
 
 /**
@@ -55,10 +56,21 @@ public interface IGraphics {
 	public void drawLine(Vector start, Vector end, Color c);
 	
 	/**
+	 * 
+	 * Draw a sprite as a rectangle
+	 * @param s the sprite to be drawn
+	 * @param pos the position of the sprite
+	 * @param size the size of the sprite
+	 */
+	public void drawSprite(Sprite s, Vector pos, Vector size);
+	
+	
+	/**
 	 * Add a texture to the texture library
 	 * @param id the id for the texture
 	 * @param data a bufferedimage containing the image
 	 */
+	
 	public void addTexture(String id, BufferedImage data);
 
 	/**

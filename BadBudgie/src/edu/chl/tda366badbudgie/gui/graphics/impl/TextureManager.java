@@ -36,7 +36,7 @@ public class TextureManager {
 
 		
 		if(tex == null) {
-			System.out.println("setActiveTexture: no such texture!");
+			System.out.println("setActiveTexture: no such texture! id: " + id);
 			return;
 		}
 		

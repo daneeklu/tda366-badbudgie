@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,17 +15,47 @@ import java.util.Map;
  */
 public class Sprite {
 	
-	private String id;
+	private String texId;
 	private int horFrames, verFrames;
 	private Map<String, Animation> animations;
 	
-	public Sprite(String id, int horizontalFrames, int verticalFrames,
+	public Sprite(String texId, int horizontalFrames, int verticalFrames,
 			Map<String, Animation> animations){
-		this.id = id;
+		this.texId = texId;
 		this.horFrames=horizontalFrames;
 		this.verFrames=verticalFrames;
 		this.animations = new HashMap<String, Animation>();
 		this.animations.putAll(animations);
+	}
+	
+	public Sprite(String texId, int horizontalFrames, int verticalFrames,
+			List<Animation> animations){
+		this.texId = texId;
+		this.horFrames=horizontalFrames;
+		this.verFrames=verticalFrames;
+		this.animations = new HashMap<String, Animation>();
+		
+		for (Animation a : animations) {
+			this.animations.put(a.getId(), a);
+		}
+	}
+	
+	/**
+	 * Create a sprite with a single animation
+	 * 
+	 * @param texId the texture id
+	 * @param horizontalFrames the number of horizontal frames in the sprite
+	 * @param verticalFrames the number of vertical frames in the sprite
+	 * @param animations
+	 */
+	
+	public Sprite(String texId, int horizontalFrames, int verticalFrames,
+			Animation animation){
+		this.texId = texId;
+		this.horFrames=horizontalFrames;
+		this.verFrames=verticalFrames;
+		this.animations = new HashMap<String, Animation>();
+		this.animations.put(animation.getId(), animation);
 	}
 	
 	/**
@@ -32,7 +63,7 @@ public class Sprite {
 	 * @return
 	 */
 	public String getId(){
-		return id;
+		return texId;
 	}
 	
 	//TODO: Question this method.

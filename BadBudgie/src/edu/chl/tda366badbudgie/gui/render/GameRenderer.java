@@ -34,6 +34,7 @@ public class GameRenderer {
 	
 	private static void drawGameObjects(List<AbstractGameObject> gos, IGraphics g) {
 		for (AbstractGameObject go : gos) {
+			g.setActiveTexture("test");
 			g.drawRect(new Rectangle(go.getX()-0.1, go.getY()-0.1,0.2,0.2 ));
 		}
 	}

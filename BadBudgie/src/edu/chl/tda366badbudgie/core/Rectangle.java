@@ -38,6 +38,16 @@ public class Rectangle extends Polygon {
 		this.vertices.add(new Vector(x + width,y ));
 	}
 	
+	public Rectangle(Vector pos, Vector size){
+		
+		this.vertices = new ArrayList<Vector>();
+		
+		this.vertices.add(new Vector(pos.getX(), pos.getY()));
+		this.vertices.add(new Vector(pos.getX(), pos.getY() + size.getY()));
+		this.vertices.add(new Vector(pos.getX() + size.getX(), pos.getY() + size.getY()));
+		this.vertices.add(new Vector(pos.getX() + size.getX(), pos.getY()));
+	}
+	
 	public double getWidth() {
 		return this.vertices.get(2).getX() - this.vertices.get(0).getX();
 	}

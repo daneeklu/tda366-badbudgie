@@ -16,6 +16,7 @@ import com.sun.opengl.util.GLUT;
 import edu.chl.tda366badbudgie.core.Polygon;
 import edu.chl.tda366badbudgie.core.Quad;
 import edu.chl.tda366badbudgie.core.Rectangle;
+import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.io.FileManager;
@@ -83,6 +84,10 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		IFileManager fm = new FileManager(this);
 		fm.loadData();
 		ready = true;
+		GL gl = glDraw.getGL();
+		
+		gl.glEnable(GL.GL_BLEND);
+		gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 	}
 	
 	@Override
@@ -125,6 +130,37 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glVertex2d(x + w, y + h);
 		
 		gl.glTexCoord2d(1.0, 1.0);
+		gl.glVertex2d(x + w, y);
+		
+		gl.glEnd();		
+	}
+	
+	public void drawRect(Rectangle r, Rectangle tex) {
+		double x = r.getX(), y = r.getY();
+		double w = r.getWidth(), h = r.getHeight();
+		
+		double tx1 = tex.getX();
+		double ty1 = tex.getY();
+		double tx2 = tx1 + tex.getWidth(); 
+		double ty2 = ty1 + tex.getHeight();
+		
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
+		gl.glBegin(GL.GL_QUADS);
+		
+		gl.glTexCoord2d(tx1, ty2);
+		gl.glVertex2d(x, y );
+		
+		gl.glTexCoord2d(tx1, ty1);
+		gl.glVertex2d(x, y + h);
+		
+		gl.glTexCoord2d(tx2, ty1);
+		gl.glVertex2d(x + w, y + h);
+		
+		gl.glTexCoord2d(tx2, ty2);
 		gl.glVertex2d(x + w, y);
 		
 		gl.glEnd();		
@@ -230,6 +266,15 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		
 		gl.glEnd();	
+		
+	}
+
+	@Override
+	public void drawSprite(Sprite s, Vector pos, Vector size) {
+		String texId = s.getId();
+		
+		setActiveTexture(texId);
+		drawRect(new Rectangle(pos, size), new Rectangle(0.0,0.0,1.0,0.25));
 		
 	}
 
