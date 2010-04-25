@@ -5,7 +5,7 @@ package edu.chl.tda366badbudgie.core;
  * 
  * Interface implemented by game objects.
  * 
- * @author jesper, kvarfordt
+ * @author jesper, kvarfordt, d.skalle
  * 
  */
 public abstract class AbstractGameObject {
@@ -26,7 +26,7 @@ public abstract class AbstractGameObject {
 		mass = 1;
 		stationary = false;
 		
-		//TODO: Add actual size param to constructor
+		//TODO: Add actual size parameter to constructor
 		size = new Vector(0.2,0.2);
 	}
 	

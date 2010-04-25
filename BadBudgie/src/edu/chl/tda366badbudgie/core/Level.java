@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * Class representing a game level with terrain and objects.
  * 
- * @author Daniel
+ * @author kvarfordt
  *
  */
 public class Level {

@@ -9,7 +9,7 @@ import java.util.List;
  * A session of the game. 
  * Keeps track of the current level and the players score.
  * 
- * @author Daniel
+ * @author kvarfordt
  * 
  */
 public class GameRound {
