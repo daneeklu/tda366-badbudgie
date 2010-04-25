@@ -89,6 +89,21 @@ public class Vector {
 	}
 
 	/**
+	 * Returns the value of the cross product of this vector with a second
+	 * vector v. The cross product of two vectors in the plane is of limited
+	 * use, and can be seen as analogous to the resulting z-component of the
+	 * test in N3-space.
+	 * 
+	 * @param v
+	 *            the vector by which the cross product will be calculated.
+	 * @return the resulting value of the cross product.
+	 */
+	public double crossProduct(Vector v) {
+		return this.x * v.y - this.y * v.x;
+	}
+
+	
+	/**
 	 * Returns the projection of this vector on a second vector c.
 	 * @param v the vector which this vector will be projected on.
 	 * @return the resulting vector.
@@ -156,6 +171,42 @@ public class Vector {
 		return false;
 	}
 	
+	/**
+	 * Compares the direction of the vector with another 
+	 * and checks if it is the same.
+	 * 
+	 * @param v vector to compare direction with.
+	 * @return true if the vector have the same exact direction.
+	 */
+	public boolean sameDirection(Vector v) {
+		if (this.x == v.x) {
+			return this.y * v.y > 0;
+		} else if (this.y == v.y) {
+			return this.x * v.x > 0;
+		}
+		double dx = this.x / v.x;
+		double dy = this.y / v.y;
+		return (dx >= 0 && dx == dy);
+	}
+
+	/**
+	 * Compares the direction of the vector with another 
+	 * and checks if it is the exact opposite.
+	 * 
+	 * @param v vector to compare direction with.
+	 * @return true if the vector have the opposite direction.
+	 */
+	public boolean oppositeDirection(Vector v) {
+		if (this.x == v.x) {
+			return this.y * v.y < 0;
+		} else if (this.y == v.y) {
+			return this.x * v.x < 0;
+		}
+		double dx = this.x / v.x;
+		double dy = this.y / v.y;
+		return (dx <= 0 && dx == dy);
+	}
+	
 	@Override
 	public String toString() {
 		return "[" + x + " , " + y + "]";
@@ -166,4 +217,15 @@ public class Vector {
 		return new Vector(x, y);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Vector) {
+
+			Vector v = (Vector) o;
+			return (x == v.x && y == v.y);
+		} else {
+			return false;
+		}
+
+	}
 }
