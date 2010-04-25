@@ -151,4 +151,12 @@ public abstract class AbstractGameObject {
 	 */
 	public void updateForces() {}
 	
+	/**
+	 * Method to be overridden by objects that have inner state logic.
+	 */
+	public void updateState() {}
+	
+	
+	
+	
 }
