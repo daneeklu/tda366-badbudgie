@@ -25,7 +25,11 @@ public class Player extends AbstractUnit {
 	
 	public void jump(boolean down) {
 		if (down) {
-			applyForce(new Vector(0, jumpStrength));
+			Vector groundContactVector = getGroundContactVector();
+			if (!groundContactVector.hasZeroLength()) {
+				applyForce(groundContactVector.normalize().scalarMultiplication(jumpStrength));
+			}
+			
 		}
 	}
 	
@@ -33,7 +37,7 @@ public class Player extends AbstractUnit {
 	@Override
 	public void updateForces() {
 		if (isMovingLeft) {
-			if (getGroundContactVector().getLength() != 0) {
+			if (!getGroundContactVector().hasZeroLength()) {
 				applyForce(getGroundContactVector().perpendicularCCW().scalarMultiplication(moveForce));
 			}
 			else {
@@ -41,7 +45,7 @@ public class Player extends AbstractUnit {
 			}
 		}
 		if (isMovingRight) {
-			if (getGroundContactVector().getLength() != 0) {
+			if (!getGroundContactVector().hasZeroLength()) {
 				applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(moveForce));
 			}
 			else {

@@ -1,10 +1,12 @@
 package edu.chl.tda366badbudgie.physics;
 
+import java.awt.Color;
 import java.util.List;
 
 import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Vector;
+import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 
 public class MovementHandler {
 
@@ -25,6 +27,11 @@ public class MovementHandler {
 			
 			// Set the new position of the object
 			ago.setPosition(ago.getPosition().add(ago.getVelocity()));
+			
+			
+			DebugInfoRenderer.getInstance().addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getForce().scalarMultiplication(100)), Color.red);
+			DebugInfoRenderer.getInstance().addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getVelocity().scalarMultiplication(100)), Color.blue);
+			
 			
 			// Reset the force on the object
 			ago.setForce(new Vector(0, 0));

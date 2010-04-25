@@ -62,10 +62,9 @@ public class CollisionHandlerTest {
 		Vector bcCol = ch.getCollisionSAT(b, c);
 		Vector acCol = ch.getCollisionSAT(a, c);
 		
-		assertTrue(abCol.getLength() != 0);
-		assertTrue(bcCol.getLength() != 0);
-		System.out.println(acCol.getLength());
-		assertTrue(acCol.getLength() == 0);
+		assertTrue(!abCol.hasZeroLength());
+		assertTrue(!bcCol.hasZeroLength());
+		assertTrue(acCol.hasZeroLength());
 		
 		assertTrue(bcCol.dotProduct(new Vector(1,1)) < 0);
 		

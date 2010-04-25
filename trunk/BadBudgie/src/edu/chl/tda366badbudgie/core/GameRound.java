@@ -54,7 +54,21 @@ public class GameRound {
 		t = new TerrainSection(tVerts, 0.5, 0.5);
 		currentLevel.addTerrainSection(t);
 		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-0.3, -0.8));
+		tVerts.add(new Vector(-0.4, -0.8));
+		tVerts.add(new Vector(-0.2, -0.4));
+		tVerts.add(new Vector(-0.1, -0.4));
+		t = new TerrainSection(tVerts, 0.5, 0.5);
+		currentLevel.addTerrainSection(t);
 		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-0.3, -0.8));
+		tVerts.add(new Vector(-0.4, -0.8));
+		tVerts.add(new Vector(-0.6, -0.4));
+		tVerts.add(new Vector(-0.5, -0.4));
+		t = new TerrainSection(tVerts, 0.5, 0.5);
+		currentLevel.addTerrainSection(t);
 	}
 	
 	public Level getLevel() {
