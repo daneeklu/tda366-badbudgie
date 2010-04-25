@@ -144,6 +144,17 @@ public class Vector {
 	public Vector perpendicularCCW() {
 		return new Vector(-y, x);
 	}
+
+	/**
+	 * Returns true if the vector has a length of zero.
+	 * 
+	 * @return true if the vector is of zero length
+	 */
+	public boolean hasZeroLength() {
+		if (x == 0 && y == 0)
+			return true;
+		return false;
+	}
 	
 	@Override
 	public String toString() {
