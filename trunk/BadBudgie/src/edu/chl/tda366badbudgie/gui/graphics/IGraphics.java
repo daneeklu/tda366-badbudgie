@@ -12,7 +12,7 @@ import edu.chl.tda366badbudgie.core.Vector;
 
 /**
  * 
- * @author Andreas
+ * @author lumbo, d.skalle
  *
  */
 public interface IGraphics {

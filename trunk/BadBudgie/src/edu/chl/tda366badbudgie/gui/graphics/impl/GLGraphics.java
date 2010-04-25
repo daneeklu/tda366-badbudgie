@@ -22,6 +22,14 @@ import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.io.FileManager;
 import edu.chl.tda366badbudgie.io.IFileManager;
 
+/**
+ * 
+ * A graphics class implementing the IGraphics
+ * interface, using OpenGL.
+ * 
+ * @author d.skalle
+ *
+ */
 
 public class GLGraphics implements GLEventListener, IGraphics{
 	private GLCanvas canvas;

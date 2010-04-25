@@ -4,7 +4,6 @@ import java.util.List;
 
 import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
@@ -14,17 +13,25 @@ import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
  * 
  * Rendering class for drawing in-game graphics. 
  * 
- * @author 
+ * @author d.skalle, kvarfordt
  *
  */
 public class GameRenderer {
 
+	/**
+	 * Render a GameRound.
+	 * @param gameRound the GameRound.
+	 * @param g the Graphics object to do the rendering.
+	 */
 	public static void render(GameRound gameRound, IGraphics g) {
 		if(!g.startRendering()) 
 			return;
 		
 		drawTerrain(gameRound.getLevel().getTerrainSections(), g);
-		drawGameObjects(gameRound.getLevel().getGameObjects(), g);
+		
+		for (AbstractGameObject go : gameRound.getLevel().getGameObjects()) {
+			drawGameObject(go, g);
+		}
 		
 		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
 			DebugInfoRenderer.getInstance().drawDebugInfo(g);
@@ -34,21 +41,27 @@ public class GameRenderer {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * Render a section of terrain.
+	 * @param ts the terrain section.
+	 * @param g the Graphics object to do the rendering. 
+	 */
 	private static void drawTerrain(List<TerrainSection> ts, IGraphics g) {
 		for (TerrainSection t : ts) {
 			g.drawQuad(t.getQuad());
 		}
 	}
 	
-	private static void drawGameObjects(List<AbstractGameObject> gos, IGraphics g) {
-		for (AbstractGameObject go : gos) {
-			g.setActiveTexture("test");
-			g.drawSprite(go.getSprite(), 
-					new Vector(go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2),
-					new Vector(go.getWidth(), go.getHeight()));
-			//g.drawRect(new Rectangle(go.getX()-0.1, go.getY()-0.1,0.2,0.2 ));
-		}
+	/**
+	 * Render a GameObject.
+	 * @param go the GameObject to draw.
+	 * @param g the Graphics object to do the rendering. 
+	 */
+	private static void drawGameObject(AbstractGameObject go, IGraphics g) {
+		g.drawSprite(go.getSprite(), 
+				new Vector(go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2),
+				new Vector(go.getWidth(), go.getHeight()));
 	}
 
 }

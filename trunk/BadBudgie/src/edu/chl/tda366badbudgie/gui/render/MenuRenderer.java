@@ -10,16 +10,23 @@ import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
  * 
  * Rendering class for menu graphics.
  * 
- * @author 
+ * @author d.skalle
  *
  */
 public class MenuRenderer {
 
+	/**
+	 * Render a menu.
+	 * @param menu the menu to render.
+	 * @param g the Graphics object to do the rendering. 
+	 */
 	public static void render(Menu menu, IGraphics g) {
 		if(!g.startRendering()) 
 			return;
-		g.setActiveTexture("test");
 		
+		
+		// TODO: draw the background image of the menu, make this not hardcoded
+		g.setActiveTexture("test");
 		g.drawRect(new Rectangle(-1.0, -1.0, 2.0, 2.0));
 		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
 			DebugInfoRenderer.getInstance().drawDebugInfo(g);
@@ -32,6 +39,11 @@ public class MenuRenderer {
 		g.stopRendering();
 	}
 	
+	/**
+	 * Render a menu item.
+	 * @param item the menu item.
+	 * @param g the Graphics object to do the rendering. 
+	 */
 	private static void renderMenuItem(MenuItem item, IGraphics g) {
 		g.setActiveTexture(item.getSprite().getId());
 		g.drawSprite(item.getSprite(), item.getPosition(), item.getSize());

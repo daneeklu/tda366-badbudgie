@@ -37,6 +37,10 @@ public class Menu {
 		setCurrentItem(0);
 	}
 	
+	/**
+	 * Set the current menu item
+	 * @param item the number of the new menu item
+	 */
 	public void setCurrentItem(int item) {
 		
 		if (item == -1) {
@@ -54,6 +58,11 @@ public class Menu {
 		currentItem = item;
 	}
 
+	/**
+	 * Key handling function, called by MenuState
+	 * @param id the id of the key 
+	 * @param down true if the key was pushed down
+	 */
 	public void keyboardAction(String id, boolean down) {
 		
 		if (!down) return;
@@ -65,14 +74,25 @@ public class Menu {
 			setCurrentItem(currentItem - 1);
 	}
 	
+	/**
+	 * Get the name of the selected menu item
+	 * @return the menu item's name
+	 */
 	public String getSelected() {
 		return items[currentItem];
 	}
 	
+	/**
+	 * Get the menu items this menu has
+	 * @return the menu items
+	 */
 	public MenuItem[] getMenuItems() {
 		return menuItems;
 	}
 
+	/**
+	 * A method for doing all "game logic" of the menu
+	 */ 
 	public void logic() {
 		for (MenuItem mi : menuItems) {
 			mi.logic();

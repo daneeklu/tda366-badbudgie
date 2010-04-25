@@ -10,7 +10,7 @@ import java.util.Map;
  * Holds an arbitrary number of animations of a
  * segmented texture.
  * 
- * @author jesper
+ * @author jesper, d.skalle
  *
  */
 public class Sprite {
@@ -21,16 +21,14 @@ public class Sprite {
 	private int currentFrame;
 	private Map<String, Animation> animations;
 	
-	public Sprite(String texId, int horizontalFrames, int verticalFrames,
-			Map<String, Animation> animations){
-		this.texId = texId;
-		this.horFrames=horizontalFrames;
-		this.verFrames=verticalFrames;
-		this.animations = new HashMap<String, Animation>();
-		this.animations.putAll(animations);
-
-	}
-	
+	/**
+	 * Create a new sprite
+	 * 
+	 * @param texId the id of the texture of the sprite
+	 * @param horizontalFrames number of horizontal frames in the texture
+	 * @param verticalFrames number of vertical frames in the texture
+	 * @param animations
+	 */
 	public Sprite(String texId, int horizontalFrames, int verticalFrames,
 			List<Animation> animations){
 		this.texId = texId;
@@ -60,7 +58,7 @@ public class Sprite {
 	 * @param texId the texture id
 	 * @param horizontalFrames the number of horizontal frames in the sprite
 	 * @param verticalFrames the number of vertical frames in the sprite
-	 * @param animations
+	 * @param animation the single animation used by the sprite
 	 */
 	
 	public Sprite(String texId, int horizontalFrames, int verticalFrames,
@@ -74,21 +72,31 @@ public class Sprite {
 		this.currentFrame = 0;
 	}
 	
+	/**
+	 * Create a sprite with a single frame animation, where
+	 * the single frame covers the entire texture
+	 * 
+	 * @param texId the texture id
+	 */
+	
+	public Sprite(String texId) {
+		this(texId, 1, 1, (Animation)null);
+	}
+	
+	/**
+	 * Get the current frame index (image offset)
+	 * of the current frame of the current animation
+	 * @return the frame index.
+	 */
 	public int getFrameIndex() {
-		
-		if (animations == null) System.out.println("a");
-		if (currentAnim == null) System.out.println("b");
-		if (animations.get(currentAnim) == null) System.out.println("c");
-
 
 		int pos = animations.get(currentAnim).getFrameIndex(currentFrame);
-		
 		return pos;
 	}
 	
 	/**
 	 * Returns the id of the texture used by this sprite.
-	 * @return
+	 * @return the texture id.
 	 */
 	public String getId(){
 		return texId;
@@ -97,14 +105,28 @@ public class Sprite {
 	//TODO: Question this method.
 	public void nextAnimation(){}
 	
+	/**
+	 * Get the horizontal frame resolution of
+	 * the sprite's texture.
+	 * @return the horizontal resolution.
+	 */
 	public int getHorFrames() {
 		return horFrames;
 	}
 
+	/**
+	 * Get the vertical frame resolution of
+	 * the sprite's texture.
+	 * @return the vertical resolution.
+	 */
 	public int getVerFrames() {
 		return verFrames;
 	}
 
+	/**
+	 * Set the current animation.
+	 * @param animId the id of the animation.
+	 */
 	public void setAnimation(String animId) {
 		if (animations.containsKey(animId));
 			this.currentAnim = animId;
