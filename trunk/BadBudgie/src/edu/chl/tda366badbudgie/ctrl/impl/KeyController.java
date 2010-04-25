@@ -9,6 +9,8 @@ import edu.chl.tda366badbudgie.ctrl.IStateContext;
 
 
 /**
+ * KeyController
+ * 
  * Controller class for keyboard input.
  * 
  * @author tda366-badbudgie

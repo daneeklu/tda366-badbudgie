@@ -1,12 +1,14 @@
 package edu.chl.tda366badbudgie.core;
+
+import java.util.List;
+
 /**
  * Quad
+ * 
  * Convex four-corner polygon. 
  * @author jesper
  *
  */
-import java.util.List;
-
 public class Quad extends Polygon {
 
 	/**

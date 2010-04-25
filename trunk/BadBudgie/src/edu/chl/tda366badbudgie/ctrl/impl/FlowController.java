@@ -6,6 +6,15 @@ import java.awt.event.ActionListener;
 import edu.chl.tda366badbudgie.ctrl.IStateContext;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
+/**
+ * FlowController
+ * 
+ * The game update controller. Calls on the state context 
+ * to update the game at a regular interval.
+ * 
+ * @author d.skalle, kvarfordt
+ *
+ */
 public class FlowController implements ActionListener {
 
 	public static FlowController ctrl;

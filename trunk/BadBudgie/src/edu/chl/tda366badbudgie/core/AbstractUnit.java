@@ -1,10 +1,12 @@
 package edu.chl.tda366badbudgie.core;
 
 /**
+ * AbstractUnit
+ * 
  * Abstract class representing a unit in the game, such as an enemy or the
  * player.
  * 
- * @author Daniel
+ * @author kvarfordt
  * 
  */
 public abstract class AbstractUnit extends AbstractCollidable {

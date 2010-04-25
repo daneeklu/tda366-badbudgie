@@ -8,6 +8,14 @@ import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
+/**
+ * GameRenderer
+ * 
+ * Rendering class for drawing in-game graphics. 
+ * 
+ * @author 
+ *
+ */
 public class GameRenderer {
 
 	public static void render(GameRound gameRound, IGraphics g) {

@@ -3,6 +3,14 @@ package edu.chl.tda366badbudgie.core;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * MenuItem
+ * 
+ * An item in one of the games menus.
+ * 
+ * @author d.skalle
+ *
+ */
 public class MenuItem {
 	
 	private Sprite sprite;

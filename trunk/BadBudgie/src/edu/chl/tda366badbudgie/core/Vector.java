@@ -5,7 +5,7 @@ package edu.chl.tda366badbudgie.core;
  * 
  * Immutable class holding fields and methods for two-dimensional vectors with double precision.
  * 
- * @author dkvarfordt, jesper
+ * @author kvarfordt, jesper
  * 
  */
 public class Vector {
