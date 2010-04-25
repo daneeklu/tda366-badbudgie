@@ -1,5 +1,13 @@
 package edu.chl.tda366badbudgie.core;
 
+/**
+ * Player
+ * 
+ * Represents the player unit in the game.
+ * 
+ * @author kvarfordt, lumbo
+ *
+ */
 public class Player extends AbstractUnit {
 	
 	private static final double moveForce = 0.005;

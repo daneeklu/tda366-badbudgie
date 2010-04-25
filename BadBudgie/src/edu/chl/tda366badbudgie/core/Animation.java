@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Animation
+ * 
  * An indexed sequence denoting parts of a segmented image.
  * @author jesper
  *

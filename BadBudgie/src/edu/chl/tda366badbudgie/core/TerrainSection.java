@@ -4,9 +4,11 @@ import java.util.List;
 
 
 /**
- * Class representing a segment of the level terrain.
+ * TerrainSection
  * 
- * @author dkvarfordt
+ * Class representing a segment of a levels terrain.
+ * 
+ * @author kvarfordt
  *
  */
 public class TerrainSection extends AbstractCollidable {

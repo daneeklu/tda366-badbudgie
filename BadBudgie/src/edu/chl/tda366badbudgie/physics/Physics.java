@@ -2,6 +2,14 @@ package edu.chl.tda366badbudgie.physics;
 
 import edu.chl.tda366badbudgie.core.GameRound;
 
+/**
+ * Physics
+ * 
+ * Contains methods to handle the physics.
+ * 
+ * @author Daniel
+ *
+ */
 public class Physics implements IPhysics{
 
 	public static final double g = 0.002;

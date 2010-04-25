@@ -5,6 +5,8 @@ import java.util.List;
 
 
 /**
+ * Level
+ * 
  * Class representing a game level with terrain and objects.
  * 
  * @author Daniel

@@ -1,7 +1,14 @@
 package edu.chl.tda366badbudgie.core;
 
 
-
+/**
+ * Menu
+ * 
+ * A menu of options available to the user.
+ * 
+ * @author d.skalle
+ *
+ */
 public class Menu {
 
 	private final int numItems = 3;

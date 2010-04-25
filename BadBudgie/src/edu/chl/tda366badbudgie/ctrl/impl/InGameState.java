@@ -10,9 +10,11 @@ import edu.chl.tda366badbudgie.physics.MovementHandler;
 import edu.chl.tda366badbudgie.physics.Physics;
 
 /**
- * This class represents a running game state.
+ * InGameState
  * 
- * @author dkvarford
+ * State of a running game.
+ * 
+ * @author kvarfordt
  *
  */
 public class InGameState implements IState {

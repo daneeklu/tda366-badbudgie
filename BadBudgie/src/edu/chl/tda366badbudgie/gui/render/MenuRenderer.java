@@ -5,6 +5,14 @@ import edu.chl.tda366badbudgie.core.MenuItem;
 import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
+/**
+ * MenuRenderer
+ * 
+ * Rendering class for menu graphics.
+ * 
+ * @author 
+ *
+ */
 public class MenuRenderer {
 
 	public static void render(Menu menu, IGraphics g) {

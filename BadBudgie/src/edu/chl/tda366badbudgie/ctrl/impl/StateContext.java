@@ -7,6 +7,8 @@ import edu.chl.tda366badbudgie.gui.GraphicsFrame;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
 /**
+ * StateContext
+ * 
  * This class is responsible for the state of the game, 
  * whether it's in the menu or in a running game.
  * 
@@ -70,7 +72,7 @@ public class StateContext implements IStateContext {
 	 */
 	public void shutDown() {
 		if (graphicsFrame != null) {
-			graphicsFrame.scheduleShutdown();
+			graphicsFrame.shutdown();
 		}
 		else {
 			throw new IllegalStateException("The GraphicsFrame has not been set.");

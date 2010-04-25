@@ -1,11 +1,11 @@
 package edu.chl.tda366badbudgie.core;
 
 /**
- * IGameObject
+ * AbstractGameObject
  * 
  * Interface implemented by game objects.
  * 
- * @author jesper
+ * @author jesper, kvarfordt
  * 
  */
 public abstract class AbstractGameObject {

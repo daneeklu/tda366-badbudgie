@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Polygon
  * 
- * A class that represents a 2-dimensional polygon.
+ * A convex 2-dimensional polygon.
  * 
  * @author dkvarfordt
  *
