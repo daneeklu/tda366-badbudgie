@@ -235,10 +235,9 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void drawText(String text, int x, int y) {
 		
 		GLUT glut = new GLUT();
-		Dimension gSize = getCanvas().getSize();
 		
 		gl.glColor3d(1.0,1.0,1.0);
-		gl.glRasterPos2d(x - 1, 1 - y - 0.06);
+		gl.glRasterPos2d(x - 1, 1 - y);
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		glut.glutBitmapString(7, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);
