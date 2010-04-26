@@ -23,16 +23,16 @@ public class Menu {
 		menuItems = new MenuItem[3];
 		
 		menuItems[0] = new MenuItem("newgame",
-				new Vector(-0.5, 0.2),
-				new Vector(1.0, 0.3));
+				new Vector(-200, 80),
+				new Vector(400, 120));
 		
 		menuItems[1] = new MenuItem("options",
-				new Vector(-0.5, -0.3),
-				new Vector(1.0, 0.3));
+				new Vector(-200, -120),
+				new Vector(400, 120));
 		
 		menuItems[2] = new MenuItem("exit",
-				new Vector(-0.5, -0.8),
-				new Vector(1.0, 0.3));
+				new Vector(-200, -320),
+				new Vector(400, 120));
 		
 		setCurrentItem(0);
 	}
