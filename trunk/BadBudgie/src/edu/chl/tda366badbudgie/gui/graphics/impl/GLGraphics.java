@@ -20,8 +20,8 @@ import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
-import edu.chl.tda366badbudgie.io.FileManager;
 import edu.chl.tda366badbudgie.io.IFileManager;
+import edu.chl.tda366badbudgie.io.filehandling.FileManager;
 
 /**
  * 

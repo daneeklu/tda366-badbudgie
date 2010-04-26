@@ -172,11 +172,11 @@ public class Vector {
 	}
 	
 	/**
-	 * Compares the direction of the vector with another 
-	 * and checks if it is the same.
+	 * Checks if the direction of the vector is the same
+	 * as another.
 	 * 
 	 * @param v vector to compare direction with.
-	 * @return true if the vector have the same exact direction.
+	 * @return true if the vector have the same direction.
 	 */
 	public boolean sameDirection(Vector v) {
 		if (this.x == v.x) {
@@ -190,8 +190,8 @@ public class Vector {
 	}
 
 	/**
-	 * Compares the direction of the vector with another 
-	 * and checks if it is the exact opposite.
+	 * Checks if the direction of the vector is the
+	 * opposite of another.
 	 * 
 	 * @param v vector to compare direction with.
 	 * @return true if the vector have the opposite direction.
