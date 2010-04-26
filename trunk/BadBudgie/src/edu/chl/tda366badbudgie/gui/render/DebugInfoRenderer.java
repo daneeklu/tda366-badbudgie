@@ -78,7 +78,7 @@ public class DebugInfoRenderer {
 			}
 			int i = 0;
 			for (String s : debugText) {
-				g.drawText(s, -300, 80 * i++);
+				g.drawText(s, 10, 30 * i++);
 			}
 			
 			debugLines.clear();

@@ -24,7 +24,7 @@ public class GameRenderer {
 	 * @param g the Graphics object to do the rendering.
 	 */
 	public static void render(GameRound gameRound, IGraphics g) {
-		if(!g.startRendering()) 
+		if(!g.startRendering(gameRound.getPlayer().getPosition())) 
 			return;
 		
 		drawTerrain(gameRound.getLevel().getTerrainSections(), g);

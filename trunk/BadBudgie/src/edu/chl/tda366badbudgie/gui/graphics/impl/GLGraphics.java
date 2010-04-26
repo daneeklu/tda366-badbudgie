@@ -20,8 +20,8 @@ import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.io.FileManager;
 import edu.chl.tda366badbudgie.io.IFileManager;
-import edu.chl.tda366badbudgie.io.filehandling.FileManager;
 
 /**
  * 
@@ -62,7 +62,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 	
 	@Override
-	public boolean startRendering() {
+	public boolean startRendering(Vector cameraPosition) {
 		
 		gl = canvas.getGL();
 		con = canvas.getContext();
@@ -80,9 +80,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		gl.glLoadIdentity();
 		gl.glMatrixMode(GL.GL_PROJECTION);
-		glu.gluOrtho2D(0, width*2, 0, height*2); // Scale of axes, to be corresponding to pixels? What about fullscreen?
-		
-		gl.glTranslatef(width, height, 0); // Camera position
+		glu.gluOrtho2D(0, width, 0, height);
+		gl.glTranslatef(width/2 - ((float) cameraPosition.getX()), height/2 - ((float) cameraPosition.getY()), 0);
 
 		return true;
 	}
@@ -237,7 +236,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		GLUT glut = new GLUT();
 		
 		gl.glColor3d(1.0,1.0,1.0);
-		gl.glRasterPos2d(x - 1, 1 - y);
+		gl.glRasterPos2d(x - width, height - y - 30);
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		glut.glutBitmapString(7, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);

@@ -27,7 +27,7 @@ public class GraphicsFrame extends JFrame {
 	private IGraphics ig;
 	
 	public GraphicsFrame(){
-		ig = new GLGraphics(800, 600);
+		ig = new GLGraphics(1024, 600);
 		
 		add(ig.getCanvas());
 		setSize(800, 600);

@@ -26,7 +26,7 @@ public class Player extends AbstractUnit {
 	private int wingTimer;
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
-	private boolean isFlying;
+	private boolean isGliding;
 	
 	/**
 	 * Constructor
@@ -63,11 +63,11 @@ public class Player extends AbstractUnit {
 	}
 	
 	/**
-	 * Called by GameRound when the player wants to jump or fly
+	 * Called by GameRound when the player wants to jump or flap his wings.
 	 * 
 	 * @param down true if the key was pressed, false if released
 	 */
-	public void jump(boolean down) {
+	public void jumpOrFlap(boolean down) {
 		if (down) {
 			
 			Vector groundContactVector = getGroundContactVector();
@@ -78,7 +78,6 @@ public class Player extends AbstractUnit {
 			}
 			else {
 				// Start wing flap
-				isFlying = true;
 				if (flyingEnergy >= 5 && wingTimer == 0) {
 					flyingEnergy -= 20;
 					wingTimer = 20;
@@ -86,9 +85,17 @@ public class Player extends AbstractUnit {
 			}
 		}
 		else {
-			isFlying = false;
 		}
 		
+	}
+	
+	public void glide(boolean down) {
+		if (down) {
+			isGliding = true;
+		}
+		else {
+			isGliding = false;
+		}
 	}
 	
 	@Override
@@ -132,7 +139,7 @@ public class Player extends AbstractUnit {
 		}
 		
 		// Gliding
-		if (isFlying) {
+		if (isGliding) {
 			if (getVelocity().getY() < 0) {
 				applyForce(new Vector(0, GLIDE_FORCE_RATIO * -getVelocity().getY()));
 			}
