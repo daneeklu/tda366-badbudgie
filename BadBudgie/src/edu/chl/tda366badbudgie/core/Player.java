@@ -14,20 +14,25 @@ import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
  */
 public class Player extends AbstractUnit {
 	
-	private static final double moveForce = 0.005;
-	private static final double airMoveForce = 0.0005;
-	private static final double jumpStrength = 0.04;
-	private static final double glideStrength = 0.01;
-	private static final double[] flyingStrength = {0, 0, 0, 0, 0, 0, 0, 0.005, 0.005, 0.005, 0.01, 0.01, 0.01, 0.005, 0.005, 0, -0.005, -0.005, -0.002, -0.001};
+	private static final double MOVE_FORCE = 0.005;
+	private static final double AIR_MOVE_FORCE = 0.0005;
+	private static final double JUMP_FORCE = 0.04;
+	private static final double GLIDE_FORCE_RATIO = 0.15;
+	private static final double[] FLYING_FORCE = {0, 0, 0, 0, 0, 0, 0, 0.005, 0.005, 0.005, 0.01, 0.01, 0.01, 0.005, 0.005, 0, -0.005, -0.005, -0.002, -0.001};
 	
 	private int health;
-	private double flyingEnergy;
+	private int flyingEnergy;
 	
 	private int wingTimer;
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
 	private boolean isFlying;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param texId the texture id of the player.
+	 */
 	public Player(String texId) {
 		setFriction(0.5);
 		setElasticity(0.5);
@@ -38,14 +43,30 @@ public class Player extends AbstractUnit {
 		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
 	}
 
+
+	/**
+	 * Called by GameRound when the player wants to move left
+	 * 
+	 * @param down true if the key was pressed, false if released
+	 */
 	public void moveLeft(boolean down) {
 		isMovingLeft = down;
 	}
 
+	/**
+	 * Called by GameRound when the player wants to move right
+	 * 
+	 * @param down true if the key was pressed, false if released
+	 */
 	public void moveRight(boolean down) {
 		isMovingRight = down;
 	}
 	
+	/**
+	 * Called by GameRound when the player wants to jump or fly
+	 * 
+	 * @param down true if the key was pressed, false if released
+	 */
 	public void jump(boolean down) {
 		if (down) {
 			
@@ -53,11 +74,15 @@ public class Player extends AbstractUnit {
 			
 			if (!groundContactVector.hasZeroLength()) {
 				// Instant jump
-				applyForce(groundContactVector.normalize().scalarMultiplication(jumpStrength));
+				applyForce(groundContactVector.normalize().scalarMultiplication(JUMP_FORCE));
 			}
 			else {
-				// Start flying
+				// Start wing flap
 				isFlying = true;
+				if (flyingEnergy >= 5 && wingTimer == 0) {
+					flyingEnergy -= 20;
+					wingTimer = 20;
+				}
 			}
 		}
 		else {
@@ -72,53 +97,47 @@ public class Player extends AbstractUnit {
 		// Player wants to move left
 		if (isMovingLeft) {
 			if (!getGroundContactVector().hasZeroLength()) {
-				applyForce(getGroundContactVector().perpendicularCCW().scalarMultiplication(moveForce));
+				applyForce(getGroundContactVector().perpendicularCCW().scalarMultiplication(MOVE_FORCE));
 			}
 			else {
-				applyForce(new Vector(-1, 0).scalarMultiplication(airMoveForce));
+				applyForce(new Vector(-1, 0).scalarMultiplication(AIR_MOVE_FORCE));
 			}
 		}
 		
 		// Player wants to move right
 		if (isMovingRight) {
 			if (!getGroundContactVector().hasZeroLength()) {
-				applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(moveForce));
+				applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE));
 			}
 			else {
-				applyForce(new Vector(1, 0).scalarMultiplication(airMoveForce));
+				applyForce(new Vector(1, 0).scalarMultiplication(AIR_MOVE_FORCE));
 			}
 		}
 		
-		// Start wing flap
-		if (isFlying && flyingEnergy >= 5 && wingTimer == 0) {
-			flyingEnergy -= 20;
-			wingTimer = 20;
-			System.out.println("Fly!");
-		}
 		
 		// Wings flapping
 		if (wingTimer > 0) {
 			// Flying straight up
 			if (!isMovingLeft && !isMovingRight) {
-				applyForce(new Vector(0, flyingStrength[wingTimer-1]));
+				applyForce(new Vector(0, FLYING_FORCE[wingTimer-1]));
 			}
 			// Flying to the left
 			if (isMovingLeft) {
-				applyForce(new Vector(flyingStrength[wingTimer-1] * -0.2, flyingStrength[wingTimer-1] * 0.7));
+				applyForce(new Vector(FLYING_FORCE[wingTimer-1] * -0.2, FLYING_FORCE[wingTimer-1] * 0.7));
 			}
 			// Flying to the right
 			if (isMovingRight) {
-				applyForce(new Vector(flyingStrength[wingTimer-1] * 0.2, flyingStrength[wingTimer-1] * 0.7));
+				applyForce(new Vector(FLYING_FORCE[wingTimer-1] * 0.2, FLYING_FORCE[wingTimer-1] * 0.7));
 			}
 		}
 		
 		// Gliding
 		if (isFlying) {
 			if (getVelocity().getY() < 0) {
-				applyForce(new Vector(0, glideStrength * -getVelocity().getY() * 15));
+				applyForce(new Vector(0, GLIDE_FORCE_RATIO * -getVelocity().getY()));
 			}
 			// Gliding force due to horizontal movement
-			applyForce(new Vector(0, glideStrength * Math.abs(getVelocity().getX())));
+			applyForce(new Vector(0, GLIDE_FORCE_RATIO / 15 * Math.abs(getVelocity().getX())));
 		}
 		
 		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
@@ -134,10 +153,10 @@ public class Player extends AbstractUnit {
 		
 	}
 	
-	
+	@Override
 	public void updateState(){
 		if(flyingEnergy < 100){
-			flyingEnergy += 0.1;
+			flyingEnergy += 1;
 		}
 		
 		if (wingTimer > 0) {
