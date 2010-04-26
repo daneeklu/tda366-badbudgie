@@ -105,7 +105,10 @@ public class GameRound {
 			player.moveRight(down);
 		}
 		if (id.equals("jump")) {
-			player.jump(down);
+			player.jumpOrFlap(down);
+		}
+		if (id.equals("moveup")) {
+			player.glide(down);
 		}
 
 	}

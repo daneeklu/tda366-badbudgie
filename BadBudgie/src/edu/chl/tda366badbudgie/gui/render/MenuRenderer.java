@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.gui.render;
 import edu.chl.tda366badbudgie.core.Menu;
 import edu.chl.tda366badbudgie.core.MenuItem;
 import edu.chl.tda366badbudgie.core.Rectangle;
+import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
 /**
@@ -21,7 +22,7 @@ public class MenuRenderer {
 	 * @param g the Graphics object to do the rendering. 
 	 */
 	public static void render(Menu menu, IGraphics g) {
-		if(!g.startRendering()) 
+		if(!g.startRendering(new Vector())) 
 			return;
 		
 		

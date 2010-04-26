@@ -25,7 +25,7 @@ public interface IGraphics {
 	 * Start the rendering
 	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
 	 */
-	public boolean startRendering();
+	public boolean startRendering(Vector cameraPosition);
 
 	/**
 	 * Draws a rectangle 
