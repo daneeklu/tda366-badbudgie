@@ -27,7 +27,7 @@ public abstract class AbstractGameObject {
 		stationary = false;
 		
 		//TODO: Add actual size parameter to constructor
-		size = new Vector(0.2,0.2);
+		size = new Vector(80,80);
 	}
 	
 	

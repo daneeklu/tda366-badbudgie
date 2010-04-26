@@ -10,6 +10,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.GLEventListener;
+import javax.media.opengl.glu.GLU;
 
 import com.sun.opengl.util.GLUT;
 
@@ -35,17 +36,23 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	private GLCanvas canvas;
 	private GLContext con;
 	private GL gl;
+	private GLU glu;
+	
+	private int width;
+	private int height;
 	
 	//Has the program been properly inited? (resources etc)
 	private boolean ready;
 	
 	private TextureManager textureManager;
 	
-	public GLGraphics(){
+	public GLGraphics(int width, int height) {
 		canvas = new GLCanvas();
 		canvas.createContext(null).makeCurrent();
 		canvas.addGLEventListener(this);
 		canvas.setAutoSwapBufferMode(false);
+		this.width = width;
+		this.height = height;
 		ready = false;
 	}
 	
@@ -69,7 +76,13 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		}
 		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+		
+		
 		gl.glLoadIdentity();
+		gl.glMatrixMode(GL.GL_PROJECTION);
+		glu.gluOrtho2D(0, width*2, 0, height*2); // Scale of axes, to be corresponding to pixels? What about fullscreen?
+		
+		gl.glTranslatef(width, height, 0); // Camera position
 
 		return true;
 	}
@@ -93,9 +106,12 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		fm.loadData();
 		ready = true;
 		GL gl = glDraw.getGL();
+		glu = new GLU();
 		
 		gl.glEnable(GL.GL_BLEND);
 		gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+		
+		
 	}
 	
 	@Override
@@ -222,7 +238,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		Dimension gSize = getCanvas().getSize();
 		
 		gl.glColor3d(1.0,1.0,1.0);
-		gl.glRasterPos2d(((double) x / gSize.width) - 1, 1 - ((double) y / gSize.height) - 0.06);
+		gl.glRasterPos2d(x - 1, 1 - y - 0.06);
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		glut.glutBitmapString(7, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);

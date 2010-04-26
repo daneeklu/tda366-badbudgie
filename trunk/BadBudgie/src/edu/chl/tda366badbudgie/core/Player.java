@@ -14,11 +14,11 @@ import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
  */
 public class Player extends AbstractUnit {
 	
-	private static final double MOVE_FORCE = 0.005;
-	private static final double AIR_MOVE_FORCE = 0.0005;
-	private static final double JUMP_FORCE = 0.04;
+	private static final double MOVE_FORCE = 2.0;
+	private static final double AIR_MOVE_FORCE = 0.2;
+	private static final double JUMP_FORCE = 16.0;
 	private static final double GLIDE_FORCE_RATIO = 0.15;
-	private static final double[] FLYING_FORCE = {0, 0, 0, 0, 0, 0, 0, 0.005, 0.005, 0.005, 0.01, 0.01, 0.01, 0.005, 0.005, 0, -0.005, -0.005, -0.002, -0.001};
+	private static final double[] FLYING_FORCE = {0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 4, 3, 2, 0, -2, -2, -1, -0.5};
 	
 	private int health;
 	private int flyingEnergy;

@@ -28,53 +28,53 @@ public class GameRound {
 
 		player = new Player("budgie");
 		player.setX(0.0);
-		player.setY(0.8);
+		player.setY(320.0);
 		LinkedList<Vector> pcd = new LinkedList<Vector>();
-		pcd.add(new Vector(-0.1, -0.1));
-		pcd.add(new Vector(0.1, -0.1));
-		pcd.add(new Vector(0.1, 0.1));
-		pcd.add(new Vector(-0.1, 0.1));
+		pcd.add(new Vector(-40, -40));
+		pcd.add(new Vector(40, -40));
+		pcd.add(new Vector(40, 40));
+		pcd.add(new Vector(-40, 40));
 		player.setCollisionData(new Polygon(pcd));
 
 		currentLevel.addGameObject(player);
 
 		List<Vector> tVerts = new LinkedList<Vector>();
 		tVerts.add(new Vector(0, 0));
-		tVerts.add(new Vector(1, 0));
-		tVerts.add(new Vector(1, 0.2));
-		tVerts.add(new Vector(0, 0.1));
+		tVerts.add(new Vector(400, 0));
+		tVerts.add(new Vector(400, 80));
+		tVerts.add(new Vector(0, 40));
 		TerrainSection t = new TerrainSection(tVerts, 0.3, 0.5);
 		currentLevel.addTerrainSection(t);
 
 		tVerts = new LinkedList<Vector>();
-		tVerts.add(new Vector(-1, -0.95));
-		tVerts.add(new Vector(0, -1));
-		tVerts.add(new Vector(0, -0.8));
-		tVerts.add(new Vector(-1, -0.9));
+		tVerts.add(new Vector(-400, -380));
+		tVerts.add(new Vector(0, -400));
+		tVerts.add(new Vector(0, -320));
+		tVerts.add(new Vector(-400, -360));
 		t = new TerrainSection(tVerts, 0.01, 4);
 		currentLevel.addTerrainSection(t);
 
 		tVerts = new LinkedList<Vector>();
-		tVerts.add(new Vector(-1, 0.2));
-		tVerts.add(new Vector(-0.2, 1));
-		tVerts.add(new Vector(-0.5, 1));
-		tVerts.add(new Vector(-1, 0.5));
+		tVerts.add(new Vector(-400, 80));
+		tVerts.add(new Vector(-80, 400));
+		tVerts.add(new Vector(-200, 400));
+		tVerts.add(new Vector(-400, 200));
 		t = new TerrainSection(tVerts, 0.5, 0.5);
 		currentLevel.addTerrainSection(t);
 
 		tVerts = new LinkedList<Vector>();
-		tVerts.add(new Vector(-0.3, -0.8));
-		tVerts.add(new Vector(-0.4, -0.8));
-		tVerts.add(new Vector(-0.2, -0.4));
-		tVerts.add(new Vector(-0.1, -0.4));
+		tVerts.add(new Vector(-120, -320));
+		tVerts.add(new Vector(-160, -320));
+		tVerts.add(new Vector(-80, -160));
+		tVerts.add(new Vector(-40, -160));
 		t = new TerrainSection(tVerts, 0.5, 0.5);
 		currentLevel.addTerrainSection(t);
 
 		tVerts = new LinkedList<Vector>();
-		tVerts.add(new Vector(-0.3, -0.8));
-		tVerts.add(new Vector(-0.4, -0.8));
-		tVerts.add(new Vector(-0.6, -0.4));
-		tVerts.add(new Vector(-0.5, -0.4));
+		tVerts.add(new Vector(-120, -320));
+		tVerts.add(new Vector(-160, -320));
+		tVerts.add(new Vector(-240, -160));
+		tVerts.add(new Vector(-200, -160));
 		t = new TerrainSection(tVerts, 0.5, 0.5);
 		currentLevel.addTerrainSection(t);
 	}
