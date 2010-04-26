@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gamedata>
+	<textures>
+		<texture>
+			<id>menubackground</id>
+			<path>res/test.png</path>
+		</texture>
+		<texture>
+			<id>testanim</id>
+			<path>res/SmurfSpin.png</path>
+		</texture>
+	</textures>
+	<levels>
+		<level>
+			<nr>1</nr>
+			<path>config/level1.xml</path>
+		</level>
+	</levels>
+</gamedata>
