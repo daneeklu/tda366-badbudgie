@@ -23,12 +23,14 @@ import edu.chl.tda366badbudgie.gui.graphics.impl.GLGraphics;
  */
 @SuppressWarnings("serial")
 public class GraphicsFrame extends JFrame {
+	
 	private IGraphics ig;
+	
 	public GraphicsFrame(){
-		ig = new GLGraphics();
+		ig = new GLGraphics(800, 600);
 		
 		add(ig.getCanvas());
-		setSize(500, 500);
+		setSize(800, 600);
 		setVisible(true);
 		
 		IStateContext app = StateContext.getInstance();
