@@ -2,7 +2,6 @@ package edu.chl.tda366badbudgie.gui.graphics.impl;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 import javax.media.opengl.GL;
@@ -20,7 +19,7 @@ import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
-import edu.chl.tda366badbudgie.io.FileManager;
+import edu.chl.tda366badbudgie.io.filehandling.FileManager;
 import edu.chl.tda366badbudgie.io.IFileManager;
 
 /**
@@ -40,6 +39,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	
 	private int width;
 	private int height;
+	private Vector cameraPosition;
 	
 	//Has the program been properly inited? (resources etc)
 	private boolean ready;
@@ -74,6 +74,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		if(!ready) {
 			init(canvas);
 		}
+		
+		this.cameraPosition = cameraPosition;
 		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		
@@ -236,7 +238,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		GLUT glut = new GLUT();
 		
 		gl.glColor3d(1.0,1.0,1.0);
-		gl.glRasterPos2d(x - width, height - y - 30);
+		gl.glRasterPos2d(x - width/2 + ((float) cameraPosition.getX()), height/2 - y - 30 + ((float) cameraPosition.getY()));
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		glut.glutBitmapString(7, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);
