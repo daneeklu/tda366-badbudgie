@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.filehandling;
+package edu.chl.tda366badbudgie.io.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

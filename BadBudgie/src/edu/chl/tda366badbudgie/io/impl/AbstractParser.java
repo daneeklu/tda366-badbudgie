@@ -1,4 +1,4 @@
-private package edu.chl.tda366badbudgie.io.filehandling;
+private package edu.chl.tda366badbudgie.io.impl;
 
 import org.w3c.dom.Document;
 
