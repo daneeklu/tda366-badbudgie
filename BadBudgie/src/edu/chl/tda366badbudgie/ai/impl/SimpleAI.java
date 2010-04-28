@@ -18,13 +18,13 @@ public class SimpleAI {
 		
 		if(new Vector(4, 0).dotProduct(v) == 0 || new Vector(-4, 0).dotProduct(v) == 0){
 			
-			if(enemy.getDirection().equals("left") && posControl()){
+			if(enemy.getDirection().equals("left") && isTooClose()){
 				System.out.println("Left");
 				setControlPosition();
 				enemy.moveLeft(false);
 				enemy.moveRight(true);
 			}
-			else if(enemy.getDirection().equals("right") && posControl()){
+			else if(enemy.getDirection().equals("right") && isTooClose()){
 				System.out.println("Right");
 				setControlPosition();
 				enemy.moveLeft(true);
@@ -39,7 +39,7 @@ public class SimpleAI {
 	}
 	
 	
-	public boolean posControl(){
+	public boolean isTooClose(){
 		double d = controlPosition.getX() - enemy.getX();
 		if(d > 10 || d < -10){
 			return true;
