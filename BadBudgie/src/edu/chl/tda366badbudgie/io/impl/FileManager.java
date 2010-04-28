@@ -66,6 +66,10 @@ public class FileManager implements IFileManager{
 		loadImage("budgie", "res/test_alpha.png");
 		loadImage("enemy", "res/test_enemy.png");
 		loadImage("wep", "res/gun1.png");
+		loadImage("confirm:exit", "res/confirm_exit.png");
+		loadImage("confirm:newgame", "res/confirm_newgame.png");
+		loadImage("yesno", "res/yesno.png");
+		
 	}
 	
 	private void loadImage(String id, String path) {

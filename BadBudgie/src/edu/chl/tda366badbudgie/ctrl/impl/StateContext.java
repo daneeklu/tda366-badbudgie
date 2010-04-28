@@ -29,7 +29,6 @@ public class StateContext implements IStateContext {
 	
 	private StateContext() {
 		menuState = new MenuState();
-		inGameState = new InGameState(new GameRound());
 		currentState = menuState;
 	}
 	
@@ -53,17 +52,14 @@ public class StateContext implements IStateContext {
 	}
 
 	@Override
-	public void setState(String stateid) {
-		if (stateid.equals("startGame")) {
-			if(inGameState != null)
-				currentState = new InGameState(new GameRound());
-			else
-				currentState = inGameState;
-		} else if(stateid.equals("resumeGame")){
-			currentState = inGameState;
-		} else if (stateid.equals("menu")) {
-			currentState = menuState;
-		}
+	public void setState(IState state) {
+		
+		if (state instanceof InGameState)
+			inGameState = state;
+		else if (state instanceof MenuState)
+			menuState = state;
+		
+		currentState = state;
 	}
 
 	/**
@@ -82,6 +78,16 @@ public class StateContext implements IStateContext {
 	@Override
 	public void setFrame(GraphicsFrame graphicsFrame) {
 		this.graphicsFrame = graphicsFrame;
+	}
+
+	@Override
+	public IState getGameState() {
+		return inGameState;
+	}
+
+	@Override
+	public IState getMenuState() {
+		return menuState;
 	}
 	
 	

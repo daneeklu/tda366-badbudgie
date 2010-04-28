@@ -47,7 +47,7 @@ public class InGameState implements IState {
 		gameRound.keyboardAction(id, down);
 		
 		if (down && id.equals("escape")) {
-			StateContext.getInstance().setState("menu");
+			StateContext.getInstance().setState(StateContext.getInstance().getMenuState());
 			return;
 		}
 	}

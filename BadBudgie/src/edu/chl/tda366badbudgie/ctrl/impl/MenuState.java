@@ -1,10 +1,10 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
 
+import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Menu;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
-import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 import edu.chl.tda366badbudgie.gui.render.MenuRenderer;
 
 public class MenuState implements IState {
@@ -20,7 +20,8 @@ public class MenuState implements IState {
 	@Override
 	public void logic() {
 		if (startGame) {
-			StateContext.getInstance().setState("startGame");
+			StateContext.getInstance().setState(
+					StateContext.getInstance().getGameState());
 		} else {
 			menu.logic();
 		}
@@ -39,14 +40,31 @@ public class MenuState implements IState {
 		if (down && id.equals("select")) {
 			String selected = menu.getSelected();
 			
-			if (selected.equals("New game")) {
-				StateContext.getInstance().setState("startGame");
-			} else if (selected.equals("Options")) {
+			if (selected == null) return;
+			
+			
+			if (selected.equals("newgame")) {
+				
+				if (StateContext.getInstance().getGameState() == null) {
+					StateContext.getInstance().setState(
+							new InGameState(new GameRound()));
+				} else {
+					menu.showConfirmDialog();
+				}
+
+			} else if (selected.equals("options")) {
 				//TODO: add switch to options state here
 				;
-			} else if (selected.equals("Exit")) {
+			} else if (selected.equals("exit")) {
+				menu.showConfirmDialog();
+
+			} else if (selected.equals("confirm:exit")) {
 				StateContext.getInstance().shutDown();
-			} 
+				
+			} else if (selected.equals("confirm:newgame")) {
+				StateContext.getInstance().setState(
+					new InGameState(new GameRound()));
+			}
 
 			return;
 		}

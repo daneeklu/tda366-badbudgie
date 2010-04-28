@@ -348,5 +348,20 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 	}
 
+	@Override
+	public void drawRectSection(Rectangle rectangle, int section, int hres,
+			int vres) {
+		
+		double tx, ty;
+		double frameWidth = 1.0 / hres;
+		double frameHeight = 1.0 / vres;
+		
+		tx = (double)(section % hres ) * frameWidth;
+		ty = (double)(section / hres ) * frameHeight;
+		
+		drawRect(rectangle, new Rectangle(tx, ty, frameWidth, frameHeight));
+		
+	}
+
 	
 }

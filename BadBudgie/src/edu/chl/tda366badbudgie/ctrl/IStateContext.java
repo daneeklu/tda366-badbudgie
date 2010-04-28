@@ -9,7 +9,10 @@ public interface IStateContext {
 		public void doLogic();
 		public void draw(IGraphics g);
 
-		public void setState(String string);
+		public void setState(IState state);
+		
+		public IState getGameState();
+		public IState getMenuState();
 		
 		public void shutDown();
 

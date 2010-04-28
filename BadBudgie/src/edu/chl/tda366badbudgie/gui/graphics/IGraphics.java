@@ -99,5 +99,14 @@ public interface IGraphics {
 	 */
 	public void drawText(String text, int x, int y);
 
+	/**
+	 * Draw a rectangle, using a section of a texture
+	 * @param rectangle the rectangle
+	 * @param section the number of the section to draw
+	 * @param hres the horisontal section resolution of the texture
+	 * @param vres the vertical section resolution of the texture
+	 */
+	public void drawRectSection(Rectangle rectangle, int section, int hres, int vres);
+
 	
 }
