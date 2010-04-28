@@ -14,7 +14,7 @@ import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
  *
  */
 public class Enemy extends AbstractUnit {
-	private static final double MOVE_FORCE = 0.3;
+	private static final double MOVE_FORCE = 0.9;
 	private static final double JUMP_FORCE = 6.0;
 	
 	private int health;
@@ -30,7 +30,7 @@ public class Enemy extends AbstractUnit {
 	 * @param texId the texture id of the enemy.
 	 */
 	public Enemy(String texId) {
-		setFriction(0.2);
+		setFriction(0.5);
 		setElasticity(0.5);
 		setMass(1);
 		health = 100;
@@ -99,7 +99,7 @@ public class Enemy extends AbstractUnit {
 	
 	@Override
 	public void updateState(){
-		ai.calculateMove();
+		ai.initAI();
 	}
 
 
