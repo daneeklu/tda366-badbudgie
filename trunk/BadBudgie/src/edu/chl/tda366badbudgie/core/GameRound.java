@@ -38,20 +38,42 @@ public class GameRound {
 
 		currentLevel.addGameObject(player);
 
+		Obstacle rock = new Obstacle("rock");
+		rock.setX(200.0);
+		rock.setY(320.0);
+		pcd = new LinkedList<Vector>();
+		pcd.add(new Vector(-40, -30));
+		pcd.add(new Vector(40, -30));
+		pcd.add(new Vector(20, 20));
+		pcd.add(new Vector(-20, 20));
+		rock.setCollisionData(new Polygon(pcd));
+
+		currentLevel.addGameObject(rock);
+
+		
+		
 		List<Vector> tVerts = new LinkedList<Vector>();
 		tVerts.add(new Vector(0, 0));
 		tVerts.add(new Vector(400, 0));
-		tVerts.add(new Vector(400, 80));
-		tVerts.add(new Vector(0, 40));
-		TerrainSection t = new TerrainSection(tVerts, 0.3, 0.5);
+		tVerts.add(new Vector(400, 40));
+		tVerts.add(new Vector(0, 80));
+		TerrainSection t = new TerrainSection(tVerts, 0.4, 0.5);
 		currentLevel.addTerrainSection(t);
 
 		tVerts = new LinkedList<Vector>();
-		tVerts.add(new Vector(-400, -380));
+		tVerts.add(new Vector(400, 0));
+		tVerts.add(new Vector(800, 0));
+		tVerts.add(new Vector(800, 40));
+		tVerts.add(new Vector(400, 40));
+		t = new TerrainSection(tVerts, 0.4, 0.5);
+		currentLevel.addTerrainSection(t);
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-400, -3380));
 		tVerts.add(new Vector(0, -400));
 		tVerts.add(new Vector(0, -320));
 		tVerts.add(new Vector(-400, -360));
-		t = new TerrainSection(tVerts, 0.01, 4);
+		t = new TerrainSection(tVerts, 0.1, 0.5);
 		currentLevel.addTerrainSection(t);
 
 		tVerts = new LinkedList<Vector>();

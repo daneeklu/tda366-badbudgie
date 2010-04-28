@@ -1,12 +1,10 @@
 package edu.chl.tda366badbudgie.physics;
 
-import java.awt.Color;
 import java.util.List;
 
 import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Vector;
-import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 
 public class MovementHandler {
 

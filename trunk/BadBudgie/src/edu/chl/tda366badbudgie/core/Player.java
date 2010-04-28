@@ -18,16 +18,19 @@ public class Player extends AbstractUnit {
 	private static final double AIR_MOVE_FORCE = 0.2;
 	private static final double JUMP_FORCE = 16.0;
 	private static final double GLIDE_FORCE_RATIO = 0.15;
-	private static final double[] FLYING_FORCE = {0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 4, 3, 2, 0, -2, -2, -1, -0.5};
+	private static final double[] FLYING_FORCE = {0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 0.5, 0.2, 0.1, 0.1};
 	
 	private int health;
-	private int flyingEnergy;
-	
-	private int wingTimer;
+
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
 	private boolean isGliding;
+	private int wingTimer;
+	private double flyingEnergy;
+	private int maxFlyingEnergy;
 	
+
+
 	/**
 	 * Constructor
 	 * 
@@ -35,14 +38,25 @@ public class Player extends AbstractUnit {
 	 */
 	public Player(String texId) {
 		setFriction(0.5);
-		setElasticity(0.5);
+		setElasticity(0.6);
 		setMass(1);
 		health = 100;
-		flyingEnergy = 100;
-		wingTimer = 0;
+		setFlyingEnergy(100);
+		setMaxFlyingEnergy(300);
+		setWingTimer(0);
 		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
+		
 	}
 
+	
+	
+	
+	/*
+	 * 
+	 * PLAYER ACTIONS AND LOGIC
+	 * 
+	 */
+	
 
 	/**
 	 * Called by GameRound when the player wants to move left
@@ -78,13 +92,14 @@ public class Player extends AbstractUnit {
 			}
 			else {
 				// Start wing flap
-				if (flyingEnergy >= 5 && wingTimer == 0) {
-					flyingEnergy -= 20;
-					wingTimer = 20;
+				if (getFlyingEnergy() >= 5 && getWingTimer() == 0) {
+					setWingTimer(20);
 				}
 			}
 		}
 		else {
+			if (getWingTimer() > 11)
+				setWingTimer(9);
 		}
 		
 	}
@@ -104,7 +119,11 @@ public class Player extends AbstractUnit {
 		// Player wants to move left
 		if (isMovingLeft) {
 			if (!getGroundContactVector().hasZeroLength()) {
-				applyForce(getGroundContactVector().perpendicularCCW().scalarMultiplication(MOVE_FORCE));
+				Vector force = getGroundContactVector().perpendicularCCW().scalarMultiplication(MOVE_FORCE);
+				if (force.getLength() > 1)
+					force = force.normalize(); // Max friction = 1
+				applyForce(force);
+				getGroundContactObject().applyForce(force.scalarMultiplication(-1));
 			}
 			else {
 				applyForce(new Vector(-1, 0).scalarMultiplication(AIR_MOVE_FORCE));
@@ -114,7 +133,9 @@ public class Player extends AbstractUnit {
 		// Player wants to move right
 		if (isMovingRight) {
 			if (!getGroundContactVector().hasZeroLength()) {
-				applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE));
+				Vector force = getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE);
+				applyForce(force);
+				getGroundContactObject().applyForce(force.scalarMultiplication(-1));
 			}
 			else {
 				applyForce(new Vector(1, 0).scalarMultiplication(AIR_MOVE_FORCE));
@@ -123,19 +144,21 @@ public class Player extends AbstractUnit {
 		
 		
 		// Wings flapping
-		if (wingTimer > 0) {
+		if (getWingTimer() > 0 && getFlyingEnergy() > 0) {
 			// Flying straight up
 			if (!isMovingLeft && !isMovingRight) {
-				applyForce(new Vector(0, FLYING_FORCE[wingTimer-1]));
+				applyForce(new Vector(0, FLYING_FORCE[getWingTimer()-1]));
 			}
 			// Flying to the left
 			if (isMovingLeft) {
-				applyForce(new Vector(FLYING_FORCE[wingTimer-1] * -0.2, FLYING_FORCE[wingTimer-1] * 0.7));
+				applyForce(new Vector(FLYING_FORCE[getWingTimer()-1] * -0.2, FLYING_FORCE[getWingTimer()-1] * 0.7));
 			}
 			// Flying to the right
 			if (isMovingRight) {
-				applyForce(new Vector(FLYING_FORCE[wingTimer-1] * 0.2, FLYING_FORCE[wingTimer-1] * 0.7));
+				applyForce(new Vector(FLYING_FORCE[getWingTimer()-1] * 0.2, FLYING_FORCE[getWingTimer()-1] * 0.7));
 			}
+
+			setFlyingEnergy(getFlyingEnergy() - (FLYING_FORCE[getWingTimer()-1] * 6));
 		}
 		
 		// Gliding
@@ -147,28 +170,89 @@ public class Player extends AbstractUnit {
 			applyForce(new Vector(0, GLIDE_FORCE_RATIO / 15 * Math.abs(getVelocity().getX())));
 		}
 		
-		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
-			DebugInfoRenderer.getInstance().addDebugLine(getPosition(), getPosition().add(getForce().scalarMultiplication(100)), Color.red);
-			DebugInfoRenderer.getInstance().addDebugLine(getPosition(), getPosition().add(getVelocity().scalarMultiplication(70)), Color.blue);
-			DebugInfoRenderer.getInstance().addDebugText("Player");
-			DebugInfoRenderer.getInstance().addDebugText("x:" + getX() + " y:" + getY());
-			DebugInfoRenderer.getInstance().addDebugText("vx:" + getVelocity().getX() + " vy:" + getVelocity().getY());
-			DebugInfoRenderer.getInstance().addDebugText("fx:" + getForce().getX() + " fy:" + getForce().getY());
-			DebugInfoRenderer.getInstance().addDebugText("FlyingEnergy:" + flyingEnergy);
-			DebugInfoRenderer.getInstance().addDebugText("WingTimer:" + wingTimer);
-		}
+
 		
 	}
 	
 	@Override
 	public void updateState(){
-		if(flyingEnergy < 100){
-			flyingEnergy += 1;
+		if(getFlyingEnergy() < maxFlyingEnergy){
+			setFlyingEnergy(getFlyingEnergy() + 1);
 		}
 		
-		if (wingTimer > 0) {
-			wingTimer--;
+		if (getWingTimer() > 0) {
+			setWingTimer(getWingTimer() - 1);
 		}
 	}
+
+
+	@Override
+	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
+		
+		
+		// Set the ground contact vector
+		if (mtv.getY() > 0) {
+			// Player has ground beneath his feet
+			// Set ground contact vector to mean of previous and new contact vector, 
+			// to allow multiple contacts in one loop
+			this.setGroundContactVector(this.getGroundContactVector().add(
+					mtv.normalize().scalarDivision(2)));
+			this.setGroundContactObject(other);
+		}
+		
+	}
+
+	
+	
+	/*
+	 * 
+	 * GETTERS AND SETTERS
+	 * 
+	 */
+	
+	
+	
+	/**
+	 * @param flyingEnergy the flyingEnergy to set
+	 */
+	public void setFlyingEnergy(double flyingEnergy) {
+		this.flyingEnergy = flyingEnergy;
+	}
+
+	/**
+	 * @return the flyingEnergy
+	 */
+	public double getFlyingEnergy() {
+		return flyingEnergy;
+	}
+
+	/**
+	 * @param wingTimer the wingTimer to set
+	 */
+	public void setWingTimer(int wingTimer) {
+		this.wingTimer = wingTimer;
+	}
+
+	/**
+	 * @return the wingTimer
+	 */
+	public int getWingTimer() {
+		return wingTimer;
+	}
+	
+	/**
+	 * @return the maxFlyingEnergy
+	 */
+	public int getMaxFlyingEnergy() {
+		return maxFlyingEnergy;
+	}
+	
+	/**
+	 * @param maxFlyingEnergy the maxFlyingEnergy to set
+	 */
+	public void setMaxFlyingEnergy(int maxFlyingEnergy) {
+		this.maxFlyingEnergy = maxFlyingEnergy;
+	}
+
 	
 }

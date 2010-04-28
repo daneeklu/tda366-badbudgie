@@ -28,8 +28,6 @@ public class MenuState implements IState {
 	
 	@Override
 	public void draw(IGraphics g) {
-		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled())
-			DebugInfoRenderer.getInstance().addDebugText("AppState: menu. Item: " + menu.getSelected());
 		MenuRenderer.render(menu, g);
 	}
 

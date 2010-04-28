@@ -64,6 +64,7 @@ public class FileManager implements IFileManager{
 		loadImage("newgame", "res/newgame.png");	
 		loadImage("options", "res/options.png");
 		loadImage("budgie", "res/test_alpha.png");
+		loadImage("rock", "res/rock.png");
 	}
 	
 	private void loadImage(String id, String path) {

@@ -3,7 +3,6 @@ package edu.chl.tda366badbudgie.core;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * AbstractCollidable
  * 
@@ -19,6 +18,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	private double friction; 		// Friction coefficient. (100 = a lot, 0 = no friction)  
 	private double elasticity; 		// Elasticity coefficient. 1 = superball, 0 = lump of clay
 	private Vector groundContactVector;
+	private AbstractCollidable groundContactObject;
 	
 	
 	/**
@@ -33,6 +33,9 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		this.friction = friction;
 		this.elasticity = elasticity;
 		setGroundContactVector(new Vector());
+		setGroundContactObject(new AbstractCollidable() {
+			// Dummy default collision object
+			@Override public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {}});
 	}
 	
 	protected AbstractCollidable() {
@@ -117,6 +120,34 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 */
 	public Vector getGroundContactVector() {
 		return groundContactVector;
+	}
+	
+
+	
+	/**
+	 * Notifies the object that there is a collision and lets it act accordingly.
+	 * 
+	 * @param other the colliding object
+	 * @param mtv minimum translation vector for the collision
+	 */
+	public abstract void executeCollisionEffect(AbstractCollidable other, Vector mtv);
+
+	/**
+	 * 
+	 * 
+	 * @param groundContactObject
+	 */
+	public void setGroundContactObject(AbstractCollidable groundContactObject) {
+		this.groundContactObject = groundContactObject;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	public AbstractCollidable getGroundContactObject() {
+		return groundContactObject;
 	}
 	
 }

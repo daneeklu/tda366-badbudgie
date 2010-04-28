@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.chl.tda366badbudgie.core.AbstractCollidable;
+import edu.chl.tda366badbudgie.core.AbstractGameObject;
+import edu.chl.tda366badbudgie.core.GameRound;
+import edu.chl.tda366badbudgie.core.Menu;
+import edu.chl.tda366badbudgie.core.Player;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
@@ -12,7 +17,7 @@ import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
  * 
  * Singleton used for drawing debug info to screen.
  * Graphical lines and text can be added to the buffer anywhere in the code, 
- * and are drawn by calling drawDebugInfo() from the game's render method.
+ * and are drawn by calling drawDebugInfo() from the game's render pipe.
  * 
  * @author kvarfordt
  *
@@ -22,9 +27,11 @@ public class DebugInfoRenderer {
 	private List<DebugLine> debugLines;
 	private List<String> debugText;
 	private boolean debugInfoEnabled = true;
+	private static DebugInfoRenderer instance = new DebugInfoRenderer();
 	
-	private static DebugInfoRenderer instance;
-	
+	/**
+	 * Private constructor
+	 */
 	private DebugInfoRenderer() {
 		debugLines = new LinkedList<DebugLine>();
 		debugText = new LinkedList<String>();
@@ -36,9 +43,6 @@ public class DebugInfoRenderer {
 	 * @return the instance
 	 */
 	public static DebugInfoRenderer getInstance() {
-		if (instance == null) {
-			instance = new DebugInfoRenderer();
-		}
 		return instance;
 	}
 	
@@ -65,26 +69,80 @@ public class DebugInfoRenderer {
 	}
 
 	/**
-	 * Call this method from the game's render 
-	 * method, between the calls to startRender() and stopRender()
-	 * to draw the contents of the class' buffer to screen.
+	 * Gets the objects of a gameRounds level and displays various information about them, such as velocities and forces.
 	 * 
-	 * @param g the graphics object to use.
+	 * @param gameRound the gameRound
+	 * @param g the IGraphics to use
 	 */
-	public void drawDebugInfo(IGraphics g) {
+	public void drawDebugInfo(GameRound gameRound, IGraphics g) {
 		if (isDebugInfoEnabled()) {
-			for (DebugLine d : debugLines) {
-				g.drawLine(d.start, d.end, d.c);
+			for (AbstractGameObject ago : gameRound.getLevel().getGameObjects()) {
+				
+				// Player data
+				if (ago instanceof Player) {
+					Player p = (Player) ago;
+					addDebugText("Player");
+					addDebugText("x:" + p.getX() + " y:" + p.getY());
+					addDebugText("vx:" + p.getVelocity().getX() + " vy:" + p.getVelocity().getY());
+					addDebugText("fx:" + p.getForce().getX() + " fy:" + p.getForce().getY());
+					addDebugText("FlyingEnergy:" + p.getFlyingEnergy());
+					addDebugText("WingTimer:" + p.getWingTimer());
+				}
+				
+				// Collision data
+				if (ago instanceof AbstractCollidable) {
+					AbstractCollidable ac = (AbstractCollidable) ago;
+					List<Vector> verts = ac.getCollisionData().getVertices();
+					for (int i = 0; i < verts.size(); i++) {
+						Vector v1 = verts.get(i);
+						Vector v2 = verts.get((i + 1) % verts.size());
+						addDebugLine(v1, v2, Color.darkGray);
+					}
+				}
+				
+				addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getForce().scalarMultiplication(100)), Color.red);
+				addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getVelocity().scalarMultiplication(7)), Color.blue);
+				
+				
 			}
-			int i = 0;
-			for (String s : debugText) {
-				g.drawText(s, 10, 30 * i++);
-			}
-			
-			debugLines.clear();
-			debugText.clear();
+			renderDebugInfo(g);
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * Displays info about the menu when called.
+	 * 
+	 * @param menu
+	 * @param g
+	 */
+	public void drawDebugInfo(Menu menu, IGraphics g) {
+		if (isDebugInfoEnabled()) {
+			addDebugText("AppState: menu. Item: " + menu.getSelected());
+			renderDebugInfo(g);
 		}
 	}
+	
+	/**
+	 * The method that draws the lines and text in the buffer.
+	 * @param g
+	 */
+	private void renderDebugInfo(IGraphics g) {
+		for (DebugLine d : debugLines) {
+			g.drawLine(d.start, d.end, d.c);
+		}
+		int i = 0;
+		for (String s : debugText) {
+			g.drawText(s, 10, 30 * i++);
+		}
+		debugLines.clear();
+		debugText.clear();
+	}
+	
+	
+	
 	
 	/**
 	 * Enable or disable drawing of debug info.
@@ -108,7 +166,7 @@ public class DebugInfoRenderer {
 	/**
 	 * Private inner class for a line in the buffer.
 	 * 
-	 * @author Daniel
+	 * @author kvarfordt
 	 *
 	 */
 	private class DebugLine {

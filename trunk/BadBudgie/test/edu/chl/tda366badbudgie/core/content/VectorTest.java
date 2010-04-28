@@ -2,6 +2,7 @@ package edu.chl.tda366badbudgie.core.content;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +19,11 @@ public class VectorTest {
 		b = new Vector(2,0);
 		c = new Vector(2,2);
 		
+	}
+	
+	@After
+	public void uninit() {
+		a = b = c = null;
 	}
 	
 	@Test
@@ -80,7 +86,18 @@ public class VectorTest {
 
 		Vector cn = c.normalize();
 		
-		assertTrue(Math.abs(cn.getLength() - 1) < 0.000000000000001); // not equal because of rounding errors
+		assertTrue(Math.abs(cn.getLength() - 1.0) < 0.000000000000001); // not equal because of rounding errors
+		
+	}
+	
+	@Test
+	public void testCrossProduct() {
+
+		double vpAB = a.crossProduct(b);
+		double vpBA = b.crossProduct(a);
+		
+		assertTrue(vpAB < 0);
+		assertTrue(vpBA > 0);
 		
 	}
 
