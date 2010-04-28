@@ -99,6 +99,7 @@ public interface IGraphics {
 	 */
 	public void drawText(String text, int x, int y);
 
+	
 	/**
 	 * Draw a rectangle, using a section of a texture
 	 * @param rectangle the rectangle
@@ -107,6 +108,23 @@ public interface IGraphics {
 	 * @param vres the vertical section resolution of the texture
 	 */
 	public void drawRectSection(Rectangle rectangle, int section, int hres, int vres);
+	
+	
+	/**
+	 * Draws a quad with the specified texture id
+	 * 
+	 * @param q the quad
+	 * @param texureId the texture id
+	 */
+	public void drawTexturedQuad(Quad q, String textureId, double textureResolution);
+
+	/**
+	 * Draws a textured rectangle with the specified texture id
+	 * 
+	 * @param r the rectangle
+	 * @param texId the texture id
+	 */
+	public void drawBackgroundRect(Rectangle r, String texId);
 
 	
 }

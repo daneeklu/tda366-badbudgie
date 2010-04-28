@@ -227,6 +227,40 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		gl.glEnd();		
 	}
+	
+	@Override
+	public void drawBackgroundRect(Rectangle r, String texId) {
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
+		
+		double x = r.getX();
+		double y = r.getY();
+		double xr = r.getX() + cameraPosition.getX();
+		double yr = r.getY() + cameraPosition.getY();
+		double w = r.getWidth();
+		double h = r.getHeight();
+		
+		
+		setActiveTexture(texId);
+		
+		gl.glBegin(GL.GL_QUADS);
+		gl.glEnable(GL.GL_TEXTURE_2D);
+
+		gl.glTexCoord2d(0, 1);	
+		gl.glVertex2d(xr, yr);
+		gl.glTexCoord2d(1, 1);
+		gl.glVertex2d(xr + w, yr);
+		gl.glTexCoord2d(1, 0);
+		gl.glVertex2d(xr + w, yr + h);
+		gl.glTexCoord2d(0, 0);
+		gl.glVertex2d(xr, yr + h);
+		
+		gl.glEnd();
+		
+	}
 
 
 	@Override
@@ -248,6 +282,29 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		gl.glColor3d(1.0, 1.0, 1.0);
 		gl.glEnable(GL.GL_TEXTURE_2D);
+		gl.glEnd();		
+	}
+	
+	@Override
+	public void drawTexturedQuad(Quad q, String textureId, double texRes) {
+		
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
+
+		setActiveTexture(textureId);
+		
+		gl.glBegin(GL.GL_QUADS);
+		gl.glEnable(GL.GL_TEXTURE_2D);
+		for (Vector v : q.getVertices()) {
+			
+			gl.glTexCoord2d(v.getX() * texRes, v.getY() * texRes);
+			gl.glVertex2d(v.getX(), v.getY() );
+			
+		}
+		
 		gl.glEnd();		
 	}
 	
@@ -295,7 +352,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		gl.glBegin(GL.GL_POLYGON);
 		
-		gl.glColor3d(1.0, 0.5, 1.0);
+		gl.glColor3d(0.5, 0.5, 0.5);
 		
 		for (Vector v : p.getVertices()) {
 			gl.glVertex2d(v.getX(), v.getY() );

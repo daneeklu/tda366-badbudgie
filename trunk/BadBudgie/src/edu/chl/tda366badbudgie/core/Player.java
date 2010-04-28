@@ -89,6 +89,7 @@ public class Player extends AbstractUnit {
 			if (!groundContactVector.hasZeroLength()) {
 				// Instant jump
 				applyForce(groundContactVector.normalize().scalarMultiplication(JUMP_FORCE));
+				getGroundContactObject().applyForce(groundContactVector.normalize().scalarMultiplication(-JUMP_FORCE));
 			}
 			else {
 				// Start wing flap

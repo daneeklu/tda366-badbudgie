@@ -17,6 +17,8 @@ public class Level {
 	private ArrayList<AbstractGameObject> gameObjects;
 	private ArrayList<TerrainSection> terrainQuads;
 	
+	private String backgroundTexId;
+	
 	/**
 	 * Constructs a new Level object.
 	 */
@@ -24,6 +26,9 @@ public class Level {
 		
 		gameObjects = new ArrayList<AbstractGameObject>();
 		terrainQuads = new ArrayList<TerrainSection>();
+		
+		// TODO: Load from level data
+		setBackgroundTexId("background");
 		
 	}
 	
@@ -71,6 +76,20 @@ public class Level {
 	 */
 	public void addGameObject(AbstractGameObject go) {
 		gameObjects.add(go);
+	}
+
+	/**
+	 * @param backgroundTexId the background texture id
+	 */
+	public void setBackgroundTexId(String backgroundTexId) {
+		this.backgroundTexId = backgroundTexId;
+	}
+
+	/**
+	 * @return the background texture id
+	 */
+	public String getBackgroundTexId() {
+		return backgroundTexId;
 	}
 	
 }

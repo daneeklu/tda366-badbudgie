@@ -17,8 +17,10 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	private Polygon collisionData;
 	private double friction; 		// Friction coefficient. (100 = a lot, 0 = no friction)  
 	private double elasticity; 		// Elasticity coefficient. 1 = superball, 0 = lump of clay
+	
 	private Vector groundContactVector;
 	private AbstractCollidable groundContactObject;
+	private List<Contact> contacts;
 	
 	
 	/**
@@ -148,6 +150,27 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 */
 	public AbstractCollidable getGroundContactObject() {
 		return groundContactObject;
+	}
+	
+	
+	
+	
+	
+	
+	public void addContact(AbstractCollidable ac, Vector mtv) {
+		contacts.add(new Contact(ac, mtv));
+	}
+	
+	private static class Contact {
+		
+		private AbstractCollidable contactObejct;
+		private Vector mtv;
+		
+		private Contact(AbstractCollidable contactObejct, Vector mtv) {
+			this.contactObejct = contactObejct;
+			this.mtv = mtv;
+		}
+		
 	}
 	
 }
