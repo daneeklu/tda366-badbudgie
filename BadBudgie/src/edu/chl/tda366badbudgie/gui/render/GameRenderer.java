@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
+import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
@@ -27,7 +28,11 @@ public class GameRenderer {
 		if(!g.startRendering(gameRound.getPlayer().getPosition())) 
 			return;
 		
-		drawTerrain(gameRound.getLevel().getTerrainSections(), g);
+		g.drawBackgroundRect(new Rectangle(new Vector(-400, -300), new Vector(800, 600)), gameRound.getLevel().getBackgroundTexId());
+		
+		for (TerrainSection ts : gameRound.getLevel().getTerrainSections()) {
+			drawTerrainSection(ts, g);
+		}
 		
 		for (AbstractGameObject go : gameRound.getLevel().getGameObjects()) {
 			drawGameObject(go, g);
@@ -45,10 +50,11 @@ public class GameRenderer {
 	 * @param ts the terrain section.
 	 * @param g the Graphics object to do the rendering. 
 	 */
-	private static void drawTerrain(List<TerrainSection> ts, IGraphics g) {
-		for (TerrainSection t : ts) {
-			g.drawQuad(t.getQuad());
-		}
+	private static void drawTerrainSection(TerrainSection ts, IGraphics g) {
+		if (ts.getTexId() != null && !ts.getTexId().equals(""))
+			g.drawTexturedQuad(ts.getQuad(), ts.getTexId(), ts.getTexRes());
+		else 
+			g.drawQuad(ts.getQuad());
 	}
 	
 	/**
