@@ -29,7 +29,7 @@ public class MovementHandler {
 			ago.setForce(new Vector(0, 0));
 			
 		}
-		
+
 	}
 
 }
