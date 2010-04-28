@@ -37,8 +37,13 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	private GL gl;
 	private GLU glu;
 	
-	private int width;
-	private int height;
+	private final int fullwidth;
+	private final int fullheight;
+	//The preferred ratio = preferred width / preferred height
+	private final double ratio;
+	private double width;
+	private double height;
+	
 	private Vector cameraPosition;
 	
 	//Has the program been properly inited? (resources etc)
@@ -51,8 +56,9 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		canvas.createContext(null).makeCurrent();
 		canvas.addGLEventListener(this);
 		canvas.setAutoSwapBufferMode(false);
-		this.width = width;
-		this.height = height;
+		fullwidth = width;
+		fullheight = height;
+		ratio = (double)fullwidth / (double)fullheight;
 		ready = false;
 	}
 	
@@ -80,10 +86,11 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		
 		
+
+		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
-		gl.glMatrixMode(GL.GL_PROJECTION);
 		glu.gluOrtho2D(0, width, 0, height);
-		gl.glTranslatef(width/2 - ((float) cameraPosition.getX()), height/2 - ((float) cameraPosition.getY()), 0);
+		gl.glTranslatef((float)(width/2 - ( cameraPosition.getX())),(float)(height/2 - ( cameraPosition.getY())), 0);
 
 		return true;
 	}
@@ -116,21 +123,51 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 	
 	@Override
-	public void display(GLAutoDrawable glDraw) {
+	public void display(GLAutoDrawable drawable) {
 		//Don't render, rendering is done elsewhere
 	}
 
 	@Override
-	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
+	public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
 		//Nothing to be implemented
 		
 	}
 	
 	@Override
-	public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3,
-			int arg4) {
-		//Nothing to be implemented
+	public void reshape(GLAutoDrawable drawable, int x, int y,
+			int width, int height) {
+
+		// Refit the GL width and height mappings so the ratio of the
+		// screen stays intact
 		
+		
+		// If the screen is currently too wide...
+		if ((double)width / (double)height >  ratio) {
+			
+			//Height decides the size
+			this.height = fullheight;
+			this.width = (fullwidth * width) / (height * ratio);
+			
+			//If the screen is very small, then make it
+			//crop rather than zoom
+			if (height < fullheight / 2.0) {
+				this.height = 2.0 * height;
+				this.width = (fullwidth * (double)width ) / (ratio * ((double)fullheight / 2.0));
+			}
+			
+		} else {
+			//The screen is too high
+			//Width decides the size
+			this.width = fullwidth;
+			this.height =  (fullheight * height) * ratio / (width);
+			
+			//If the screen is very small, then make it
+			//crop rather than zoom
+			if (width < fullwidth / 2.0) {
+				this.width = 2.0 * width;
+				this.height = (fullheight * height * ratio) / (fullwidth / 2.0);
+			}
+		}
 	}
 
 	@Override

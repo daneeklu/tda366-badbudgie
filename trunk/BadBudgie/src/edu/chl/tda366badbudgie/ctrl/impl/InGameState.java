@@ -50,8 +50,6 @@ public class InGameState implements IState {
 			StateContext.getInstance().setState("menu");
 			return;
 		}
-		
-		System.out.println("In game keypress: " + id + " " + down);
 	}
 
 }

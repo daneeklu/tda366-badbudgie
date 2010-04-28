@@ -28,7 +28,7 @@ public class MenuRenderer {
 		
 		// TODO: draw the background image of the menu, make this not hardcoded
 		g.setActiveTexture("test");
-		g.drawRect(new Rectangle(-400, -400, 800, 800));
+		g.drawRect(new Rectangle(-400, -300, 800, 600));
 
 		DebugInfoRenderer.getInstance().drawDebugInfo(menu, g);
 		
