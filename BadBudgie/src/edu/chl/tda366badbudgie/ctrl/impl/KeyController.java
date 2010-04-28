@@ -36,7 +36,8 @@ public class KeyController extends KeyAdapter{
 		menuKeyMap.put(KeyEvent.VK_RIGHT, "right");
 		menuKeyMap.put(KeyEvent.VK_UP, "up");
 		menuKeyMap.put(KeyEvent.VK_DOWN, "down");
-		menuKeyMap.put(KeyEvent.VK_ENTER, "enter");
+		menuKeyMap.put(KeyEvent.VK_ENTER, "select");
+		menuKeyMap.put(KeyEvent.VK_SPACE, "select");
 		menuKeyMap.put(KeyEvent.VK_ESCAPE, "escape");
 		
 		// TODO: Temp in game key bindings

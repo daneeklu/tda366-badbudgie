@@ -33,11 +33,10 @@ public class MenuState implements IState {
 
 	@Override
 	public void keyboardAction(String id, boolean down) {
-		System.out.println("In menu keypress: " + id + " " + down);
 		
 		menu.keyboardAction(id, down);
 		
-		if (down && id.equals("enter")) {
+		if (down && id.equals("select")) {
 			String selected = menu.getSelected();
 			
 			if (selected.equals("New game")) {
