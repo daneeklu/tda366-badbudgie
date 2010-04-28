@@ -13,12 +13,16 @@ public class Menu {
 
 	private final int numItems = 3;
 	
-	private String[] items = {"New game", "Options", "Exit"};
+	private String[] items = {"newgame", "options", "exit"};
 	private MenuItem[] menuItems;
 	
 	private int currentItem;
 	
+	private ConfirmDialog dialog;
+	
 	public Menu() {
+		
+		dialog = null;
 		
 		menuItems = new MenuItem[3];
 		
@@ -67,11 +71,22 @@ public class Menu {
 		
 		if (!down) return;
 		
-		if (id.equals("down"))
-			setCurrentItem(currentItem + 1);
-		
-		if (id.equals("up"))
-			setCurrentItem(currentItem - 1);
+		if (dialog == null) {
+			if (id.equals("down"))
+				setCurrentItem(currentItem + 1);
+			
+			if (id.equals("up"))
+				setCurrentItem(currentItem - 1);
+			
+			if (id.equals("escape"))
+				setCurrentItem(numItems-1);
+		} else {
+			if (id.equals("right"))
+				dialog.change(-1);
+			if (id.equals("left"))
+				dialog.change(1);
+		}
+
 	}
 	
 	/**
@@ -79,7 +94,18 @@ public class Menu {
 	 * @return the menu item's name
 	 */
 	public String getSelected() {
-		return items[currentItem];
+
+		if (dialog == null)
+			return items[currentItem];
+		
+		if (dialog.getValue()) {
+			dialog = null;
+			return "confirm:" + items[currentItem];
+		}
+		else {
+			dialog = null;
+			return null;
+		}	
 	}
 	
 	/**
@@ -100,6 +126,38 @@ public class Menu {
 		
 	}
 	
-	
+	public class ConfirmDialog {
+		
+		boolean value;
+		String action;
+		String texId;
+		
+		private ConfirmDialog(String action, String texId) {
+			this.action = action;
+			this.texId = texId;
+			value = false;
+		}
+		
+		public void change(int val) {
+			value = (val == 1) ? true : false;
+		}
+		
+		public boolean getValue() {
+			return value;
+		}
+
+		public String getTexId() {
+			return texId;
+		}
+		
+	}
+
+	public void showConfirmDialog() {
+		dialog = new ConfirmDialog(items[currentItem], "confirm:" + items[currentItem]);
+	}
+
+	public ConfirmDialog getConfirmDialog() {
+		return dialog;
+	}
 
 }
