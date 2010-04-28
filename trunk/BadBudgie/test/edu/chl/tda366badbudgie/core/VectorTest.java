@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core.content;
+package edu.chl.tda366badbudgie.core;
 
 import static org.junit.Assert.*;
 
