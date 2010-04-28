@@ -56,7 +56,7 @@ public class GameRound {
 		
 
 		Obstacle rock = new Obstacle("rock");
-		rock.setX(200.0);
+		rock.setX(600.0);
 		rock.setY(320.0);
 		pcd = new LinkedList<Vector>();
 		pcd.add(new Vector(-40, -15));

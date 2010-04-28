@@ -12,36 +12,70 @@ public class SimpleAI {
 		enemy.moveRight(true);
 	}
 
-	public void calculateMove() {
+	public void initAI() {
 		
 		Vector v = enemy.getGroundContactVector();
 		
-		if(new Vector(4, 0).dotProduct(v) == 0 || new Vector(-4, 0).dotProduct(v) == 0){
-			
-			if(enemy.getDirection().equals("left") && isTooClose()){
-				setControlPosition();
-				enemy.moveLeft(false);
-				enemy.moveRight(true);
-			}
-			else if(enemy.getDirection().equals("right") && isTooClose()){
-				setControlPosition();
-				enemy.moveLeft(true);
-				enemy.moveRight(false);
+		if(new Vector(1, 0).dotProduct(v) == 0 || new Vector(-1, 0).dotProduct(v) == 0){
+			if(!isTooClose()){
+				changeDirection();
 			}
 		}
 	}
 	
+	/**
+	 * Changes the direction of the enemy
+	 */
+	public void changeDirection(){
+		setControlPosition();
+		if(enemy.getDirection().equals("left")){
+			enemy.moveLeft(false);
+			enemy.moveRight(true);
+		}
+		else if(enemy.getDirection().equals("right")){
+			enemy.moveLeft(true);
+			enemy.moveRight(false);
+		}
+		
+		/*
+		 * Gives the enemy a little boost if he gets stuck in the graphics,
+		 * often caused when starting in a steep hill. 
+		 */
+		enemy.applyForce(new Vector(0,1));
+	}
+	
+	
+	/**
+	 * Sets the position from which the non-turning radius will be calculated
+	 */
 	public void setControlPosition(){
 		controlPosition = enemy.getPosition();
 	}
 	
-	
+	/**
+	 * 
+	 * @return true if the turning point is too close for a turn.
+	 */
 	public boolean isTooClose(){
+		//Gets the distance between the enemy and the non-turning radius
 		double d = controlPosition.getX() - enemy.getX();
-		if(d > 10 || d < -10){
-			return true;
+		
+		//Declares a radius from the turning point, where the enemy may not turn again.
+		if(d > 25 || d < -25){
+			return false;
 		}
-		return false;
+		return true;
+	}
+	
+	/**
+	 * If there is a collision with something, this method will override the non-turning radius
+	 * and change the direction of the enemy.
+	 * @param b that should be true if a collision has happened.
+	 */
+	public void isCollision(boolean b){
+		if(b){
+			changeDirection();
+		}
 	}
 
 }
