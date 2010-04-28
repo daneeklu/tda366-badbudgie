@@ -3,7 +3,6 @@ package edu.chl.tda366badbudgie.ctrl.impl;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
-import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 import edu.chl.tda366badbudgie.gui.render.GameRenderer;
 import edu.chl.tda366badbudgie.physics.CollisionHandler;
 import edu.chl.tda366badbudgie.physics.MovementHandler;
@@ -31,17 +30,14 @@ public class InGameState implements IState {
 	@Override
 	public void logic() {
 		
+		gameRound.updateGameObjects();
 		physics.doPhysics(gameRound);
 		
-		gameRound.updateGameObjects();
 		
 	}
 	
 	@Override
 	public void draw(IGraphics g) {
-		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled())
-			DebugInfoRenderer.getInstance().addDebugText("AppState: ingame");
-			
 		GameRenderer.render(gameRound,g);
 	}
 

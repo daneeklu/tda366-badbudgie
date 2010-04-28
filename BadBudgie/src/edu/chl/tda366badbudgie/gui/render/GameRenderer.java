@@ -33,9 +33,7 @@ public class GameRenderer {
 			drawGameObject(go, g);
 		}
 		
-		if (DebugInfoRenderer.getInstance().isDebugInfoEnabled()) {
-			DebugInfoRenderer.getInstance().drawDebugInfo(g);
-		}
+		DebugInfoRenderer.getInstance().drawDebugInfo(gameRound, g);
 		
 		g.stopRendering();
 		

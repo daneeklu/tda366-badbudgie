@@ -38,4 +38,10 @@ public class TerrainSection extends AbstractCollidable {
 		return quad;
 	}
 
+
+	@Override
+	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
+		// Collisions has no effects on terrain
+	}
+
 }
