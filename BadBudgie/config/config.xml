@@ -18,6 +18,5 @@
 	<levels>
 		<level nr="1" path="config/level1.xml"/>
 			<!--Additional data-->
-		</level>
 	</levels>
 </gamedata>
