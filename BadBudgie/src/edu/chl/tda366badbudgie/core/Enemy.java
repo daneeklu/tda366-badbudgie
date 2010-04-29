@@ -1,9 +1,6 @@
 package edu.chl.tda366badbudgie.core;
 
-import java.awt.Color;
-
 import edu.chl.tda366badbudgie.ai.impl.SimpleAI;
-import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 
 /**
  * Enemy
@@ -18,6 +15,7 @@ public class Enemy extends AbstractUnit {
 	private static final double JUMP_FORCE = 6.0;
 	
 	private int health;
+	private int damage;
 	
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
@@ -34,6 +32,7 @@ public class Enemy extends AbstractUnit {
 		setElasticity(0.5);
 		setMass(1);
 		health = 100;
+		setDamage(10);
 		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
 		ai = new SimpleAI(this);
 		
@@ -116,5 +115,25 @@ public class Enemy extends AbstractUnit {
 		}
 		
 		
+	}
+
+
+	/**
+	 * Sets the amount of damage this enemy does to the player.
+	 * 
+	 * @param damage the damage
+	 */
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
+
+	/**
+	 * Gets the amount of damage this enemy does to the player.
+	 * 
+	 * @return the damage
+	 */
+	public int getDamage() {
+		return damage;
 	}
 }

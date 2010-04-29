@@ -87,6 +87,7 @@ public class DebugInfoRenderer {
 					addDebugText("fx:" + p.getForce().getX() + " fy:" + p.getForce().getY());
 					addDebugText("FlyingEnergy:" + p.getFlyingEnergy());
 					addDebugText("WingTimer:" + p.getWingTimer());
+					addDebugText("Health:" + p.getHealth());
 				}
 				
 				// Collision data
