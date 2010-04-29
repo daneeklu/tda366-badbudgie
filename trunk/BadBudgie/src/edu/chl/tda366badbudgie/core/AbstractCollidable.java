@@ -1,5 +1,6 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,8 +21,6 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	private Vector groundContactVector;
 	private AbstractCollidable groundContactObject;
-	private List<Contact> contacts;
-	
 	
 	/**
 	 * Creates a new AbstractCollidable object with the given properties.
@@ -131,6 +130,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * 
 	 * @param other the colliding object
 	 * @param mtv minimum translation vector for the collision
+	 * @return true if the objects should collide physically
 	 */
 	public abstract void executeCollisionEffect(AbstractCollidable other, Vector mtv);
 
@@ -157,20 +157,47 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	
 	
-	public void addContact(AbstractCollidable ac, Vector mtv) {
-		contacts.add(new Contact(ac, mtv));
-	}
+
 	
-	private static class Contact {
+	/**
+	 * Returns true if the objects of the two given classes should collide physically.
+	 * 
+	 * @param class1
+	 * @param class2
+	 * @return
+	 */
+	public static boolean isPhysicalCollision(Class<? extends AbstractCollidable> class1, Class<? extends AbstractCollidable> class2) {
 		
-		private AbstractCollidable contactObejct;
-		private Vector mtv;
+		/*
+		 * Using the static list physicalCollisions below.
+		 * Implementation might change.
+		 */
 		
-		private Contact(AbstractCollidable contactObejct, Vector mtv) {
-			this.contactObejct = contactObejct;
-			this.mtv = mtv;
+		String cn1 = class1.getSimpleName();
+		String cn2 = class2.getSimpleName();
+		String concat;
+		
+		if (cn1.compareTo(cn2) < 0) {
+			concat = cn1 + "-" + cn2;
+		}
+		else {
+			concat = cn2 + "-" + cn1;
 		}
 		
+		if (physicalCollisions.contains(concat))
+			return true;
+		
+		return false;
+	}
+	
+	private static List<String> physicalCollisions = new ArrayList<String>();
+	static {
+		physicalCollisions.add("Enemy-TerrainSection");
+		physicalCollisions.add("Enemy-Obstacle");
+		physicalCollisions.add("Enemy-Player");
+		physicalCollisions.add("Obstacle-Player");
+		physicalCollisions.add("Obstacle-TerrainSection");
+		physicalCollisions.add("Player-TerrainSection");
 	}
 	
 }
