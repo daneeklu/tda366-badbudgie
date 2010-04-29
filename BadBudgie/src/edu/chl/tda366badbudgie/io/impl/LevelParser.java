@@ -2,6 +2,13 @@ package edu.chl.tda366badbudgie.io.impl;
 
 import org.w3c.dom.Document;
 
+/**
+ * LevelParser
+ * Parses level data, creating new level instances from xml data.
+ * 
+ * @author jesper
+ *
+ */
 public class LevelParser extends AbstractParser{
 
 	public LevelParser(Document xmlDocument) {
