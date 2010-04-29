@@ -2,9 +2,15 @@ private package edu.chl.tda366badbudgie.io.impl;
 
 import org.w3c.dom.Document;
 
+/**
+ * AbstractParser
+ * Defines basic structure of xml-parsers.
+ * @author jesper
+ *
+ */
 public abstract class AbstractParser {
 
-	Document xmlData;
+	private Document xmlData;
 	
 	public AbstractParser(Document xmlDocument){
 		xmlData = xmlDocument;
@@ -23,4 +29,9 @@ public abstract class AbstractParser {
 	 */
 	public abstract void parseData();
 	
+	/**
+	 * Tests whether the xml structure is valid.
+	 * @return true if the xml structure passes the test.
+	 */
+	public abstract boolean validate();
 }

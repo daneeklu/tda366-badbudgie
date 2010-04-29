@@ -27,4 +27,10 @@ public class LevelParser extends AbstractParser{
 		//Save level.
 	}
 
+	@Override
+	public boolean validate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

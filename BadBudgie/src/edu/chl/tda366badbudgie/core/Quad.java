@@ -31,6 +31,7 @@ public class Quad extends Polygon {
 		//TODO: somehow the number of vertices should be checked in all the constructors
 	}
 	
+	//TODO: Remove this constructor.
 	protected Quad() {}
 	
 }

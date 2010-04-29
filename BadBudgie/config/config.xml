@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gamedata>
 	<textures>
-		<texture>
-			<id>menubackground</id>
-			<path>res/test.png</path>
-		</texture>
-		<texture>
-			<id>testanim</id>
-			<path>res/SmurfSpin.png</path>
-		</texture>
+		<texture id="test" path="res/test.png"/>
+		<texture id="exit" path="res/exit.png"/>
+		<texture id="smurf" path="res/SmurfSpin.png"/>
+		<texture id="newgame" path="res/newgame.png"/>
+		<texture id="options" path="res/options.png"/>
+		<texture id="budgie" path="res/test_alpha.png"/>
+		<texture id="enemy" path="res/test_enemy.png"/>
+		<texture id="rock" path="res/rock.png"/>
+		<texture id="confirm:exit" path="res/confirm_exit.png"/>
+		<texture id="confirm:newgame" path="res/confirm_newgame.png"/>
+		<texture id="yesno" path="res/yesno.png"/>
+		<texture id="grass1" path="res/grass1_256.png"/>
+		<texture id="background" path="res/temp_background.png"/>
 	</textures>
 	<levels>
-		<level>
-			<nr>1</nr>
-			<path>config/level1.xml</path>
+		<level nr="1" path="config/level1.xml"/>
+			<!--Additional data-->
 		</level>
 	</levels>
 </gamedata>

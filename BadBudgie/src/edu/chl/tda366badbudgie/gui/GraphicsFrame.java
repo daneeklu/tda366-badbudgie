@@ -30,8 +30,9 @@ public class GraphicsFrame extends JFrame {
 		ig = new GLGraphics(800, 600);
 		
 		add(ig.getCanvas());
+		setUndecorated(true);
 		setSize(800, 600);
-		setVisible(true);
+		setLocationRelativeTo(null);
 		
 		IStateContext app = StateContext.getInstance();
 		app.setFrame(this);

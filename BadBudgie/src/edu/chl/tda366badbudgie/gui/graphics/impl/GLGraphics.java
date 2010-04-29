@@ -3,6 +3,8 @@ package edu.chl.tda366badbudgie.gui.graphics.impl;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -13,6 +15,7 @@ import javax.media.opengl.glu.GLU;
 
 import com.sun.opengl.util.GLUT;
 
+import edu.chl.tda366badbudgie.core.ImageDataHandler;
 import edu.chl.tda366badbudgie.core.Polygon;
 import edu.chl.tda366badbudgie.core.Quad;
 import edu.chl.tda366badbudgie.core.Rectangle;
@@ -110,8 +113,15 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		System.out.println("OpenGL init");
 		textureManager = new TextureManager();
-		IFileManager fm = new FileManager(this);
-		fm.loadData();
+
+		Map<String, BufferedImage> imgMap = ImageDataHandler.getInstance().getData();
+		Iterator<String> it = imgMap.keySet().iterator();
+		
+		while(it.hasNext()){
+			String key = it.next();
+			addTexture(key, imgMap.get(key));
+		}
+		
 		ready = true;
 		GL gl = glDraw.getGL();
 		glu = new GLU();

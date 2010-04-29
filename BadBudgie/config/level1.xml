@@ -5,20 +5,10 @@
 		<x>0</x>
 		<y>0</y>
 	</playerposition>
-
-	<!--Textures used in the level-->
-	<texturedata>
-		<texture>
-			<id>animtest</id>
-			<path>res/SmurfSpin.png</path>
-		</texture>
-	</texturedata>
 	
 	<!--Sprites used in the level -->
 	<sprites>
-		<sprite>
-			<id>smurf</id>
-			<textureid>animtest<textureid>
+		<sprite id="smurf" startanim="1" textureid="animtest">
 			<segments>
 				<x>5</x>
 				<y>2</y>
@@ -27,14 +17,12 @@
 				<animationid>smurfloop</animationid>
 				<animationid>smurfstill</animationid>
 			</animations>
-			<startanim>2</startanim>
 		</sprite>
 	<sprites>
 	
 	<!--Animations used by sprites -->
 	<animations>
-		<animation>
-			<id>smurfloop</id>
+		<animation id="smurfloop" loop="true">
 			<frames>
 				<sequence>
 				<from>1</from>
@@ -42,31 +30,29 @@
 				<duration>1</duration>
 				</sequence>
 			</frames>
-			<loop>true</loop>
 		</animation>
-		<animation>
-			<id>smurfstill</id>
+		<animation id="smurfstill" loop="false">
 			<frames>
 				<frame>
 					<index>3</index>
 					<duration>1</duration>
 				</frame>
 			</frames>
-			<loop>false</loop>
 		</animation>
 	<animations>
 	
 	<!--Game objects placed in the level -->
 	<gameobjects>
 		<gameobject id="objectID">
-		<x>0</x>
-		<y>0</y>
+			<position x="0" y="0" ></position>
 		</gameobject>
 	</gameobjects>
 	
 	<!--Terrain segments used in the level -->
 	<terrain>
 		<segment>
+		<!--Add collision data-->
+		<!--Add graphics data-->
 		</segment>
 	</terrain>
 </leveldata>
