@@ -121,6 +121,11 @@ public class GameRound {
 		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.0015);
 		currentLevel.addTerrainSection(t);
 		
+		LevelExit lf = new LevelExit(this, "reagan");
+		lf.setX(800);
+		lf.setY(500);
+		currentLevel.addGameObject(lf);
+		
 		
 	}
 
@@ -166,6 +171,11 @@ public class GameRound {
 		for (AbstractGameObject ago : currentLevel.getGameObjects()) {
 			ago.updateState();
 		}
+	}
+
+	public void levelFinished() {
+		// TODO Next level
+		System.out.println("Next level");
 	}
 
 }

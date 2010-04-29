@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,6 +42,9 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	protected AbstractCollidable() {
 		setGroundContactVector(new Vector());
+		
+		// Default collision data
+		collisionData = new Polygon(new ArrayList<Vector>(Arrays.asList(new Vector(-32, -32), new Vector(32, -32), new Vector(32, 32), new Vector(-32, 32))));
 	}
 	
 	/**
