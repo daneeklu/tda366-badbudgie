@@ -29,7 +29,7 @@ public class TextureManager {
 	}
 
 	/**
-	 * Retirm the active texture.
+	 * Return the active texture.
 	 * @return the string id of the texture, or null if no texture is active.
 	 */
 	public String getActiveTexture() {

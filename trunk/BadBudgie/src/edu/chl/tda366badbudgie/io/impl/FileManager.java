@@ -22,7 +22,7 @@ import edu.chl.tda366badbudgie.io.IFileManager;
  */
 public class FileManager implements IFileManager{
 	
-	private IGraphics g;
+	//private IGraphics g;
 	
 	/**
 	 * Create a new filemanager, using a
@@ -30,8 +30,8 @@ public class FileManager implements IFileManager{
 	 * the textures.
 	 * @param g the graphics object.
 	 */
-	public FileManager(IGraphics g) {
-		this.g = g;
+	public FileManager(){//IGraphics g) {
+		//this.g = g;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class FileManager implements IFileManager{
 
 		
 		//Temp loading
-		loadImage("test", "res/test.png");
+		/*loadImage("test", "res/test.png");
 		loadImage("exit", "res/exit.png");
 		loadImage("smurf", "res/SmurfSpin.png");
 		loadImage("newgame", "res/newgame.png");	
@@ -71,7 +71,7 @@ public class FileManager implements IFileManager{
 		loadImage("confirm:newgame", "res/confirm_newgame.png");
 		loadImage("yesno", "res/yesno.png");
 		loadImage("grass1", "res/grass1_256.png");
-		loadImage("background", "res/temp_background.png");
+		loadImage("background", "res/temp_background.png");*/
 		loadImage("resume", "res/resumegame.png");
 	}
 	
@@ -80,7 +80,7 @@ public class FileManager implements IFileManager{
 
 		try {
 			image = ImageIO.read(new File(path));
-			g.addTexture(id, image);
+			//g.addTexture(id, image);
 		} catch (IOException e) {
 			System.out.println("COULDN'T LOAD TEXTURE: " + id + " at \"" + path + "\"");
 		}
