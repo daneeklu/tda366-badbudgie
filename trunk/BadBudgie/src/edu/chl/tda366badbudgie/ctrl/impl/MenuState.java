@@ -51,7 +51,9 @@ public class MenuState implements IState {
 				} else {
 					menu.showConfirmDialog();
 				}
-
+			} else if (selected.equals("resume")) {
+				if (StateContext.getInstance().getGameState() != null) 
+					StateContext.getInstance().setState(StateContext.getInstance().getGameState());
 			} else if (selected.equals("options")) {
 				//TODO: add switch to options state here
 				;

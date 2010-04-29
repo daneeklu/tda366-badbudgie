@@ -33,7 +33,8 @@ public class MenuRenderer {
 		
 		
 		for (MenuItem item : menu.getMenuItems()) {
-			renderMenuItem(item, g);
+			if(item.getEnabled())
+				renderMenuItem(item, g);
 		}
 
 		if (menu.getConfirmDialog() != null) {
@@ -51,7 +52,7 @@ public class MenuRenderer {
 	 */
 	private static void renderMenuItem(MenuItem item, IGraphics g) {
 		g.setActiveTexture(item.getSprite().getId());
-		g.drawSprite(item.getSprite(), item.getPosition(), item.getSize());
+		g.drawSprite(item.getSprite(), item.getBounds());
 	}
 	
 	private static void renderConfirmDialog(ConfirmDialog dialog, IGraphics g) {

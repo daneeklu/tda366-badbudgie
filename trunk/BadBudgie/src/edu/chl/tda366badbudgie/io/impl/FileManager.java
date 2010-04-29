@@ -72,6 +72,7 @@ public class FileManager implements IFileManager{
 		loadImage("yesno", "res/yesno.png");
 		loadImage("grass1", "res/grass1_256.png");
 		loadImage("background", "res/temp_background.png");
+		loadImage("resume", "res/resumegame.png");
 	}
 	
 	private void loadImage(String id, String path) {

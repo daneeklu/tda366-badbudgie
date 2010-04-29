@@ -236,8 +236,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			return;
 		}
 		
-		double x = r.getX();
-		double y = r.getY();
 		double xr = r.getX() + cameraPosition.getX();
 		double yr = r.getY() + cameraPosition.getY();
 		double w = r.getWidth();
@@ -388,24 +386,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawSprite(Sprite s, Vector pos, Vector size) {
-		String texId = s.getId();
-		
-		double tx, ty;
-		double frameWidth = 1.0 / s.getHorFrames();
-		double frameHeight = 1.0 / s.getVerFrames();
-		
-		int frameIndex = s.getFrameIndex();
-		
-		tx = (double)(frameIndex % s.getHorFrames() ) * frameWidth;
-		ty = (double)(frameIndex / s.getHorFrames() ) * frameHeight;
-		
-		setActiveTexture(texId);
-		drawRect(new Rectangle(pos, size), new Rectangle(tx, ty, frameWidth, frameHeight));
-		
-	}
-
-	@Override
 	public void drawRectSection(Rectangle rectangle, int section, int hres,
 			int vres) {
 		
@@ -417,6 +397,24 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		ty = (double)(section / hres ) * frameHeight;
 		
 		drawRect(rectangle, new Rectangle(tx, ty, frameWidth, frameHeight));
+		
+	}
+
+	@Override
+	public void drawSprite(Sprite sprite, Rectangle bounds) {
+		String texId = sprite.getId();
+		
+		double tx, ty;
+		double frameWidth = 1.0 / sprite.getHorFrames();
+		double frameHeight = 1.0 / sprite.getVerFrames();
+		
+		int frameIndex = sprite.getFrameIndex();
+		
+		tx = (double)(frameIndex % sprite.getHorFrames() ) * frameWidth;
+		ty = (double)(frameIndex / sprite.getHorFrames() ) * frameHeight;
+		
+		setActiveTexture(texId);
+		drawRect(bounds, new Rectangle(tx, ty, frameWidth, frameHeight));
 		
 	}
 
