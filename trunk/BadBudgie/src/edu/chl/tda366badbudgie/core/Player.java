@@ -1,9 +1,5 @@
 package edu.chl.tda366badbudgie.core;
 
-import java.awt.Color;
-
-import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
-
 /**
  * Player
  * 
@@ -29,14 +25,17 @@ public class Player extends AbstractUnit {
 	private double flyingEnergy;
 	private int maxFlyingEnergy;
 	
+	private GameRound gameRound;
 
 
 	/**
 	 * Constructor
+	 * @param gameRound 
 	 * 
 	 * @param texId the texture id of the player.
 	 */
-	public Player(String texId) {
+	public Player(GameRound gameRound, String texId) {
+		this.gameRound = gameRound;
 		setFriction(0.5);
 		setElasticity(0.6);
 		setMass(1);
@@ -180,6 +179,11 @@ public class Player extends AbstractUnit {
 		if (getWingTimer() > 0) {
 			setWingTimer(getWingTimer() - 1);
 		}
+		
+		if(health <= 0) {
+			gameRound.playerDied();
+		}
+		
 	}
 
 
@@ -195,6 +199,15 @@ public class Player extends AbstractUnit {
 			this.setGroundContactVector(this.getGroundContactVector().add(
 					mtv.normalize().scalarDivision(2)));
 			this.setGroundContactObject(other);
+		}
+		
+		// Enemy hurts player
+		if (other instanceof Enemy) {
+			health -= ((Enemy)other).getDamage();
+			
+			// Bump player away from enemy
+			int dir = (int) Math.signum(mtv.getX());
+			applyForce(new Vector(dir * 6, 6));
 		}
 		
 	}
@@ -250,6 +263,23 @@ public class Player extends AbstractUnit {
 	public void setMaxFlyingEnergy(int maxFlyingEnergy) {
 		this.maxFlyingEnergy = maxFlyingEnergy;
 	}
+	
+	/**
+	 * Get the players health
+	 * 
+	 * @return the health
+	 */
+	public int getHealth() {
+		return health;
+	}
 
+	/**
+	 * Set the players health
+	 * 
+	 * @param health the health to set
+	 */
+	public void setHealth(int health) {
+		this.health = health;
+	}
 	
 }

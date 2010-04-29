@@ -28,7 +28,7 @@ public class GameRound {
 
 		currentLevel = new Level();
 
-		player = new Player("budgie");
+		player = new Player(this, "budgie");
 		player.setX(0.0);
 		player.setY(320.0);
 		LinkedList<Vector> pcd = new LinkedList<Vector>();
@@ -176,6 +176,11 @@ public class GameRound {
 	public void levelFinished() {
 		// TODO Next level
 		System.out.println("Next level");
+	}
+
+	public void playerDied() {
+		// TODO Kill player
+		System.out.println("Player died");
 	}
 
 }
