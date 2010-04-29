@@ -13,8 +13,9 @@
 		<texture id="confirm:newgame" path="res/confirm_newgame.png"/>
 		<texture id="yesno" path="res/yesno.png"/>
 		<texture id="grass1" path="res/grass1_256.png"/>
-		<texture id="background" path="res/temp_background.png"/><texture
-			id="reagan" path="res/reagan.png">
+		<texture id="background" path="res/temp_background.png"/>
+		<texture id="resume" path="res/resumegame.png"
+		<texture id="reagan" path="res/reagan.png">
 </texture>
 	</textures>
 	<levels>
