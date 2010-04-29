@@ -181,6 +181,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		String cn2 = class2.getSimpleName();
 		String concat;
 		
+		// Sort the two class names lexicographically
 		if (cn1.compareTo(cn2) < 0) {
 			concat = cn1 + "-" + cn2;
 		}
@@ -188,6 +189,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 			concat = cn2 + "-" + cn1;
 		}
 		
+		// See if the combined string of names is in physicalCollisions
 		if (physicalCollisions.contains(concat))
 			return true;
 		

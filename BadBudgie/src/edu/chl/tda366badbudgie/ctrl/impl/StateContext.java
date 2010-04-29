@@ -61,19 +61,7 @@ public class StateContext implements IStateContext {
 		currentState = state;
 	}
 
-	/**
-	 * Tells the GraphicsFrame to shut down the program.
-	 * @throws an IllegalStateException if graphicsframe has not been set.
-	 */
-	public void shutDown() {
-		if (graphicsFrame != null) {
-			graphicsFrame.shutdown();
-		}
-		else {
-			throw new IllegalStateException("The GraphicsFrame has not been set.");
-		}
-	}
-
+	
 	@Override
 	public void setFrame(GraphicsFrame graphicsFrame) {
 		this.graphicsFrame = graphicsFrame;
@@ -87,6 +75,26 @@ public class StateContext implements IStateContext {
 	@Override
 	public IState getMenuState() {
 		return menuState;
+	}
+
+	@Override
+	public void shutDown() {
+		if (graphicsFrame != null) {
+			graphicsFrame.shutdown();
+		}
+		else {
+			throw new IllegalStateException("The GraphicsFrame has not been set.");
+		}
+	}
+	
+	@Override
+	public void setFullscreen(boolean fullscreen) {
+		if (graphicsFrame != null) {
+			graphicsFrame.setFullscreen(fullscreen);
+		}
+		else {
+			throw new IllegalStateException("The GraphicsFrame has not been set.");
+		}
 	}
 	
 	
