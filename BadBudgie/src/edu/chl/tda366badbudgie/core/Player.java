@@ -121,10 +121,7 @@ public class Player extends AbstractUnit {
 		if (isMovingLeft) {
 			if (!getGroundContactVector().hasZeroLength()) {
 				Vector force = getGroundContactVector().perpendicularCCW().scalarMultiplication(MOVE_FORCE);
-				if (force.getLength() > 1)
-					force = force.normalize(); // Max friction = 1
 				applyForce(force);
-				getGroundContactObject().applyForce(force.scalarMultiplication(-1));
 			}
 			else {
 				applyForce(new Vector(-1, 0).scalarMultiplication(AIR_MOVE_FORCE));
@@ -136,7 +133,6 @@ public class Player extends AbstractUnit {
 			if (!getGroundContactVector().hasZeroLength()) {
 				Vector force = getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE);
 				applyForce(force);
-				getGroundContactObject().applyForce(force.scalarMultiplication(-1));
 			}
 			else {
 				applyForce(new Vector(1, 0).scalarMultiplication(AIR_MOVE_FORCE));
