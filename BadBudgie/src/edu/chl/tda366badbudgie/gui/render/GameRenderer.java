@@ -1,7 +1,5 @@
 package edu.chl.tda366badbudgie.gui.render;
 
-import java.util.List;
-
 import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Rectangle;
@@ -63,9 +61,9 @@ public class GameRenderer {
 	 * @param g the Graphics object to do the rendering. 
 	 */
 	private static void drawGameObject(AbstractGameObject go, IGraphics g) {
-		g.drawSprite(go.getSprite(), 
-				new Vector(go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2),
-				new Vector(go.getWidth(), go.getHeight()));
+		g.drawSprite(go.getSprite(), new Rectangle(
+				go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2,
+				go.getWidth(), go.getHeight()));
 	}
 
 }

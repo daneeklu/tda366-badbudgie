@@ -14,17 +14,19 @@ import java.util.List;
 public class MenuItem {
 	
 	private Sprite sprite;
-	private Vector position;
-	private Vector size;
+	Rectangle bounds;
+	private String action;
 	private boolean selected;
+	private boolean enabled;
 	
 	/**
 	 * Create a MenuItem.
-	 * @param id the texture id for the MenuItem.
+	 * @param action the action string for the MenuItem.
+	 * @param texId the texture id for the MenuItem.
 	 * @param position the position of the MenuItem.
 	 * @param size the size of the MenuItem.
 	 */
-	public MenuItem(String id, Vector position, Vector size) {
+	public MenuItem(String action, String texId, Rectangle bounds) {
 		
 		Animation idleAnim = new Animation("idle",0);
 		
@@ -34,10 +36,23 @@ public class MenuItem {
 		
 		animList.add(idleAnim);
 		animList.add(selectedAnim);
-		sprite = new Sprite(id, 1, 4, animList);
-		this.position = position;
-		this.size = size;
+		sprite = new Sprite(texId, 1, 4, animList);
+		this.bounds = bounds;
 		this.selected = false;
+		enabled = true;
+		this.action = action;
+		
+	}
+	
+	/**
+	 * Create a MenuItem.
+	 * @param id the id for both the action string and the texture.
+	 * @param position the position of the MenuItem.
+	 * @param size the size of the MenuItem.
+	 */
+	public MenuItem(String id, Rectangle bounds) {
+		
+		this(id, id, bounds);
 		
 	}
 	
@@ -64,6 +79,18 @@ public class MenuItem {
 	}
 	
 	/**
+	 * Check if the menu is enabled
+	 * @return true if enabled
+	 */
+	public boolean getEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	/**
 	 * Get the sprite object of the MenuItem.
 	 * @return the associated sprite.
 	 */
@@ -72,19 +99,11 @@ public class MenuItem {
 	}
 	
 	/**
-	 * Get the position of the MenuItem.
-	 * @return the position vector.
+	 * Get the boundary rectangle for the menuItem
+	 * @return the rectangle
 	 */
-	public Vector getPosition() {
-		return position;
-	}
-	
-	/**
-	 * Get the size of the MenuItem
-	 * @return the size vector.
-	 */
-	public Vector getSize() {
-		return size;
+	public Rectangle getBounds() {
+		return bounds;
 	}
 
 	/**
@@ -92,6 +111,10 @@ public class MenuItem {
 	 */
 	public void logic() {
 		// TODO Should menuitem have logic?
+	}
+	
+	public String getAction() {
+		return action;
 	}
 	
 	

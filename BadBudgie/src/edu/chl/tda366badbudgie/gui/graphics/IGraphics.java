@@ -55,14 +55,14 @@ public interface IGraphics {
 	 */
 	public void drawLine(Vector start, Vector end, Color c);
 	
+
 	/**
 	 * 
 	 * Draw a sprite as a rectangle
 	 * @param s the sprite to be drawn
-	 * @param pos the position of the sprite
-	 * @param size the size of the sprite
+	 * @param bounds the boundary rectangle
 	 */
-	public void drawSprite(Sprite s, Vector pos, Vector size);
+	public void drawSprite(Sprite sprite, Rectangle bounds);
 	
 	
 	/**
@@ -125,6 +125,8 @@ public interface IGraphics {
 	 * @param texId the texture id
 	 */
 	public void drawBackgroundRect(Rectangle r, String texId);
+
+
 
 	
 }

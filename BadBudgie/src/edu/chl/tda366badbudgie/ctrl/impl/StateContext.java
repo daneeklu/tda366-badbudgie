@@ -1,6 +1,5 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
-import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.ctrl.IStateContext;
 import edu.chl.tda366badbudgie.gui.GraphicsFrame;

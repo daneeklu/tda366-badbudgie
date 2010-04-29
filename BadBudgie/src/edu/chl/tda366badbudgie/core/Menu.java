@@ -1,5 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
+import edu.chl.tda366badbudgie.ctrl.impl.StateContext;
+
 
 /**
  * Menu
@@ -10,12 +12,8 @@ package edu.chl.tda366badbudgie.core;
  *
  */
 public class Menu {
-
-	private final int numItems = 3;
 	
-	private String[] items = {"newgame", "options", "exit"};
 	private MenuItem[] menuItems;
-	
 	private int currentItem;
 	
 	private ConfirmDialog dialog;
@@ -24,37 +22,85 @@ public class Menu {
 		
 		dialog = null;
 		
-		menuItems = new MenuItem[3];
+		menuItems = new MenuItem[4];
 		
 		menuItems[0] = new MenuItem("newgame",
-				new Vector(-200, 0),
-				new Vector(400, 100));
+				new Rectangle(-200, 0, 400, 100));
 		
 		menuItems[1] = new MenuItem("options",
-				new Vector(-200, -120),
-				new Vector(400, 100));
+				new Rectangle(-200, -120, 400, 100));
 		
 		menuItems[2] = new MenuItem("exit",
-				new Vector(-200, -240),
-				new Vector(400, 100));
+				new Rectangle(-200, -240, 400, 100));
+		
+		menuItems[3] = new MenuItem("resume",
+				new Rectangle(-200, 120, 400, 100));
+		
+		menuItems[3].setEnabled(false);
 		
 		setCurrentItem(0);
 	}
 	
 	/**
-	 * Set the current menu item
+	 * Select the previous enabled item in the menu
+	 */
+	public void selectPrevious() {
+		int item = currentItem - 1;
+		
+		if(item < 0) item = menuItems.length - 1;
+		
+		//Skip disabled menuItems
+		while (!menuItems[item].getEnabled()) {
+			item--;
+			if(item < 0) item = menuItems.length - 1;
+		}
+		
+		menuItems[currentItem].setSelected(false);
+		menuItems[item].setSelected(true);
+		
+		currentItem = item;
+	}
+	
+	/**
+	 * Select the next enabled item in the menu
+	 */
+	public void selectNext() {
+		int item = currentItem + 1;
+		
+		if(item >= menuItems.length) item = 0;
+		
+		//Skip disabled menuItems
+		while (!menuItems[item].getEnabled()) {
+			item++;
+			if(item >= menuItems.length) item = 0;
+		}
+		
+		menuItems[currentItem].setSelected(false);
+		menuItems[item].setSelected(true);
+		
+		currentItem = item;
+	}
+	
+	/**
+	 * Set the current menu item. Doesn't set
+	 * if the item is disabled
 	 * @param item the number of the new menu item
 	 */
-	public void setCurrentItem(int item) {
+	
+	private void setCurrentItem(int item) {
 		
+
 		if (item == -1) {
-			setCurrentItem(numItems - 1);
+			setCurrentItem(menuItems.length - 1);
 			return;
 		}
-		if (item == numItems) {
+		if (item == menuItems.length) {
 			setCurrentItem(0);
 			return;
 		}
+		
+		if (!menuItems[item].getEnabled())
+			return;
 		
 		menuItems[currentItem].setSelected(false);
 		menuItems[item].setSelected(true);
@@ -73,13 +119,13 @@ public class Menu {
 		
 		if (dialog == null) {
 			if (id.equals("down"))
-				setCurrentItem(currentItem + 1);
+				selectNext();
 			
 			if (id.equals("up"))
-				setCurrentItem(currentItem - 1);
+				selectPrevious();
 			
 			if (id.equals("escape"))
-				setCurrentItem(numItems-1);
+				setCurrentItem(2);
 		} else {
 			if (id.equals("right"))
 				dialog.change(-1);
@@ -96,11 +142,11 @@ public class Menu {
 	public String getSelected() {
 
 		if (dialog == null)
-			return items[currentItem];
+			return menuItems[currentItem].getAction();
 		
 		if (dialog.getValue()) {
 			dialog = null;
-			return "confirm:" + items[currentItem];
+			return "confirm:" + menuItems[currentItem].getAction();
 		}
 		else {
 			dialog = null;
@@ -124,8 +170,46 @@ public class Menu {
 			mi.logic();
 		}
 		
+		if (StateContext.getInstance().getGameState() != null)
+		{
+			if (!menuItems[3].getEnabled()) {
+				
+				// After a new game has been started, highlight "resume game"
+				// after returning to the menu
+				menuItems[3].setEnabled(true);
+				setCurrentItem(3);
+			}
+		}
+		else {
+			// If there's no game state, "resume game" should be disabled
+			menuItems[3].setEnabled(false);
+		}
+	}
+
+
+	/**
+	 * Show a confirmation dialog for the current menuItem
+	 */
+	public void showConfirmDialog() {
+		dialog = new ConfirmDialog(menuItems[currentItem].getAction(), "confirm:" + menuItems[currentItem].getSprite().getId());
+	}
+
+	/**
+	 * Return the currently showing confirmation dialog,
+	 * if there is one
+	 * @return the dialog, or null
+	 */
+	public ConfirmDialog getConfirmDialog() {
+		return dialog;
 	}
 	
+	
+	/**
+	 * An inner class representing a confirmation dialog
+	 * 
+	 * @author d.skalle
+	 * 
+	 */
 	public class ConfirmDialog {
 		
 		boolean value;
@@ -150,14 +234,6 @@ public class Menu {
 			return texId;
 		}
 		
-	}
-
-	public void showConfirmDialog() {
-		dialog = new ConfirmDialog(items[currentItem], "confirm:" + items[currentItem]);
-	}
-
-	public ConfirmDialog getConfirmDialog() {
-		return dialog;
 	}
 
 }
