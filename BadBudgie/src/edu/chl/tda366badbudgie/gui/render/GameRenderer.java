@@ -26,7 +26,7 @@ public class GameRenderer {
 		if(!g.startRendering(gameRound.getPlayer().getPosition())) 
 			return;
 		
-		g.drawBackgroundRect(new Rectangle(new Vector(-400, -300), new Vector(800, 600)), gameRound.getLevel().getBackgroundTexId());
+		g.drawBackgroundRect(null,new Rectangle(new Vector(-400, -300), new Vector(800, 600)), gameRound.getLevel().getBackgroundTexId());
 		
 		for (TerrainSection ts : gameRound.getLevel().getTerrainSections()) {
 			drawTerrainSection(ts, g);
@@ -50,9 +50,9 @@ public class GameRenderer {
 	 */
 	private static void drawTerrainSection(TerrainSection ts, IGraphics g) {
 		if (ts.getTexId() != null && !ts.getTexId().equals(""))
-			g.drawTexturedQuad(ts.getQuad(), ts.getTexId(), ts.getTexRes());
+			g.drawTexturedQuad(ts.getPosition(),ts.getQuad(), ts.getTexId(), ts.getTexRes());
 		else 
-			g.drawQuad(ts.getQuad());
+			g.drawQuad(ts.getPosition(),ts.getQuad());
 	}
 	
 	/**

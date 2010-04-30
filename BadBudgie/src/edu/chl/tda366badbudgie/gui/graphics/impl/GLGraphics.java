@@ -22,9 +22,6 @@ import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
-import edu.chl.tda366badbudgie.io.impl.FileManager;
-import edu.chl.tda366badbudgie.io.IFileManager;
-
 /**
  * 
  * A graphics class implementing the IGraphics
@@ -181,7 +178,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawRect(Rectangle r) {
+	public void drawRect(Vector position, Rectangle r) {
 		double x = r.getX(), y = r.getY();
 		double w = r.getWidth(), h = r.getHeight();
 		
@@ -190,19 +187,21 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		if (GLContext.getCurrent() != con) {
 			return;
 		}
+		
+		position.getX();
 		gl.glBegin(GL.GL_QUADS);
 		
 		gl.glTexCoord2d(0.0, 1.0);
-		gl.glVertex2d(x, y );
+		gl.glVertex2d(position.getX() + x, position.getY() + y );
 		
 		gl.glTexCoord2d(0.0, 0.0);
-		gl.glVertex2d(x, y + h);
+		gl.glVertex2d(position.getX() + x, position.getY() + y + h);
 		
 		gl.glTexCoord2d(1.0, 0.0);
-		gl.glVertex2d(x + w, y + h);
+		gl.glVertex2d(position.getX() + x + w, position.getY() + y + h);
 		
 		gl.glTexCoord2d(1.0, 1.0);
-		gl.glVertex2d(x + w, y);
+		gl.glVertex2d(position.getX() + x + w, position.getY() + y);
 		
 		gl.glEnd();		
 	}
@@ -239,7 +238,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 	
 	@Override
-	public void drawBackgroundRect(Rectangle r, String texId) {
+	public void drawBackgroundRect(Vector position, Rectangle r, String texId) {
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
 		if (GLContext.getCurrent() != con) {
@@ -272,7 +271,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 
 
 	@Override
-	public void drawQuad(Quad q) {
+	public void drawQuad(Vector position, Quad q) {
 		
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
@@ -285,7 +284,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		gl.glColor3d(0.5, 0.5, 0.5);
 		for (Vector v : q.getVertices()) {
-			gl.glVertex2d(v.getX(), v.getY() );
+			gl.glVertex2d(position.getX()+v.getX(), position.getY()+v.getY() );
 		}
 		
 		gl.glColor3d(1.0, 1.0, 1.0);
@@ -294,7 +293,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 	
 	@Override
-	public void drawTexturedQuad(Quad q, String textureId, double texRes) {
+	public void drawTexturedQuad(Vector position, Quad q, String textureId, double texRes) {
 		
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
@@ -313,7 +312,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		for (Vector v : q.getVertices()) {
 			
 			gl.glTexCoord2d(v.getX() * texRes, v.getY() * texRes);
-			gl.glVertex2d(v.getX(), v.getY() );
+			gl.glVertex2d(position.getX() + v.getX(),position.getY() + v.getY() );
 			
 		}
 		
@@ -353,7 +352,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawPolygon(Polygon p) {
+	public void drawPolygon(Vector position, Polygon p) {
 
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
@@ -400,7 +399,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawRectSection(Rectangle rectangle, int section, int hres,
+	public void drawRectSection(Vector position, Rectangle rectangle, int section, int hres,
 			int vres) {
 		
 		double tx, ty;

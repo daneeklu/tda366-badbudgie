@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <leveldata>
 	<!--The starting location of the player. -->
-	<playerposition>
-		<x>0</x>
-		<y>0</y>
-	</playerposition>
+	<playerposition x="0" y="0"/>
 	
 	<!--Sprites used in the level -->
 	<sprites>
-		<sprite id="smurf" startanim="1" textureid="animtest">
-			<segments>
-				<x>5</x>
-				<y>2</y>
-			</segments>
+		<sprite id="smurf" startanim="1" textureid="smurf">
+			<segments x=5 y=2>
 			<animations>
 				<animationid>smurfloop</animationid>
 				<animationid>smurfstill</animationid>
@@ -25,9 +19,9 @@
 		<animation id="smurfloop" loop="true">
 			<frames>
 				<sequence>
-				<from>1</from>
-				<to>9</to>
-				<duration>1</duration>
+					<from>1</from>
+					<to>9</to>
+					<duration>0.2</duration>
 				</sequence>
 			</frames>
 		</animation>
@@ -44,15 +38,14 @@
 	<!--Game objects placed in the level -->
 	<gameobjects>
 		<gameobject id="objectID">
-			<position x="0" y="0" ></position>
+			<position x="0" y="0" />
 		</gameobject>
 	</gameobjects>
 	
 	<!--Terrain segments used in the level -->
-	<terrain>
-		<segment>
-		<!--Add collision data-->
-		<!--Add graphics data-->
-		</segment>
-	</terrain>
+	<terrainsections>
+		<terrain sprite="grass" friction="0.5" elasticity="0">
+			
+		</terrain>
+	</terrainsections>
 </leveldata>

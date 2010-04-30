@@ -1,10 +1,7 @@
 package edu.chl.tda366badbudgie.io.impl;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,25 +42,12 @@ public class FileManager implements IFileManager{
 		 	gameParser.parseData();
 		 	
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	}
-	
-	private void loadImage(String id, String path) {
-		BufferedImage image;
-
-		try {
-			image = ImageIO.read(new File(path));
-			//g.addTexture(id, image);
-		} catch (IOException e) {
-			System.out.println("COULDN'T LOAD TEXTURE: " + id + " at \"" + path + "\"");
 		}
 	}
 }

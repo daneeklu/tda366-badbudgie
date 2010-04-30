@@ -29,24 +29,30 @@ public interface IGraphics {
 
 	/**
 	 * Draws a rectangle 
+	 * 
+	 * @param position the reference position of the rectangle.
 	 * @param r the rectangle to be drawn
 	 * 
 	 */
-	public void drawRect(Rectangle r);
+	public void drawRect(Vector position, Rectangle r);
 	
 	/**
 	 * Draws a quad 
+	 * 
+	 * @param position the reference position of the quad.
 	 * @param r the rectangle to be drawn
 	 * 
 	 */
-	public void drawQuad(Quad q);
+	public void drawQuad(Vector position, Quad q);
 	
 	/**
 	 * Draws a polygon
+	 * 
+	 * @param position the reference position of the rectangle.
 	 * @param p the polygon to draw
 	 * 
 	 */
-	public void drawPolygon(Polygon p);
+	public void drawPolygon(Vector position, Polygon p);
 	
 	/**
 	 * Draws a line
@@ -102,29 +108,32 @@ public interface IGraphics {
 	
 	/**
 	 * Draw a rectangle, using a section of a texture
+	 * @param position the reference position of the rectangle.
 	 * @param rectangle the rectangle
 	 * @param section the number of the section to draw
 	 * @param hres the horisontal section resolution of the texture
 	 * @param vres the vertical section resolution of the texture
 	 */
-	public void drawRectSection(Rectangle rectangle, int section, int hres, int vres);
+	public void drawRectSection(Vector position, Rectangle rectangle, int section, int hres, int vres);
 	
 	
 	/**
 	 * Draws a quad with the specified texture id
 	 * 
+	 * @param position the reference position of the quad
 	 * @param q the quad
 	 * @param texureId the texture id
 	 */
-	public void drawTexturedQuad(Quad q, String textureId, double textureResolution);
+	public void drawTexturedQuad(Vector position, Quad q, String textureId, double textureResolution);
 
 	/**
 	 * Draws a textured rectangle with the specified texture id
 	 * 
+	 * @param position the reference position of the rectangle.
 	 * @param r the rectangle
 	 * @param texId the texture id
 	 */
-	public void drawBackgroundRect(Rectangle r, String texId);
+	public void drawBackgroundRect(Vector position, Rectangle r, String texId);
 
 
 

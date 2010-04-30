@@ -32,8 +32,6 @@ public class InGameState implements IState {
 		
 		gameRound.updateGameObjects();
 		physics.doPhysics(gameRound);
-		
-		
 	}
 	
 	@Override
