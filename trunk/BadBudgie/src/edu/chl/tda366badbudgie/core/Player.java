@@ -17,7 +17,8 @@ public class Player extends AbstractUnit {
 	private static final double[] FLYING_FORCE = {0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 0.5, 0.2, 0.1, 0.1};
 	
 	private int health;
-
+	private int invincibilityTimer;
+	
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
 	private boolean isGliding;
@@ -37,7 +38,7 @@ public class Player extends AbstractUnit {
 	public Player(GameRound gameRound, String texId) {
 		this.gameRound = gameRound;
 		setFriction(0.5);
-		setElasticity(0.6);
+		setElasticity(0.2);
 		setMass(1);
 		health = 100;
 		setFlyingEnergy(100);
@@ -184,6 +185,10 @@ public class Player extends AbstractUnit {
 			gameRound.playerDied();
 		}
 		
+		if(invincibilityTimer > 0) {
+			invincibilityTimer--;
+		}
+		
 	}
 
 
@@ -202,11 +207,12 @@ public class Player extends AbstractUnit {
 		}
 		
 		// Enemy hurts player
-		if (other instanceof Enemy) {
+		if (invincibilityTimer == 0 && other instanceof Enemy) {
 			health -= ((Enemy)other).getDamage();
+			invincibilityTimer = 20;
 			
 			// Bump player away from enemy
-			int dir = (int) Math.signum(mtv.getX());
+			int dir = (int) Math.signum(getX() - other.getX());
 			applyForce(new Vector(dir * 6, 6));
 		}
 		
@@ -280,6 +286,20 @@ public class Player extends AbstractUnit {
 	 */
 	public void setHealth(int health) {
 		this.health = health;
+	}
+
+	/**
+	 * @param invincibilityTimer the invincibilityTimer to set
+	 */
+	public void setInvincibilityTimer(int invincibilityTimer) {
+		this.invincibilityTimer = invincibilityTimer;
+	}
+
+	/**
+	 * @return the invincibilityTimer
+	 */
+	public int getInvincibilityTimer() {
+		return invincibilityTimer;
 	}
 	
 }
