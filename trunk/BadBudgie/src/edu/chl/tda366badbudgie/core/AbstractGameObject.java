@@ -49,7 +49,7 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Returns a vector to the objects world coordinate.
-	 * @return position vector
+	 * @return position vector ...
 	 */
 	public Vector getPosition() {
 		return (Vector) position.clone();

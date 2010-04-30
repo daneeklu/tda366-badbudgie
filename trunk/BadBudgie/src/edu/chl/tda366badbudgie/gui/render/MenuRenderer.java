@@ -29,7 +29,7 @@ public class MenuRenderer {
 		
 		// TODO: draw the background image of the menu, make this not hardcoded
 		g.setActiveTexture("test");
-		g.drawRect(new Rectangle(-400, -300, 800, 600));
+		g.drawRect(new Vector(-400,-300) , new Rectangle(0, 0, 800, 600));
 		
 		
 		for (MenuItem item : menu.getMenuItems()) {
@@ -57,16 +57,16 @@ public class MenuRenderer {
 	
 	private static void renderConfirmDialog(ConfirmDialog dialog, IGraphics g) {
 		g.setActiveTexture(dialog.getTexId());
-		g.drawRect(new Rectangle(-200, -200, 400, 400));
+		g.drawRect(new Vector(-200, -200),new Rectangle(0, 0, 600, 600));
 		
 		g.setActiveTexture("yesno");
 		
 		if(dialog.getValue()) {
-			g.drawRectSection(new Rectangle(-170, -150, 100, 100), 2, 2, 2);
-			g.drawRectSection(new Rectangle(20, -150, 100, 100), 1, 2, 2);
+			g.drawRectSection(null, new Rectangle(-170, -150, 100, 100), 2, 2, 2);
+			g.drawRectSection(null, new Rectangle(20, -150, 100, 100), 1, 2, 2);
 		} else {
-			g.drawRectSection(new Rectangle(-170, -150, 100, 100), 0, 2, 2);
-			g.drawRectSection(new Rectangle(20, -150, 100, 100), 3, 2, 2);
+			g.drawRectSection(null, new Rectangle(-170, -150, 100, 100), 0, 2, 2);
+			g.drawRectSection(null, new Rectangle(20, -150, 100, 100), 3, 2, 2);
 		}
 
 	}

@@ -15,8 +15,7 @@
 		<texture id="grass1" path="res/grass1_256.png"/>
 		<texture id="background" path="res/temp_background.png"/>
 		<texture id="resume" path="res/resumegame.png" />
-		<texture id="reagan" path="res/reagan.png">
-</texture>
+		<texture id="reagan" path="res/reagan.png" ko='0' />
 	</textures>
 	<levels>
 		<level nr="1" path="config/level1.xml"/>

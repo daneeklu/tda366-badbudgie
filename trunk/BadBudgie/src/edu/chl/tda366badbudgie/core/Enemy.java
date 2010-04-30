@@ -25,15 +25,15 @@ public class Enemy extends AbstractUnit {
 	/**
 	 * Constructor
 	 * 
-	 * @param texId the texture id of the enemy.
+	 * @param sprite the texture id of the enemy.
 	 */
-	public Enemy(String texId) {
+	public Enemy(Sprite sprite) {
 		setFriction(0.5);
 		setElasticity(0.5);
 		setMass(1);
 		health = 100;
 		setDamage(10);
-		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
+		this.sprite = sprite;
 		ai = new SimpleAI(this);
 		
 	}

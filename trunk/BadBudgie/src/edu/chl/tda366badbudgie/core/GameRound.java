@@ -40,9 +40,22 @@ public class GameRound {
 
 		currentLevel.addGameObject(player);
 		
+		//Animation test
+		
+		List<Double> durations = new LinkedList<Double>();
+		List<Integer> indices = new LinkedList<Integer>();
+		for(int i = 0; i <10; i++){
+			durations.add(0.1);
+			indices.add(i+1);
+		}
+		List<Animation> anims = new LinkedList<Animation>();
+		anims.add(new Animation("",indices, durations));
+		
+		Sprite enemySprite = new Sprite("enemy");
+		
 		//Puts a dummy enemy on the screen
 		
-		enemy = new Enemy("enemy");
+		enemy = new Enemy(enemySprite);
 		enemy.setX(100.0);
 		enemy.setY(300.0);
 		LinkedList<Vector> ecd = new LinkedList<Vector>();
@@ -68,17 +81,33 @@ public class GameRound {
 		pcd.add(new Vector(20, 20));
 		pcd.add(new Vector(-20, 20));
 		rock.setCollisionData(new Polygon(pcd));
+		
+		currentLevel.addGameObject(rock);
+		
+		rock = new Obstacle("rock");
+		rock.setX(690.0);
+		rock.setY(320.0);
+		pcd = new LinkedList<Vector>();
+		pcd.add(new Vector(-40, -15));
+		
+		pcd.add(new Vector(-25, -35));
+		pcd.add(new Vector(25, -35));
+		
+		pcd.add(new Vector(40, -15));
+		pcd.add(new Vector(20, 20));
+		pcd.add(new Vector(-20, 20));
+		rock.setCollisionData(new Polygon(pcd)); 
 
 		currentLevel.addGameObject(rock);
-
-		
 		
 		List<Vector> tVerts = new LinkedList<Vector>();
+		TerrainSection t;
+		/*
 		tVerts.add(new Vector(0, 0));
 		tVerts.add(new Vector(400, 0));
 		tVerts.add(new Vector(400, 40));
 		tVerts.add(new Vector(0, 80));
-		TerrainSection t = new TerrainSection(tVerts, 0.4, 0.5, "grass1", 0.0015);
+		TerrainSection t = new TerrainSection(tVerts, 0.4, 0.5, "grass1", 0.0005);
 		currentLevel.addTerrainSection(t);
 
 		tVerts = new LinkedList<Vector>();
@@ -120,6 +149,56 @@ public class GameRound {
 		tVerts.add(new Vector(-200, -160));
 		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.0015);
 		currentLevel.addTerrainSection(t);
+		*/
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-1000, 0));
+		tVerts.add(new Vector(1000, 0));
+		tVerts.add(new Vector(1000, 10));
+		tVerts.add(new Vector(-1000, 10));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		currentLevel.addTerrainSection(t);
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-1000, 800));
+		tVerts.add(new Vector(1000, 800));
+		tVerts.add(new Vector(1000, 810));
+		tVerts.add(new Vector(-1000, 810));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		currentLevel.addTerrainSection(t);
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-1000, 800));
+		tVerts.add(new Vector(-1000, 0));
+		tVerts.add(new Vector(-990, 0));
+		tVerts.add(new Vector(-990, 800));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		currentLevel.addTerrainSection(t);
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(1000, 800));
+		tVerts.add(new Vector(1000, 0));
+		tVerts.add(new Vector(990, 0));
+		tVerts.add(new Vector(990, 800));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		currentLevel.addTerrainSection(t);		
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(0, 0));
+		tVerts.add(new Vector(100, 0));
+		tVerts.add(new Vector(100, 200));
+		tVerts.add(new Vector(0, 200));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t.setX(-300);
+		currentLevel.addTerrainSection(t);
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(0, 0));
+		tVerts.add(new Vector(120, 0));
+		tVerts.add(new Vector(120, 200));
+		tVerts.add(new Vector(0, 200));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t.setX(-310);
+		currentLevel.addTerrainSection(t);		
 		
 		LevelExit lf = new LevelExit(this, "reagan");
 		lf.setX(800);

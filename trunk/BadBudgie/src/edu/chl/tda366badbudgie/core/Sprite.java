@@ -48,8 +48,6 @@ public class Sprite {
 			currentAnim = "idle";
 			currentFrame = 0;
 		}
-		
-
 	}
 	
 	/**
@@ -60,7 +58,6 @@ public class Sprite {
 	 * @param verticalFrames the number of vertical frames in the sprite
 	 * @param animation the single animation used by the sprite
 	 */
-	
 	public Sprite(String texId, int horizontalFrames, int verticalFrames,
 			Animation animation){
 		this.texId = texId;
@@ -73,14 +70,13 @@ public class Sprite {
 	}
 	
 	/**
-	 * Create a sprite with a single frame animation, where
+	 * Create a sprite with a single frame, where
 	 * the single frame covers the entire texture
 	 * 
 	 * @param texId the texture id
 	 */
-	
 	public Sprite(String texId) {
-		this(texId, 1, 1, (Animation)null);
+		this(texId, 1, 1, new Animation("still", 0));
 	}
 	
 	/**
