@@ -302,10 +302,14 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			return;
 		}
 
+		gl.glEnable(GL.GL_TEXTURE_2D);
+		gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
+	    gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
 		setActiveTexture(textureId);
+
 		
 		gl.glBegin(GL.GL_QUADS);
-		gl.glEnable(GL.GL_TEXTURE_2D);
+		
 		for (Vector v : q.getVertices()) {
 			
 			gl.glTexCoord2d(v.getX() * texRes, v.getY() * texRes);
