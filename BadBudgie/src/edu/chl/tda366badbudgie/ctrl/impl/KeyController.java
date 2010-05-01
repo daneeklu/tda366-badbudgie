@@ -2,6 +2,9 @@ package edu.chl.tda366badbudgie.ctrl.impl;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -16,7 +19,7 @@ import edu.chl.tda366badbudgie.ctrl.IStateContext;
  * @author tda366-badbudgie
  *
  */
-public class KeyController extends KeyAdapter{
+public class KeyController extends KeyAdapter implements MouseListener, MouseMotionListener{
 
 	private IStateContext stateContext;
 	private HashMap<Integer, String> menuKeyMap;
@@ -48,6 +51,12 @@ public class KeyController extends KeyAdapter{
 		inGameKeyMap.put(KeyEvent.VK_ENTER, "enter");
 		inGameKeyMap.put(KeyEvent.VK_ESCAPE, "escape");
 		inGameKeyMap.put(KeyEvent.VK_SPACE, "jump");
+		inGameKeyMap.put(KeyEvent.VK_CONTROL, "jump");
+		inGameKeyMap.put(KeyEvent.VK_W, "moveup");
+		inGameKeyMap.put(KeyEvent.VK_D, "moveright");
+		inGameKeyMap.put(KeyEvent.VK_A, "moveleft");
+		inGameKeyMap.put(KeyEvent.VK_S, "movedown");
+		
 	}
 	
 	
@@ -86,6 +95,62 @@ public class KeyController extends KeyAdapter{
 			keyDown[kc] = false;
 		}
 		
+	}
+
+
+
+	@Override
+	public void mouseClicked(MouseEvent evt) {
+		stateContext.getState().mouseActionClick(true);
+		
+	}
+
+
+
+	@Override
+	public void mouseEntered(MouseEvent evt) {
+		System.out.println("Mouse support initiated!");
+		
+	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent evt) {
+		
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent evt) {
+		stateContext.getState().mouseActionClick(true);
+		
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent evt) {
+		stateContext.getState().mouseActionClick(false);
+		
+	}
+
+
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
+		//stateContext.getState().mouseActionMoved(e.getX(), e.getY());
+		
+	}
+
+
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
+		//stateContext.getState().mouseActionMoved(e.getX(), e.getY());
 	}
 	
 }

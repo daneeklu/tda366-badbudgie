@@ -22,6 +22,7 @@ public class Player extends AbstractUnit {
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
 	private boolean isGliding;
+	private boolean shooting;
 	private int wingTimer;
 	private double flyingEnergy;
 	private int maxFlyingEnergy;
@@ -115,6 +116,19 @@ public class Player extends AbstractUnit {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param x - the x coordinate for the aim, or mouse position if you will.
+	 * @param y - the y coordinate for the aim, or mouse position if you will.
+	 * @param mouseDown - a boolean that says if the mouse is pressed or not.
+	 */
+	
+	
+	public void shoot(double x, double y, boolean mouseDown) {
+		shooting = mouseDown;
+	}
+
+	
 	@Override
 	public void updateForces() {
 		
@@ -167,8 +181,6 @@ public class Player extends AbstractUnit {
 			// Gliding force due to horizontal movement
 			applyForce(new Vector(0, GLIDE_FORCE_RATIO / 15 * Math.abs(getVelocity().getX())));
 		}
-		
-
 		
 	}
 	
@@ -311,5 +323,11 @@ public class Player extends AbstractUnit {
 	public void setWeapon(Weapon wep){
 		this.wep = wep;
 	}
+	
+	public Weapon getActiveWeapon(){
+		return wep;
+	}
+
+
 	
 }

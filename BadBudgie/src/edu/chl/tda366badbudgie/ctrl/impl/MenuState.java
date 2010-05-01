@@ -73,4 +73,18 @@ public class MenuState implements IState {
 		
 	}
 
+
+	@Override
+	public void mouseActionClick(boolean pressed) {
+		if(pressed){
+			System.out.println("Yay, a click");
+		}
+		
+	}
+
+	@Override
+	public void mouseActionMoved(double x, double y) {
+		System.out.println("Mouse at x: " + x + " y: " + y);
+	}
+
 }

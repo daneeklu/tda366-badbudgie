@@ -10,4 +10,8 @@ public interface IState {
 
 	public void keyboardAction(String id, boolean down);
 	
+	public void mouseActionClick(boolean pressed);
+	
+	public void mouseActionMoved(double x, double y);
+	
 }

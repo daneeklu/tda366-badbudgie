@@ -1,21 +1,26 @@
 package edu.chl.tda366badbudgie.core;
 
-public class Weapon extends AbstractUnit{
+public class Weapon extends AbstractItem{
 	
 	private int damage;
 	private String weaponId;
-	
-	public Weapon(String weaponId){
-		this(weaponId, 25);
+
+	public Weapon(String texId){
+		this(texId, 25);
 	}
 	
-	public Weapon(String weaponId, int damage){
+	public Weapon(String texId, int damage){
 		setFriction(0.5);
-		setElasticity(0.5);
+		setElasticity(0.2);
 		setMass(1);
+		this.stationary = true;
 		this.damage = damage;
-		this.weaponId = weaponId;
-		sprite = new Sprite(weaponId, 1, 1, new Animation("idle", 0));
+		sprite = new Sprite(texId);
+		
+	}
+	
+	public void setDamage(int damage){
+		this.damage = damage;
 	}
 	
 	public int getDamage(){
@@ -25,11 +30,17 @@ public class Weapon extends AbstractUnit{
 	public String getId(){
 		return weaponId;
 	}
-
+	
+	
+	@Override
+	public void updateState(){
+		
+	}
+	
+	
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	
