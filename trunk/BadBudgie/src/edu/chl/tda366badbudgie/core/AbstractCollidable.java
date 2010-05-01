@@ -40,12 +40,18 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 			@Override public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {}});
 	}
 	
-	protected AbstractCollidable() {
+	public AbstractCollidable(){
+		Vector v = new Vector(32, 32);
 		setGroundContactVector(new Vector());
 		
 		// Default collision data
-		collisionData = new Polygon(new ArrayList<Vector>(Arrays.asList(new Vector(-32, -32), new Vector(32, -32), new Vector(32, 32), new Vector(-32, 32))));
+		collisionData = new Polygon(new ArrayList<Vector>(Arrays.asList(
+				new Vector(-v.getX(), -v.getY()), 
+				new Vector(v.getX(), -v.getY()), 
+				new Vector(v.getX(), v.getY()), 
+				new Vector(-v.getX(), v.getY()))));
 	}
+	
 	
 	/**
 	 * Returns the collision data of the object.
