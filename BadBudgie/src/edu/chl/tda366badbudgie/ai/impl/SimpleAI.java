@@ -5,18 +5,21 @@ import edu.chl.tda366badbudgie.core.Vector;
 
 public class SimpleAI {
 	private Enemy enemy;
+	private Vector groundContact;
 	private Vector controlPosition = new Vector(9999, 9999);
+	
 	public SimpleAI(Enemy enemy){
 		this.enemy = enemy;
-		enemy.applyForce(new Vector(5, 0));
+		//enemy.applyForce(new Vector(5, 0));
 		enemy.moveRight(true);
 	}
 
 	public void initAI() {
 		
-		Vector v = enemy.getGroundContactVector();
+		groundContact = enemy.getGroundContactVector();
 		
-		if(new Vector(1, 0).dotProduct(v) == 0 || new Vector(-1, 0).dotProduct(v) == 0){
+		if(new Vector(1, 0).dotProduct(groundContact) == 0 || 
+				new Vector(-1, 0).dotProduct(groundContact) == 0){
 			if(!isTooClose()){
 				changeDirection();
 			}
@@ -29,10 +32,12 @@ public class SimpleAI {
 	public void changeDirection(){
 		setControlPosition();
 		if(enemy.getDirection().equals("left")){
+			//System.out.println("Changes direction to Left");
 			enemy.moveLeft(false);
 			enemy.moveRight(true);
 		}
 		else if(enemy.getDirection().equals("right")){
+			//System.out.println("Changes direction to Right");
 			enemy.moveLeft(true);
 			enemy.moveRight(false);
 		}
@@ -53,7 +58,7 @@ public class SimpleAI {
 	}
 	
 	/**
-	 * 
+	 * Checks if the enemy is too close to the turning area.
 	 * @return true if the turning point is too close for a turn.
 	 */
 	public boolean isTooClose(){

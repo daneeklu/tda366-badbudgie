@@ -18,8 +18,16 @@ public abstract class AbstractGameObject {
 	protected Sprite sprite;
 	private Vector size;
 	
+
+	
 	
 	public AbstractGameObject() {
+		this(new Vector(80, 80));
+	}
+	
+	
+	
+	public AbstractGameObject(Vector v){
 		position = new Vector();
 		velocity = new Vector();
 		force = new Vector();
@@ -27,7 +35,7 @@ public abstract class AbstractGameObject {
 		stationary = false;
 		
 		//TODO: Add actual size parameter to constructor
-		size = new Vector(80,80);
+		this.size = v;
 	}
 	
 	
@@ -177,7 +185,9 @@ public abstract class AbstractGameObject {
 		return size.getY();
 	}
 	
-	
+	public void setSize(Vector v){
+		this.size = v;
+	}
 	
 	
 }
