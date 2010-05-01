@@ -17,7 +17,7 @@ public class GameRound {
 	private Level currentLevel;
 	private Player player;
 	private Enemy enemy;
-	//private Weapon weapon;
+	private Weapon wep;
 	private int score;
 
 	public GameRound() {
@@ -52,21 +52,40 @@ public class GameRound {
 		anims.add(new Animation("",indices, durations));
 		
 		Sprite enemySprite = new Sprite("enemy");
+		Sprite weaponSprite = new Sprite("gun1");
 		
 		//Puts a dummy enemy on the screen
 		
 		enemy = new Enemy(enemySprite);
 		enemy.setX(100.0);
 		enemy.setY(300.0);
-		LinkedList<Vector> ecd = new LinkedList<Vector>();
-		ecd.add(new Vector(-40, -40));
-		ecd.add(new Vector(40, -40));
-		ecd.add(new Vector(40, 40));
-		ecd.add(new Vector(-40, 40));
-		enemy.setCollisionData(new Polygon(ecd));
+		pcd = new LinkedList<Vector>();
+		pcd.add(new Vector(-40, -40));
+		pcd.add(new Vector(40, -40));
+		pcd.add(new Vector(40, 40));
+		pcd.add(new Vector(-40, 40));
+		enemy.setCollisionData(new Polygon(pcd));
 		
 		currentLevel.addGameObject(enemy);
 		
+		
+		//Adds the weapon to the player
+		
+		wep = new Weapon("gun1");
+		wep.setX(player.getX());
+		wep.setY(player.getY());
+		pcd = new LinkedList<Vector>();
+		pcd.add(new Vector(-40, -40));
+		pcd.add(new Vector(40, -40));
+		pcd.add(new Vector(40, 40));
+		pcd.add(new Vector(-40, 40));
+		wep.setCollisionData(new Polygon(pcd));
+		wep.setSize(new Vector(60, 30));
+		currentLevel.addGameObject(wep);
+		player.setWeapon(wep);
+		
+		
+		//Adds a little rock, then another.
 
 		Obstacle rock = new Obstacle("rock");
 		rock.setX(600.0);
@@ -102,7 +121,57 @@ public class GameRound {
 		
 		List<Vector> tVerts = new LinkedList<Vector>();
 		TerrainSection t;
+		
+		
+		/*
+		tVerts.add(new Vector(0, 0));
+		tVerts.add(new Vector(400, 0));
+		tVerts.add(new Vector(400, 40));
+		tVerts.add(new Vector(0, 80));
+		TerrainSection t = new TerrainSection(tVerts, 0.4, 0.5, "grass1", 0.0005);
+		currentLevel.addTerrainSection(t);
 
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(400, 0));
+		tVerts.add(new Vector(800, 0));
+		tVerts.add(new Vector(800, 40));
+		tVerts.add(new Vector(400, 40));
+		t = new TerrainSection(tVerts, 0.4, 0.5, "grass1", 0.0015);
+		currentLevel.addTerrainSection(t);
+		
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-400, -3380));
+		tVerts.add(new Vector(0, -400));
+		tVerts.add(new Vector(0, -320));
+		tVerts.add(new Vector(-400, -360));
+		t = new TerrainSection(tVerts, 0.1, 0.5, "grass1", 0.0015);
+		currentLevel.addTerrainSection(t);
+
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-400, 80));
+		tVerts.add(new Vector(-80, 400));
+		tVerts.add(new Vector(-200, 400));
+		tVerts.add(new Vector(-400, 200));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.0015);
+		currentLevel.addTerrainSection(t);
+
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-120, -320));
+		tVerts.add(new Vector(-160, -320));
+		tVerts.add(new Vector(-80, -160));
+		tVerts.add(new Vector(-40, -160));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.0015);
+		currentLevel.addTerrainSection(t);
+
+		tVerts = new LinkedList<Vector>();
+		tVerts.add(new Vector(-120, -320));
+		tVerts.add(new Vector(-160, -320));
+		tVerts.add(new Vector(-240, -160));
+		tVerts.add(new Vector(-200, -160));
+		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.0015);
+		currentLevel.addTerrainSection(t);
+		*/
+		
 		tVerts = new LinkedList<Vector>();
 		tVerts.add(new Vector(-1000, 0));
 		tVerts.add(new Vector(1000, 0));
@@ -143,8 +212,6 @@ public class GameRound {
 		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
 		t.setX(-300);
 		currentLevel.addTerrainSection(t);
-		
-		
 		tVerts = new LinkedList<Vector>();
 		tVerts.add(new Vector(0, 0));
 		tVerts.add(new Vector(120, 0));
@@ -153,21 +220,6 @@ public class GameRound {
 		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
 		t.setX(-310);
 		currentLevel.addTerrainSection(t);		
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
-		t.setX(-510);
-		t.setY(100);
-		currentLevel.addTerrainSection(t);
-		
-		tVerts = new LinkedList<Vector>();
-		tVerts.add(new Vector(0, 0));
-		tVerts.add(new Vector(400, 0));
-		tVerts.add(new Vector(400, 20));
-		tVerts.add(new Vector(0, 20));
-		t = new TerrainSection(tVerts, 0.0, 0.0, "smurf", 0.005);
-		t.setX(-1000);
-		t.setY(5);
-		currentLevel.addTerrainSection(t);
-		
 		
 		LevelExit lf = new LevelExit(this, "reagan");
 		lf.setX(800);
