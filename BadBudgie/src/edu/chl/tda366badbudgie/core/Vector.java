@@ -170,6 +170,28 @@ public class Vector {
 			return true;
 		return false;
 	}
+
+	//Private direction check used by public tests.
+	private double directionCheck(Vector v) {
+
+		double coeff = 0;
+		
+		if (v.hasZeroLength() || this.hasZeroLength()) {
+			coeff = 0;
+		} else if(x == 0 && v.x == 0) {
+			coeff = v.y / y;
+		} else if(x == 0 || v.x == 0) {
+			coeff = 0;
+		} else if(y == 0 && v.y == 0) {
+			coeff = v.x / x;
+		} else if(y == 0 || v.y == 0) {
+			coeff = 0;
+		} else if(v.x /x == v.y /y){
+			coeff = v.x /x;
+		}
+		
+		return coeff;
+	}
 	
 	/**
 	 * Checks if the direction of the vector is the same
@@ -179,16 +201,9 @@ public class Vector {
 	 * @return true if the vector have the same direction.
 	 */
 	public boolean sameDirection(Vector v) {
-		if (this.x == v.x) {
-			return this.y * v.y > 0;
-		} else if (this.y == v.y) {
-			return this.x * v.x > 0;
-		}
-		double dx = this.x / v.x;
-		double dy = this.y / v.y;
-		return (dx >= 0 && dx == dy);
+		return directionCheck(v) > 0;
 	}
-
+	
 	/**
 	 * Checks if the direction of the vector is the
 	 * opposite of another.
@@ -197,14 +212,7 @@ public class Vector {
 	 * @return true if the vector have the opposite direction.
 	 */
 	public boolean oppositeDirection(Vector v) {
-		if (this.x == v.x) {
-			return this.y * v.y < 0;
-		} else if (this.y == v.y) {
-			return this.x * v.x < 0;
-		}
-		double dx = this.x / v.x;
-		double dy = this.y / v.y;
-		return (dx <= 0 && dx == dy);
+		return directionCheck(v) < 0;
 	}
 	
 	@Override

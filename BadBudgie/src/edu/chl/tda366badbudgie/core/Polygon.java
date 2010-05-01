@@ -44,14 +44,18 @@ public class Polygon {
 	 * @return true if the polygon is convex, otherwise false.
 	 */
 	protected static boolean checkConvexity(List<Vector> vertices) {
+		
 		if (vertices.size() < 3) {
 			return false;
 		}
+		
+		//Stores the sign between checks.
 		double oldSign = 0;
 		boolean changedDirection = false;
 
-		for (int i = 0; i < vertices.size(); i++) {
+		for (int i = 0; i < vertices.size(); i++) {			
 
+			//Get the vectors forming two adjacent edges
 			Vector aVec = vertices.get(i);
 			Vector bVec = vertices.get((i + 1) % vertices.size());
 			Vector cVec = vertices.get((i + 2) % vertices.size());
@@ -60,9 +64,11 @@ public class Polygon {
 				return false;
 			}
 
+			//Calculate edge vectors.
 			Vector nV1 = bVec.subtract(aVec);
 			Vector nV2 = cVec.subtract(bVec);
 
+			//Ensure the vertices don't form a straight line.
 			if (!changedDirection && !nV1.sameDirection(nV2)) {
 				changedDirection = true;
 			}
@@ -70,16 +76,18 @@ public class Polygon {
 			if (nV1.oppositeDirection(nV2)) {
 				return false;
 			}
-
+			
+			//calculate the sign of the edges
 			double newSign = Math.signum(nV1.crossProduct(nV2));
 
-			if (oldSign != 0 && newSign != 0 && oldSign != newSign) {
+			//Check whether sign has reversed.
+			if(newSign == -oldSign){
 				return false;
 			}
-
+			
 			oldSign = newSign;
-
 		}
+		
 		return changedDirection;
 	}
 

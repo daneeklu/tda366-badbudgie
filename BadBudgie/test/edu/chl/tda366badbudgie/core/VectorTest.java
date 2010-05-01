@@ -100,5 +100,18 @@ public class VectorTest {
 		assertTrue(vpBA > 0);
 		
 	}
+	
+	@Test
+	public void testDirection() {
+		
+		Vector aa = new Vector(0, 0);
+		Vector bb = new Vector(3, 3);
+		Vector cc = new Vector(0, 3);
+		
+		assertFalse(aa.sameDirection(cc));
+		assertTrue(bb.sameDirection(bb.add(bb)));
+		assertTrue(bb.oppositeDirection(bb.scalarMultiplication(-2)));
+		
+	}
 
 }

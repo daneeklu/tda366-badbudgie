@@ -124,5 +124,25 @@ public class PolygonTest {
 		
 		assertFalse(Polygon.checkConvexity(vertices));
 	}
+	
+	@Test
+	public void pentagonTest(){
+		System.out.println("Checking pentagon...");
+		v1 = new Vector(0, 0);
+		v2 = new Vector(1, -1);
+		v3 = new Vector(2, -1);
+		v4 = new Vector(3, 0);
+		v5 = new Vector(1.2, 1);
+		
+		vertices = new ArrayList<Vector>(5);
+		
+		vertices.add(v1);
+		vertices.add(v2);
+		vertices.add(v3);
+		vertices.add(v4);
+		vertices.add(v5);
+		
+		assertTrue(Polygon.checkConvexity(vertices));
+	}
 
 }
