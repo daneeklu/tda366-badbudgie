@@ -18,6 +18,7 @@ public class GameRound {
 	private Player player;
 	private Enemy enemy;
 	private Weapon wep;
+	private Projectile projectile;
 	private int score;
 
 	public GameRound() {
@@ -281,6 +282,28 @@ public class GameRound {
 	public void playerDied() {
 		// TODO Kill player
 		System.out.println("Player died");
+	}
+
+	public void mouseAction(double x, double y, boolean mouseDown) {
+		if(mouseDown){
+			
+			
+			
+			
+			
+			projectile = new Projectile("bullet1", x, y, projectile);
+			projectile.setX(player.getX());
+			projectile.setY(player.getY());
+			LinkedList<Vector> pcd = new LinkedList<Vector>();
+			pcd.add(new Vector(-40, -40));
+			pcd.add(new Vector(40, -40));
+			pcd.add(new Vector(40, 40));
+			pcd.add(new Vector(-40, 40));
+			projectile.setCollisionData(new Polygon(pcd));
+			currentLevel.addGameObject(projectile);
+		
+			player.shoot(x, y, mouseDown);
+		}
 	}
 
 }
