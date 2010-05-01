@@ -27,6 +27,7 @@ public class Player extends AbstractUnit {
 	private int maxFlyingEnergy;
 	
 	private GameRound gameRound;
+	private Weapon wep;
 
 
 	/**
@@ -181,6 +182,11 @@ public class Player extends AbstractUnit {
 			setWingTimer(getWingTimer() - 1);
 		}
 		
+		if(this.wep != null){
+			wep.setPosition(this.getPosition());
+			//System.out.println("Vapen: " + wep.getPosition() + " Spelare: " + this.getPosition());
+		}
+		
 		if(health <= 0) {
 			gameRound.playerDied();
 		}
@@ -300,6 +306,10 @@ public class Player extends AbstractUnit {
 	 */
 	public int getInvincibilityTimer() {
 		return invincibilityTimer;
+	}
+	
+	public void setWeapon(Weapon wep){
+		this.wep = wep;
 	}
 	
 }
