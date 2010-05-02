@@ -1,9 +1,12 @@
 package edu.chl.tda366badbudgieeditor;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 import edu.chl.tda366badbudgie.core.Enemy;
+import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Level;
 import edu.chl.tda366badbudgie.core.LevelExit;
 import edu.chl.tda366badbudgie.core.LevelManager;
@@ -11,6 +14,8 @@ import edu.chl.tda366badbudgie.core.Obstacle;
 import edu.chl.tda366badbudgie.core.Player;
 import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.TerrainSection;
+import edu.chl.tda366badbudgie.ctrl.impl.InGameState;
+import edu.chl.tda366badbudgie.ctrl.impl.StateContext;
 import edu.chl.tda366badbudgie.gui.GraphicsFrame;
 import edu.chl.tda366badbudgie.io.IFileManager;
 import edu.chl.tda366badbudgie.io.impl.FileManager;
@@ -25,16 +30,28 @@ public class LevelTestPlayer {
 
 	public LevelTestPlayer(ELevel elevel) {
 
+		ArrayList<Level> levelList = new ArrayList<Level>();
+		levelList.add(convertToGameLevel(elevel));
+		LevelManager.getInstance().setLevels(levelList);
+		
 		
 		//Load assets
 		IFileManager fileManager = new FileManager();
 		fileManager.loadData();
 		
-		ArrayList<Level> levelList = new ArrayList<Level>();
-		levelList.add(convertToGameLevel(elevel));
-		LevelManager.getInstance().setLevels(levelList);
+
 		
-		(new GraphicsFrame()).setVisible(true);
+		final GraphicsFrame gameFrame = new GraphicsFrame();
+		gameFrame.setVisible(true);
+		gameFrame.removeWindowListener(gameFrame.getWindowListeners()[0]);
+		gameFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				StateContext.getInstance().setFrame(null);
+				StateContext.getInstance().setState(new InGameState(new GameRound()));
+				gameFrame.dispose();
+			}
+		});
 	}
 	
 	
