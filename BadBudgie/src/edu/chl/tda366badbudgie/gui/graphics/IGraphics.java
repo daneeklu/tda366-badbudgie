@@ -23,18 +23,27 @@ public interface IGraphics {
 	
 	/**
 	 * Start the rendering
+	 * 
+	 * @param cameraPosition the center position of the camera
 	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
 	 */
 	public boolean startRendering(Vector cameraPosition);
+	
+	/**
+	 * Start the rendering
+	 * 
+	 * @param bounds the boundary rectangle for the camera
+	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
+	 */
+	public boolean startRendering(Rectangle bounds);
 
 	/**
 	 * Draws a rectangle 
 	 * 
-	 * @param position the reference position of the rectangle.
 	 * @param r the rectangle to be drawn
 	 * 
 	 */
-	public void drawRect(Vector position, Rectangle r);
+	public void drawRect(Rectangle r);
 	
 	/**
 	 * Draws a quad 
@@ -129,11 +138,12 @@ public interface IGraphics {
 	/**
 	 * Draws a textured rectangle with the specified texture id
 	 * 
-	 * @param position the reference position of the rectangle.
 	 * @param r the rectangle
 	 * @param texId the texture id
 	 */
-	public void drawBackgroundRect(Vector position, Rectangle r, String texId);
+	public void drawBackgroundRect(Rectangle r, String texId);
+
+
 
 
 
