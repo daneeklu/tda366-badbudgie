@@ -140,8 +140,8 @@ public class KeyController extends KeyAdapter implements MouseListener, MouseMot
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
-		//stateContext.getState().mouseActionMoved(e.getX(), e.getY());
+		//stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
+		stateContext.getState().mouseActionMoved(e.getX(), e.getY());
 		
 	}
 
@@ -149,8 +149,8 @@ public class KeyController extends KeyAdapter implements MouseListener, MouseMot
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
-		//stateContext.getState().mouseActionMoved(e.getX(), e.getY());
+		//stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
+		stateContext.getState().mouseActionMoved(e.getX(), e.getY());
 	}
 	
 }

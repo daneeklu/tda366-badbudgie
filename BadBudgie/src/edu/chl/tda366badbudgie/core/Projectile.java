@@ -3,20 +3,25 @@ package edu.chl.tda366badbudgie.core;
 public class Projectile extends AbstractItem {
 	 
 	private GameRound gameRound;
-	private Vector startPos;
-	private Projectile projectile;
+	private Vector vector;
 	
-	
-	public Projectile(String texId, double x, double y, Projectile projectile){
-		//System.out.println("Success!");
-		this.projectile = projectile;
-		startPos = new Vector(x, y);
+	public Projectile(String texId, double x, double y, GameRound gameRound){
 		
+		this.gameRound = gameRound;
+		vector = gameRound.getPlayer().getPosition();
 		setSize(new Vector(20, 20));
+
+//		System.out.println("Mouse Pos: " + new Vector(x, y));
+//		System.out.println("Player Pos: " + vector);
+//		System.out.println("Resulting force: " + getForce(x, y).scalarMultiplication(20));
+
+		Vector v = getForce(x, -y);
+		v = v.scalarDivision(1000);
 		
-		Vector v = getForce(x, y);
-		setForce(v.scalarMultiplication(1));
-		setVelocity(v);
+		System.out.println("Resulting force: " + v);
+		
+		setForce(v.scalarMultiplication(100));
+		//setVelocity(v);
 		
 		sprite = new Sprite(texId);
 		
@@ -30,36 +35,36 @@ public class Projectile extends AbstractItem {
 	 * @return
 	 */
 	public Vector getForce(double x, double y){
-		if(x < 400){
-			x = -1*getModTen(x);
-		}
-		else
-			x = getModTen(x);
+		int resWidth = 800;
+		int resHeight = -600;
+		System.out.println(y);
 		
-		if(y < 300){
-			y = -1*getModTen(y);
+		//If x is smaller then width/2 then calculate how far 
+		if(x < resWidth/2){
+			x = x-resWidth/2;
 		}
-		else
-			y = getModTen(y);
+		if(x > resWidth/2){
+			x = x-resWidth/2;
+		}
+		
+		
+		if(y > resHeight/2){
+			y = y-resHeight/2;
+			System.out.println("> " + y);
+		}
+		
+		if(y < resHeight/2){
+			y = y-resHeight/2;
+			System.out.println("< " + y);
+		}		
+		
+		System.out.println(x + " " + y);
+		
 		
 		return new Vector(x, y);
 	}
 	
 	
-	/**
-	 * Calculates the d parameter to be less than 10
-	 * @param d
-	 * @return
-	 */
-	public double getModTen(double d){
-		while(d>100){
-			System.out.println(d);
-			d = d%10;
-			System.out.println(d);
-		}
-		return d;
-	}
-
 	
 	@Override
 	public void updateState(){
