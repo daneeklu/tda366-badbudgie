@@ -169,8 +169,15 @@ public abstract class AbstractGameObject {
 	
 	/**
 	 * Method to be overridden by objects that have inner state logic.
+	 * Note that this method is not intended to normally handle to objects physics.
+	 * 
+	 * @return a string set to "" normally, but can be set to one of the following event stings:
+	 * "nextlevel" if the object wishes to tell the gameround to change level.
+	 * "playerdied" if the object wished to tell the gameround that the player has died.
 	 */
-	public void updateState() {}
+	public String update() {
+		return "";
+	}
 
 
 	public Sprite getSprite() {

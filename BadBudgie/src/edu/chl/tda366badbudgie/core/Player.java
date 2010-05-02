@@ -38,12 +38,10 @@ public class Player extends AbstractUnit {
 
 	/**
 	 * Constructor
-	 * @param gameRound 
 	 * 
 	 * @param texId the texture id of the player.
 	 */
-	public Player(GameRound gameRound, String texId) {
-		this.gameRound = gameRound;
+	public Player(String texId) {
 		setFriction(0.5);
 		setElasticity(0.2);
 		setMass(1);
@@ -223,7 +221,10 @@ public class Player extends AbstractUnit {
 	}
 	
 	@Override
-	public void updateState(){
+	public String update(){
+		
+		String gameEvent = "";
+		
 		if(getFlyingEnergy() < maxFlyingEnergy){
 			setFlyingEnergy(getFlyingEnergy() + 1);
 		}
@@ -237,14 +238,14 @@ public class Player extends AbstractUnit {
 		}
 		
 		if(health <= 0) {
-			gameRound.playerDied();
+			gameEvent = "playerdied";
 		}
 		
 		if(invincibilityTimer > 0) {
 			invincibilityTimer--;
 		}
 		
-		
+		return gameEvent;
 		
 	}
 

@@ -34,10 +34,6 @@ public class Weapon extends AbstractItem{
 	}
 	
 	
-	@Override
-	public void updateState(){
-		
-	}
 	
 	
 	@Override

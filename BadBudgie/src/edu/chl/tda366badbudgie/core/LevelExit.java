@@ -12,20 +12,27 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class LevelExit extends AbstractCollidable {
 	
-	private GameRound gameRound;
+	private boolean touchedByPlayer = false;
 	
 	/**
 	 * Constructor
 	 */
-	public LevelExit(GameRound gameRound, String texId) {
-		this.gameRound = gameRound;
+	public LevelExit(String texId) {
 		stationary = true;
 		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
 	}
 
 	@Override
+	public String update() {
+		if (touchedByPlayer) 
+			return "nextlevel";
+		else
+			return "";
+	}
+	
+	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		gameRound.levelFinished();
+		touchedByPlayer = true;
 	}
 	
 }

@@ -21,11 +21,6 @@ public class Projectile extends AbstractItem {
 	
 	
 	
-	@Override
-	public void updateState(){
-		
-	}
-	
 	
 
 	@Override
