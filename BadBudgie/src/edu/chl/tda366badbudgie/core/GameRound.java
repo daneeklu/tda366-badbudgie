@@ -274,6 +274,10 @@ public class GameRound {
 		}
 	}
 
+	public Level getCurrentLevel(){
+		return currentLevel;
+	}
+	
 	public void levelFinished() {
 		// TODO Next level
 		System.out.println("Next level");
@@ -283,27 +287,13 @@ public class GameRound {
 		// TODO Kill player
 		System.out.println("Player died");
 	}
+	
+	public void addGameObject(AbstractGameObject agb){
+		currentLevel.addGameObject(agb);
+	}
 
 	public void mouseAction(double x, double y, boolean mouseDown) {
-		if(mouseDown){
-			
-			
-			
-			
-			
-			projectile = new Projectile("bullet1", x, y, this);
-			projectile.setX(player.getX());
-			projectile.setY(player.getY());
-			LinkedList<Vector> pcd = new LinkedList<Vector>();
-			pcd.add(new Vector(-40, -40));
-			pcd.add(new Vector(40, -40));
-			pcd.add(new Vector(40, 40));
-			pcd.add(new Vector(-40, 40));
-			projectile.setCollisionData(new Polygon(pcd));
-			currentLevel.addGameObject(projectile);
-		
-			player.shoot(x, y, mouseDown);
-		}
+		player.shoot(x, y, mouseDown);
 	}
 
 }

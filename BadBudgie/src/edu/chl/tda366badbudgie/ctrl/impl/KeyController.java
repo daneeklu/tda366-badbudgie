@@ -19,7 +19,7 @@ import edu.chl.tda366badbudgie.ctrl.IStateContext;
  * @author tda366-badbudgie
  *
  */
-public class KeyController extends KeyAdapter implements MouseListener, MouseMotionListener{
+public class KeyController extends KeyAdapter{
 
 	private IStateContext stateContext;
 	private HashMap<Integer, String> menuKeyMap;
@@ -97,60 +97,5 @@ public class KeyController extends KeyAdapter implements MouseListener, MouseMot
 		
 	}
 
-
-
-	@Override
-	public void mouseClicked(MouseEvent evt) {
-		stateContext.getState().mouseActionClick(true);
-		
-	}
-
-
-
-	@Override
-	public void mouseEntered(MouseEvent evt) {
-		System.out.println("Mouse support initiated!");
-		
-	}
-
-
-
-	@Override
-	public void mouseExited(MouseEvent evt) {
-		
-	}
-
-
-
-	@Override
-	public void mousePressed(MouseEvent evt) {
-		stateContext.getState().mouseActionClick(true);
-		
-	}
-
-
-
-	@Override
-	public void mouseReleased(MouseEvent evt) {
-		stateContext.getState().mouseActionClick(false);
-		
-	}
-
-
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		//stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
-		stateContext.getState().mouseActionMoved(e.getX(), e.getY());
-		
-	}
-
-
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		//stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
-		stateContext.getState().mouseActionMoved(e.getX(), e.getY());
-	}
 	
 }
