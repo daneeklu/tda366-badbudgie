@@ -1,5 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.LinkedList;
+
 /**
  * Player
  * 
@@ -22,13 +24,13 @@ public class Player extends AbstractUnit {
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
 	private boolean isGliding;
-	private boolean shooting;
 	private int wingTimer;
 	private double flyingEnergy;
 	private int maxFlyingEnergy;
 	
 	private GameRound gameRound;
 	private Weapon wep;
+	private Projectile bullet;
 
 
 	/**
@@ -125,7 +127,40 @@ public class Player extends AbstractUnit {
 	
 	
 	public void shoot(double x, double y, boolean mouseDown) {
-		shooting = mouseDown;
+		//shooting = mouseDown;
+		if(mouseDown){
+			bullet = new Projectile("bullet1", x, y, this);
+			bullet.setX(this.getX());
+			bullet.setY(this.getY());
+			LinkedList<Vector> pcd = new LinkedList<Vector>();
+			pcd.add(new Vector(-20, -20));
+			pcd.add(new Vector(20, -20));
+			pcd.add(new Vector(20, 20));
+			pcd.add(new Vector(-20, 20));
+			bullet.setCollisionData(new Polygon(pcd));
+			gameRound.addGameObject(bullet);	
+		}
+		
+	}
+	
+	public Vector getProjectileForce(double x, double y){
+		int resWidth = 800;
+		int resHeight = -600;
+		
+		if(x < resWidth/2){
+			x = x-resWidth/2;
+		}
+		else if(x > resWidth/2){
+			x = x-resWidth/2;
+		}
+		
+		if(y > resHeight/2){
+			y = y-resHeight/2;
+		}
+		else if(y < resHeight/2){
+			y = y-resHeight/2;
+		}		
+		return new Vector(x, y);
 	}
 
 	
@@ -196,7 +231,6 @@ public class Player extends AbstractUnit {
 		
 		if(this.wep != null){
 			wep.setPosition(this.getPosition());
-			//System.out.println("Vapen: " + wep.getPosition() + " Spelare: " + this.getPosition());
 		}
 		
 		if(health <= 0) {
@@ -206,6 +240,8 @@ public class Player extends AbstractUnit {
 		if(invincibilityTimer > 0) {
 			invincibilityTimer--;
 		}
+		
+		
 		
 	}
 
