@@ -70,6 +70,16 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	@Override
 	public boolean startRendering(Vector cameraPosition) {
 		
+		return startRendering(new Rectangle(cameraPosition.getX() - 400,
+									 cameraPosition.getY() - 300,
+									 800, 
+									 600));
+	}
+	
+	
+	@Override
+	public boolean startRendering(Rectangle bounds) {
+		
 		gl = canvas.getGL();
 		con = canvas.getContext();
 
@@ -81,16 +91,18 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			init(canvas);
 		}
 		
-		this.cameraPosition = cameraPosition;
+		cameraPosition = new Vector(bounds.getX() + bounds.getWidth() / 2, bounds.getY() + bounds.getHeight() / 2);
 		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-		
 		
 
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();
-		glu.gluOrtho2D(0, width, 0, height);
-		gl.glTranslatef((float)(width/2 - ( cameraPosition.getX())),(float)(height/2 - ( cameraPosition.getY())), 0);
+		glu.gluOrtho2D(cameraPosition.getX() - width / 2,
+				cameraPosition.getX() + width / 2,
+				cameraPosition.getY() - height / 2,
+				cameraPosition.getY() + height / 2);
+		//gl.glTranslatef((float)(width/2 - ( cameraPosition.getX())),(float)(height/2 - ( cameraPosition.getY())), 0);
 
 		return true;
 	}
@@ -178,32 +190,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawRect(Vector position, Rectangle r) {
-		double x = r.getX(), y = r.getY();
-		double w = r.getWidth(), h = r.getHeight();
-		
-		GL gl = canvas.getGL();
-		GLContext con = canvas.getContext();
-		if (GLContext.getCurrent() != con) {
-			return;
-		}
-		
-		position.getX();
-		gl.glBegin(GL.GL_QUADS);
-		
-		gl.glTexCoord2d(0.0, 1.0);
-		gl.glVertex2d(position.getX() + x, position.getY() + y );
-		
-		gl.glTexCoord2d(0.0, 0.0);
-		gl.glVertex2d(position.getX() + x, position.getY() + y + h);
-		
-		gl.glTexCoord2d(1.0, 0.0);
-		gl.glVertex2d(position.getX() + x + w, position.getY() + y + h);
-		
-		gl.glTexCoord2d(1.0, 1.0);
-		gl.glVertex2d(position.getX() + x + w, position.getY() + y);
-		
-		gl.glEnd();		
+	public void drawRect(Rectangle r) {
+		drawRect(r, new Rectangle(0,0,1.0,1.0));
 	}
 	
 	public void drawRect(Rectangle r, Rectangle tex) {
@@ -238,15 +226,15 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 	
 	@Override
-	public void drawBackgroundRect(Vector position, Rectangle r, String texId) {
+	public void drawBackgroundRect(Rectangle r, String texId) {
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
 		if (GLContext.getCurrent() != con) {
 			return;
 		}
 		
-		double xr = r.getX() + cameraPosition.getX();
-		double yr = r.getY() + cameraPosition.getY();
+		double xr = r.getX() + cameraPosition.getX() - width / 2;
+		double yr = r.getY() + cameraPosition.getY() - height / 2;
 		double w = r.getWidth();
 		double h = r.getHeight();
 		
@@ -343,7 +331,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		GLUT glut = new GLUT();
 		
 		gl.glColor3d(1.0,1.0,1.0);
-		gl.glRasterPos2d(x - width/2 + ((float) cameraPosition.getX()), height/2 - y - 30 + ((float) cameraPosition.getY()));
+		gl.glRasterPos2d(-width / 2 + x + ((float) cameraPosition.getX()),
+						 height / 2 - y - 30 + ((float) cameraPosition.getY()));
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		glut.glutBitmapString(7, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);

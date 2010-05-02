@@ -31,7 +31,7 @@ public class GraphicsFrame extends JFrame {
 		ig = new GLGraphics(800, 600);
 		
 		add(ig.getCanvas());
-		setUndecorated(true);
+		//setUndecorated(true);
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		

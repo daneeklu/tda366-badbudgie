@@ -15,26 +15,30 @@ public class Menu {
 	
 	private MenuItem[] menuItems;
 	private int currentItem;
+	private Rectangle bounds;
+	private String texId;
 	
 	private ConfirmDialog dialog;
 	
 	public Menu() {
 		
 		dialog = null;
+		texId = "test";
+		bounds = new Rectangle(0,0,800,600);
 		
 		menuItems = new MenuItem[4];
 		
 		menuItems[0] = new MenuItem("newgame",
-				new Rectangle(-200, 0, 400, 100));
+				new Rectangle(200, 300, 400, 100));
 		
 		menuItems[1] = new MenuItem("options",
-				new Rectangle(-200, -120, 400, 100));
+				new Rectangle(200, 180, 400, 100));
 		
 		menuItems[2] = new MenuItem("exit",
-				new Rectangle(-200, -240, 400, 100));
+				new Rectangle(200, 60, 400, 100));
 		
 		menuItems[3] = new MenuItem("resume",
-				new Rectangle(-200, 120, 400, 100));
+				new Rectangle(200, 420, 400, 100));
 		
 		menuItems[3].setEnabled(false);
 		
@@ -79,6 +83,14 @@ public class Menu {
 		menuItems[item].setSelected(true);
 		
 		currentItem = item;
+	}
+	
+	public Rectangle getBounds() {
+		return bounds;
+	}
+	
+	public String getTexId() {
+		return texId;
 	}
 	
 	/**

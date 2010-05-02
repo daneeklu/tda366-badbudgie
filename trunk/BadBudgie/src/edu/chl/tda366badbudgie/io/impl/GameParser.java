@@ -42,7 +42,6 @@ public class GameParser extends AbstractParser {
 			try {
 				ImageDataHandler.getInstance().addImage(id,
 						ImageIO.read(new File(path)));
-				System.out.println(id + " loaded!");
 			} catch (IOException e) {
 				System.out.println("Failed to load texture: \"" + id
 						+ "\" from " + path);

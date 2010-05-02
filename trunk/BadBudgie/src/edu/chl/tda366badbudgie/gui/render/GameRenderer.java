@@ -26,7 +26,7 @@ public class GameRenderer {
 		if(!g.startRendering(gameRound.getPlayer().getPosition())) 
 			return;
 		
-		g.drawBackgroundRect(null,new Rectangle(new Vector(-400, -300), new Vector(800, 600)), gameRound.getLevel().getBackgroundTexId());
+		g.drawBackgroundRect(new Rectangle(0, 0, 800, 600), gameRound.getLevel().getBackgroundTexId());
 		
 		for (TerrainSection ts : gameRound.getLevel().getTerrainSections()) {
 			drawTerrainSection(ts, g);
