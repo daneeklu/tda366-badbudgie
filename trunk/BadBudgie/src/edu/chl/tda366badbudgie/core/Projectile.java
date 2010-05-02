@@ -1,5 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
+import edu.chl.tda366badbudgie.util.Vector;
+
 public class Projectile extends AbstractItem {
 	 
 	public Projectile(String texId, double x, double y, Player player){

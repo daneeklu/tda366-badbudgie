@@ -9,8 +9,8 @@ import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Menu;
 import edu.chl.tda366badbudgie.core.Player;
-import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * DebugInfoRenderer

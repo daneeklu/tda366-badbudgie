@@ -2,10 +2,10 @@ package edu.chl.tda366badbudgie.gui.render;
 
 import edu.chl.tda366badbudgie.core.Menu;
 import edu.chl.tda366badbudgie.core.MenuItem;
-import edu.chl.tda366badbudgie.core.Rectangle;
-import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.core.Menu.ConfirmDialog;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.util.Rectangle;
+import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * MenuRenderer

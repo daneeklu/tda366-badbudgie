@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * Editor representation of a level.
+ * 
+ * @author kvarfordt
+ *
+ */
 public class ELevel {
 	
 	private ArrayList<EGameObject> gameObjects = new ArrayList<EGameObject>();

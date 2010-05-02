@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.chl.tda366badbudgie.core.Polygon;
-import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.physics.CollisionHandler;
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Vector;
 
 public class CollisionHandlerTest {
 

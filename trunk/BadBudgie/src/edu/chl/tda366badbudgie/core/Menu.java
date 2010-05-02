@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
 import edu.chl.tda366badbudgie.ctrl.impl.StateContext;
+import edu.chl.tda366badbudgie.util.Rectangle;
 
 
 /**

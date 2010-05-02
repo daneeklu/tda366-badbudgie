@@ -2,10 +2,10 @@ package edu.chl.tda366badbudgie.gui.render;
 
 import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.TerrainSection;
-import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.util.Rectangle;
+import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * GameRenderer

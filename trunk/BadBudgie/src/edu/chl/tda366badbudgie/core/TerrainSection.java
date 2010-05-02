@@ -2,6 +2,10 @@ package edu.chl.tda366badbudgie.core;
 
 import java.util.List;
 
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Quad;
+import edu.chl.tda366badbudgie.util.Vector;
+
 
 /**
  * TerrainSection

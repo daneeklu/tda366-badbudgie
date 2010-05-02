@@ -10,14 +10,19 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import edu.chl.tda366badbudgieeditor.core.ResourceManager;
+import edu.chl.tda366badbudgieeditor.core.EGameObject;
 import edu.chl.tda366badbudgieeditor.ctrl.EditorController;
+import edu.chl.tda366badbudgieeditor.ctrl.EditorController.Tool;
 
+/**
+ * GUI control panel.
+ * 
+ * @author Daniel
+ *
+ */
 @SuppressWarnings("serial")
 public class ToolPanel extends JPanel implements ActionListener {
 
-	private JButton terrainToolButton;
-	private JButton objectToolButton;
 	private JComboBox objectTypeChooser;
 	private JPanel propertiesPanel;
 	private JButton saveButton;
@@ -26,60 +31,48 @@ public class ToolPanel extends JPanel implements ActionListener {
 	public ToolPanel(EditorController controller) {
 		
 		setPreferredSize(new Dimension(120, 100));
+		setBackground(Color.lightGray);
 		
-		terrainToolButton = new JButton("Terrain Tool");
-		objectToolButton = new JButton("Object Tool");
-		objectTypeChooser = new JComboBox(ResourceManager.getGameObjectNames().toArray());
+		// Add a button for each Tool
+		for (Tool ot : EditorController.Tool.values()) {
+			JButton tb = new JButton(ot.toString());
+			tb.setActionCommand(ot.toString().toLowerCase().replaceAll(" ", ""));
+			tb.addActionListener(controller);
+			tb.addActionListener(this);
+			tb.addKeyListener(controller);
+			add(tb);
+		}
+		
+		// More buttons
+		objectTypeChooser = new JComboBox(EGameObject.ObjectType.values());
 		propertiesPanel = new JPanel();
 		saveButton = new JButton("Save");
 		loadButton = new JButton("Load");
 		propertiesPanel.setBorder(BorderFactory.createTitledBorder("Properties"));
 		propertiesPanel.setPreferredSize(new Dimension(100, 100));
-		terrainToolButton.setActionCommand("terraintool");
-		objectToolButton.setActionCommand("objecttool");
 		objectTypeChooser.setActionCommand("objectypechanged");
 		saveButton.setActionCommand("save");
 		loadButton.setActionCommand("load");
 		
-		terrainToolButton.addActionListener(controller);
-		objectToolButton.addActionListener(controller);
+		// Listeners
 		objectTypeChooser.addActionListener(controller);
 		saveButton.addActionListener(controller);
 		loadButton.addActionListener(controller);
-		
-		terrainToolButton.addActionListener(this);
-		objectToolButton.addActionListener(this);
-		
-		terrainToolButton.addKeyListener(controller);
-		objectToolButton.addKeyListener(controller);
 		objectTypeChooser.addKeyListener(controller);
-		
-		
 		addKeyListener(controller);
 		
-		add(terrainToolButton);
-		add(objectToolButton);
 		add(objectTypeChooser);
 		add(propertiesPanel);
 		add(saveButton);
 		add(loadButton);
 		
-		
-		setBackground(Color.lightGray);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		
-		if(e.getActionCommand().equals("terraintool")) {
-//			terrainToolButton.setEnabled(false);
-//			objectToolButton.setEnabled(true);
-		}
-		else if(e.getActionCommand().equals("objecttool")) {
-//			terrainToolButton.setEnabled(true);
-//			objectToolButton.setEnabled(false);
-		}
+		if(e.getActionCommand().equals("terraintool")) {}
+		else if(e.getActionCommand().equals("objecttool")) {}
 	}
 	
 }
