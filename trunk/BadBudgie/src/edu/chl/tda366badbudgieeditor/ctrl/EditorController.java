@@ -10,6 +10,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComboBox;
 
+import edu.chl.tda366badbudgieeditor.LevelTestPlayer;
 import edu.chl.tda366badbudgieeditor.core.EGameObject;
 import edu.chl.tda366badbudgieeditor.core.ELevel;
 import edu.chl.tda366badbudgieeditor.core.ETerrainSection;
@@ -92,6 +93,9 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 		}
 		if (e.getActionCommand().equals("load")) {
 			System.out.println("Load Button Clicked");
+		}
+		if (e.getActionCommand().equals("play")) {
+			new LevelTestPlayer(level);
 		}
 		level.notifyLevelChanged();
 	}

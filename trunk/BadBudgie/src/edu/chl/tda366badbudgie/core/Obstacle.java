@@ -36,8 +36,6 @@ public class Obstacle extends AbstractCollidable {
 	}
 	
 	
-	
-	
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
 		

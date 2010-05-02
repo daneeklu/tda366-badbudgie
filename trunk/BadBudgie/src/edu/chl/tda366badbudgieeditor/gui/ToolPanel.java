@@ -27,6 +27,7 @@ public class ToolPanel extends JPanel implements ActionListener {
 	private JPanel propertiesPanel;
 	private JButton saveButton;
 	private JButton loadButton;
+	private JButton playButton;
 	
 	public ToolPanel(EditorController controller) {
 		
@@ -48,16 +49,19 @@ public class ToolPanel extends JPanel implements ActionListener {
 		propertiesPanel = new JPanel();
 		saveButton = new JButton("Save");
 		loadButton = new JButton("Load");
+		playButton = new JButton("Play");
 		propertiesPanel.setBorder(BorderFactory.createTitledBorder("Properties"));
 		propertiesPanel.setPreferredSize(new Dimension(100, 100));
 		objectTypeChooser.setActionCommand("objectypechanged");
 		saveButton.setActionCommand("save");
 		loadButton.setActionCommand("load");
+		playButton.setActionCommand("play");
 		
 		// Listeners
 		objectTypeChooser.addActionListener(controller);
 		saveButton.addActionListener(controller);
 		loadButton.addActionListener(controller);
+		playButton.addActionListener(controller);
 		objectTypeChooser.addKeyListener(controller);
 		addKeyListener(controller);
 		
@@ -65,6 +69,7 @@ public class ToolPanel extends JPanel implements ActionListener {
 		add(propertiesPanel);
 		add(saveButton);
 		add(loadButton);
+		add(playButton);
 		
 	}
 

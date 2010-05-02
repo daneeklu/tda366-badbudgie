@@ -1,10 +1,5 @@
 package edu.chl.tda366badbudgie.core;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import edu.chl.tda366badbudgie.util.Polygon;
-import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * GameRound
@@ -12,7 +7,7 @@ import edu.chl.tda366badbudgie.util.Vector;
  * A session of the game. 
  * Keeps track of the current level and the players score.
  * 
- * @author kvarfordt
+ * @author kvarfordt, lumbo
  * 
  */
 public class GameRound {
@@ -20,9 +15,6 @@ public class GameRound {
 	private Level currentLevel;
 	private int currentLevelNumber;
 	private Player player;
-	private Enemy enemy;
-	private Weapon wep;
-	private Projectile projectile;
 	private int score;
 
 	public GameRound() {
