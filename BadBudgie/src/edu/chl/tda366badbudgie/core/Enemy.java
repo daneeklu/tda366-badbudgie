@@ -8,7 +8,7 @@ import edu.chl.tda366badbudgie.util.Vector;
  * 
  * Class representing enemy units in the game.
  * 
- * @author kvarfordt
+ * @author lumbo
  *
  */
 public class Enemy extends AbstractUnit {

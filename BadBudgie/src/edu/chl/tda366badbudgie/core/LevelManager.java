@@ -11,7 +11,7 @@ import edu.chl.tda366badbudgie.util.Vector;
  * Singleton class that handles references 
  * to levels objects.
  * 
- * @author jesper
+ * @author jesper, kvarfordt
  *
  */
 public class LevelManager {
@@ -473,6 +473,15 @@ public class LevelManager {
 		level.addGameObject(lf);
 		
 		return level;
+	}
+
+	/**
+	 * Sets the level list. Used by the level editor to test a level.
+	 * 
+	 * @param levels
+	 */
+	public void setLevels(List<Level> levels) {
+		this.levels = levels;
 	}
 	
 }

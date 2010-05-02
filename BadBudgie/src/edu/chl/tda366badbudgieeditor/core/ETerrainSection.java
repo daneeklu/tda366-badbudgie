@@ -13,10 +13,14 @@ import java.util.List;
 public class ETerrainSection {
 	
 	private List<EVector> verts = new ArrayList<EVector>(4);
+	private double friction;
+	private double elasticity;
 	private ELevel parent;
 	
 	public ETerrainSection(ELevel parent) {
 		this.parent = parent;
+		friction = 0.5;
+		elasticity = 0.2;
 	}
 	
 	public List<EVector> getVerts() {
@@ -37,7 +41,7 @@ public class ETerrainSection {
 		if (isConvex()) {
 			return true;
 		}
-		return true; // TODO <- isConvex seems broken so this always returns true temporarily
+		return true; // TODO <- isConvex seems broken so this always returns true temporarily, fix
 	}
 	
 	
@@ -109,6 +113,22 @@ public class ETerrainSection {
 
 	public void reverseVertexOrder() {
 		Collections.reverse(verts);
+	}
+
+	public double getFriction() {
+		return friction;
+	}
+
+	public void setFriction(double friction) {
+		this.friction = friction;
+	}
+
+	public double getElasticity() {
+		return elasticity;
+	}
+
+	public void setElasticity(double elasticity) {
+		this.elasticity = elasticity;
 	}
 	
 }

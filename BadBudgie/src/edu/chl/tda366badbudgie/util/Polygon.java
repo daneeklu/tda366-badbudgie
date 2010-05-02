@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * A convex 2-dimensional polygon.
  * 
- * @author dkvarfordt, jesper
+ * @author kvarfordt, jesper
  * 
  */
 public class Polygon {
