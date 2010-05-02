@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Polygon {
 
-	protected ArrayList<Vector> vertices;
+	private ArrayList<Vector> vertices;
 
 	/**
 	 * Creates a new polygon with the given list of Vector2D objects as
@@ -35,8 +35,6 @@ public class Polygon {
 		this.vertices.addAll(vertices);
 	}
 
-	protected Polygon() {
-	}
 
 	/**
 	 * Checks whether the supplied vertices form a convex polygon.

@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Rectangle
@@ -11,6 +12,9 @@ import java.util.ArrayList;
  */
 public class Rectangle extends Polygon {
 
+	private double x, y, width, height;
+	
+	
 	/**
 	 * Creates a new rectangle with a given width
 	 * and height, and position = (0,0)
@@ -19,13 +23,7 @@ public class Rectangle extends Polygon {
 	 * @param height the height of the rectangle.
 	 */
 	public Rectangle(double width, double height){
-		
-		this.vertices = new ArrayList<Vector>();
-		
-		this.vertices.add(new Vector(0, 0));
-		this.vertices.add(new Vector(0, height));
-		this.vertices.add(new Vector(width, height));
-		this.vertices.add(new Vector(width, 0));
+		this(0,0, width, height);
 	}
 
 	/**
@@ -37,13 +35,11 @@ public class Rectangle extends Polygon {
 	 * @param height the height of the rectangle.
 	 */
 	public Rectangle(double x, double y, double width, double height){
-		
-		this.vertices = new ArrayList<Vector>();
-		
-		this.vertices.add(new Vector(x, y));
-		this.vertices.add(new Vector(x, y + height));
-		this.vertices.add(new Vector(x + width, y + height));
-		this.vertices.add(new Vector(x + width,y ));
+		super(new ArrayList<Vector>(Arrays.asList(new Vector(x, y), new Vector(x, y + height), new Vector(x + width, y + height), new Vector(x + width, y))));
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 	
 	/**
@@ -53,13 +49,7 @@ public class Rectangle extends Polygon {
 	 * @param size the size vector
 	 */
 	public Rectangle(Vector pos, Vector size){
-		
-		this.vertices = new ArrayList<Vector>();
-		
-		this.vertices.add(new Vector(pos.getX(), pos.getY()));
-		this.vertices.add(new Vector(pos.getX(), pos.getY() + size.getY()));
-		this.vertices.add(new Vector(pos.getX() + size.getX(), pos.getY() + size.getY()));
-		this.vertices.add(new Vector(pos.getX() + size.getX(), pos.getY()));
+		this(pos.getX(), pos.getY(), size.getX(), size.getY());
 	}
 	
 	/**
@@ -67,7 +57,7 @@ public class Rectangle extends Polygon {
 	 * @return the width
 	 */
 	public double getWidth() {
-		return this.vertices.get(2).getX() - this.vertices.get(0).getX();
+		return width;
 	}
 	
 	/**
@@ -75,7 +65,7 @@ public class Rectangle extends Polygon {
 	 * @return the height
 	 */
 	public double getHeight() {
-		return this.vertices.get(2).getY() - this.vertices.get(0).getY();
+		return height;
 	}
 	
 	/**
@@ -83,7 +73,7 @@ public class Rectangle extends Polygon {
 	 * @return the x position
 	 */
 	public double getX() {
-		return this.vertices.get(0).getX();
+		return x;
 	}
 	
 	/**
@@ -91,7 +81,7 @@ public class Rectangle extends Polygon {
 	 * @return the y position
 	 */
 	public double getY() {
-		return this.vertices.get(0).getY();
+		return y;
 	}
 	
 	

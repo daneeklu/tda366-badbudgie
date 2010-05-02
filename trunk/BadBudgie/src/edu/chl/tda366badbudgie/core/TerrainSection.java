@@ -26,8 +26,7 @@ public class TerrainSection extends AbstractCollidable {
 	 */
 	public TerrainSection(List<Vector> vertices, double friction, double elasticity) {
 		super(new Polygon(vertices), friction, elasticity);
-		//TODO: check validity of vertices?
-		this.quad = new Quad(vertices);
+		this.quad = new Quad(vertices.get(0),vertices.get(1),vertices.get(2),vertices.get(3));
 		stationary = true;
 	}
 	
@@ -40,8 +39,7 @@ public class TerrainSection extends AbstractCollidable {
 	 */
 	public TerrainSection(List<Vector> vertices, double friction, double elasticity, String texId, double texRes) {
 		super(new Polygon(vertices), friction, elasticity);
-		//TODO: check validity of vertices?
-		this.quad = new Quad(vertices);
+		this.quad = new Quad(vertices.get(0),vertices.get(1),vertices.get(2),vertices.get(3));
 		stationary = true;
 		this.setTexId(texId);
 		this.setTexRes(texRes);

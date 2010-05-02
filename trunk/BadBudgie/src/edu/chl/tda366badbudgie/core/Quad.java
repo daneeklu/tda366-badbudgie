@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Quad
@@ -20,18 +21,7 @@ public class Quad extends Polygon {
 	 * @param v4 fourth vector 4.
 	 */
 	public Quad(Vector v1, Vector v2, Vector v3, Vector v4){
-		vertices.add(v1);
-		vertices.add(v2);
-		vertices.add(v3);
-		vertices.add(v4);
+		super(new ArrayList<Vector>(Arrays.asList(v1, v2, v3, v4)));
 	}
-	
-	public Quad(List<Vector> vertices) {
-		super(vertices);
-		//TODO: somehow the number of vertices should be checked in all the constructors
-	}
-	
-	//TODO: Remove this constructor.
-	protected Quad() {}
 	
 }
