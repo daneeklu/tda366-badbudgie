@@ -291,7 +291,7 @@ public class GameRound {
 			
 			
 			
-			projectile = new Projectile("bullet1", x, y, projectile);
+			projectile = new Projectile("bullet1", x, y, this);
 			projectile.setX(player.getX());
 			projectile.setY(player.getY());
 			LinkedList<Vector> pcd = new LinkedList<Vector>();
