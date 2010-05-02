@@ -20,13 +20,14 @@ public abstract class AbstractGameObject {
 	
 
 	
-	
+
 	public AbstractGameObject() {
-		this(new Vector(80, 80));
+		this(new Vector(120, 120));
 	}
 	
 	
-	
+	//TODO: actually call this from subclasses,
+	// don't just set all objects to the same size
 	public AbstractGameObject(Vector v){
 		position = new Vector();
 		velocity = new Vector();
