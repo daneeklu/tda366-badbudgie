@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Vector;
+
 /**
  * AbstractCollidable
  * 

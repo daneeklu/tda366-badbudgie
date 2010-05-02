@@ -9,6 +9,12 @@ import edu.chl.tda366badbudgieeditor.core.ELevel;
 import edu.chl.tda366badbudgieeditor.core.ILevelObserver;
 import edu.chl.tda366badbudgieeditor.ctrl.EditorController;
 
+/**
+ * The frame of the editor gui.
+ * 
+ * @author kvarfordt
+ *
+ */
 @SuppressWarnings("serial")
 public class EditorFrame extends JFrame implements ILevelObserver {
 	

@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core;
+package edu.chl.tda366badbudgie.util;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.After;
+
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * Checks validity of polygon setups.

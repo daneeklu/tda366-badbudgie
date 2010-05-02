@@ -1,7 +1,7 @@
 package edu.chl.tda366badbudgie.ai.impl;
 
 import edu.chl.tda366badbudgie.core.Enemy;
-import edu.chl.tda366badbudgie.core.Vector;
+import edu.chl.tda366badbudgie.util.Vector;
 
 public class SimpleAI {
 	private Enemy enemy;

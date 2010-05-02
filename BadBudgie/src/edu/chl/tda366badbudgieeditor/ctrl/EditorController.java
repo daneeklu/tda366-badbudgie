@@ -1,6 +1,5 @@
 package edu.chl.tda366badbudgieeditor.ctrl;
 
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,11 +15,19 @@ import edu.chl.tda366badbudgieeditor.core.ELevel;
 import edu.chl.tda366badbudgieeditor.core.ETerrainSection;
 import edu.chl.tda366badbudgieeditor.core.EVector;
 import static edu.chl.tda366badbudgieeditor.core.EGameObject.ObjectType;
-import static edu.chl.tda366badbudgieeditor.core.ResourceManager.Tool;
 
+
+/**
+ * Controller class for the editor.
+ * 
+ * @author Daniel
+ *
+ */
 public class EditorController implements MouseListener, MouseMotionListener, KeyListener, ActionListener {
 
 	private static final int snapDistance = 15;
+	
+	public enum Tool{TerrainTool, ObjectTool};
 	
 	private int camX;
 	private int camY;
@@ -41,14 +48,17 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	private EVector currentDrawVertex;
 	private EVector currentMoveVertex;
 	
-	
 	/*
 	 * Game object drawing vars 
 	 */
 	private EGameObject currentGameObject;
 	private ObjectType selectedObjectType;
 	
-	
+	/**
+	 * Constructor
+	 * 
+	 * @param level the ELevel used.
+	 */
 	public EditorController(ELevel level) {
 		this.level = level;
 		camX = -100;
@@ -61,14 +71,14 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		// A button or control in the GUI has been used.
+		
 		if (e.getActionCommand().equals("objectypechanged")) {
 			selectedObjectType = ObjectType.valueOf(((JComboBox)e.getSource()).getSelectedItem().toString());
-			System.out.println("New object type: " + selectedObjectType);
 		}
 		if (e.getActionCommand().equals("terraintool")) {
 			selectedTool = Tool.TerrainTool;
 			currentGameObject = null;
-			System.out.println("TerrainTool selected");
 		}
 		if (e.getActionCommand().equals("objecttool")) {
 			selectedTool = Tool.ObjectTool;
@@ -76,7 +86,6 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 			currentDrawTerrainSection = null;
 			currentDrawVertex = null;
 			currentMoveVertex = null;
-			System.out.println("ObjectTool selected");
 		}
 		if (e.getActionCommand().equals("save")) {
 			System.out.println("Save Button Clicked");
@@ -89,25 +98,24 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("Canvas MousePressed, button: " + e.getButton());
 
 		mouseButtonDown = e.getButton();
 		
 		int mx = e.getX() + camX;
 		int my = e.getY() + camY;
 		
-		
 		/*
 		 * TERRAIN CREATION
 		 */
-		
 		if (selectedTool == Tool.TerrainTool) {
 			
+			// Left mouse button was clicked
 			if (mouseButtonDown == 1) {
 				if (!drawingTerrain) {
 					// Start drawing a new Terrain Section
 					drawingTerrain = true;
 					
+					// Create section and add to level
 					ETerrainSection newTerr = new ETerrainSection(level);
 					EVector newVert = new EVector(mx, my);
 					newTerr.addVert(newVert);
@@ -125,7 +133,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 						currentDrawVertex = newVert;
 						
 						if (currentDrawTerrainSection.getVerts().size() == 4) {
-							// Stop drawing the current quad
+							// Quad finished, stop drawing the current quad
 							drawingTerrain = false;
 							if (currentDrawTerrainSection.isConvex() && !currentDrawTerrainSection.isCCW()) {
 								currentDrawTerrainSection.reverseVertexOrder();
@@ -135,7 +143,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 				}
 			}
 			else if (mouseButtonDown == 3) {
-				// Rmb down, select closest vertex?
+				// Right mouse button down, select closest vertex if close enough
 				EVector closestVert = getClosestVert(mx, my);
 				if (closestVert != null && closestVert.getDistanceTo(new EVector(mx, my)) < snapDistance) {
 					currentMoveVertex = closestVert;
@@ -143,7 +151,6 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 				}
 				else {
 					// if no close terrain vertex found, search for game object instead
-					
 					EGameObject closestGO = getClosestGameObject(mx, my);
 					if (closestGO != null && closestGO.getPosition().getDistanceTo(new EVector(mx, my)) < snapDistance) {
 						currentGameObject = closestGO;
@@ -162,22 +169,22 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 		/*
 		 * OBJECT CREATION
 		 */
-		
 		if (selectedTool == Tool.ObjectTool) {
-			
+
 			if (mouseButtonDown == 1) {
+				// Left mouse button was clicked, create new object
 				EGameObject newObj = new EGameObject(mx, my, selectedObjectType);
 				currentGameObject = newObj;
 				level.addGameObject(newObj);
 			}
 			else if (mouseButtonDown == 3) {
+				// Right mouse button down, select closest object if close enough
 				EGameObject closestGO = getClosestGameObject(mx, my);
 				if (closestGO != null && closestGO.getPosition().getDistanceTo(new EVector(mx, my)) < snapDistance) {
 					currentGameObject = closestGO;
 				}
 				else {
-					// No object close enough found, serach for terrain vertex instead
-					
+					// No object close enough found, search for terrain vertex instead
 					EVector closestVert = getClosestVert(mx, my);
 					if (closestVert != null && closestVert.getDistanceTo(new EVector(mx, my)) < snapDistance) {
 						currentMoveVertex = closestVert;
@@ -185,11 +192,11 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 						selectedTool = Tool.TerrainTool;
 					}
 					
+					// Nothing found, deselect all
 					currentGameObject = null;
 				}
 			}
 		}
-		
 		
 		level.notifyLevelChanged();
 	}
@@ -200,7 +207,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 		int mx = e.getX() + camX;
 		int my = e.getY() + camY;
 		
-		// Mmb, panning
+		// Middle mouse button, panning
 		if (mouseButtonDown == 2) {
 			
 			camX += oldMouseX - mx + camX;
@@ -213,6 +220,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 		 */
 		if (selectedTool == Tool.TerrainTool) {
 			if (mouseButtonDown == 1) {
+				// Find close vertex and snap to it if close enough, else move to mouse.
 				EVector closestVert = getClosestVertInOtherTS(mx, my, currentDrawTerrainSection);
 				if (closestVert != null && closestVert.getDistanceTo(new EVector(mx, my)) < snapDistance) {
 					currentDrawVertex.setX(closestVert.getX());
@@ -224,13 +232,17 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 				}
 			}
 			else if (mouseButtonDown == 3) {
+
 				if (currentMoveVertex != null) {
+					// Currently moving a vertex
 					EVector closestVert = getClosestVertInAnyTS(mx, my, currentMoveVertex);
 					if (closestVert != null && closestVert.getDistanceTo(new EVector(mx, my)) < snapDistance) {
+						// If close to other vertex, snap
 						currentMoveVertex.setX(closestVert.getX());
 						currentMoveVertex.setY(closestVert.getY());
 					}
 					else {
+						// Else move to mouse
 						currentMoveVertex.setX(mx);
 						currentMoveVertex.setY(my);
 					}
@@ -246,7 +258,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 		if (selectedTool == Tool.ObjectTool) {
 			
 			if (mouseButtonDown == 1) {
-				// See if we should snap to a close object or not
+				// Find close object and snap to it if close enough, else move to mouse.
 				EGameObject closestGO = getClosestGameObject(mx, my, currentGameObject);
 				if (closestGO != null && closestGO.getPosition().getDistanceTo(new EVector(mx, my)) < snapDistance) {
 					currentGameObject.setX(closestGO.getX());
@@ -259,11 +271,11 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 				
 			}
 			else if (mouseButtonDown == 3) {
-				// Rmb, move object
+				// Right mouse button, move object to mouse
 				if (currentGameObject != null) {
 					
-					/* 
-					// Should we snap?
+					// No snapping between objects currently
+					/* Should we snap?
 					EGameObject closestGO = getClosestGameObject(mx, my, currentGameObject);
 					if (closestGO != null && closestGO.getPosition().getDistanceTo(new EVector(mx, my)) < snapDistance) {
 						currentGameObject.setX(closestGO.getX());
@@ -290,6 +302,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		// Mouse up, reset mouseButtonDown
 		mouseButtonDown = 0;
 	}
 
@@ -303,16 +316,15 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_DELETE) {
 			if (currentSelectedTerrainSection != null) {
+				// Delete terrain section
 				level.removeTerrainSection(currentSelectedTerrainSection);
 			}
 			if (currentGameObject != null) {
+				// Delete current object
 				level.removeGameObject(currentGameObject);
 			}
 		}
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {}
 
 	/*
 	 * Returns the closest EGameObject to x,y ignoring the specified one.
@@ -403,6 +415,9 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	}
 	
 
+	/*
+	 * Getters and setters
+	 */
 	public int getCamX() {
 		return camX;
 	}
@@ -428,7 +443,9 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	}
 	
 	
-	
+	// Unused interface methods
+	@Override
+	public void keyReleased(KeyEvent e) {}
 	@Override
 	public void mouseClicked(MouseEvent e) {}
 	@Override

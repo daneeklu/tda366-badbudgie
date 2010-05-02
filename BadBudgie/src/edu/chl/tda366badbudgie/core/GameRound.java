@@ -3,6 +3,9 @@ package edu.chl.tda366badbudgie.core;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Vector;
+
 /**
  * GameRound
  * 

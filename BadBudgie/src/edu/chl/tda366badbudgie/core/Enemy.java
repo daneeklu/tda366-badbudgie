@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
 import edu.chl.tda366badbudgie.ai.impl.SimpleAI;
+import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * Enemy

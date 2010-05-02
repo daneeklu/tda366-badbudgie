@@ -1,5 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
+import edu.chl.tda366badbudgie.util.Vector;
+
 /**
  * LevelExit
  * 

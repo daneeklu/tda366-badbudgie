@@ -12,6 +12,12 @@ import edu.chl.tda366badbudgieeditor.core.ETerrainSection;
 import edu.chl.tda366badbudgieeditor.core.EVector;
 import edu.chl.tda366badbudgieeditor.ctrl.EditorController;
 
+/**
+ * Graphics area displaying the level and allowing the user to edit it.
+ * 
+ * @author kvarfordt
+ *
+ */
 @SuppressWarnings("serial")
 public class LevelPanel extends JPanel {
 	

@@ -1,11 +1,15 @@
 package edu.chl.tda366badbudgieeditor.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * Editor representation of a terrain segment.
+ * 
+ * @author kvarfordt
+ *
+ */
 public class ETerrainSection {
 	
 	private List<EVector> verts = new ArrayList<EVector>(4);

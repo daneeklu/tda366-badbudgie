@@ -1,7 +1,12 @@
 package edu.chl.tda366badbudgieeditor.core;
 
-import edu.chl.tda366badbudgie.core.Vector;
-
+/**
+ * Vector class with int accuracy (editor accuracy).
+ * Has a selection of the methods from Vector.
+ * 
+ * @author kvarfordt
+ *
+ */
 public class EVector {
 	private int x;
 	private int y;
@@ -36,7 +41,6 @@ public class EVector {
 		return Math.sqrt((other.getX() - getX())*(other.getX() - getX()) + (other.getY() - getY())*(other.getY() - getY()));
 	}
 	
-
 	@Override
 	public String toString() {
 		return "[" + x + " , " + y + "]";

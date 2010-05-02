@@ -16,12 +16,12 @@ import javax.media.opengl.glu.GLU;
 import com.sun.opengl.util.GLUT;
 
 import edu.chl.tda366badbudgie.core.ImageDataHandler;
-import edu.chl.tda366badbudgie.core.Polygon;
-import edu.chl.tda366badbudgie.core.Quad;
-import edu.chl.tda366badbudgie.core.Rectangle;
 import edu.chl.tda366badbudgie.core.Sprite;
-import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Quad;
+import edu.chl.tda366badbudgie.util.Rectangle;
+import edu.chl.tda366badbudgie.util.Vector;
 /**
  * 
  * A graphics class implementing the IGraphics

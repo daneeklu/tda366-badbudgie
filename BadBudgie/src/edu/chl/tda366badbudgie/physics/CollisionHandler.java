@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.AbstractCollidable;
-import edu.chl.tda366badbudgie.core.Polygon;
-import edu.chl.tda366badbudgie.core.Vector;
 import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * A collision detection and handling class.

@@ -1,7 +1,16 @@
 package edu.chl.tda366badbudgieeditor.core;
 
+/**
+ * Editor representation of a game object.
+ * 
+ * @author kvarfordt
+ *
+ */
 public class EGameObject {
 
+	/**
+	 * This enum lists all the available object types.
+	 */
 	public enum ObjectType{Player, Enemy, Obstacle, Exit};
 	
 	private ObjectType type;
