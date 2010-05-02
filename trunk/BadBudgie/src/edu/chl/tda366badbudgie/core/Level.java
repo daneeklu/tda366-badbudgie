@@ -91,5 +91,20 @@ public class Level {
 	public String getBackgroundTexId() {
 		return backgroundTexId;
 	}
+
+	
+	/**
+	 * Return the player in this level.
+	 * 
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		for (AbstractGameObject ago : gameObjects) {
+			if (ago instanceof Player)
+				return (Player) ago;
+		}
+		throw new IllegalStateException("No player in level.");
+		
+	}
 	
 }

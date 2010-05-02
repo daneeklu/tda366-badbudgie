@@ -98,8 +98,9 @@ public class Enemy extends AbstractUnit {
 	}
 	
 	@Override
-	public void updateState(){
+	public String update(){
 		ai.initAI();
+		return "";
 	}
 
 
