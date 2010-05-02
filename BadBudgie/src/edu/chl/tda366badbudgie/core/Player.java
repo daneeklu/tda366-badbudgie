@@ -31,7 +31,6 @@ public class Player extends AbstractUnit {
 	private double flyingEnergy;
 	private int maxFlyingEnergy;
 	
-	private GameRound gameRound;
 	private Weapon wep;
 	private Projectile bullet;
 
@@ -139,7 +138,7 @@ public class Player extends AbstractUnit {
 			pcd.add(new Vector(20, 20));
 			pcd.add(new Vector(-20, 20));
 			bullet.setCollisionData(new Polygon(pcd));
-			gameRound.addGameObject(bullet);	
+			getParent().addGameObject(bullet);	
 		}
 		
 	}

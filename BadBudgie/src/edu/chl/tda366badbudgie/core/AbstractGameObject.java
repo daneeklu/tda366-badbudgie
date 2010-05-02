@@ -19,7 +19,7 @@ public abstract class AbstractGameObject {
 	protected boolean stationary;
 	protected Sprite sprite;
 	private Vector size;
-	
+	private Level parent;
 
 	
 
@@ -198,6 +198,18 @@ public abstract class AbstractGameObject {
 	public void setSize(Vector v){
 		this.size = v;
 	}
+
+
+	public Level getParent() {
+		return parent;
+	}
+
+
+	public void setParent(Level parent) {
+		this.parent = parent;
+	}
+	
+	
 	
 	
 }

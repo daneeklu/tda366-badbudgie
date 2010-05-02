@@ -1,7 +1,6 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
 import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.Projectile;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.GameRenderer;
@@ -14,7 +13,7 @@ import edu.chl.tda366badbudgie.physics.Physics;
  * 
  * State of a running game.
  * 
- * @author kvarfordt
+ * @author kvarfordt, lumbo
  *
  */
 public class InGameState implements IState {
@@ -68,4 +67,9 @@ public class InGameState implements IState {
 		//System.out.println("Aiming at x: " + x + " y: " + y);
 	}
 
+	
+	public GameRound getGameRound() {
+		return gameRound;
+	}
+	
 }

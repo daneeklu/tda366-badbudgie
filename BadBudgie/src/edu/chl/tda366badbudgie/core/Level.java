@@ -76,6 +76,7 @@ public class Level {
 	 */
 	public void addGameObject(AbstractGameObject go) {
 		gameObjects.add(go);
+		go.setParent(this);
 	}
 
 	/**
