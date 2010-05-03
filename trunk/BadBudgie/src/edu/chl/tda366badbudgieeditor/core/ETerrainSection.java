@@ -41,7 +41,7 @@ public class ETerrainSection {
 		if (isConvex()) {
 			return true;
 		}
-		return true; // TODO <- isConvex seems broken so this always returns true temporarily, fix
+		return false; // TODO <- isConvex seems broken so this always returns true temporarily, fix
 	}
 	
 	
