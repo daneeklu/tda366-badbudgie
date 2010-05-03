@@ -18,16 +18,13 @@ import edu.chl.tda366badbudgie.io.IFileManager;
  */
 public class FileManager implements IFileManager{
 	
-	//private IGraphics g;
-	
 	/**
 	 * Create a new filemanager, using a
 	 * specified graphics object to load
 	 * the textures.
 	 * @param g the graphics object.
 	 */
-	public FileManager(){//IGraphics g) {
-		//this.g = g;
+	public FileManager(){
 	}
 
 	@Override

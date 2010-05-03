@@ -20,6 +20,7 @@ public class LevelManager {
 	private List<Level> levels = new LinkedList<Level>();
 	
 	private LevelManager(){
+		/*
 		levels.add(makeTestLevel());
 		levels.add(makeTestLevel2());
 		levels.add(makeTestLevel());
@@ -27,7 +28,7 @@ public class LevelManager {
 		levels.add(makeTestLevel());
 		levels.add(makeTestLevel2());
 		levels.add(makeTestLevel());
-		levels.add(makeTestLevel2());
+		levels.add(makeTestLevel2());*/
 	}
 	
 	/**
@@ -62,6 +63,7 @@ public class LevelManager {
 	/*
 	 * Test level
 	 */
+	//TODO: Remove this when levels are stored/loaded from xml.
 	private Level makeTestLevel() {
 		Level level = new Level();
 
@@ -214,7 +216,7 @@ public class LevelManager {
 		tVerts.add(new Vector(1000, 0));
 		tVerts.add(new Vector(1000, 10));
 		tVerts.add(new Vector(-1000, 10));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
@@ -222,7 +224,7 @@ public class LevelManager {
 		tVerts.add(new Vector(1000, 800));
 		tVerts.add(new Vector(1000, 810));
 		tVerts.add(new Vector(-1000, 810));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
@@ -230,7 +232,7 @@ public class LevelManager {
 		tVerts.add(new Vector(-1000, 0));
 		tVerts.add(new Vector(-990, 0));
 		tVerts.add(new Vector(-990, 800));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
@@ -238,7 +240,7 @@ public class LevelManager {
 		tVerts.add(new Vector(1000, 0));
 		tVerts.add(new Vector(990, 0));
 		tVerts.add(new Vector(990, 800));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);		
 		
 		tVerts = new LinkedList<Vector>();
@@ -246,7 +248,7 @@ public class LevelManager {
 		tVerts.add(new Vector(100, 0));
 		tVerts.add(new Vector(100, 200));
 		tVerts.add(new Vector(0, 200));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		t.setX(-300);
 		level.addTerrainSection(t);
 		tVerts = new LinkedList<Vector>();
@@ -254,7 +256,7 @@ public class LevelManager {
 		tVerts.add(new Vector(120, 0));
 		tVerts.add(new Vector(120, 200));
 		tVerts.add(new Vector(0, 200));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		t.setX(-310);
 		level.addTerrainSection(t);		
 		
@@ -423,7 +425,7 @@ public class LevelManager {
 		tVerts.add(new Vector(1000, 0));
 		tVerts.add(new Vector(1000, 10));
 		tVerts.add(new Vector(-1000, 10));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
@@ -431,7 +433,7 @@ public class LevelManager {
 		tVerts.add(new Vector(1000, 800));
 		tVerts.add(new Vector(1000, 810));
 		tVerts.add(new Vector(-1000, 810));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
@@ -439,7 +441,7 @@ public class LevelManager {
 		tVerts.add(new Vector(-1000, 0));
 		tVerts.add(new Vector(-990, 0));
 		tVerts.add(new Vector(-990, 800));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);
 		
 		tVerts = new LinkedList<Vector>();
@@ -447,7 +449,7 @@ public class LevelManager {
 		tVerts.add(new Vector(1000, 0));
 		tVerts.add(new Vector(990, 0));
 		tVerts.add(new Vector(990, 800));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		level.addTerrainSection(t);		
 		
 		tVerts = new LinkedList<Vector>();
@@ -455,7 +457,7 @@ public class LevelManager {
 		tVerts.add(new Vector(100, 0));
 		tVerts.add(new Vector(100, 200));
 		tVerts.add(new Vector(0, 200));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		t.setX(-300);
 		level.addTerrainSection(t);
 		tVerts = new LinkedList<Vector>();
@@ -463,7 +465,7 @@ public class LevelManager {
 		tVerts.add(new Vector(120, 0));
 		tVerts.add(new Vector(120, 200));
 		tVerts.add(new Vector(0, 200));
-		t = new TerrainSection(tVerts, 0.5, 0.5, "grass1", 0.005);
+		t = new TerrainSection(new Polygon(tVerts), 0.5, 0.5, "grass1", 0.005);
 		t.setX(-310);
 		level.addTerrainSection(t);		
 		

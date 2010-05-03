@@ -49,9 +49,9 @@ public class GameRenderer {
 	 */
 	private static void drawTerrainSection(TerrainSection ts, IGraphics g) {
 		if (ts.getTexId() != null && !ts.getTexId().equals(""))
-			g.drawTexturedQuad(ts.getPosition(),ts.getQuad(), ts.getTexId(), ts.getTexRes());
+			g.drawTexturedPolygon(ts.getPosition(),ts.getSurface(), ts.getTexId(), ts.getTexRes());
 		else 
-			g.drawQuad(ts.getPosition(),ts.getQuad());
+			g.drawPolygon(ts.getPosition(),ts.getSurface());
 	}
 	
 	/**

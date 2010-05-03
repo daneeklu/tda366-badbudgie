@@ -1,6 +1,14 @@
 package edu.chl.tda366badbudgie.io.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.w3c.dom.Document;
+
+import edu.chl.tda366badbudgie.core.Level;
+import edu.chl.tda366badbudgie.core.LevelManager;
+import edu.chl.tda366badbudgie.core.Player;
+import edu.chl.tda366badbudgie.util.Polygon;
 
 /**
  * LevelParser
@@ -17,21 +25,28 @@ public class LevelParser extends AbstractParser{
 
 	@Override
 	public void parseData() {
-		//Load textures.
+
+		List<Polygon> colList = new LinkedList<Polygon>();
 		
-		//Load collision data. (or integrate).
+		//Create level.
+		Level level = new Level();
+		
+		//Create and add player
+		Player player = new Player("budgie");
+		level.addGameObject(player);
 		
 		//Create animations.
 		
 		//Create sprites.
 		
+		//Load collision data. (or integrate).
+		
 		//Create gameobjects.
 		
 		//Create terrain.
 		
-		//Create and setup level.
-		
 		//Save level.
+		LevelManager.getInstance().addLevel(level);
 	}
 
 	@Override

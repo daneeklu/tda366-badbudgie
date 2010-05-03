@@ -69,7 +69,7 @@ public class LevelTestPlayer {
 			for (EVector ev : et.getVerts()) {
 				verts.add(new Vector(ev.getX(), -ev.getY()));
 			}
-			result.addTerrainSection(new TerrainSection(verts, et.getFriction(), et.getElasticity()));
+			result.addTerrainSection(new TerrainSection(new Polygon(verts), et.getFriction(), et.getElasticity()));
 		}
 		
 		for (EGameObject ego : elevel.getGameObjects()) {
