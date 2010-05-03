@@ -136,6 +136,16 @@ public interface IGraphics {
 	public void drawTexturedQuad(Vector position, Quad q, String textureId, double textureResolution);
 
 	/**
+	 * Draws a quad with the specified texture id
+	 * 
+	 * @param position the reference position of the quad
+	 * @param q the quad
+	 * @param texureId the texture id
+	 */
+	public void drawTexturedPolygon(Vector position, Polygon p, String textureId, double textureResolution);
+
+	
+	/**
 	 * Draws a textured rectangle with the specified texture id
 	 * 
 	 * @param r the rectangle

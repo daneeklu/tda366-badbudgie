@@ -115,7 +115,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		con = null;
 		gl = null;
 	}
-	
 
 	@Override
 	public void init(GLAutoDrawable glDraw) {
@@ -257,7 +256,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 	}
 
-
 	@Override
 	public void drawQuad(Vector position, Quad q) {
 		
@@ -268,7 +266,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		}
 		
 		gl.glDisable(GL.GL_TEXTURE_2D);
-		gl.glBegin(GL.GL_QUADS);
+		gl.glBegin(GL.GL_POLYGON);
 		
 		gl.glColor3d(0.5, 0.5, 0.5);
 		for (Vector v : q.getVertices()) {
@@ -281,7 +279,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 	
 	@Override
-	public void drawTexturedQuad(Vector position, Quad q, String textureId, double texRes) {
+	public void drawTexturedPolygon(Vector position, Polygon p, String textureId, double texRes) {
 		
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
@@ -294,10 +292,9 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	    gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
 		setActiveTexture(textureId);
 
+		gl.glBegin(GL.GL_POLYGON);
 		
-		gl.glBegin(GL.GL_QUADS);
-		
-		for (Vector v : q.getVertices()) {
+		for (Vector v : p.getVertices()) {
 			
 			gl.glTexCoord2d(v.getX() * texRes, v.getY() * texRes);
 			gl.glVertex2d(position.getX() + v.getX(),position.getY() + v.getY() );
@@ -349,8 +346,17 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			return;
 		}
 		
-		
-		gl.glBegin(GL.GL_POLYGON);
+		switch (p.getVertices().size()) {
+		case 3:
+			gl.glBegin(GL.GL_TRIANGLES);
+			break;
+		case 4:
+			gl.glBegin(GL.GL_QUADS);
+			break;
+		default:
+			gl.glBegin(GL.GL_POLYGON);
+			break;
+		}
 		
 		gl.glColor3d(0.5, 0.5, 0.5);
 		
@@ -420,5 +426,10 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 	}
 
+	@Override
+	public void drawTexturedQuad(Vector position, Quad q, String textureId,
+			double textureResolution) {
+		drawTexturedPolygon(position, q, textureId, textureResolution);
+	}
 	
 }

@@ -13,7 +13,6 @@ public class Projectile extends AbstractItem {
 		
 		setForce(v.scalarMultiplication(100));
 		sprite = new Sprite(texId);
-		
 	}
 	
 

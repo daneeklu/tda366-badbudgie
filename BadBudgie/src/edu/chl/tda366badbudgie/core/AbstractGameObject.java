@@ -21,8 +21,6 @@ public abstract class AbstractGameObject {
 	private Vector size;
 	private Level parent;
 
-	
-
 	public AbstractGameObject() {
 		this(new Vector(120, 120));
 	}
@@ -30,7 +28,7 @@ public abstract class AbstractGameObject {
 	
 	//TODO: actually call this from subclasses,
 	// don't just set all objects to the same size
-	public AbstractGameObject(Vector v){
+	public AbstractGameObject(Vector obSize){
 		position = new Vector();
 		velocity = new Vector();
 		force = new Vector();
@@ -38,7 +36,7 @@ public abstract class AbstractGameObject {
 		stationary = false;
 		
 		//TODO: Add actual size parameter to constructor
-		this.size = v;
+		this.size = obSize;
 	}
 	
 	
@@ -179,22 +177,34 @@ public abstract class AbstractGameObject {
 		return "";
 	}
 
-
+	/**
+	 * Returns the sprite of the object.
+	 * @return the sprite of the object.
+	 */
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
 		return sprite;
 	}
 
-
+	/**
+	 * Returns the width of the object.
+	 * @return the width of the object.
+	 */
 	public double getWidth() {
 		return size.getX();
 	}
 
-
+	/**
+	 * Returns the height of the object.
+	 * @return the height of the object.
+	 */
 	public double getHeight() {
 		return size.getY();
 	}
 	
+	/**
+	 * Sets the size of the object.
+	 * @param v the vector setting the new size.
+	 */
 	public void setSize(Vector v){
 		this.size = v;
 	}
