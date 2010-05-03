@@ -34,7 +34,7 @@ public class ToolPanel extends JPanel implements ActionListener {
 		setPreferredSize(new Dimension(120, 100));
 		setBackground(Color.lightGray);
 		
-		// Add a button for each Tool
+		// Add a button, listener etc, for each Tool
 		for (Tool ot : EditorController.Tool.values()) {
 			JButton tb = new JButton(ot.toString());
 			tb.setActionCommand(ot.toString().toLowerCase().replaceAll(" ", ""));
@@ -76,8 +76,12 @@ public class ToolPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getActionCommand().equals("terraintool")) {}
-		else if(e.getActionCommand().equals("objecttool")) {}
+		if(e.getActionCommand().equals("terraintool")) {
+			
+		}
+		else if(e.getActionCommand().equals("objecttool")) {
+			
+		}
 	}
 	
 }
