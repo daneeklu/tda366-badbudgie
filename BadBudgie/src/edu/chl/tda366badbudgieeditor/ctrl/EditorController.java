@@ -55,6 +55,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	private EGameObject currentGameObject;
 	private ObjectType selectedObjectType;
 	
+	
 	/**
 	 * Constructor
 	 * 
@@ -318,6 +319,7 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println("keypressed");
 		if (e.getKeyCode() == KeyEvent.VK_DELETE) {
 			if (currentSelectedTerrainSection != null) {
 				// Delete terrain section
@@ -328,6 +330,20 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 				level.removeGameObject(currentGameObject);
 			}
 		}
+		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			camX -= 25;
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			camX += 25;
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			camY -= 25;
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			camY += 25;
+		}
+		level.notifyLevelChanged();
+		
 	}
 
 	/*
@@ -451,12 +467,12 @@ public class EditorController implements MouseListener, MouseMotionListener, Key
 	@Override
 	public void keyReleased(KeyEvent e) {}
 	@Override
+	public void keyTyped(KeyEvent e) {}
+	@Override
 	public void mouseClicked(MouseEvent e) {}
 	@Override
 	public void mouseEntered(MouseEvent e) {}
 	@Override
 	public void mouseExited(MouseEvent e) {}
-	@Override
-	public void keyTyped(KeyEvent e) {}
 	
 }
