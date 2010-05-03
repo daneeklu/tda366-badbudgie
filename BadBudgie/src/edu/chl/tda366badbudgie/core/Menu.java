@@ -24,22 +24,22 @@ public class Menu {
 	public Menu() {
 		
 		dialog = null;
-		texId = "test";
+		texId = "intro";
 		bounds = new Rectangle(0,0,800,600);
 		
 		menuItems = new MenuItem[4];
 		
 		menuItems[0] = new MenuItem("newgame",
-				new Rectangle(200, 300, 400, 100));
+				new Rectangle(240, 240, 320, 80));
 		
 		menuItems[1] = new MenuItem("options",
-				new Rectangle(200, 180, 400, 100));
+				new Rectangle(240, 140, 320, 80));
 		
 		menuItems[2] = new MenuItem("exit",
-				new Rectangle(200, 60, 400, 100));
+				new Rectangle(240, 40, 320, 80));
 		
 		menuItems[3] = new MenuItem("resume",
-				new Rectangle(200, 420, 400, 100));
+				new Rectangle(240, 340, 320, 80));
 		
 		menuItems[3].setEnabled(false);
 		

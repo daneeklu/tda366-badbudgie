@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gamedata>
 	<textures>
-		<texture id="test" path="res/test.png"/>
+		<texture id="intro" path="res/introscreen.png"/>
 		<texture id="exit" path="res/exit.png"/>
 		<texture id="smurf" path="res/SmurfSpin.png"/>
 		<texture id="newgame" path="res/newgame.png"/>
