@@ -65,10 +65,10 @@ public class LevelPanel extends JPanel {
 			// Draw unfinished quads green, finished black etc.
 			if (verts.size() < 4)
 				g.setColor(drawingColor);
-			else if (t == controller.getSelectedTerrainSection())
-				g.setColor(selectedColor);
 			else if (!t.isValidQuad())
 				g.setColor(invalidColor);
+			else if (t == controller.getSelectedTerrainSection())
+				g.setColor(selectedColor);
 			else
 				g.setColor(Color.black);
 			
