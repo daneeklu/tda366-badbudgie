@@ -1,5 +1,7 @@
 package edu.chl.tda366badbudgieeditor.core;
 
+import edu.chl.tda366badbudgie.util.Vector;
+
 /**
  * Vector class with int accuracy (editor accuracy).
  * Has a selection of the methods from Vector.
@@ -61,13 +63,52 @@ public class EVector {
 	public double crossProduct(EVector v) {
 		return this.x * v.y - this.y * v.x;
 	}
-
-	public boolean sameDirection(EVector v) {
-		return (dotProduct(v) > 0);
-	}
-
-	public boolean oppositeDirection(EVector v) {
-		return (dotProduct(v) < 0);
+	
+	public boolean hasZeroLength(){
+		return (x==0 && y==0);
 	}
 	
+	private double directionCheck(EVector v) {
+
+		double coeff = 0;
+		
+		if (v.hasZeroLength() || this.hasZeroLength()) {
+			coeff = 0;
+		} else if(x == 0 && v.x == 0) {
+			coeff = v.y / y;
+		} else if(x == 0 || v.x == 0) {
+			coeff = 0;
+		} else if(y == 0 && v.y == 0) {
+			coeff = v.x / x;
+		} else if(y == 0 || v.y == 0) {
+			coeff = 0;
+		} else if(v.x /x == v.y /y){
+			coeff = v.x /x;
+		}
+		
+		return coeff;
+	}
+
+	
+	/**
+	 * Checks if the direction of the vector is the same
+	 * as another.
+	 * 
+	 * @param v vector to compare direction with.
+	 * @return true if the vector have the same direction.
+	 */
+	public boolean sameDirection(EVector v) {
+		return directionCheck(v) > 0;
+	}
+	
+	/**
+	 * Checks if the direction of the vector is the
+	 * opposite of another.
+	 * 
+	 * @param v vector to compare direction with.
+	 * @return true if the vector have the opposite direction.
+	 */
+	public boolean oppositeDirection(EVector v) {
+		return directionCheck(v) < 0;
+	}
 }
