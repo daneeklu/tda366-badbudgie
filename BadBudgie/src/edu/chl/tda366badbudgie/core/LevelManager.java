@@ -110,19 +110,19 @@ public class LevelManager {
 		
 		//Adds the weapon to the player
 		
-//		Weapon wep = new Weapon("gun1");
-//		wep.setX(player.getX());
-//		wep.setY(player.getY());
-//		pcd = new LinkedList<Vector>();
-//		pcd.add(new Vector(-40, -40));
-//		pcd.add(new Vector(40, -40));
-//		pcd.add(new Vector(40, 40));
-//		pcd.add(new Vector(-40, 40));
-//		wep.setCollisionData(new Polygon(pcd));
-//		wep.setSize(new Vector(60, 30));
-//		level.addGameObject(wep);
-//		player.setWeapon(wep);
-//		
+		Weapon wep = new Weapon("gun1");
+		wep.setX(player.getX());
+		wep.setY(player.getY());
+		pcd = new LinkedList<Vector>();
+		pcd.add(new Vector(-40, -40));
+		pcd.add(new Vector(40, -40));
+		pcd.add(new Vector(40, 40));
+		pcd.add(new Vector(-40, 40));
+		wep.setCollisionData(new Polygon(pcd));
+		wep.setSize(new Vector(60, 30));
+		level.addGameObject(wep);
+		player.setWeapon(wep);
+		
 		
 		//Adds a little rock, then another.
 

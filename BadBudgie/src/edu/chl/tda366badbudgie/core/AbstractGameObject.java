@@ -16,6 +16,7 @@ public abstract class AbstractGameObject {
 	private Vector velocity;
 	private Vector force;
 	private double mass;
+	private double airResistance;
 	protected boolean stationary;
 	protected Sprite sprite;
 	private Vector size;
@@ -34,6 +35,7 @@ public abstract class AbstractGameObject {
 		force = new Vector();
 		mass = 1;
 		stationary = false;
+		airResistance = 0.0005;
 		
 		//TODO: Add actual size parameter to constructor
 		this.size = obSize;
@@ -217,6 +219,16 @@ public abstract class AbstractGameObject {
 
 	public void setParent(Level parent) {
 		this.parent = parent;
+	}
+
+
+	public void setAirResistance(double airResistance) {
+		this.airResistance = airResistance;
+	}
+
+
+	public double getAirResistance() {
+		return airResistance;
 	}
 	
 	

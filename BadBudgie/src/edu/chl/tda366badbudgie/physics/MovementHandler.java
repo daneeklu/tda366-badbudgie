@@ -15,8 +15,11 @@ public class MovementHandler {
 		for(AbstractGameObject ago : gameObjects) {
 			
 			if (!ago.isStationary()) {
-				// Update the external forces acting on the object
+				// Update additional external forces acting on the object
 				ago.updateForces();
+				
+				// Air friction
+				ago.applyForce(ago.getVelocity().scalarMultiplication(ago.getVelocity().getLength()*-1.0*ago.getAirResistance()));
 				
 				// Apply gravity
 				ago.applyForce(new Vector(0, -Physics.g * ago.getMass()));
