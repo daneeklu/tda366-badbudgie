@@ -4,6 +4,8 @@ import edu.chl.tda366badbudgie.util.Vector;
 
 public class Projectile extends AbstractItem {
 	 
+	private int lifeTimer = 200;
+	
 	public Projectile(String texId, double x, double y, Player player){
 		
 		setSize(new Vector(10, 10));
@@ -17,7 +19,13 @@ public class Projectile extends AbstractItem {
 	
 
 
-	
+	@Override
+	public GameRoundMessage update() {
+		if (--lifeTimer == 0)
+			return GameRoundMessage.RemoveObject;
+		
+		return GameRoundMessage.NoEvent;
+	}
 	
 	
 	

@@ -12,6 +12,7 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public abstract class AbstractGameObject {
 
+	public enum GameRoundMessage{NoEvent, LevelFinished, PlayerDied, RemoveObject};
 	private Vector position;
 	private Vector velocity;
 	private Vector force;
@@ -175,8 +176,8 @@ public abstract class AbstractGameObject {
 	 * "nextlevel" if the object wishes to tell the gameround to change level.
 	 * "playerdied" if the object wished to tell the gameround that the player has died.
 	 */
-	public String update() {
-		return "";
+	public GameRoundMessage update() {
+		return GameRoundMessage.NoEvent;
 	}
 
 	/**
