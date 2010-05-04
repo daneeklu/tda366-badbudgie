@@ -80,7 +80,7 @@ public class CollisionHandler {
 	private void collide(AbstractCollidable o1,
 			AbstractCollidable o2, Vector mtv) {
 		
-		
+		// Let the classes exercise any side effects of the collision
 		o1.executeCollisionEffect(o2, mtv);
 		o2.executeCollisionEffect(o1, mtv.scalarMultiplication(-1));
 		
@@ -92,7 +92,6 @@ public class CollisionHandler {
 			handleImpact(o1, o2, mtv);
 		}
 		
-
 		DebugInfoRenderer.getInstance().addDebugLine(o1.getPosition(), o1.getPosition().add(mtv.scalarMultiplication(30)), Color.green);
 	}
 

@@ -1,5 +1,10 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.ctrl.IStateContext;
 import edu.chl.tda366badbudgie.gui.GraphicsFrame;
@@ -11,12 +16,12 @@ import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
  * This class is responsible for the state of the game, 
  * whether it's in the menu or in a running game.
  * 
- * @author dkvarfordt
+ * @author kvarfordt
  *
  */
 public class StateContext implements IStateContext {
 	
-	private GraphicsFrame graphicsFrame;
+	private JFrame graphicsFrame;
 	
 	private IState menuState;
 	private IState inGameState;
@@ -31,6 +36,11 @@ public class StateContext implements IStateContext {
 		currentState = menuState;
 	}
 	
+	/**
+	 * Returns the singleton instance of this class.
+	 * 
+	 * @return the instance
+	 */
 	public static IStateContext getInstance() {
 		if (instance == null) {
 			instance = new StateContext();
@@ -38,14 +48,23 @@ public class StateContext implements IStateContext {
 		return instance;
 	}
 	
+	/**
+	 * Returns the current state object.
+	 */
 	public IState getState() {
 		return currentState;
 	}
 	
+	/**
+	 * Calls doLogic on the current state.
+	 */
 	public void doLogic() {
 		currentState.logic();
 	}
 	
+	/**
+	 * Tells the current state to draw itself.
+	 */
 	public void draw(IGraphics g) {
 		currentState.draw(g);
 	}
@@ -63,7 +82,7 @@ public class StateContext implements IStateContext {
 
 	
 	@Override
-	public void setFrame(GraphicsFrame graphicsFrame) {
+	public void setFrame(JFrame graphicsFrame) {
 		this.graphicsFrame = graphicsFrame;
 	}
 
@@ -80,7 +99,8 @@ public class StateContext implements IStateContext {
 	@Override
 	public void shutDown() {
 		if (graphicsFrame != null) {
-			graphicsFrame.shutdown();
+			WindowEvent wev = new WindowEvent(graphicsFrame, WindowEvent.WINDOW_CLOSING);
+	        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
 		}
 		else {
 			throw new IllegalStateException("The GraphicsFrame has not been set.");
@@ -88,13 +108,13 @@ public class StateContext implements IStateContext {
 	}
 	
 	@Override
-	public void setFullscreen(boolean fullscreen) {
-		if (graphicsFrame != null) {
-			graphicsFrame.setFullscreen(fullscreen);
-		}
-		else {
-			throw new IllegalStateException("The GraphicsFrame has not been set.");
-		}
+	public void toggleFullscreen() {
+    	if (graphicsFrame.getExtendedState() == JFrame.NORMAL) {
+    		graphicsFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    	}
+    	else {
+    		graphicsFrame.setExtendedState(JFrame.NORMAL);
+    	}
 	}
 	
 	
