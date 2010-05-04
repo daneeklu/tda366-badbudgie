@@ -32,7 +32,8 @@ public class LevelExit extends AbstractCollidable {
 	
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		touchedByPlayer = true;
+		if (other instanceof Player)
+			touchedByPlayer = true;
 	}
 	
 }
