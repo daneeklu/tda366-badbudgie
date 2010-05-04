@@ -98,9 +98,9 @@ public class Enemy extends AbstractUnit {
 	}
 	
 	@Override
-	public String update(){
+	public GameRoundMessage update(){
 		ai.initAI();
-		return "";
+		return GameRoundMessage.NoEvent;
 	}
 
 

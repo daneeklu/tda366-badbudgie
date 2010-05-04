@@ -1,5 +1,9 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.Iterator;
+
+import edu.chl.tda366badbudgie.core.AbstractGameObject.GameRoundMessage;
+
 
 /**
  * GameRound
@@ -61,20 +65,28 @@ public class GameRound {
 	 * AbstractGameObject.
 	 */
 	public void updateGameObjects() {
+		
 		// The objects pass back events as strings
-		String gameEvent;
-		for (AbstractGameObject ago : currentLevel.getGameObjects()) {
-			// Update each object
+		GameRoundMessage gameEvent;
+		
+		// Using iterator so that an object can be removed in the loop
+		for (Iterator<AbstractGameObject> i = currentLevel.getGameObjects().iterator(); i.hasNext(); ) {
+			AbstractGameObject ago = i.next();
+			
+			// Update each object and receive the passed back GameRoundMessage
 			gameEvent = ago.update();
 			
-			// See if an event requiring action from GameRound has occured
-			if (gameEvent.equals("nextlevel")) {
+			// See if an event requiring action from GameRound has occurred
+			if (gameEvent == GameRoundMessage.LevelFinished) {
 				currentLevel = LevelManager.getInstance().getLevel(++currentLevelNumber);
 				player = currentLevel.getPlayer();
 				break;
 			}
-			else if (gameEvent.equals("playerdied")) {
+			else if (gameEvent == GameRoundMessage.PlayerDied) {
 				// TODO: Player dies
+			}
+			else if (gameEvent == GameRoundMessage.RemoveObject) {
+				i.remove();
 			}
 		}
 	}

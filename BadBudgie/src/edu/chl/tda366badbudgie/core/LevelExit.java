@@ -23,11 +23,11 @@ public class LevelExit extends AbstractCollidable {
 	}
 
 	@Override
-	public String update() {
+	public GameRoundMessage update() {
 		if (touchedByPlayer) 
-			return "nextlevel";
+			return GameRoundMessage.LevelFinished;
 		else
-			return "";
+			return GameRoundMessage.NoEvent;
 	}
 	
 	@Override

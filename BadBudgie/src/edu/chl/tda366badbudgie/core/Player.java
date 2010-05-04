@@ -202,9 +202,9 @@ public class Player extends AbstractUnit {
 	}
 	
 	@Override
-	public String update(){
+	public GameRoundMessage update(){
 		
-		String gameEvent = "";
+		GameRoundMessage grMessage = GameRoundMessage.NoEvent;
 		
 		if(getFlyingEnergy() < maxFlyingEnergy){
 			setFlyingEnergy(getFlyingEnergy() + 1);
@@ -212,10 +212,6 @@ public class Player extends AbstractUnit {
 		
 		if(this.wep != null){
 			wep.setPosition(this.getPosition());
-		}
-		
-		if(health <= 0) {
-			gameEvent = "playerdied";
 		}
 		
 		if (flyingEnergy <= 0) {
@@ -232,8 +228,12 @@ public class Player extends AbstractUnit {
 		} else {
 			sprite.setAnimation("idle");
 		}
+
+		if(health <= 0) {
+			grMessage = GameRoundMessage.PlayerDied;
+		}
 		
-		return gameEvent;
+		return grMessage;
 		
 	}
 
