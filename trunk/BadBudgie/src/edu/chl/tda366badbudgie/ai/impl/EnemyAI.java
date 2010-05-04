@@ -68,8 +68,8 @@ public class EnemyAI implements IAI {
 				// Check for obstructing objects in the enemy's path
 				if (!rightHindrance && !leftHindrance) {
 					for (AbstractCollidable c : gr.getLevel().getCollidableObjects()) {
-						if (!(c instanceof Player)) {
-							// Ignore player
+						if (!(c instanceof Player) && AbstractCollidable.isPhysicalCollision(c.getClass(), e.getClass())) {
+							// Ignore non-physical collisions and the player
 							if (e.getDirection() == -1 && StaticUtilityMethods.checkPointCollision(leftCollCheck, c.getCollisionData())) {
 								leftHindrance = true;
 								break;

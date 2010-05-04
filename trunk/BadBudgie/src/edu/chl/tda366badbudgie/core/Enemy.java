@@ -64,6 +64,9 @@ public class Enemy extends AbstractUnit {
 					mtv.normalize().scalarDivision(2)));
 			this.setGroundContactObject(other);
 		}
+		else if (other instanceof Player) {
+			setDirection(-1 * getDirection());
+		}
 		
 		
 	}
