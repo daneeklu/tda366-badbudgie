@@ -20,7 +20,7 @@ public class LevelManager {
 	private List<Level> levels = new LinkedList<Level>();
 	
 	private LevelManager(){
-		/*
+		
 		levels.add(makeTestLevel());
 		levels.add(makeTestLevel2());
 		levels.add(makeTestLevel());
@@ -28,7 +28,7 @@ public class LevelManager {
 		levels.add(makeTestLevel());
 		levels.add(makeTestLevel2());
 		levels.add(makeTestLevel());
-		levels.add(makeTestLevel2());*/
+		levels.add(makeTestLevel2());
 	}
 	
 	/**
