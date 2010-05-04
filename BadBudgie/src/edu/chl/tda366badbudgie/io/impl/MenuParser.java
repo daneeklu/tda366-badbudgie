@@ -34,8 +34,7 @@ public class MenuParser extends AbstractParser{
 			int numItems = menuItemList.getLength();
 			
 			MenuItem[] menuItems = new MenuItem[numItems];
-			
-			System.out.println("items#: " + numItems);
+
 			for (int i = 0; i < numItems; i++) {
 				String itemName;
 				String itemTexture;
