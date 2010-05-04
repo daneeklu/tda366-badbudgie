@@ -19,7 +19,6 @@ public class Player extends AbstractUnit {
 	private static final double MOVE_FORCE = 2.0;
 	private static final double AIR_MOVE_FORCE = 0.2;
 	private static final double JUMP_FORCE = 36.0;
-	private static final double FLYING_FORCE = 0.75;
 	
 	private int health;
 	private int invincibilityTimer;
@@ -46,7 +45,7 @@ public class Player extends AbstractUnit {
 		setMass(1);
 		health = 100;
 		setFlyingEnergy(100);
-		setMaxFlyingEnergy(100);
+		setMaxFlyingEnergy(150);
 		
 		List<Animation> animations = new LinkedList<Animation>();
 		
@@ -194,7 +193,7 @@ public class Player extends AbstractUnit {
 			double yVel = getVelocity().getY();
 			applyForce(new Vector(0, yVel < 0 ? 1.5 : (6 - yVel) / 2));
 			
-			flyingEnergy -= 2;
+			flyingEnergy -= 4;
 		}
 		
 		
