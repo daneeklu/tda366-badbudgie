@@ -6,13 +6,13 @@
 	<!--Sprites used in the level -->
 	<sprites>
 		<sprite id="smurf" startanim="1" textureid="smurf">
-			<segments x=5 y=2>
+			<segments x="5" y="2" />
 			<animations>
 				<animationid>smurfloop</animationid>
 				<animationid>smurfstill</animationid>
 			</animations>
 		</sprite>
-	<sprites>
+	</sprites>
 	
 	<!--Animations used by sprites -->
 	<animations>
@@ -27,13 +27,10 @@
 		</animation>
 		<animation id="smurfstill" loop="false">
 			<frames>
-				<frame>
-					<index>3</index>
-					<duration>1</duration>
-				</frame>
+				<frame index="1" duration="1" />
 			</frames>
 		</animation>
-	<animations>
+	</animations>
 	
 	<!--Game objects placed in the level -->
 	<gameobjects>
@@ -44,8 +41,14 @@
 	
 	<!--Terrain segments used in the level -->
 	<terrainsections>
-		<terrain sprite="grass" friction="0.5" elasticity="0">
-			
+		<terrain x="-3" y="-10" sprite="grass" friction="0.5" elasticity="0">
+			<position x="0" y="0" />
+			<polygon>
+				<vector x="0" y="0" />
+				<vector x="2" y="0" />
+				<vector x="2" y="2" />
+				<vector x="0" y="2" />
+			</polygon>
 		</terrain>
 	</terrainsections>
 </leveldata>
