@@ -5,6 +5,7 @@ import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.util.Rectangle;
+import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * GameRenderer
@@ -49,9 +50,9 @@ public class GameRenderer {
 	 */
 	private static void drawTerrainSection(TerrainSection ts, IGraphics g) {
 		if (ts.getTexId() != null && !ts.getTexId().equals(""))
-			g.drawTexturedPolygon(ts.getPosition(),ts.getSurface(), ts.getTexId(), ts.getTexRes());
+			g.drawTexturedPolygon(new Vector(),ts.getSurface(), ts.getTexId(), ts.getTexRes());
 		else 
-			g.drawPolygon(ts.getPosition(),ts.getSurface());
+			g.drawPolygon(new Vector(),ts.getSurface());
 	}
 	
 	/**

@@ -120,6 +120,7 @@ public class LevelManager {
 		pcd.add(new Vector(-40, 40));
 		wep.setCollisionData(new Polygon(pcd));
 		wep.setSize(new Vector(60, 30));
+		wep.setMass(30);
 		level.addGameObject(wep);
 		player.setWeapon(wep);
 		
