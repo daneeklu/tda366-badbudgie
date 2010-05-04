@@ -15,7 +15,9 @@ import java.util.List;
 public class Polygon {
 
 	private ArrayList<Vector> vertices;
-
+	private Vector boundingBoxPosition;
+	private Vector boundingBoxSize;
+	
 	/**
 	 * Creates a new polygon with the given list of Vector2D objects as
 	 * vertices.
@@ -36,6 +38,9 @@ public class Polygon {
 		}
 		this.vertices = new ArrayList<Vector>(vertices.size());
 		this.vertices.addAll(vertices);
+		
+		calculateBoundingBox();
+		
 	}
 
 
@@ -122,6 +127,51 @@ public class Polygon {
 		ArrayList<Vector> r = new ArrayList<Vector>();
 		r.addAll(vertices);
 		return r;
+	}
+	
+	
+	/**
+	 * Calculates and stores the position, width and height of the 
+	 * minimal box containing this TerrainSection.
+	 */
+	private void calculateBoundingBox() {
+		
+		double minX = vertices.get(0).getX();
+		double maxX = minX;
+		double minY = vertices.get(0).getY();;
+		double maxY = minY;
+		
+		for (Vector v : vertices) {
+			if (v.getX() < minX)
+				minX = v.getX();
+			else if (v.getX() > maxX)
+				maxX = v.getX();
+			
+			if (v.getY() < minY)
+				minY = v.getY();
+			else if (v.getY() > maxY)
+				maxY = v.getY();
+			
+		}
+		
+		boundingBoxPosition = new Vector(minX, minY);
+		boundingBoxSize = new Vector(maxX - minX, maxY - minY);
+	}
+
+	/**
+	 * Returns the position of the minimum rectangle containing this polygon.
+	 * @return the position
+	 */
+	public Vector getBoundingBoxSize() {
+		return boundingBoxSize;
+	}
+
+	/**
+	 * Returns the size of the minimum rectangle containing this polygon.
+	 * @return the size
+	 */
+	public Vector getBoundingBoxPosition() {
+		return boundingBoxPosition;
 	}
 
 }

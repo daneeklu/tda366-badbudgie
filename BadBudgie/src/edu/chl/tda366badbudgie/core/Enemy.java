@@ -1,6 +1,5 @@
 package edu.chl.tda366badbudgie.core;
 
-import edu.chl.tda366badbudgie.ai.impl.SimpleAI;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
@@ -8,19 +7,17 @@ import edu.chl.tda366badbudgie.util.Vector;
  * 
  * Class representing enemy units in the game.
  * 
- * @author lumbo
+ * @author 
  *
  */
 public class Enemy extends AbstractUnit {
 	private static final double MOVE_FORCE = 0.9;
-	private static final double JUMP_FORCE = 6.0;
 	
 	private int health;
 	private int damage;
 	
-	private boolean isMovingLeft;
-	private boolean isMovingRight;
-	private SimpleAI ai;
+	
+	private int direction = 0;
 	
 	
 	/**
@@ -35,71 +32,23 @@ public class Enemy extends AbstractUnit {
 		health = 100;
 		setDamage(10);
 		this.sprite = sprite;
-		ai = new SimpleAI(this);
-		
-	}
-
-
-	/**
-	 * @param down true if the key was pressed, false if released
-	 */
-	public void moveLeft(boolean down) {
-		isMovingLeft = down;
-		
-	}
-
-	/**
-	 * @param down true if the key was pressed, false if released
-	 */
-	public void moveRight(boolean down) {
-		isMovingRight = down;
+		direction = -1;
 	}
 	
-	/**
-	 * @param down true if the key was pressed, false if released
-	 */
-	public void jumpOrFlap(boolean down) {
-		
-	}
-	
-	public void glide(boolean down) {
-
-	}
-	
-	public String getDirection(){
-		if(isMovingLeft){
-			return "left";
-		}
-		else if(isMovingRight){
-			return "right";
-		}
-		else{
-			return null;
-		}
-	}
-
 	
 	@Override
 	public void updateForces() {
 		
-		// Player wants to move left
-		if (isMovingLeft) {
-			if (!getGroundContactVector().hasZeroLength()) {
-				applyForce(getGroundContactVector().perpendicularCCW().scalarMultiplication(MOVE_FORCE));
-			}
-		}
 		
-		// Player wants to move right
-		if (isMovingRight) {
-			if (!getGroundContactVector().hasZeroLength()) {
-				applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE));
-			}
-		}
+		if (!getGroundContactVector().hasZeroLength()) 
+			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE * direction));
+
+
 	}
 	
 	@Override
 	public GameRoundMessage update(){
-		ai.initAI();
+		//ai.initAI();
 		return GameRoundMessage.NoEvent;
 	}
 
@@ -107,7 +56,7 @@ public class Enemy extends AbstractUnit {
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
 		// Set the ground contact vector
-		if (mtv.getY() > 0) {
+		if (mtv.getY() > 0 && other instanceof TerrainSection) {
 			// Player has ground beneath his feet
 			// Set ground contact vector to mean of previous and new contact vector, 
 			// to allow multiple contacts in one loop
@@ -138,4 +87,21 @@ public class Enemy extends AbstractUnit {
 	public int getDamage() {
 		return damage;
 	}
+
+	/**
+	 * Gets the enemy's direction.
+	 * @return 1 if heading right, -1 if heading left
+	 */
+	public int getDirection() {
+		return direction;
+	}
+
+	/**
+	 * Sets the enemy's direction.
+	 * @param direction 1 if heading right, -1 if heading left
+	 */
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+	
 }

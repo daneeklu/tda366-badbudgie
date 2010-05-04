@@ -11,7 +11,7 @@ public class SimpleAI {
 	public SimpleAI(Enemy enemy){
 		this.enemy = enemy;
 		//enemy.applyForce(new Vector(5, 0));
-		enemy.moveRight(true);
+		//enemy.moveRight(true);
 	}
 
 	public void initAI() {
@@ -21,7 +21,7 @@ public class SimpleAI {
 		if(new Vector(1, 0).dotProduct(groundContact) == 0 || 
 				new Vector(-1, 0).dotProduct(groundContact) == 0){
 			if(!isTooClose()){
-				changeDirection();
+//				changeDirection();
 			}
 		}
 	}
@@ -29,25 +29,25 @@ public class SimpleAI {
 	/**
 	 * Changes the direction of the enemy
 	 */
-	public void changeDirection(){
-		setControlPosition();
-		if(enemy.getDirection().equals("left")){
-			//System.out.println("Changes direction to Left");
-			enemy.moveLeft(false);
-			enemy.moveRight(true);
-		}
-		else if(enemy.getDirection().equals("right")){
-			//System.out.println("Changes direction to Right");
-			enemy.moveLeft(true);
-			enemy.moveRight(false);
-		}
-		
-		/*
-		 * Gives the enemy a little boost if he gets stuck in the graphics,
-		 * often caused when starting in a steep hill. 
-		 */
-		enemy.applyForce(new Vector(0,1));
-	}
+//	public void changeDirection(){
+//		setControlPosition();
+//		if(enemy.getDirection().equals("left")){
+//			//System.out.println("Changes direction to Left");
+//			enemy.moveLeft(false);
+//			enemy.moveRight(true);
+//		}
+//		else if(enemy.getDirection().equals("right")){
+//			//System.out.println("Changes direction to Right");
+//			enemy.moveLeft(true);
+//			enemy.moveRight(false);
+//		}
+//		
+//		/*
+//		 * Gives the enemy a little boost if he gets stuck in the graphics,
+//		 * often caused when starting in a steep hill. 
+//		 */
+//		enemy.applyForce(new Vector(0,1));
+//	}
 	
 	
 	/**
@@ -79,7 +79,7 @@ public class SimpleAI {
 	 */
 	public void isCollision(boolean b){
 		if(b){
-			changeDirection();
+//			changeDirection();
 		}
 	}
 
