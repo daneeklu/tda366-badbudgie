@@ -292,7 +292,17 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	    gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
 		setActiveTexture(textureId);
 
-		gl.glBegin(GL.GL_POLYGON);
+		switch (p.getVertices().size()) {
+		case 3:
+			gl.glBegin(GL.GL_TRIANGLES);
+			break;
+		case 4:
+			gl.glBegin(GL.GL_QUADS);
+			break;
+		default:
+			gl.glBegin(GL.GL_POLYGON);
+			break;
+		}
 		
 		for (Vector v : p.getVertices()) {
 			
