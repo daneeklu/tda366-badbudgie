@@ -14,9 +14,9 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class TerrainSection extends AbstractCollidable {
 	
-	private Polygon surface;			//The Quad object that stores the terrain data.
 	private String texId;
 	private double texRes;
+
 	
 	/**
 	 * Creates a new TerrainQuad from the given polygon and properties.
@@ -27,10 +27,10 @@ public class TerrainSection extends AbstractCollidable {
 	 */
 	public TerrainSection(Polygon surface, double friction, double elasticity) {
 		super(surface, friction, elasticity);
-		this.surface = surface;
 		stationary = true;
 	}
-	
+
+
 	/**
 	 * Creates a new TerrainQuad from the given vertices and properties.
 	 * 
@@ -41,18 +41,18 @@ public class TerrainSection extends AbstractCollidable {
 	public TerrainSection(Polygon surface, double friction, double elasticity, String texId, double texRes) {
 		super(surface, friction, elasticity);
 		stationary = true;
-		this.surface = surface;
 		this.setTexId(texId);
 		this.setTexRes(texRes);
 	}
 	
 
 	/**
-	 * Returns the Polygon object forming this TerrainSection
+	 * Returns the Polygon object forming this TerrainSection, 
+	 * in this case the same as the collision data.
 	 * @return the Polygon object
 	 */
 	public Polygon getSurface() {
-		return surface;
+		return getCollisionData();
 	}
 
 
@@ -89,4 +89,5 @@ public class TerrainSection extends AbstractCollidable {
 		return texRes;
 	}
 
+	
 }

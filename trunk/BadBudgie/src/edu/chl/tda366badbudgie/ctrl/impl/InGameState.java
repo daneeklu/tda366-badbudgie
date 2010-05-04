@@ -1,12 +1,14 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
+import edu.chl.tda366badbudgie.ai.IAI;
+import edu.chl.tda366badbudgie.ai.impl.EnemyAI;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.GameRenderer;
-import edu.chl.tda366badbudgie.physics.CollisionHandler;
-import edu.chl.tda366badbudgie.physics.MovementHandler;
-import edu.chl.tda366badbudgie.physics.Physics;
+import edu.chl.tda366badbudgie.physics.impl.CollisionHandler;
+import edu.chl.tda366badbudgie.physics.impl.MovementHandler;
+import edu.chl.tda366badbudgie.physics.impl.Physics;
 
 /**
  * InGameState
@@ -20,19 +22,22 @@ public class InGameState implements IState {
 
 	private GameRound gameRound;
 	private Physics physics;
+	private IAI enemyAi;
 	private boolean mouseDown;
 	private double mX, mY;
 	
 	
 	public InGameState(GameRound gr) {
 		gameRound = gr;
-		physics = new Physics(gr,new CollisionHandler(), new MovementHandler());
+		physics = new Physics();
+		enemyAi = new EnemyAI();
 	}
 	
 	@Override
 	public void logic() {
 		
 		gameRound.updateGameObjects();
+		enemyAi.doAI(gameRound);
 		physics.doPhysics(gameRound);
 	}
 	

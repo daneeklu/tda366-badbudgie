@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.physics;
+package edu.chl.tda366badbudgie.physics.impl;
 
 import java.util.List;
 
