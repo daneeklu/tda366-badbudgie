@@ -25,29 +25,30 @@ public class TerrainSection extends AbstractCollidable {
 	 * @param friction 
 	 * @param elasticity
 	 */
-	public TerrainSection(Polygon vertices, double friction, double elasticity) {
-		super(vertices, friction, elasticity);
-		surface = vertices;
+	public TerrainSection(Polygon surface, double friction, double elasticity) {
+		super(surface, friction, elasticity);
+		this.surface = surface;
 		stationary = true;
 	}
 	
 	/**
 	 * Creates a new TerrainQuad from the given vertices and properties.
 	 * 
-	 * @param surfaceData list of vectors representing the vertices of the quad.
+	 * @param surface list of vectors representing the vertices of the quad.
 	 * @param friction 
 	 * @param elasticity
 	 */
-	public TerrainSection(Polygon surfaceData, double friction, double elasticity, String texId, double texRes) {
-		super(surfaceData, friction, elasticity);
+	public TerrainSection(Polygon surface, double friction, double elasticity, String texId, double texRes) {
+		super(surface, friction, elasticity);
 		stationary = true;
+		this.surface = surface;
 		this.setTexId(texId);
 		this.setTexRes(texRes);
 	}
 	
 
 	/**
-	 * Returns the Polygon object making this TerrainSection
+	 * Returns the Polygon object forming this TerrainSection
 	 * @return the Polygon object
 	 */
 	public Polygon getSurface() {
