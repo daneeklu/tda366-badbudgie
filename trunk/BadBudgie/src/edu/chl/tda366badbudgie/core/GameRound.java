@@ -53,9 +53,6 @@ public class GameRound {
 		if (id.equals("jump")) {
 			player.jumpOrFlap(down);
 		}
-		if (id.equals("moveup")) {
-			player.glide(down);
-		}
 
 	}
 

@@ -86,7 +86,6 @@ public class DebugInfoRenderer {
 					addDebugText("vx:" + p.getVelocity().getX() + " vy:" + p.getVelocity().getY());
 					addDebugText("fx:" + p.getForce().getX() + " fy:" + p.getForce().getY());
 					addDebugText("FlyingEnergy:" + p.getFlyingEnergy());
-					addDebugText("WingTimer:" + p.getWingTimer());
 					addDebugText("Health:" + p.getHealth());
 				}
 				
