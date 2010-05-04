@@ -65,19 +65,5 @@ public class GraphicsFrame extends JFrame {
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
     }
     
-    /**
-     * Set the frame to fullscreen or windowed. 
-     * 
-     * @param fullscreen true if fullscreen
-     */
-    public void setFullscreen(boolean fullscreen) {
-    	if (fullscreen) {
-    		setExtendedState(MAXIMIZED_BOTH);
-    	}
-    	else {
-    		setExtendedState(NORMAL);
-    	}
-    }
 	
-
 }

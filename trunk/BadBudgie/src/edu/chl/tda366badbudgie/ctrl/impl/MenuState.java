@@ -56,7 +56,7 @@ public class MenuState implements IState {
 					StateContext.getInstance().setState(StateContext.getInstance().getGameState());
 			} else if (selected.equals("options")) {
 				//TODO: Add options dialog, selecting options temporarily switches to fullscreen
-				StateContext.getInstance().setFullscreen(true);
+				StateContext.getInstance().toggleFullscreen();
 			} else if (selected.equals("exit")) {
 				menu.showConfirmDialog();
 
