@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gamedata>
+	<menu path="config/menu.xml" />
+
 	<textures>
 		<texture id="intro" path="res/introscreen.png"/>
 		<texture id="exit" path="res/exit.png"/>

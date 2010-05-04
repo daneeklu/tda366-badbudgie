@@ -11,9 +11,9 @@ import org.xml.sax.SAXException;
 import edu.chl.tda366badbudgie.io.IFileManager;
 
 
-/**
+/** 
  * A filemanager, implementing the IFileManager interface.
- * @author daniel
+ * @author d.skalle
  *
  */
 public class FileManager implements IFileManager{

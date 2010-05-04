@@ -14,6 +14,7 @@ import edu.chl.tda366badbudgie.util.Rectangle;
  */
 public class Menu {
 	
+	private String id;
 	private MenuItem[] menuItems;
 	private int currentItem;
 	private Rectangle bounds;
@@ -21,29 +22,22 @@ public class Menu {
 	
 	private ConfirmDialog dialog;
 	
-	public Menu() {
-		
+	public Menu(String id, String texId, Rectangle bounds, MenuItem[] items) {
 		dialog = null;
-		texId = "intro";
-		bounds = new Rectangle(0,0,800,600);
-		
-		menuItems = new MenuItem[4];
-		
-		menuItems[0] = new MenuItem("newgame",
-				new Rectangle(240, 240, 320, 80));
-		
-		menuItems[1] = new MenuItem("options",
-				new Rectangle(240, 140, 320, 80));
-		
-		menuItems[2] = new MenuItem("exit",
-				new Rectangle(240, 40, 320, 80));
-		
-		menuItems[3] = new MenuItem("resume",
-				new Rectangle(240, 340, 320, 80));
-		
-		menuItems[3].setEnabled(false);
+		this.id = id;
+		this.texId = texId;
+		this.bounds = bounds;
+		this.menuItems = items;
 		
 		setCurrentItem(0);
+	}
+	
+	/**
+	 * Get the id of the menu
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
 	}
 	
 	/**
@@ -154,8 +148,9 @@ public class Menu {
 	 */
 	public String getSelected() {
 
-		if (dialog == null)
+		if (dialog == null) {
 			return menuItems[currentItem].getAction();
+		}
 		
 		if (dialog.getValue()) {
 			dialog = null;
