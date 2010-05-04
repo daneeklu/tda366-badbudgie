@@ -36,9 +36,10 @@ public class InGameState implements IState {
 	@Override
 	public void logic() {
 		
-		gameRound.updateGameObjects();
+
 		enemyAi.doAI(gameRound);
-		physics.doPhysics(gameRound);
+		physics.doPhysics(gameRound);		
+		gameRound.updateGameObjects();
 	}
 	
 	@Override
