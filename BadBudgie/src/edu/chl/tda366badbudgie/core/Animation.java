@@ -12,22 +12,36 @@ import java.util.List;
  */
 public class Animation {
 
-	private List<Frame> frames;
+	private Frame[] frames;
 	private String animId;
 	private boolean loop;
 	
-	public Animation(String animId, List<Integer> indices, List<Double> durationTimes, boolean loop){
-		frames = new ArrayList<Frame>(indices.size());
+	public Animation(String animId, int[] indices, double[] durationTimes, boolean loop){
+		frames = new Frame[indices.length];
 		
-		for(int i = 0; i < indices.size(); i ++){
-			frames.add(new Frame(indices.get(i), durationTimes.get(i)));
+		for(int i = 0; i < indices.length; i ++){
+			frames[i] = new Frame(indices[i], durationTimes[i]);
 		}
 		this.loop = loop;
 		this.animId = animId;
 	}
 	
-	public Animation(String animId, List<Integer> indices, List<Double> durationTimes){
+	public Animation(String animId, int[] indices, double durationTime, boolean loop){
+		frames = new Frame[indices.length];
+		
+		for(int i = 0; i < indices.length; i ++){
+			frames[i] = new Frame(indices[i], durationTime);
+		}
+		this.loop = loop;
+		this.animId = animId;
+	}
+	
+	public Animation(String animId, int[] indices,  double[] durationTimes){
 		this(animId, indices, durationTimes, false);
+	}
+	
+	public Animation(String animId, int[] indices, double durationTime){
+		this(animId, indices, durationTime, false);
 	}
 	
 	/**
@@ -36,14 +50,22 @@ public class Animation {
 	 * @param animId
 	 */
 	public Animation(String id, int index){
-		frames = new ArrayList<Frame>(1);
-		frames.add(new Frame(index, 1));
+		frames = new Frame[1];
+		frames[0] = new Frame(index, 1);
 		this.loop = false;
 		this.animId = id;
 	}
 	
 	public int getFrameIndex(int frame) {
-		return frames.get(frame).getIndex();
+		return frames[frame].getIndex();
+	}
+	
+	public double getFrameDuration(int frame) {
+		return frames[frame].getDuration();
+	}
+	
+	public Frame[] getFrames() {
+		return frames;
 	}
 	
 	/**

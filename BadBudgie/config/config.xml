@@ -6,7 +6,7 @@
 		<texture id="smurf" path="res/SmurfSpin.png"/>
 		<texture id="newgame" path="res/newgame.png"/>
 		<texture id="options" path="res/options.png"/>
-		<texture id="budgie" path="res/budgiesprite_highres.png"/>
+		<texture id="budgie" path="res/budgiesheet.png"/>
 		<texture id="enemy" path="res/test_enemy.png"/>
 		<texture id="rock" path="res/rock.png"/>
 		<texture id="confirm:exit" path="res/confirm_exit.png"/>

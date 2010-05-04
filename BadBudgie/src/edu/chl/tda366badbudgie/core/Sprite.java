@@ -19,6 +19,7 @@ public class Sprite {
 	private int horFrames, verFrames;
 	private String currentAnim;
 	private int currentFrame;
+	private double currentTime;
 	private Map<String, Animation> animations;
 	
 	/**
@@ -35,7 +36,7 @@ public class Sprite {
 		this.horFrames=horizontalFrames;
 		this.verFrames=verticalFrames;
 		this.animations = new HashMap<String, Animation>();
-		
+		currentTime = 0;
 
 		if (animations != null && !animations.isEmpty()) {
 			for (Animation a : animations) {
@@ -48,6 +49,7 @@ public class Sprite {
 			currentAnim = "idle";
 			currentFrame = 0;
 		}
+		
 	}
 	
 	/**
@@ -124,8 +126,27 @@ public class Sprite {
 	 * @param animId the id of the animation.
 	 */
 	public void setAnimation(String animId) {
-		if (animations.containsKey(animId));
-			this.currentAnim = animId;
+		if (currentAnim.equals(animId)) return;
+		
+		if (animations.containsKey(animId)) {
+			currentAnim = animId;
+			currentTime = 0;
+			currentFrame = 0;
+		}
+	}
+	
+	public void animate() {
+		
+		currentTime+=1.0;
+		
+		if(currentTime >= animations.get(currentAnim).getFrameDuration(currentFrame)) {
+			currentFrame++;
+			currentTime = 0;
+			if(currentFrame >= animations.get(currentAnim).getFrames().length) {
+				currentFrame = 0;
+			}
+		}
+		
 	}
 	
 }

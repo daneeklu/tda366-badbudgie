@@ -81,11 +81,11 @@ public class LevelManager {
 		
 		//Animation test
 		
-		List<Double> durations = new LinkedList<Double>();
-		List<Integer> indices = new LinkedList<Integer>();
-		for(int i = 0; i <10; i++){
-			durations.add(0.1);
-			indices.add(i+1);
+		double[] durations = new double[10];
+		int[] indices = new int[10];
+		for(int i = 0; i <indices.length; i++){
+			durations[i] = 0.1;
+			indices[i] = i;
 		}
 		List<Animation> anims = new LinkedList<Animation>();
 		anims.add(new Animation("",indices, durations));
@@ -290,11 +290,11 @@ public class LevelManager {
 		
 		//Animation test
 		
-		List<Double> durations = new LinkedList<Double>();
-		List<Integer> indices = new LinkedList<Integer>();
-		for(int i = 0; i <10; i++){
-			durations.add(0.1);
-			indices.add(i+1);
+		double[] durations = new double[10];
+		int[] indices = new int[10];
+		for(int i = 0; i <indices.length; i++){
+			durations[i] = 0.1;
+			indices[i] = i;
 		}
 		List<Animation> anims = new LinkedList<Animation>();
 		anims.add(new Animation("",indices, durations));
