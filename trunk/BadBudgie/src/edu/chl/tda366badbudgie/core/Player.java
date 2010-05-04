@@ -191,7 +191,9 @@ public class Player extends AbstractUnit {
 		
 		// Player is flying
 		if (flying && flyingEnergy > 0) {
-			applyForce(new Vector(0, FLYING_FORCE));
+			double yVel = getVelocity().getY();
+			applyForce(new Vector(0, yVel < 0 ? 1.5 : (6 - yVel) / 2));
+			
 			flyingEnergy -= 2;
 		}
 		
@@ -216,6 +218,10 @@ public class Player extends AbstractUnit {
 			gameEvent = "playerdied";
 		}
 		
+		if (flyingEnergy <= 0) {
+			flying = false;
+		}
+		
 		if(invincibilityTimer > 0) {
 			invincibilityTimer--;
 		}
@@ -235,15 +241,17 @@ public class Player extends AbstractUnit {
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
 		
-		
-		// Set the ground contact vector
-		if (mtv.getY() > 0) {
-			// Player has ground beneath his feet
-			// Set ground contact vector to mean of previous and new contact vector, 
-			// to allow multiple contacts in one loop
-			this.setGroundContactVector(this.getGroundContactVector().add(
-					mtv.normalize().scalarDivision(2)));
-			this.setGroundContactObject(other);
+		if (other instanceof TerrainSection) {
+			// Set the ground contact vector
+			if (mtv.getY() > 0) {
+				// Player has ground beneath his feet
+				// Set ground contact vector to mean of previous and new contact vector, 
+				// to allow multiple contacts in one loop
+				this.setGroundContactVector(this.getGroundContactVector().add(
+						mtv.normalize().scalarDivision(2)));
+				this.setGroundContactObject(other);
+			}
+			flying = false;
 		}
 		
 		// Enemy hurts player
