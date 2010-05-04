@@ -1,12 +1,18 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
-
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Menu;
+import edu.chl.tda366badbudgie.core.MenuManager;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.MenuRenderer;
 
+/**
+ * A state for when the menu is showing
+ * 
+ * @author d.skalle
+ *
+ */
 public class MenuState implements IState {
 
 	private Menu menu;
@@ -14,7 +20,7 @@ public class MenuState implements IState {
 	boolean startGame = false;
 	
 	public MenuState () {
-		menu = new Menu();
+		menu = MenuManager.getInstance().getMenu("mainmenu");
 	}
 	
 	@Override

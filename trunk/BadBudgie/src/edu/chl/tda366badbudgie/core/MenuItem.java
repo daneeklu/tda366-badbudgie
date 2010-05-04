@@ -16,7 +16,7 @@ import edu.chl.tda366badbudgie.util.Rectangle;
 public class MenuItem {
 	
 	private Sprite sprite;
-	Rectangle bounds;
+	private Rectangle bounds;
 	private String action;
 	private boolean selected;
 	private boolean enabled;
@@ -28,7 +28,7 @@ public class MenuItem {
 	 * @param position the position of the MenuItem.
 	 * @param size the size of the MenuItem.
 	 */
-	public MenuItem(String action, String texId, Rectangle bounds) {
+	public MenuItem(String action, String texId, Rectangle bounds, boolean enabled) {
 		
 		Animation idleAnim = new Animation("idle",0);
 		
@@ -41,21 +41,13 @@ public class MenuItem {
 		sprite = new Sprite(texId, 1, 4, animList);
 		this.bounds = bounds;
 		this.selected = false;
-		enabled = true;
 		this.action = action;
+		this.enabled = enabled;
 		
 	}
 	
-	/**
-	 * Create a MenuItem.
-	 * @param id the id for both the action string and the texture.
-	 * @param position the position of the MenuItem.
-	 * @param size the size of the MenuItem.
-	 */
-	public MenuItem(String id, Rectangle bounds) {
-		
-		this(id, id, bounds);
-		
+	public MenuItem(String action, String texId, Rectangle bounds) {
+		this(action, texId, bounds, true);
 	}
 	
 	/**
@@ -118,7 +110,5 @@ public class MenuItem {
 	public String getAction() {
 		return action;
 	}
-	
-	
 
 }

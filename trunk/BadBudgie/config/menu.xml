@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu id="mainmenu" tex="intro" bounds="0,0,800,600">
+	<menuitem id="newgame" tex="newgame" bounds="240,240,320,80" />
+	<menuitem id="options" tex="options" bounds="240,140,320,80" />
+	<menuitem id="exit" tex="exit" bounds="240,40,320,80" />
+	<menuitem id="resume" tex="resume" bounds="240,340,320,80" />
+</menu>

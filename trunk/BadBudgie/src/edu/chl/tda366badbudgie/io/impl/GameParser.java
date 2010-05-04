@@ -15,10 +15,11 @@ import org.xml.sax.SAXException;
 import edu.chl.tda366badbudgie.core.ImageDataHandler;
 
 /**
- * GameParser Validates and parses the game xml. Loads texture data to core and
- * level data to levelmanager.
+ * GameParser 
+ * Validates and parses the game xml. Loads texture data to core and
+ * level data to levelmanager. Loads menus to the MenuManager.
  * 
- * @author jesper
+ * @author jesper, d.skalle
  * 
  */
 public class GameParser extends AbstractParser {
@@ -31,6 +32,36 @@ public class GameParser extends AbstractParser {
 	public void parseData() {
 		Document xml = this.getData();
 		// Extracts game data
+		
+		// Load and delegates menu data
+		NodeList menuList = xml.getElementsByTagName("menu");
+
+		for (int l = 0; l < menuList.getLength(); l++) {
+
+			String xmlPath = menuList.item(l).getAttributes().getNamedItem(
+					"path").getNodeValue();
+
+			// TODO: Break up this sheit properly. Add validation check.
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder db;
+			try {
+				db = dbFactory.newDocumentBuilder();
+				MenuParser menuParser = new MenuParser(db
+						.parse(xmlPath));
+				menuParser.parseData();
+
+			} catch (SAXException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		
 		// Loads and delegates level data
 		NodeList levelList = xml.getElementsByTagName("level");
 
