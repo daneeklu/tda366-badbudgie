@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -46,7 +47,18 @@ public class Player extends AbstractUnit {
 		health = 100;
 		setFlyingEnergy(100);
 		setMaxFlyingEnergy(100);
-		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
+		
+		List<Animation> animations = new LinkedList<Animation>();
+		
+		animations.add(new Animation("idle",0));
+		
+		int[] indices = {4,5,6,7,6};
+		
+		animations.add(new Animation("idle",0));
+		animations.add(new Animation("run",indices,5));
+		
+		sprite = new Sprite(texId, 4, 4, animations);
+		//sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
 		
 	}
 
@@ -206,6 +218,13 @@ public class Player extends AbstractUnit {
 		
 		if(invincibilityTimer > 0) {
 			invincibilityTimer--;
+		}
+		
+		sprite.animate();
+		if (isMovingLeft || isMovingRight) {
+			sprite.setAnimation("run");
+		} else {
+			sprite.setAnimation("idle");
 		}
 		
 		return gameEvent;
