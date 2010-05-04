@@ -22,10 +22,13 @@ public class Polygon {
 	 * The vertices must form a simple, convex polygon.
 	 * A list of invalid vertices will throw an IllegalArgumentException.
 	 * @param vertices
-	 *            the list of vertices
+	 *            	the list of vertices
+	 * @throws IllegalArgumentException if the list of vertices 
+	 * 				does not form a simple, convex polygon.
 	 */
 	public Polygon(List<Vector> vertices) {
 
+		// 
 		if (!checkConvexity(vertices)) {
 			throw new IllegalArgumentException();
 		} else if (!checkCCW(vertices)) {

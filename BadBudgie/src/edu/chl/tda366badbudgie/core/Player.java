@@ -17,19 +17,18 @@ public class Player extends AbstractUnit {
 	
 	private static final double MOVE_FORCE = 2.0;
 	private static final double AIR_MOVE_FORCE = 0.2;
-	private static final double JUMP_FORCE = 16.0;
-	private static final double GLIDE_FORCE_RATIO = 0.15;
-	private static final double[] FLYING_FORCE = {0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 0.5, 0.2, 0.1, 0.1};
+	private static final double JUMP_FORCE = 36.0;
+	private static final double FLYING_FORCE = 0.75;
 	
 	private int health;
 	private int invincibilityTimer;
 	
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
-	private boolean isGliding;
-	private int wingTimer;
-	private double flyingEnergy;
+
+	private int flyingEnergy;
 	private int maxFlyingEnergy;
+	private boolean flying = false;
 	
 	private Weapon wep;
 	private Projectile bullet;
@@ -46,8 +45,7 @@ public class Player extends AbstractUnit {
 		setMass(1);
 		health = 100;
 		setFlyingEnergy(100);
-		setMaxFlyingEnergy(300);
-		setWingTimer(0);
+		setMaxFlyingEnergy(100);
 		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
 		
 	}
@@ -92,31 +90,21 @@ public class Player extends AbstractUnit {
 			
 			if (!groundContactVector.hasZeroLength()) {
 				// Instant jump
-				applyForce(groundContactVector.normalize().scalarMultiplication(JUMP_FORCE));
-				getGroundContactObject().applyForce(groundContactVector.normalize().scalarMultiplication(-JUMP_FORCE));
+				applyForce(groundContactVector.project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
+				// If we should follow Newtons 2nd law:
+				//getGroundContactObject().applyForce(groundContactVector.normalize().scalarMultiplication(-JUMP_FORCE));
 			}
 			else {
-				// Start wing flap
-				if (getFlyingEnergy() >= 5 && getWingTimer() == 0) {
-					setWingTimer(20);
-				}
+				// fly
+				flying = true;
 			}
 		}
 		else {
-			if (getWingTimer() > 11)
-				setWingTimer(9);
+			flying = false;
 		}
 		
 	}
 	
-	public void glide(boolean down) {
-		if (down) {
-			isGliding = true;
-		}
-		else {
-			isGliding = false;
-		}
-	}
 	
 	/**
 	 * 
@@ -189,33 +177,13 @@ public class Player extends AbstractUnit {
 			}
 		}
 		
-		
-		// Wings flapping
-		if (getWingTimer() > 0 && getFlyingEnergy() > 0) {
-			// Flying straight up
-			if (!isMovingLeft && !isMovingRight) {
-				applyForce(new Vector(0, FLYING_FORCE[getWingTimer()-1]));
-			}
-			// Flying to the left
-			if (isMovingLeft) {
-				applyForce(new Vector(FLYING_FORCE[getWingTimer()-1] * -0.2, FLYING_FORCE[getWingTimer()-1] * 0.7));
-			}
-			// Flying to the right
-			if (isMovingRight) {
-				applyForce(new Vector(FLYING_FORCE[getWingTimer()-1] * 0.2, FLYING_FORCE[getWingTimer()-1] * 0.7));
-			}
-
-			setFlyingEnergy(getFlyingEnergy() - (FLYING_FORCE[getWingTimer()-1] * 6));
+		// Player is flying
+		if (flying && flyingEnergy > 0) {
+			applyForce(new Vector(0, FLYING_FORCE));
+			flyingEnergy -= 2;
 		}
 		
-		// Gliding
-		if (isGliding) {
-			if (getVelocity().getY() < 0) {
-				applyForce(new Vector(0, GLIDE_FORCE_RATIO * -getVelocity().getY()));
-			}
-			// Gliding force due to horizontal movement
-			applyForce(new Vector(0, GLIDE_FORCE_RATIO / 15 * Math.abs(getVelocity().getX())));
-		}
+		
 		
 	}
 	
@@ -226,10 +194,6 @@ public class Player extends AbstractUnit {
 		
 		if(getFlyingEnergy() < maxFlyingEnergy){
 			setFlyingEnergy(getFlyingEnergy() + 1);
-		}
-		
-		if (getWingTimer() > 0) {
-			setWingTimer(getWingTimer() - 1);
 		}
 		
 		if(this.wep != null){
@@ -288,29 +252,15 @@ public class Player extends AbstractUnit {
 	/**
 	 * @param flyingEnergy the flyingEnergy to set
 	 */
-	public void setFlyingEnergy(double flyingEnergy) {
+	public void setFlyingEnergy(int flyingEnergy) {
 		this.flyingEnergy = flyingEnergy;
 	}
 
 	/**
 	 * @return the flyingEnergy
 	 */
-	public double getFlyingEnergy() {
+	public int getFlyingEnergy() {
 		return flyingEnergy;
-	}
-
-	/**
-	 * @param wingTimer the wingTimer to set
-	 */
-	public void setWingTimer(int wingTimer) {
-		this.wingTimer = wingTimer;
-	}
-
-	/**
-	 * @return the wingTimer
-	 */
-	public int getWingTimer() {
-		return wingTimer;
 	}
 	
 	/**
