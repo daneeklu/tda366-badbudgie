@@ -36,6 +36,8 @@ public class GameRenderer {
 			drawGameObject(go, g);
 		}
 		
+		renderHUD();
+		
 		DebugInfoRenderer.getInstance().drawDebugInfo(gameRound, g);
 		
 		g.stopRendering();
@@ -64,6 +66,14 @@ public class GameRenderer {
 		g.drawSprite(go.getSprite(), new Rectangle(
 				go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2,
 				go.getWidth(), go.getHeight()));
+	}
+	
+	/**
+	 * Render heads up display showing score and health among 
+	 * other things about the players status.
+	 */
+	private static void renderHUD() {
+		
 	}
 
 }

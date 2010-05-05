@@ -29,7 +29,7 @@ public class Enemy extends AbstractUnit {
 		setFriction(0.5);
 		setElasticity(0.5);
 		setMass(1);
-		health = 100;
+		health = 40;
 		setDamage(10);
 		this.sprite = sprite;
 		direction = -1;
@@ -48,7 +48,9 @@ public class Enemy extends AbstractUnit {
 	
 	@Override
 	public GameRoundMessage update(){
-		//ai.initAI();
+		if (health <= 0)
+			return GameRoundMessage.RemoveObject;
+		
 		return GameRoundMessage.NoEvent;
 	}
 
@@ -66,6 +68,9 @@ public class Enemy extends AbstractUnit {
 		}
 		else if (other instanceof Player) {
 			setDirection(-1 * getDirection());
+		}
+		else if (other instanceof Projectile) {
+			health -= ((Projectile) other).getDamage();
 		}
 		
 		

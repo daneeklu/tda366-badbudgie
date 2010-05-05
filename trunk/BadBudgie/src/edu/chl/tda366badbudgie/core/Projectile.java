@@ -5,6 +5,8 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class Projectile extends AbstractItem {
 	 
 	private int lifeTimer = 200;
+	private boolean hasCollided = false;
+	private int damage = 10;
 	
 	public Projectile(String texId, double x, double y, Player player){
 		
@@ -21,7 +23,7 @@ public class Projectile extends AbstractItem {
 
 	@Override
 	public GameRoundMessage update() {
-		if (--lifeTimer == 0)
+		if (--lifeTimer == 0 || hasCollided)
 			return GameRoundMessage.RemoveObject;
 		
 		return GameRoundMessage.NoEvent;
@@ -32,14 +34,14 @@ public class Projectile extends AbstractItem {
 
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		if (mtv.getY() > 0) {
-			// Projectile has ground beneath his feet
-			// Set ground contact vector to mean of previous and new contact vector, 
-			// to allow multiple contacts in one loop
-			this.setGroundContactVector(this.getGroundContactVector().add(
-					mtv.normalize().scalarDivision(2)));
-			this.setGroundContactObject(other);
+		if (!(other instanceof Player) && AbstractCollidable.isPhysicalCollision(this.getClass(), other.getClass())) {
+			hasCollided = true;
 		}
+	}
+
+
+	public int getDamage() {
+		return damage;
 	}
 	
 }
