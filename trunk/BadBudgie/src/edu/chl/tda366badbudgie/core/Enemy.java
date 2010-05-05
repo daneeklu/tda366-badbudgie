@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -15,12 +18,20 @@ public class Enemy extends AbstractUnit {
 	
 	// Default constructor parameters
 	private static final Vector ENEMY_SIZE = new Vector(120, 120);
-	private static final Sprite ENEMY_SPRITE = new Sprite("enemy");
+	private static final Sprite ENEMY_SPRITE;
 	private static final Polygon ENEMY_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
 	private static final double ENEMY_FRICTION = 0.5;
 	private static final double ENEMY_ELASTICITY = 0.2;
 	private static final int ENEMY_DAMAGE = 10;
 	private static final int ENEMY_DIRECTION = 1;
+	
+	static {
+		List<Animation> animations = new LinkedList<Animation>();
+		int[] indices = {4,5,6,7};
+		animations.add(new Animation("idle",0));
+		animations.add(new Animation("run",indices,5));
+		ENEMY_SPRITE = new Sprite("enemy", 4, 4, animations);
+	}
 	
 	// Movement constants
 	private static final double MOVE_FORCE = 0.9;
@@ -47,6 +58,7 @@ public class Enemy extends AbstractUnit {
 		setHealth(100);
 		setDamage(damage);
 		setDirection(direction);
+		getSprite().setAnimation("run");
 	}
 	
 	/**
@@ -69,6 +81,9 @@ public class Enemy extends AbstractUnit {
 	
 	@Override
 	public GameRoundMessage update(){
+		
+		getSprite().animate();
+		
 		if (getHealth() <= 0)
 			return GameRoundMessage.RemoveObject;
 		

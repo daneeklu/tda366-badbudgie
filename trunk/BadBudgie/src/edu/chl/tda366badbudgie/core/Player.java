@@ -21,7 +21,6 @@ public class Player extends AbstractUnit {
 	private static final Sprite PLAYER_SPRITE;
 	static {
 		List<Animation> animations = new LinkedList<Animation>();
-		animations.add(new Animation("idle",0));
 		int[] indices = {4,5,6,7,6};
 		animations.add(new Animation("idle",0));
 		animations.add(new Animation("run",indices,5));
