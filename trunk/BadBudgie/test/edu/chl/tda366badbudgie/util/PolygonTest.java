@@ -15,7 +15,7 @@ import edu.chl.tda366badbudgie.util.Vector;
 /**
  * Checks validity of polygon setups.
  * 
- * @author jesper
+ * @author jesper, kvarfordt
  * 
  */
 public class PolygonTest {
@@ -42,7 +42,7 @@ public class PolygonTest {
 		vertices.add(v2);
 		vertices.add(v3);
 
-		assertFalse(Polygon.checkConvexity(vertices));
+		assertFalse(Polygon.checkConvexity(new Polygon(vertices)));
 	}
 
 	@Test
@@ -59,12 +59,14 @@ public class PolygonTest {
 		vertices.add(v2);
 		vertices.add(v3);
 
-		assertTrue("Valid convex triangle.", Polygon.checkConvexity(vertices));
-		assertTrue("Counter clockwise order.", Polygon.checkCCW(vertices));
+		Polygon p = new Polygon(vertices);
+		
+		assertTrue("Valid convex triangle.", Polygon.checkConvexity(p));
+		assertTrue("Counter clockwise order.", Polygon.checkCCW(p));
 
 		Collections.reverse(vertices);
 
-		assertFalse("Clockwise order", Polygon.checkCCW(vertices));
+		assertFalse("Clockwise order", Polygon.checkCCW(p));
 	}
 
 	@Test
@@ -83,12 +85,14 @@ public class PolygonTest {
 		vertices.add(v3);
 		vertices.add(v4);
 
-		assertTrue("", Polygon.checkConvexity(vertices));
-		assertTrue("", Polygon.checkCCW(vertices));
+		Polygon p = new Polygon(vertices);
+		
+		assertTrue("", Polygon.checkConvexity(p));
+		assertTrue("", Polygon.checkCCW(p));
 		
 		vertices.add(v2);
 		
-		assertFalse(Polygon.checkConvexity(vertices));
+		assertFalse(Polygon.checkConvexity(p));
 	}
 
 	@Test
@@ -105,7 +109,7 @@ public class PolygonTest {
 		vertices.add(v3);
 		vertices.add(v4);
 		
-		assertFalse(Polygon.checkConvexity(vertices));
+		assertFalse(Polygon.checkConvexity(new Polygon(vertices)));
 		
 		
 	}
@@ -125,7 +129,7 @@ public class PolygonTest {
 		vertices.add(v4);
 		vertices.add(v3);
 		
-		assertFalse(Polygon.checkConvexity(vertices));
+		assertFalse(Polygon.checkConvexity(new Polygon(vertices)));
 	}
 	
 	@Test
@@ -145,7 +149,7 @@ public class PolygonTest {
 		vertices.add(v4);
 		vertices.add(v5);
 		
-		assertTrue(Polygon.checkConvexity(vertices));
+		assertTrue(Polygon.checkConvexity(new Polygon(vertices)));
 	}
 
 }

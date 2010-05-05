@@ -21,6 +21,9 @@ public class GameRound {
 	private Player player;
 	private int score;
 
+	/**
+	 * Makes a new GameRound
+	 */
 	public GameRound() {
 
 		currentLevelNumber = 0;
@@ -29,6 +32,10 @@ public class GameRound {
 		
 	}
 
+	/**
+	 * Returns the current level
+	 * @return the current level
+	 */
 	public Level getLevel() {
 		return currentLevel;
 	}
@@ -102,6 +109,10 @@ public class GameRound {
 
 	public void mouseAction(double x, double y, boolean mouseDown) {
 		player.shoot(x, y, mouseDown);
+	}
+	
+	public boolean isPlayerAlive() {
+		return (getPlayer().getHealth() > 0);
 	}
 
 }

@@ -2,6 +2,7 @@ package edu.chl.tda366badbudgie.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,6 +35,14 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @param elasticity
 	 */
 	public AbstractCollidable(Polygon collisionData, double friction, double elasticity) {
+		
+		// 
+		if (!Polygon.checkConvexity(collisionData)) {
+			throw new IllegalArgumentException("Collisiondata polygon is not convex.");
+		} else if (!Polygon.checkCCW(collisionData)) {
+			Collections.reverse(collisionData.getVertices());
+		}
+		
 		this.collisionData = collisionData;
 		this.friction = friction;
 		this.elasticity = elasticity;
