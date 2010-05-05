@@ -40,7 +40,7 @@ public class CollisionHandler {
 		
 		/*
 		 * The collision checks are separated into two nested loops for performance, 
-		 * since we dont want to test terrain against terrain 
+		 * since we don't want to test terrain against terrain 
 		 */
 		
 		// For every object in the list...

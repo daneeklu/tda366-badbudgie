@@ -6,8 +6,6 @@ import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.GameRenderer;
-import edu.chl.tda366badbudgie.physics.impl.CollisionHandler;
-import edu.chl.tda366badbudgie.physics.impl.MovementHandler;
 import edu.chl.tda366badbudgie.physics.impl.Physics;
 
 /**
