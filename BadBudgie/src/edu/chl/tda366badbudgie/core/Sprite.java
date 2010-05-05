@@ -20,6 +20,8 @@ public class Sprite {
 	private String currentAnim;
 	private int currentFrame;
 	private double currentTime;
+	private boolean mirrored;
+	private double rotation;
 	private Map<String, Animation> animations;
 	
 	/**
@@ -37,6 +39,9 @@ public class Sprite {
 		this.verFrames=verticalFrames;
 		this.animations = new HashMap<String, Animation>();
 		currentTime = 0;
+		
+		rotation = 0;
+		mirrored = false;
 
 		if (animations != null && !animations.isEmpty()) {
 			for (Animation a : animations) {
@@ -133,6 +138,22 @@ public class Sprite {
 			currentTime = 0;
 			currentFrame = 0;
 		}
+	}
+	
+	public void setMirrored(boolean mirrored) {
+		this.mirrored = mirrored;
+	}
+	
+	public boolean getMirrored() {
+		return mirrored;
+	}
+	
+	public void setRotation(double rotation) {
+		this.rotation = rotation;
+	}
+	
+	public double getRotation() {
+		return rotation;
 	}
 	
 	public void animate() {
