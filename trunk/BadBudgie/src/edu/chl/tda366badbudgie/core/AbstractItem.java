@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core;
 
+import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Vector;
+
 /**
  * AbstractItem
  * 
@@ -10,7 +13,9 @@ package edu.chl.tda366badbudgie.core;
  */
 public abstract class AbstractItem extends AbstractCollidable {
 	
-	public AbstractItem() {}
+	public AbstractItem(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
+		super(position, size, stationary, sprite, collisionData, friction, elasticity);
+	}
 	
 	
 }

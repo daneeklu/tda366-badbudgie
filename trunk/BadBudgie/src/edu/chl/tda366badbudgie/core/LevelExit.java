@@ -1,5 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
+import edu.chl.tda366badbudgie.physics.impl.CollisionHandler;
+import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
@@ -12,15 +14,24 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class LevelExit extends AbstractCollidable {
 	
+	// Default constructor parameters
+	private static final Vector EXIT_SIZE = new Vector(40, 40);
+	private static final Sprite EXIT_SPRITE = new Sprite("reagan");
+	private static final Polygon EXIT_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
+	
 	private boolean touchedByPlayer = false;
 	
 	/**
 	 * Constructor
 	 */
-	public LevelExit(String texId) {
-		stationary = true;
-		sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
+	public LevelExit(Vector position, Vector size, Sprite sprite, Polygon collisionData) {
+		super(position, size, true, sprite, collisionData, 1, 1);
 	}
+	
+	public LevelExit(Vector position) {
+		this(position, EXIT_SIZE, EXIT_SPRITE, EXIT_COLLISION_DATA);
+	}
+	
 
 	@Override
 	public GameRoundMessage update() {

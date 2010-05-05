@@ -1,5 +1,6 @@
 package edu.chl.tda366badbudgie.core;
 
+import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
@@ -11,28 +12,50 @@ import edu.chl.tda366badbudgie.util.Vector;
  *
  */
 public class Enemy extends AbstractUnit {
+	
+	// Default constructor parameters
+	private static final Vector ENEMY_SIZE = new Vector(80, 80);
+	private static final Sprite ENEMY_SPRITE = new Sprite("enemy");
+	private static final Polygon ENEMY_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
+	private static final double ENEMY_FRICTION = 0.5;
+	private static final double ENEMY_ELASTICITY = 0.2;
+	private static final int ENEMY_DAMAGE = 10;
+	private static final int ENEMY_DIRECTION = 1;
+	
+	// Movement constants
 	private static final double MOVE_FORCE = 0.9;
 	
-	private int health;
+	
 	private int damage;
-	
-	
 	private int direction = 0;
-	
 	
 	/**
 	 * Constructor
 	 * 
-	 * @param sprite the texture id of the enemy.
+	 * @param position
+	 * @param size
+	 * @param sprite
+	 * @param collisionData
+	 * @param friction
+	 * @param elasticity
+	 * @param damage
+	 * @param direction
 	 */
-	public Enemy(Sprite sprite) {
-		setFriction(0.5);
-		setElasticity(0.5);
-		setMass(1);
-		health = 40;
-		setDamage(10);
-		this.sprite = sprite;
-		direction = -1;
+	public Enemy(Vector position, Vector size, Sprite sprite, Polygon collisionData, double friction, double elasticity, int damage, int direction) {
+		super(position, size, false, sprite, collisionData, friction, elasticity);
+
+		setHealth(100);
+		setDamage(damage);
+		setDirection(direction);
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param position the enemy's position
+	 */
+	public Enemy(Vector position) {
+		this(position, ENEMY_SIZE, ENEMY_SPRITE, ENEMY_COLLISION_DATA, ENEMY_FRICTION, ENEMY_ELASTICITY, ENEMY_DAMAGE, ENEMY_DIRECTION);
 	}
 	
 	
@@ -40,13 +63,13 @@ public class Enemy extends AbstractUnit {
 	public void updateForces() {
 		
 		if (!getGroundContactVector().hasZeroLength()) 
-			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE * direction));
+			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE * Math.signum(direction)));
 
 	}
 	
 	@Override
 	public GameRoundMessage update(){
-		if (health <= 0)
+		if (getHealth() <= 0)
 			return GameRoundMessage.RemoveObject;
 		
 		return GameRoundMessage.NoEvent;
@@ -62,13 +85,13 @@ public class Enemy extends AbstractUnit {
 			// to allow multiple contacts in one loop
 			this.setGroundContactVector(this.getGroundContactVector().add(
 					mtv.normalize().scalarDivision(2)));
-			this.setGroundContactObject(other);
+			//this.setGroundContactObject(other);
 		}
 		else if (other instanceof Player) {
 			setDirection(-1 * getDirection());
 		}
 		else if (other instanceof Projectile) {
-			health -= ((Projectile) other).getDamage();
+			setHealth(getHealth() - ((Projectile) other).getDamage());
 		}
 		
 		

@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.physics.impl;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import edu.chl.tda366badbudgie.core.AbstractUnit;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.AbstractCollidable;
 import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
@@ -35,7 +36,8 @@ public class CollisionHandler {
 
 		// Reset ground contact vectors
 		for (AbstractCollidable ac : collidableObjects) {
-			ac.setGroundContactVector(new Vector(0, 0));
+			if (ac instanceof AbstractUnit)
+				((AbstractUnit) ac).setGroundContactVector(new Vector(0, 0));
 		}
 		
 		/*
@@ -53,7 +55,7 @@ public class CollisionHandler {
 
 				Vector mtv = getCollisionSAT(o1.getCollisionData(), o2
 						.getCollisionData());
-				if (!mtv.hasZeroLength()) {
+				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, o2, mtv);
 				}
 			}
@@ -62,7 +64,7 @@ public class CollisionHandler {
 			for (AbstractCollidable t : terrainSections) {
 				Vector mtv = getCollisionSAT(o1.getCollisionData(), t
 						.getCollisionData());
-				if (!mtv.hasZeroLength()) {
+				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, t, mtv);
 				}
 			}
@@ -119,7 +121,7 @@ public class CollisionHandler {
 
 		ArrayList<Vector> aVerts = new ArrayList<Vector>(a.getVertices());
 		ArrayList<Vector> bVerts = new ArrayList<Vector>(b.getVertices());
-
+		
 		ArrayList<Vector> normals = new ArrayList<Vector>();
 
 		Vector aMidPoint = new Vector();

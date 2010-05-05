@@ -32,8 +32,8 @@ public class LevelParser extends AbstractParser{
 		Level level = new Level();
 		
 		//Create and add player
-		Player player = new Player("budgie");
-		level.addGameObject(player);
+		//Player player = new Player("budgie");
+		//level.addGameObject(player);
 		
 		//Create animations.
 		

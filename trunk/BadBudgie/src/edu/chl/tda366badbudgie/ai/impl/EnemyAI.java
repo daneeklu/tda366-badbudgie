@@ -28,7 +28,7 @@ public class EnemyAI implements IAI {
 		
 		for (AbstractCollidable ago : gr.getLevel().getCollidableObjects()) {
 			// For each ago that is an enemy
-			if (ago instanceof Enemy && ago.getGroundContactVector().getLength() != 0) {
+			if (ago instanceof Enemy) {//&& ((AbstractUnit) ago).getGroundContactVector().getLength() != 0) {
 				// The object is an enemy and has ground contact
 				
 				Enemy e = (Enemy) ago;

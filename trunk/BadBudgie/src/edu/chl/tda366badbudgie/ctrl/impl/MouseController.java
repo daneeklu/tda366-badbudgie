@@ -44,14 +44,12 @@ public class MouseController implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		//stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
 		stateContext.getState().mouseActionMoved(e.getX(), e.getY());
 		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		//stateContext.getState().mouseActionMoved(e.getXOnScreen(), e.getYOnScreen());
 		stateContext.getState().mouseActionMoved(e.getX(), e.getY());
 	}
 }

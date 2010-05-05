@@ -12,6 +12,6 @@ public interface IState {
 	
 	public void mouseActionClick(boolean pressed);
 	
-	public void mouseActionMoved(double x, double y);
+	public void mouseActionMoved(int x, int y);
 	
 }
