@@ -14,7 +14,7 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class Enemy extends AbstractUnit {
 	
 	// Default constructor parameters
-	private static final Vector ENEMY_SIZE = new Vector(80, 80);
+	private static final Vector ENEMY_SIZE = new Vector(120, 120);
 	private static final Sprite ENEMY_SPRITE = new Sprite("enemy");
 	private static final Polygon ENEMY_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
 	private static final double ENEMY_FRICTION = 0.5;
@@ -131,6 +131,10 @@ public class Enemy extends AbstractUnit {
 	 */
 	public void setDirection(int direction) {
 		this.direction = direction;
+		if(direction == 1) 
+			getSprite().setMirrored(true);
+		else
+			getSprite().setMirrored(false);
 	}
 	
 }

@@ -5,6 +5,7 @@ import edu.chl.tda366badbudgie.ai.impl.EnemyAI;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 import edu.chl.tda366badbudgie.gui.render.GameRenderer;
 import edu.chl.tda366badbudgie.physics.impl.Physics;
 
@@ -52,6 +53,10 @@ public class InGameState implements IState {
 		if (down && id.equals("escape")) {
 			StateContext.getInstance().setState(StateContext.getInstance().getMenuState());
 			return;
+		}
+		
+		if (down && id.equals("debug")) {
+			DebugInfoRenderer.getInstance().setDebugInfoEnabled(!DebugInfoRenderer.getInstance().isDebugInfoEnabled());
 		}
 	}
 

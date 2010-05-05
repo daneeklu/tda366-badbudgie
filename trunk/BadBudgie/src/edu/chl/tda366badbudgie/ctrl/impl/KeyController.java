@@ -56,6 +56,7 @@ public class KeyController extends KeyAdapter{
 		inGameKeyMap.put(KeyEvent.VK_D, "moveright");
 		inGameKeyMap.put(KeyEvent.VK_A, "moveleft");
 		inGameKeyMap.put(KeyEvent.VK_S, "movedown");
+		inGameKeyMap.put(KeyEvent.VK_F, "debug");
 		
 	}
 	
