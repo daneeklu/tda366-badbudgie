@@ -115,4 +115,9 @@ public class GameRound {
 		return (getPlayer().getHealth() > 0);
 	}
 
+	public void mouseMove(double x, double y) {
+		getPlayer().setAim(x, y);
+		
+	}
+
 }

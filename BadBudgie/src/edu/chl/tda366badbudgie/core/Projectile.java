@@ -7,15 +7,16 @@ public class Projectile extends AbstractItem {
 	private int lifeTimer = 200;
 	private boolean hasCollided = false;
 	private int damage = 10;
+	private double force = 40.0;
 	
 	public Projectile(String texId, double x, double y, Player player){
 		
 		setSize(new Vector(10, 10));
 
 		Vector v = player.getProjectileForce(x, -y);
-		v = v.scalarDivision(1000);
+		v = v.normalize().scalarMultiplication(force);
 		
-		setForce(v.scalarMultiplication(100));
+		setForce(v);
 		sprite = new Sprite(texId);
 	}
 	

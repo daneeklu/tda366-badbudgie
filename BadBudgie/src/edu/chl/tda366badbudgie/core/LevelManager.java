@@ -110,7 +110,7 @@ public class LevelManager {
 		
 		//Adds the weapon to the player
 		
-		Weapon wep = new Weapon("gun1");
+		Weapon wep = new Weapon(weaponSprite);
 		wep.setX(player.getX());
 		wep.setY(player.getY());
 		pcd = new LinkedList<Vector>();
@@ -320,7 +320,7 @@ public class LevelManager {
 		
 		//Adds the weapon to the player
 		
-		Weapon wep = new Weapon("gun1");
+		Weapon wep = new Weapon(weaponSprite);
 		wep.setX(player.getX());
 		wep.setY(player.getY());
 		pcd = new LinkedList<Vector>();

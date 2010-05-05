@@ -7,17 +7,17 @@ public class Weapon extends AbstractItem {
 	private int damage;
 	private String weaponId;
 
-	public Weapon(String texId){
-		this(texId, 25);
+	public Weapon(Sprite sprite){
+		this(sprite, 25);
 	}
 	
-	public Weapon(String texId, int damage){
+	public Weapon(Sprite sprite, int damage){
 		setFriction(0.5);
 		setElasticity(0.2);
 		setMass(1);
 		this.stationary = true;
 		this.damage = damage;
-		sprite = new Sprite(texId);
+		this.sprite = sprite;
 		
 	}
 	
