@@ -14,7 +14,7 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class Obstacle extends AbstractCollidable {
 
 	// Default constructor parameters
-	private static final Vector OBSTACLE_SIZE = new Vector(80, 80);
+	private static final Vector OBSTACLE_SIZE = new Vector(100, 100);
 	private static final Sprite OBSTACLE_SPRITE = new Sprite("rock");
 	private static final Polygon OBSTACLE_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
 	private static final double OBSTACLE_FRICTION = 0.5;

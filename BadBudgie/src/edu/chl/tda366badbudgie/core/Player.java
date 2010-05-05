@@ -17,7 +17,7 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class Player extends AbstractUnit {
 	
 	// Default constructor parameters
-	private static final Vector PLAYER_SIZE = new Vector(80, 80);
+	private static final Vector PLAYER_SIZE = new Vector(120, 120);
 	private static final Sprite PLAYER_SPRITE;
 	static {
 		List<Animation> animations = new LinkedList<Animation>();
@@ -42,7 +42,6 @@ public class Player extends AbstractUnit {
 	private int flyingEnergy;
 	private int maxFlyingEnergy;
 	private boolean flying = false;
-	private Weapon wep;
 	
 	private Weapon weapon;
 	private Projectile bullet;
@@ -156,10 +155,25 @@ public class Player extends AbstractUnit {
 		Vector dist = new Vector(400,300);
 		v = v.subtract(dist);
 		
-		v = v.subtract(getPosition());
+		//v = v.subtract(getPosition());
 		
 		double rot = Math.atan2(v.getY(),v.getX());
-		weapon.getSprite().setRotation(Math.toDegrees(rot));
+		rot = Math.toDegrees(rot) + 180;
+
+		if(rot > 90 && rot < 270) {
+			getSprite().setMirrored(true);
+			rot-=180;
+			weapon.getSprite().setMirrored(true);
+
+		}
+		else {
+			getSprite().setMirrored(false);
+			weapon.getSprite().setMirrored(false);			
+		}
+
+		
+		
+		weapon.getSprite().setRotation(rot);
 	}
 	
 	@Override
@@ -222,10 +236,10 @@ public class Player extends AbstractUnit {
 		
 		getSprite().animate();
 		if (isMovingLeft || isMovingRight) {
-			if(isMovingRight)
-				getSprite().setMirrored(true);
-			else
-				getSprite().setMirrored(false);
+			//if(isMovingRight)
+			//	getSprite().setMirrored(true);
+			//else
+			//	getSprite().setMirrored(false);
 			
 			
 			getSprite().setAnimation("run");

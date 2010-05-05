@@ -26,7 +26,7 @@ public class DebugInfoRenderer {
 
 	private List<DebugLine> debugLines;
 	private List<String> debugText;
-	private boolean debugInfoEnabled = true;
+	private boolean debugInfoEnabled = false;
 	private static DebugInfoRenderer instance = new DebugInfoRenderer();
 	
 	/**

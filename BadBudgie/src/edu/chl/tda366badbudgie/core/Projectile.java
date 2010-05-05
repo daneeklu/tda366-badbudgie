@@ -1,14 +1,15 @@
 package edu.chl.tda366badbudgie.core;
 
 import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Vector;
 
 public class Projectile extends AbstractItem {
 
 	// Default constructor parameters
-	private static final Vector PROJECTILE_SIZE = new Vector(20, 20);
+	private static final Vector PROJECTILE_SIZE = new Vector(10, 10);
 	private static final Sprite PROJECTILE_SPRITE = new Sprite("bullet1");
-	private static final Polygon PROJECTILE_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
+	private static final Polygon PROJECTILE_COLLISION_DATA = new Rectangle(-20,-20,40,40);
 	private static final int PROJECTILE_DAMAGE = 10;
 	private static final int PROJECTILE_SPEED = 30;
 	

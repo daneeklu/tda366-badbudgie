@@ -6,7 +6,7 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class Weapon extends AbstractItem {
 	
 	// Default constructor parameters
-	private static final Vector WEAPON_SIZE = new Vector(40, 40);
+	private static final Vector WEAPON_SIZE = new Vector(120, 120);
 	private static final Sprite WEAPON_SPRITE = new Sprite("gun1");
 	private static final Polygon WEAPON_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
 	private static final double WEAPON_FRICTION = 0.5;
