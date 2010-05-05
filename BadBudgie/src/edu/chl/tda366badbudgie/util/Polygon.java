@@ -1,7 +1,6 @@
 package edu.chl.tda366badbudgie.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,12 +29,6 @@ public class Polygon {
 	 */
 	public Polygon(List<Vector> vertices) {
 
-		// 
-		if (!checkConvexity(vertices)) {
-			throw new IllegalArgumentException();
-		} else if (!checkCCW(vertices)) {
-			Collections.reverse(vertices);
-		}
 		this.vertices = new ArrayList<Vector>(vertices.size());
 		this.vertices.addAll(vertices);
 		
@@ -45,11 +38,13 @@ public class Polygon {
 
 
 	/**
-	 * Checks whether the supplied vertices form a convex polygon.
+	 * Checks whether the supplied polygon is convex.
 	 * 
 	 * @return true if the polygon is convex, otherwise false.
 	 */
-	protected static boolean checkConvexity(List<Vector> vertices) {
+	public static boolean checkConvexity(Polygon p) {
+		
+		List<Vector> vertices = p.getVertices();
 		
 		if (vertices.size() < 3) {
 			return false;
@@ -102,8 +97,10 @@ public class Polygon {
 	 * 
 	 * @return true, if the order is counter clockwise, otherwise false.
 	 */
-	protected static boolean checkCCW(List<Vector> vertices) {
+	public static boolean checkCCW(Polygon p) {
 
+		List<Vector> vertices = p.getVertices();
+		
 		if (vertices.size() < 3) {
 			return false;
 		}
