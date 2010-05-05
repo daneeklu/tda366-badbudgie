@@ -57,7 +57,6 @@ public class Player extends AbstractUnit {
 		animations.add(new Animation("run",indices,5));
 		
 		sprite = new Sprite(texId, 4, 4, animations);
-		//sprite = new Sprite(texId, 1, 1, new Animation("idle", 0));
 		
 	}
 
@@ -223,6 +222,12 @@ public class Player extends AbstractUnit {
 		
 		sprite.animate();
 		if (isMovingLeft || isMovingRight) {
+			if(isMovingRight)
+				sprite.setMirrored(true);
+			else
+				sprite.setMirrored(false);
+			
+			
 			sprite.setAnimation("run");
 		} else {
 			sprite.setAnimation("idle");

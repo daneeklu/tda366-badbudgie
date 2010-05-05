@@ -432,8 +432,11 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		ty = (double)(frameIndex / sprite.getHorFrames() ) * frameHeight;
 		
 		setActiveTexture(texId);
-		drawRect(bounds, new Rectangle(tx, ty, frameWidth, frameHeight));
 		
+		if (sprite.getMirrored())
+			drawRect(bounds, new Rectangle(tx + frameWidth, ty, -frameWidth, frameHeight));
+		else
+			drawRect(bounds, new Rectangle(tx, ty, frameWidth, frameHeight));
 	}
 
 	@Override
