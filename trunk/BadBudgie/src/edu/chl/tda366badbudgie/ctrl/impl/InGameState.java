@@ -21,7 +21,6 @@ public class InGameState implements IState {
 	private GameRound gameRound;
 	private Physics physics;
 	private IAI enemyAi;
-	private boolean mouseDown;
 	private double mX, mY;
 	
 	
@@ -68,6 +67,7 @@ public class InGameState implements IState {
 	public void mouseActionMoved(double x, double y) {
 		mX = x;
 		mY = y;
+		gameRound.mouseMove(x,y);
 		//System.out.println("Aiming at x: " + x + " y: " + y);
 	}
 

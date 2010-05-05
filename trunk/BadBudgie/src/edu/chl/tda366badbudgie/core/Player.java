@@ -30,7 +30,7 @@ public class Player extends AbstractUnit {
 	private int maxFlyingEnergy;
 	private boolean flying = false;
 	
-	private Weapon wep;
+	private Weapon weapon;
 	private Projectile bullet;
 
 
@@ -160,7 +160,20 @@ public class Player extends AbstractUnit {
 		}		
 		return new Vector(x, y);
 	}
-
+	
+	public void setAim(double x, double y) {
+		
+		// TODO: Translate the screen coordinates to world coordinates correctly
+		Vector v = new Vector(x,y);
+		
+		Vector dist = new Vector(400,300);
+		v = v.subtract(dist);
+		
+		v = v.subtract(getPosition());
+		
+		double rot = Math.atan2(v.getY(),v.getX());
+		weapon.getSprite().setRotation(Math.toDegrees(rot));
+	}
 	
 	@Override
 	public void updateForces() {
@@ -208,8 +221,8 @@ public class Player extends AbstractUnit {
 			setFlyingEnergy(getFlyingEnergy() + 1);
 		}
 		
-		if(this.wep != null){
-			wep.setPosition(this.getPosition());
+		if(this.weapon != null){
+			weapon.setPosition(this.getPosition());
 		}
 		
 		if (flyingEnergy <= 0) {
@@ -341,11 +354,11 @@ public class Player extends AbstractUnit {
 	}
 	
 	public void setWeapon(Weapon wep){
-		this.wep = wep;
+		this.weapon = wep;
 	}
 	
 	public Weapon getActiveWeapon(){
-		return wep;
+		return weapon;
 	}
 
 
