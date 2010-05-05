@@ -39,10 +39,8 @@ public class Enemy extends AbstractUnit {
 	@Override
 	public void updateForces() {
 		
-		
 		if (!getGroundContactVector().hasZeroLength()) 
 			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE * direction));
-
 
 	}
 	
