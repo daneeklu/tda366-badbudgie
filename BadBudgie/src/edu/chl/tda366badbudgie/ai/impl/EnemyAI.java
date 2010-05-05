@@ -1,14 +1,11 @@
 package edu.chl.tda366badbudgie.ai.impl;
 
-import java.awt.Color;
-
 import edu.chl.tda366badbudgie.ai.IAI;
 import edu.chl.tda366badbudgie.core.AbstractCollidable;
 import edu.chl.tda366badbudgie.core.Enemy;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Player;
 import edu.chl.tda366badbudgie.core.TerrainSection;
-import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 import edu.chl.tda366badbudgie.util.StaticUtilityMethods;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -43,7 +40,6 @@ public class EnemyAI implements IAI {
 				Vector leftCollCheck = new Vector(e.getX() - e.getWidth()/2 - checkOffsetX, e.getY());
 				Vector rightCollCheck = new Vector(e.getX() + e.getWidth()/2 + checkOffsetX, e.getY());
 				
-				DebugInfoRenderer.getInstance().addDebugLine(leftGroundCheck, rightGroundCheck, Color.red);
 				
 				boolean rightHindrance = false;
 				boolean leftHindrance = false;

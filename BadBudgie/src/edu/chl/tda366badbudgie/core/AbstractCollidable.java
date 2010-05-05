@@ -210,10 +210,14 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		physicalCollisions.add("Enemy-TerrainSection");
 		physicalCollisions.add("Enemy-Obstacle");
 		physicalCollisions.add("Enemy-Player");
+		physicalCollisions.add("Enemy-Projectile");
 		physicalCollisions.add("Obstacle-Obstacle");
 		physicalCollisions.add("Obstacle-Player");
+		physicalCollisions.add("Obstacle-Projectile");
 		physicalCollisions.add("Obstacle-TerrainSection");
 		physicalCollisions.add("Player-TerrainSection");
+		physicalCollisions.add("Projectile-TerrainSection");
+		
 	}
 	
 }
