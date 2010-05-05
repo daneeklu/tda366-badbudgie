@@ -51,8 +51,8 @@ public class GameRenderer {
 	 * @param g the Graphics object to do the rendering. 
 	 */
 	private static void drawTerrainSection(TerrainSection ts, IGraphics g) {
-		if (ts.getTexId() != null && !ts.getTexId().equals(""))
-			g.drawTexturedPolygon(new Vector(),ts.getSurface(), ts.getTexId(), ts.getTexRes());
+		if (ts.getSprite().getId() != null && !ts.getSprite().getId().equals(""))
+			g.drawTexturedPolygon(new Vector(),ts.getSurface(), ts.getSprite().getId(), ts.getTexRes());
 		else 
 			g.drawPolygon(new Vector(),ts.getSurface());
 	}

@@ -104,11 +104,11 @@ public class GameRound {
 	
 	
 	public void addGameObject(AbstractGameObject agb){
-		currentLevel.addGameObject(agb);
+		getCurrentLevel().addGameObject(agb);
 	}
 
 	public void mouseAction(double x, double y, boolean mouseDown) {
-		player.shoot(x, y, mouseDown);
+		getPlayer().shootAt(x, y, mouseDown);
 	}
 	
 	public boolean isPlayerAlive() {

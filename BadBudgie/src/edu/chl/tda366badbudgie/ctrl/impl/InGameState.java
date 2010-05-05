@@ -21,7 +21,8 @@ public class InGameState implements IState {
 	private GameRound gameRound;
 	private Physics physics;
 	private IAI enemyAi;
-	private double mX, mY;
+	private boolean mouseDown;
+	private int mX, mY;
 	
 	
 	public InGameState(GameRound gr) {
@@ -33,7 +34,6 @@ public class InGameState implements IState {
 	@Override
 	public void logic() {
 		
-
 		enemyAi.doAI(gameRound);
 		physics.doPhysics(gameRound);		
 		gameRound.updateGameObjects();
@@ -64,7 +64,7 @@ public class InGameState implements IState {
 	}
 
 	@Override
-	public void mouseActionMoved(double x, double y) {
+	public void mouseActionMoved(int x, int y) {
 		mX = x;
 		mY = y;
 		gameRound.mouseMove(x,y);

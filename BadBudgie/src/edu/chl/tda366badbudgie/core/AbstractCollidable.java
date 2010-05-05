@@ -21,11 +21,8 @@ import edu.chl.tda366badbudgie.util.Vector;
 public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	private Polygon collisionData;
-	private double friction; 		// Friction coefficient. (100 = a lot, 0 = no friction)  
-	private double elasticity; 		// Elasticity coefficient. 1 = superball, 0 = lump of clay
-	
-	private Vector groundContactVector;
-	private AbstractCollidable groundContactObject;
+	private double friction;
+	private double elasticity;
 	
 	/**
 	 * Creates a new AbstractCollidable object with the given properties.
@@ -34,36 +31,21 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @param friction
 	 * @param elasticity
 	 */
-	public AbstractCollidable(Polygon collisionData, double friction, double elasticity) {
+	public AbstractCollidable(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
+		super(position, size, stationary, sprite);
 		
-		// 
+		// Make sure the collision data is valid
 		if (!Polygon.checkConvexity(collisionData)) {
 			throw new IllegalArgumentException("Collisiondata polygon is not convex.");
 		} else if (!Polygon.checkCCW(collisionData)) {
 			Collections.reverse(collisionData.getVertices());
 		}
 		
-		this.collisionData = collisionData;
-		this.friction = friction;
-		this.elasticity = elasticity;
-		setGroundContactVector(new Vector());
-		setGroundContactObject(new AbstractCollidable() {
-			// Dummy default collision object
-			@Override public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {}});
+		setCollisionData(collisionData);
+		setFriction(friction);
+		setElasticity(elasticity);
+
 	}
-	
-	public AbstractCollidable(){
-		Vector v = new Vector(32, 32);
-		setGroundContactVector(new Vector());
-		
-		// Default collision data
-		collisionData = new Polygon(new ArrayList<Vector>(Arrays.asList(
-				new Vector(-v.getX(), -v.getY()), 
-				new Vector(v.getX(), -v.getY()), 
-				new Vector(v.getX(), v.getY()), 
-				new Vector(-v.getX(), v.getY()))));
-	}
-	
 	
 	/**
 	 * Returns the collision data of the object.
@@ -124,30 +106,6 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	}
 	
 	/**
-	 * Sets the ground contact vector for the unit.
-	 * The magnitude signifies the friction of the contact.
-	 * 
-	 * @param groundContactVector
-	 *            the vector of the ground contact
-	 */
-	public void setGroundContactVector(Vector groundContactVector) {
-		this.groundContactVector = groundContactVector;
-	}
-
-	/**
-	 * Returns the ground contact normal of the unit. If the unit does not have
-	 * ground contact, a vector of length zero will be returned.
-	 * The magnitude signifies the friction of the contact.
-	 * 
-	 * @return the ground contact vector
-	 */
-	public Vector getGroundContactVector() {
-		return groundContactVector;
-	}
-	
-
-	
-	/**
 	 * Notifies the object that there is a collision and lets it act accordingly.
 	 * 
 	 * @param other the colliding object
@@ -155,30 +113,6 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @return true if the objects should collide physically
 	 */
 	public abstract void executeCollisionEffect(AbstractCollidable other, Vector mtv);
-
-	/**
-	 * 
-	 * 
-	 * @param groundContactObject
-	 */
-	public void setGroundContactObject(AbstractCollidable groundContactObject) {
-		this.groundContactObject = groundContactObject;
-	}
-
-	/**
-	 * 
-	 * 
-	 * @return
-	 */
-	public AbstractCollidable getGroundContactObject() {
-		return groundContactObject;
-	}
-	
-	
-	
-	
-	
-	
 
 	
 	/**
@@ -194,7 +128,6 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		 * Using the static list physicalCollisions below.
 		 * Implementation might change.
 		 */
-		
 		String cn1 = class1.getSimpleName();
 		String cn2 = class2.getSimpleName();
 		String concat;
@@ -228,5 +161,17 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		physicalCollisions.add("Projectile-TerrainSection");
 		
 	}
+	
+	
+	public final static Polygon defaultCollisionData;
+	static {
+		Vector v = new Vector(40, 40);
+		defaultCollisionData = new Polygon(new ArrayList<Vector>(Arrays.asList(
+				new Vector(-v.getX(), -v.getY()), 
+				new Vector(v.getX(), -v.getY()), 
+				new Vector(v.getX(), v.getY()), 
+				new Vector(-v.getX(), v.getY()))));
+	}
+	
 	
 }

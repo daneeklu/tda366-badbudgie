@@ -14,10 +14,13 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class TerrainSection extends AbstractCollidable {
 	
-	private String texId;
-	private double texRes;
-
+	// Default constructor parameters
+	private static final Sprite TERRAIN_SPRITE = new Sprite("grass1");
+	private static final double TERRAIN_FRICTION = 0.4;
+	private static final double TERRAIN_ELASTICITY = 0.5;
 	
+	private double texRes = 0.0005;
+
 	/**
 	 * Creates a new TerrainQuad from the given polygon and properties.
 	 * 
@@ -25,27 +28,15 @@ public class TerrainSection extends AbstractCollidable {
 	 * @param friction 
 	 * @param elasticity
 	 */
-	public TerrainSection(Polygon surface, double friction, double elasticity) {
-		super(surface, friction, elasticity);
-		stationary = true;
-	}
-
-
-	/**
-	 * Creates a new TerrainQuad from the given vertices and properties.
-	 * 
-	 * @param surface list of vectors representing the vertices of the quad.
-	 * @param friction 
-	 * @param elasticity
-	 */
-	public TerrainSection(Polygon surface, double friction, double elasticity, String texId, double texRes) {
-		super(surface, friction, elasticity);
-		stationary = true;
-		this.setTexId(texId);
-		this.setTexRes(texRes);
+	public TerrainSection(Polygon surface, Sprite sprite, double friction, double elasticity) {
+		super(new Vector(), new Vector(), true, sprite, surface, friction, elasticity);
 	}
 	
-
+	public TerrainSection(Polygon surface) {
+		this(surface, TERRAIN_SPRITE, TERRAIN_FRICTION, TERRAIN_ELASTICITY);
+	}
+	
+	
 	/**
 	 * Returns the Polygon object forming this TerrainSection, 
 	 * in this case the same as the collision data.
@@ -54,27 +45,12 @@ public class TerrainSection extends AbstractCollidable {
 	public Polygon getSurface() {
 		return getCollisionData();
 	}
-
-
+	
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
 		// Collisions has no effects on terrain
 	}
-
-	/**
-	 * @param texId the texId to set
-	 */
-	public void setTexId(String texId) {
-		this.texId = texId;
-	}
-
-	/**
-	 * @return the texId
-	 */
-	public String getTexId() {
-		return texId;
-	}
-
+	
 	/**
 	 * @param texRes the texRes to set
 	 */

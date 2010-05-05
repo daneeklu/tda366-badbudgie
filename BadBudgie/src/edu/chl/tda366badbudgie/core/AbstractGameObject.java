@@ -12,36 +12,36 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public abstract class AbstractGameObject {
 
+	/**
+	 * Enum containing possible "passback values" from an AbstractGameObject to the GameRound
+	 */
 	public enum GameRoundMessage{NoEvent, LevelFinished, PlayerDied, RemoveObject};
+	
 	private Vector position;
 	private Vector velocity;
 	private Vector force;
-	private double mass;
-	private double airResistance;
-	protected boolean stationary;
-	protected Sprite sprite;
 	private Vector size;
+	private boolean stationary;
+	private Sprite sprite;
 	private Level parent;
-
-	public AbstractGameObject() {
-		this(new Vector(120, 120));
+	private double mass = 1;
+	private double airResistance = 0.0005;
+	
+	/**
+	 * Constructor for AbstractGameObject.
+	 * 
+	 * @param position the position of the object
+	 * @param size the size of the object
+	 * @param stationary true if the object should be immovable
+	 */
+	public AbstractGameObject(Vector position, Vector size, boolean stationary, Sprite sprite){
+		setPosition(position);
+		setSize(size);
+		setStationary(stationary);
+		setSprite(sprite);
+		setVelocity(new Vector());
+		setForce(new Vector());
 	}
-	
-	
-	//TODO: actually call this from subclasses,
-	// don't just set all objects to the same size
-	public AbstractGameObject(Vector obSize){
-		position = new Vector();
-		velocity = new Vector();
-		force = new Vector();
-		mass = 1;
-		stationary = false;
-		airResistance = 0.0005;
-		
-		//TODO: Add actual size parameter to constructor
-		this.size = obSize;
-	}
-	
 	
 	/**
 	 * Returns a double which is the world coordinate in the x-axis.
@@ -154,14 +154,6 @@ public abstract class AbstractGameObject {
 	public void setMass(double mass) {
 		this.mass = mass;
 	}
-	
-	/**
-	 * Returns whether the object is stationary. That is if it is immovable.
-	 * @return
-	 */
-	public boolean isStationary() {
-		return stationary;
-	}
 
 	/**
 	 * Method to be overridden by objects that have movement logic.
@@ -169,12 +161,11 @@ public abstract class AbstractGameObject {
 	public void updateForces() {}
 	
 	/**
-	 * Method to be overridden by objects that have inner state logic.
-	 * Note that this method is not intended to normally handle to objects physics.
+	 * Method to be overridden by objects that have 
+	 * inner logic to update each cycle.
 	 * 
-	 * @return a string set to "" normally, but can be set to one of the following event stings:
-	 * "nextlevel" if the object wishes to tell the gameround to change level.
-	 * "playerdied" if the object wished to tell the gameround that the player has died.
+	 * @return a GameRoundMessage specifying if an event which must be dealt 
+	 * with in GameRound has occurred.
 	 */
 	public GameRoundMessage update() {
 		return GameRoundMessage.NoEvent;
@@ -189,6 +180,14 @@ public abstract class AbstractGameObject {
 	}
 
 	/**
+	 * Sets the sprite of the object.
+	 * @param sprite the sprite of the object.
+	 */
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
+	
+	/**
 	 * Returns the width of the object.
 	 * @return the width of the object.
 	 */
@@ -202,6 +201,14 @@ public abstract class AbstractGameObject {
 	 */
 	public double getHeight() {
 		return size.getY();
+	}
+	
+	/**
+	 * Gets the size of the object.
+	 * @return the size
+	 */
+	public Vector getSize(){
+		return size;
 	}
 	
 	/**
@@ -231,6 +238,21 @@ public abstract class AbstractGameObject {
 	public double getAirResistance() {
 		return airResistance;
 	}
+
+
+	public void setStationary(boolean stationary) {
+		this.stationary = stationary;
+	}
+
+	/**
+	 * Returns whether the object is stationary. That is if it is immovable.
+	 * 
+	 * @return true if stationary
+	 */
+	public boolean isStationary() {
+		return stationary;
+	}
+
 	
 	
 	

@@ -16,19 +16,33 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class Player extends AbstractUnit {
 	
+	// Default constructor parameters
+	private static final Vector PLAYER_SIZE = new Vector(80, 80);
+	private static final Sprite PLAYER_SPRITE;
+	static {
+		List<Animation> animations = new LinkedList<Animation>();
+		animations.add(new Animation("idle",0));
+		int[] indices = {4,5,6,7,6};
+		animations.add(new Animation("idle",0));
+		animations.add(new Animation("run",indices,5));
+		PLAYER_SPRITE = new Sprite("budgie", 4, 4, animations);
+	}
+	private static final Polygon PLAYER_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
+	private static final double PLAYER_FRICTION = 0.5;
+	private static final double PLAYER_ELASTICITY = 0.2;
+	
+	// Movement constants
 	private static final double MOVE_FORCE = 2.0;
 	private static final double AIR_MOVE_FORCE = 0.2;
 	private static final double JUMP_FORCE = 36.0;
 	
-	private int health;
 	private int invincibilityTimer;
-	
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
-
 	private int flyingEnergy;
 	private int maxFlyingEnergy;
 	private boolean flying = false;
+	private Weapon wep;
 	
 	private Weapon weapon;
 	private Projectile bullet;
@@ -37,29 +51,30 @@ public class Player extends AbstractUnit {
 	/**
 	 * Constructor
 	 * 
-	 * @param texId the texture id of the player.
+	 * @param position the players position
+	 * @param size
+	 * @param sprite
+	 * @param collisionData
+	 * @param friction
+	 * @param elasticity
 	 */
-	public Player(String texId) {
-		setFriction(0.5);
-		setElasticity(0.2);
-		setMass(1);
-		health = 100;
+	public Player(Vector position, Vector size, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
+		super(position, size, false, sprite, collisionData, friction, elasticity);
+		
+		setHealth(100);
 		setFlyingEnergy(100);
 		setMaxFlyingEnergy(150);
 		
-		List<Animation> animations = new LinkedList<Animation>();
-		
-		animations.add(new Animation("idle",0));
-		
-		int[] indices = {4,5,6,7,6};
-		
-		animations.add(new Animation("idle",0));
-		animations.add(new Animation("run",indices,5));
-		
-		sprite = new Sprite(texId, 4, 4, animations);
-		
 	}
-
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param position the players position
+	 */
+	public Player(Vector position) {
+		this(position, PLAYER_SIZE, PLAYER_SPRITE, PLAYER_COLLISION_DATA, PLAYER_FRICTION, PLAYER_ELASTICITY);
+	}
 	
 	
 	
@@ -124,42 +139,14 @@ public class Player extends AbstractUnit {
 	 */
 	
 	
-	public void shoot(double x, double y, boolean mouseDown) {
-		//shooting = mouseDown;
+	public void shootAt(double x, double y, boolean mouseDown) {
 		if(mouseDown){
-			bullet = new Projectile("bullet1", x, y, this);
-			bullet.setX(this.getX());
-			bullet.setY(this.getY());
-			LinkedList<Vector> pcd = new LinkedList<Vector>();
-			pcd.add(new Vector(-20, -20));
-			pcd.add(new Vector(20, -20));
-			pcd.add(new Vector(20, 20));
-			pcd.add(new Vector(-20, 20));
-			bullet.setCollisionData(new Polygon(pcd));
-			getParent().addGameObject(bullet);	
+			bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2));
+			getParent().addGameObject(bullet);
 		}
 		
 	}
 	
-	public Vector getProjectileForce(double x, double y){
-		int resWidth = 800;
-		int resHeight = -600;
-		
-		if(x < resWidth/2){
-			x = x-resWidth/2;
-		}
-		else if(x > resWidth/2){
-			x = x-resWidth/2;
-		}
-		
-		if(y > resHeight/2){
-			y = y-resHeight/2;
-		}
-		else if(y < resHeight/2){
-			y = y-resHeight/2;
-		}		
-		return new Vector(x, y);
-	}
 	
 	public void setAim(double x, double y) {
 		
@@ -233,20 +220,20 @@ public class Player extends AbstractUnit {
 			invincibilityTimer--;
 		}
 		
-		sprite.animate();
+		getSprite().animate();
 		if (isMovingLeft || isMovingRight) {
 			if(isMovingRight)
-				sprite.setMirrored(true);
+				getSprite().setMirrored(true);
 			else
-				sprite.setMirrored(false);
+				getSprite().setMirrored(false);
 			
 			
-			sprite.setAnimation("run");
+			getSprite().setAnimation("run");
 		} else {
-			sprite.setAnimation("idle");
+			getSprite().setAnimation("idle");
 		}
 
-		if(health <= 0) {
+		if(getHealth() <= 0) {
 			grMessage = GameRoundMessage.PlayerDied;
 		}
 		
@@ -266,14 +253,13 @@ public class Player extends AbstractUnit {
 				// to allow multiple contacts in one loop
 				this.setGroundContactVector(this.getGroundContactVector().add(
 						mtv.normalize().scalarDivision(2)));
-				this.setGroundContactObject(other);
 			}
 			flying = false;
 		}
 		
 		// Enemy hurts player
 		if (invincibilityTimer == 0 && other instanceof Enemy) {
-			health -= ((Enemy)other).getDamage();
+			setHealth(getHealth() - ((Enemy)other).getDamage()) ;
 			invincibilityTimer = 20;
 			
 			// Bump player away from enemy
@@ -321,23 +307,6 @@ public class Player extends AbstractUnit {
 		this.maxFlyingEnergy = maxFlyingEnergy;
 	}
 	
-	/**
-	 * Get the players health
-	 * 
-	 * @return the health
-	 */
-	public int getHealth() {
-		return health;
-	}
-
-	/**
-	 * Set the players health
-	 * 
-	 * @param health the health to set
-	 */
-	public void setHealth(int health) {
-		this.health = health;
-	}
 
 	/**
 	 * @param invincibilityTimer the invincibilityTimer to set

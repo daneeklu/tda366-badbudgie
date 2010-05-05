@@ -69,58 +69,50 @@ public class LevelTestPlayer {
 			for (EVector ev : et.getVerts()) {
 				verts.add(new Vector(ev.getX(), -ev.getY()));
 			}
-			result.addTerrainSection(new TerrainSection(new Polygon(verts), et.getFriction(), et.getElasticity()));
+			result.addTerrainSection(new TerrainSection(new Polygon(verts)));
 		}
 		
 		for (EGameObject ego : elevel.getGameObjects()) {
 			switch (ego.getType()) {
 				case Player:
-					Player p = new Player("budgie");
-					p.setX(ego.getX());
-					p.setY(-ego.getY());
-					LinkedList<Vector> pcd = new LinkedList<Vector>();
-					pcd.add(new Vector(-40, -40));
-					pcd.add(new Vector(40, -40));
-					pcd.add(new Vector(40, 40));
-					pcd.add(new Vector(-40, 40));
-					p.setCollisionData(new Polygon(pcd));
+					Player p = new Player(new Vector(ego.getX(), -ego.getY()));
+//					LinkedList<Vector> pcd = new LinkedList<Vector>();
+//					pcd.add(new Vector(-40, -40));
+//					pcd.add(new Vector(40, -40));
+//					pcd.add(new Vector(40, 40));
+//					pcd.add(new Vector(-40, 40));
+//					p.setCollisionData(new Polygon(pcd));
 					
 					result.addGameObject(p);
 					break;
 				case Enemy:
-					Enemy enemy = new Enemy(new Sprite("enemy"));
-					enemy.setX(ego.getX());
-					enemy.setY(-ego.getY());
-					pcd = new LinkedList<Vector>();
-					pcd.add(new Vector(-40, -40));
-					pcd.add(new Vector(40, -40));
-					pcd.add(new Vector(40, 40));
-					pcd.add(new Vector(-40, 40));
-					enemy.setCollisionData(new Polygon(pcd));
+					Enemy enemy = new Enemy(new Vector(ego.getX(), -ego.getY()));
+//					pcd = new LinkedList<Vector>();
+//					pcd.add(new Vector(-40, -40));
+//					pcd.add(new Vector(40, -40));
+//					pcd.add(new Vector(40, 40));
+//					pcd.add(new Vector(-40, 40));
+//					enemy.setCollisionData(new Polygon(pcd));
 					
 					result.addGameObject(enemy);
 					break;
 				case Obstacle:
-					Obstacle rock = new Obstacle("rock");
-					rock.setX(ego.getX());
-					rock.setY(-ego.getY());
-					pcd = new LinkedList<Vector>();
-					pcd.add(new Vector(-40, -15));
-					
-					pcd.add(new Vector(-25, -35));
-					pcd.add(new Vector(25, -35));
-					
-					pcd.add(new Vector(40, -15));
-					pcd.add(new Vector(20, 20));
-					pcd.add(new Vector(-20, 20));
-					rock.setCollisionData(new Polygon(pcd));
+					Obstacle rock = new Obstacle(new Vector(ego.getX(), -ego.getY()));
+//					pcd = new LinkedList<Vector>();
+//					pcd.add(new Vector(-40, -15));
+//					
+//					pcd.add(new Vector(-25, -35));
+//					pcd.add(new Vector(25, -35));
+//					
+//					pcd.add(new Vector(40, -15));
+//					pcd.add(new Vector(20, 20));
+//					pcd.add(new Vector(-20, 20));
+//					rock.setCollisionData(new Polygon(pcd));
 					
 					result.addGameObject(rock);
 					break;
 				case Exit:
-					LevelExit lf = new LevelExit("reagan");
-					lf.setX(ego.getX());
-					lf.setY(-ego.getY());
+					LevelExit lf = new LevelExit(new Vector(ego.getX(), -ego.getY()));
 					
 					result.addGameObject(lf);
 					break;
