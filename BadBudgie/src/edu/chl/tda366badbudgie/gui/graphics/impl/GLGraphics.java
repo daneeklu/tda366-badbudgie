@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.media.opengl.GL;
@@ -234,8 +236,20 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		double xr = r.getX() + cameraPosition.getX() - width / 2;
 		double yr = r.getY() + cameraPosition.getY() - height / 2;
-		double w = r.getWidth();
-		double h = r.getHeight();
+		double w = width;
+		double h = height;
+		
+		double texw = width;
+		double texh = height;
+		
+		if(width / height > ratio) {
+			texw = 1;
+			texh = 1.0 * height / width;
+
+		} else {
+			texw = 0.75 * width / height;
+			texh = 0.75;
+		}
 		
 		
 		setActiveTexture(texId);
@@ -243,13 +257,13 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glBegin(GL.GL_QUADS);
 		gl.glEnable(GL.GL_TEXTURE_2D);
 
-		gl.glTexCoord2d(0, 1);	
+		gl.glTexCoord2d(0.5 - texw/2, 0.5 + texh/2);	
 		gl.glVertex2d(xr, yr);
-		gl.glTexCoord2d(1, 1);
+		gl.glTexCoord2d(0.5 + texw/2, 0.5 + texh/2);
 		gl.glVertex2d(xr + w, yr);
-		gl.glTexCoord2d(1, 0);
+		gl.glTexCoord2d(0.5 + texw/2, 0.5 - texh/2);
 		gl.glVertex2d(xr + w, yr + h);
-		gl.glTexCoord2d(0, 0);
+		gl.glTexCoord2d(0.5 - texw/2, 0.5 - texh/2);
 		gl.glVertex2d(xr, yr + h);
 		
 		gl.glEnd();
@@ -368,10 +382,44 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			break;
 		}
 		
-		gl.glColor3d(0.5, 0.5, 0.5);
+		gl.glColor3d(1.0, 1.0, 1.0);
 		
 		for (Vector v : p.getVertices()) {
 			gl.glVertex2d(v.getX(), v.getY() );
+		}
+		
+		gl.glEnd();	
+		
+	}
+	
+	@Override
+	public void drawPolygon(Polygon p, Polygon t) {
+
+		GL gl = canvas.getGL();
+		GLContext con = canvas.getContext();
+		if (GLContext.getCurrent() != con) {
+			return;
+		}
+		
+		switch (p.getVertices().size()) {
+		case 3:
+			gl.glBegin(GL.GL_TRIANGLES);
+			break;
+		case 4:
+			gl.glBegin(GL.GL_QUADS);
+			break;
+		default:
+			gl.glBegin(GL.GL_POLYGON);
+			break;
+		}
+		
+		gl.glColor3d(1.0, 1.0, 1.0);
+		
+		for (int i = 0; i < p.getVertices().size(); i++) {
+			Vector v = p.getVertices().get(i);
+			Vector tx = t.getVertices().get(i);
+			gl.glTexCoord3d(tx.getX(), tx.getY(),0);
+			gl.glVertex3d(v.getX(), v.getY(),0);
 		}
 		
 		gl.glEnd();	
@@ -422,6 +470,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void drawSprite(Sprite sprite, Rectangle bounds) {
 		String texId = sprite.getId();
 		
+		Polygon poly = (Polygon)bounds;
+		
 		double tx, ty;
 		double frameWidth = 1.0 / sprite.getHorFrames();
 		double frameHeight = 1.0 / sprite.getVerFrames();
@@ -433,10 +483,35 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		setActiveTexture(texId);
 		
+		// If the sprite is rotated, rotate poly
+		if (sprite.getRotation() != 0) {
+			
+			double rot = sprite.getRotation();
+			Vector center = new Vector(bounds.getX() + bounds.getWidth()/2,
+								bounds.getY() + bounds.getHeight()/2);
+
+			
+			List<Vector> verts = new LinkedList<Vector>();
+			
+			// Rotate every vertex around the center of the sprite
+			for(Vector v : poly.getVertices()) {
+				verts.add(v.rotateAround(rot,center));
+			}
+			
+			poly = new Polygon(verts); 
+		}
+		
+		// The texture data for the geometry
+		Rectangle texRect;
+		
+		// Flip the texture data horizontally if needed
 		if (sprite.getMirrored())
-			drawRect(bounds, new Rectangle(tx + frameWidth, ty, -frameWidth, frameHeight));
+			texRect = new Rectangle(tx + frameWidth, ty+frameHeight, -frameWidth, -frameHeight);
 		else
-			drawRect(bounds, new Rectangle(tx, ty, frameWidth, frameHeight));
+			texRect = new Rectangle(tx, ty + frameHeight, frameWidth, -frameHeight);
+		
+		drawPolygon(poly, texRect);
+
 	}
 
 	@Override

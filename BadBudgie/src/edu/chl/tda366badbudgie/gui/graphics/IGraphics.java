@@ -153,6 +153,14 @@ public interface IGraphics {
 	 */
 	public void drawBackgroundRect(Rectangle r, String texId);
 
+	/**
+	 * Draws a polygon with texture coordinates
+	 * 
+	 * @param p the polygon
+	 * @param t the texture coordinates
+	 */
+	void drawPolygon(Polygon p, Polygon t);
+
 
 
 
