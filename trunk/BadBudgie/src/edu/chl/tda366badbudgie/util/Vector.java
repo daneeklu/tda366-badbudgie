@@ -5,7 +5,7 @@ package edu.chl.tda366badbudgie.util;
  * 
  * Immutable class holding fields and methods for two-dimensional vectors with double precision.
  * 
- * @author kvarfordt, jesper
+ * @author kvarfordt, jesper, d.skalle
  * 
  */
 public class Vector {
@@ -235,5 +235,29 @@ public class Vector {
 			return false;
 		}
 
+	}
+
+	/**
+	 * Rotate a vector around another vector
+	 * 
+	 * @param rot the angle to rotate, in degrees
+	 * @param pivot the pivot vector
+	 * @return the rotated vector
+	 */
+	public Vector rotateAround(double rot, Vector pivot) {
+		Vector v = subtract(pivot);
+		return v.rotate(rot).add(pivot);
+	}
+
+	/**
+	 * Rotate a vector around origo
+	 * 
+	 * @param rot the angle to rotate, in degrees
+	 * @return the rotated vector
+	 */
+	private Vector rotate(double rot) {
+		rot = rot * Math.PI / 180.0;
+		return new Vector(getX() * Math.cos(rot) + getY() * Math.sin(rot),
+				-getX() * Math.sin(rot) + getY() * Math.cos(rot));
 	}
 }
