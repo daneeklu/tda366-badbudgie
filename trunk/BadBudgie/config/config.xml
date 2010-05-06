@@ -10,11 +10,13 @@
 		<texture id="options" path="res/options.png"/>
 		<texture id="budgie" path="res/budgiesheet.png"/>
 		<texture id="enemy" path="res/cat.png"/>
+		<texture id="enemy2" path="res/cat_ghost.png"/>
 		<texture id="rock" path="res/rock.png"/>
 		<texture id="confirm:exit" path="res/confirm_exit.png"/>
 		<texture id="confirm:newgame" path="res/confirm_newgame.png"/>
 		<texture id="yesno" path="res/yesno.png"/>
 		<texture id="grass1" path="res/grass1_256.png"/>
+		<texture id="grass2" path="res/grass2_256.png"/>
 		<texture id="background" path="res/temp_background.png"/>
 		<texture id="resume" path="res/resumegame.png" />
 		<texture id="reagan" path="res/reagan.png" />
@@ -23,8 +25,10 @@
 		<texture id="bullet1" path="res/bullet1.png" />
 		<texture id="arm" path="res/arm.png" />
 	</textures>
+	
 	<levels>
 		<level nr="1" path="config/level1.xml"/>
 			<!--Additional data-->
 	</levels>
+	
 </gamedata>

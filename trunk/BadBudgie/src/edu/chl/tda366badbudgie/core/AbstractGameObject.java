@@ -21,10 +21,10 @@ public abstract class AbstractGameObject {
 	private Vector velocity;
 	private Vector force;
 	private Vector size;
-	private boolean stationary;
 	private Sprite sprite;
 	private Level parent;
 	private double mass = 1;
+	private boolean stationary;
 	private double airResistance = 0.0005;
 	
 	/**
