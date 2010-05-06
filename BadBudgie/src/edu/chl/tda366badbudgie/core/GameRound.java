@@ -29,7 +29,6 @@ public class GameRound {
 		currentLevelNumber = 0;
 		currentLevel = LevelManager.getInstance().getLevel(currentLevelNumber);
 		player = currentLevel.getPlayer();
-		
 	}
 
 	/**

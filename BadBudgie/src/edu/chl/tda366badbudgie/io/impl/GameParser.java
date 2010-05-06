@@ -44,6 +44,8 @@ public class GameParser extends AbstractParser {
 			// TODO: Break up this sheit properly. Add validation check.
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
+			dbFactory.setIgnoringComments(true);
+			dbFactory.setIgnoringElementContentWhitespace(true);
 			DocumentBuilder db;
 			try {
 				db = dbFactory.newDocumentBuilder();

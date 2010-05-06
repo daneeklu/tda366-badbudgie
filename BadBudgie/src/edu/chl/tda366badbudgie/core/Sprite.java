@@ -1,5 +1,6 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +75,14 @@ public class Sprite {
 		this.animations.put(animation.getId(), animation);
 		this.currentAnim = animation.getId();
 		this.currentFrame = 0;
+	}
+	
+	/**
+	 * Creates a copy of the given sprite.
+	 * @param s
+	 */
+	public Sprite(Sprite s){
+		this(s.getId(), s.getHorFrames(), s.getVerFrames(), new ArrayList<Animation>(s.animations.values()));
 	}
 	
 	/**

@@ -32,6 +32,7 @@ public class FileManager implements IFileManager{
 		
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db;
+		dbFactory.setIgnoringElementContentWhitespace(true);
 		try {
 			db = dbFactory.newDocumentBuilder();
 		 	GameParser gameParser = 
