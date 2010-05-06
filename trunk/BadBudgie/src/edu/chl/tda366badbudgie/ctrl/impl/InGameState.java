@@ -22,7 +22,6 @@ public class InGameState implements IState {
 	private GameRound gameRound;
 	private Physics physics;
 	private IAI enemyAi;
-	private boolean mouseDown;
 	private int mX, mY;
 	
 	

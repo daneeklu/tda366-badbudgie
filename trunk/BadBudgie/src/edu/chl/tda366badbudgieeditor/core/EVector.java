@@ -1,7 +1,5 @@
 package edu.chl.tda366badbudgieeditor.core;
 
-import edu.chl.tda366badbudgie.util.Vector;
-
 /**
  * Vector class with int accuracy (editor accuracy).
  * Has a selection of the methods from Vector.
