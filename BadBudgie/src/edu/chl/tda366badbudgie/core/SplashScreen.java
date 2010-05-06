@@ -22,7 +22,7 @@ public class SplashScreen extends JFrame {
 
 	
 	private static final long serialVersionUID = -1888144280413261482L;
-	Image image;
+	transient Image image;
 	
 	public SplashScreen(){
 

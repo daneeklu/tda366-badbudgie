@@ -169,7 +169,7 @@ public class DebugInfoRenderer {
 	 * @author kvarfordt
 	 *
 	 */
-	private class DebugLine {
+	private static class DebugLine {
 
 		private Vector start;
 		private Vector end;

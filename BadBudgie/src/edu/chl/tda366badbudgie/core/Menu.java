@@ -218,7 +218,7 @@ public class Menu {
 	 * @author d.skalle
 	 * 
 	 */
-	public class ConfirmDialog {
+	public static class ConfirmDialog {
 		
 		boolean value;
 		String action;

@@ -33,7 +33,6 @@ public class EditorFrame extends JFrame implements ILevelObserver {
 		
 		addKeyListener(controller);
 		
-		LayoutManager layout = new BorderLayout();
 		add(levelPanel, BorderLayout.CENTER);
 		add(toolPanel, BorderLayout.EAST);
 		

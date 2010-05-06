@@ -74,7 +74,7 @@ public class Animation {
 	 * @author jesper
 	 *
 	 */
-	public class Frame{
+	public static class Frame{
 		private int posIndex;
 		private double duration;
 		
