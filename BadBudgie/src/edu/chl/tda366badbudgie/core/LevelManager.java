@@ -3,9 +3,6 @@ package edu.chl.tda366badbudgie.core;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.chl.tda366badbudgie.util.Polygon;
-import edu.chl.tda366badbudgie.util.Vector;
-
 /**
  * LevelManager
  * Singleton class that handles references 
@@ -55,7 +52,7 @@ public class LevelManager {
 	 * Test level
 	 */
 	//TODO: Remove this when levels are stored/loaded from xml.
-	private Level makeTestLevel() {
+	/*private Level makeTestLevel() {
 		Level level = new Level();
 
 		Player player = new Player(new Vector(0, 320));
@@ -75,7 +72,7 @@ public class LevelManager {
 		anims.add(new Animation("",indices, durations));
 		
 		Sprite weaponSprite = new Sprite("gun1");
-		*/
+		
 		
 		//Puts a dummy enemy on the screen
 		
@@ -161,9 +158,7 @@ public class LevelManager {
 	
 	
 
-	/*
-	 * Test level
-	 */
+	
 	private Level makeTestLevel2() {
 		Level level = new Level();
 
@@ -184,7 +179,7 @@ public class LevelManager {
 		anims.add(new Animation("",indices, durations));
 		
 		Sprite weaponSprite = new Sprite("gun1");
-		*/
+		
 		
 		//Puts a dummy enemy on the screen
 		
@@ -266,7 +261,7 @@ public class LevelManager {
 		level.addGameObject(lf);
 		
 		return level;
-	}
+	}*/
 
 	/**
 	 * Sets the level list. Used by the level editor to test a level.

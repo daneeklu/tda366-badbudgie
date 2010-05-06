@@ -1,7 +1,6 @@
 package edu.chl.tda366badbudgie.ctrl;
 import javax.swing.JFrame;
 
-import edu.chl.tda366badbudgie.gui.GraphicsFrame;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
 public interface IStateContext {

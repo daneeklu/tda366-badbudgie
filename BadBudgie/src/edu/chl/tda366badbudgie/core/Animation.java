@@ -1,8 +1,5 @@
 package edu.chl.tda366badbudgie.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Animation
  * 
@@ -22,7 +19,7 @@ public class Animation {
 		for(int i = 0; i < indices.length; i ++){
 			frames[i] = new Frame(indices[i], durationTimes[i]);
 		}
-		this.loop = loop;
+		this.setLooping(loop);
 		this.animId = animId;
 	}
 	
@@ -32,7 +29,7 @@ public class Animation {
 		for(int i = 0; i < indices.length; i ++){
 			frames[i] = new Frame(indices[i], durationTime);
 		}
-		this.loop = loop;
+		this.setLooping(loop);
 		this.animId = animId;
 	}
 	
@@ -52,7 +49,7 @@ public class Animation {
 	public Animation(String id, int index){
 		frames = new Frame[1];
 		frames[0] = new Frame(index, 1);
-		this.loop = false;
+		this.setLooping(false);
 		this.animId = id;
 	}
 	
@@ -108,6 +105,14 @@ public class Animation {
 
 	public String getId() {
 		return animId;
+	}
+
+	public void setLooping(boolean loop) {
+		this.loop = loop;
+	}
+
+	public boolean isLooping() {
+		return loop;
 	}
 	
 }

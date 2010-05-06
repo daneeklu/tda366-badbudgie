@@ -1,6 +1,5 @@
 package edu.chl.tda366badbudgie.core;
 
-import edu.chl.tda366badbudgie.physics.impl.CollisionHandler;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 

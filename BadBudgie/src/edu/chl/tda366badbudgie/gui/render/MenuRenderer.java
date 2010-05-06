@@ -5,7 +5,6 @@ import edu.chl.tda366badbudgie.core.MenuItem;
 import edu.chl.tda366badbudgie.core.Menu.ConfirmDialog;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.util.Rectangle;
-import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * MenuRenderer

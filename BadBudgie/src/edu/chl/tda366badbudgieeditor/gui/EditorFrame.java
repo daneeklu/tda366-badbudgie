@@ -1,7 +1,6 @@
 package edu.chl.tda366badbudgieeditor.gui;
 
 import java.awt.BorderLayout;
-import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
 
