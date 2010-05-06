@@ -25,7 +25,7 @@ import edu.chl.tda366badbudgie.gui.graphics.impl.GLGraphics;
 @SuppressWarnings("serial")
 public class GraphicsFrame extends JFrame {
 	
-	private IGraphics ig;
+	private transient IGraphics ig;
 	
 	public GraphicsFrame(){
 		ig = new GLGraphics(800, 600);

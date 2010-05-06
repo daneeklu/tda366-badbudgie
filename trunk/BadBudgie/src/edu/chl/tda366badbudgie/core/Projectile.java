@@ -9,7 +9,7 @@ public class Projectile extends AbstractItem {
 	// Default constructor parameters
 	private static final Vector PROJECTILE_SIZE = new Vector(10, 10);
 	private static final Sprite PROJECTILE_SPRITE = new Sprite("bullet1");
-	private static final Polygon PROJECTILE_COLLISION_DATA = new Rectangle(-20,-20,40,40);
+	private static final Polygon PROJECTILE_COLLISION_DATA = new Rectangle(-5,-5,10,10);
 	private static final int PROJECTILE_DAMAGE = 10;
 	private static final int PROJECTILE_SPEED = 30;
 	

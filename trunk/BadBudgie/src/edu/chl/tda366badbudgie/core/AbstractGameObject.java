@@ -219,7 +219,10 @@ public abstract class AbstractGameObject {
 		this.size = v;
 	}
 
-
+	/**
+	 * Returns the level
+	 * @return
+	 */
 	public Level getParent() {
 		return parent;
 	}
