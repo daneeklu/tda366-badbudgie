@@ -19,7 +19,9 @@ public class MovementHandler {
 				ago.updateForces();
 				
 				// Air friction
-				ago.applyForce(ago.getVelocity().scalarMultiplication(ago.getVelocity().getLength()*-1.0*ago.getAirResistance()));
+				//ago.applyForce(ago.getVelocity().scalarMultiplication(ago.getVelocity().getLength()*-1.0*ago.getAirResistance()));
+				ago.setVelocity(ago.getVelocity().scalarDivision(ago.getAirResistance()));
+				
 				
 				// Apply gravity
 				ago.applyForce(new Vector(0, -Physics.g * ago.getMass()));

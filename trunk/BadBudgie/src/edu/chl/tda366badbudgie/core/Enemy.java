@@ -28,14 +28,14 @@ public class Enemy extends AbstractUnit {
 	static {
 		List<Animation> animations = new LinkedList<Animation>();
 		int[] indices = {4,5,6,7};
-		animations.add(new Animation("idle",0));
-		animations.add(new Animation("run",indices,5));
+		animations.add(new Animation("idle", 0));
+		animations.add(new Animation("run", indices, 5));
 		ENEMY_SPRITE = new Sprite("enemy", 4, 4, animations);
 	}
 	
 	// Movement constants
-	private static final double MOVE_FORCE = 0.9;
-	
+	private static final double GROUND_MOVE_FORCE = 1.5;
+	private static final double MAXIMUM_WALK_SPEED = 5.0;
 	
 	private int damage;
 	private int direction = 0;
@@ -73,9 +73,11 @@ public class Enemy extends AbstractUnit {
 	
 	@Override
 	public void updateForces() {
-		
-		if (!getGroundContactVector().hasZeroLength()) 
-			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE * Math.signum(direction)));
+
+		// Walking
+		if (!getGroundContactVector().hasZeroLength() 
+				&& Math.abs(getVelocity().getX()) < MAXIMUM_WALK_SPEED) 
+			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication((GROUND_MOVE_FORCE) * Math.signum(direction)));
 
 	}
 	
@@ -83,6 +85,8 @@ public class Enemy extends AbstractUnit {
 	public GameRoundMessage update(){
 		
 		getSprite().animate();
+		
+
 		
 		if (getHealth() <= 0)
 			return GameRoundMessage.RemoveObject;
@@ -94,14 +98,15 @@ public class Enemy extends AbstractUnit {
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
 		// Set the ground contact vector
-		if (mtv.getY() > 0 && other instanceof TerrainSection) {
-			// Player has ground beneath his feet
+		if (mtv.getY() > 0) {
+			// Enemy has ground beneath his feet
 			// Set ground contact vector to mean of previous and new contact vector, 
 			// to allow multiple contacts in one loop
 			this.setGroundContactVector(this.getGroundContactVector().add(
-					mtv.normalize().scalarDivision(2)));
-			//this.setGroundContactObject(other);
+					mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
+					.scalarDivision(2))); // +0.000001 to avoid a zero-length vector
 		}
+		
 		else if (other instanceof Player) {
 			setDirection(-1 * getDirection());
 		}

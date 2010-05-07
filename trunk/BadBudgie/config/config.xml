@@ -17,6 +17,8 @@
 		<texture id="yesno" path="res/yesno.png"/>
 		<texture id="grass1" path="res/grass1_256.png"/>
 		<texture id="grass2" path="res/grass2_256.png"/>
+		<texture id="ice1" path="res/ice1_256.png"/>
+		<texture id="asphalt1" path="res/asphalt1_256.png"/>
 		<texture id="background" path="res/temp_background.png"/>
 		<texture id="resume" path="res/resumegame.png" />
 		<texture id="reagan" path="res/reagan.png" />
@@ -29,6 +31,7 @@
 	<levels>
 		<level nr="1" path="config/level1.xml"/>
 		<level nr="2" path="config/level2.xml"/>
+		<level nr="3" path="config/level3.xml"/>
 			<!--Additional data-->
 	</levels>
 	
