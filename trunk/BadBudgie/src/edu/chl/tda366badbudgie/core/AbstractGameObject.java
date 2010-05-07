@@ -10,7 +10,7 @@ import edu.chl.tda366badbudgie.util.Vector;
  * @author jesper, kvarfordt, d.skalle
  * 
  */
-public abstract class AbstractGameObject {
+public abstract class AbstractGameObject implements Cloneable {
 
 	/**
 	 * Enum containing possible "passback values" from an AbstractGameObject to the GameRound
@@ -256,7 +256,8 @@ public abstract class AbstractGameObject {
 		return stationary;
 	}
 
-	
+	@Override
+	public abstract Object clone();
 	
 	
 	

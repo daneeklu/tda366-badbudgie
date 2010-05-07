@@ -45,7 +45,7 @@ public class LevelManager {
 	 * @return the Level corresponding to the given index.
 	 */
 	public Level getLevel(int index){
-		return levels.get(index % levels.size());
+		return new Level(levels.get(index));
 	}
 	
 	/*

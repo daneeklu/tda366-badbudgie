@@ -47,5 +47,10 @@ public class Weapon extends AbstractItem {
 
 	}
 
+	@Override
+	public Object clone() {
+		return new Weapon(getPosition(), getDamage(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity());
+	}
+
 	
 }
