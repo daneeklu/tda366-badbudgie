@@ -72,18 +72,22 @@
 			<position x="100" y="100" />
 			<size x="100" y="100" />
 		</gameobject>
+		
 		<gameobject id="catsoldier">
 			<position x="-300" y="200" />
 			<size x="100" y="100" />
 		</gameobject>
+		
 		<gameobject id="catghost">
 			<position x="-200" y="350" />
 			<size x="100" y="100" />
 		</gameobject>
+		
 		<gameobject id="smoothrock">
 			<position x="200" y="130" />
 			<size x="50" y="50" />
 		</gameobject>
+		
 		<gameobject id="smoothrock">
 			<position x="-50" y="500" />
 			<size x="50" y="50" />
@@ -98,61 +102,29 @@
 
 	<!--Terrain segments used in the level -->
 	<terrainsections>
-		<terrain x="-500" y="-200" sprite="grass2" friction="0.5" elasticity="0.05" resolution="0.0065" >
-			<surface type="rectangle" width="1000" height="100"/>
+			
+		<terrain x="700" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
+			<surface type="circle" radius="170" segments="32"/>
 		</terrain>
 		
-		<terrain x="-500" y="500" sprite="grass2" friction="0.5" elasticity="0.05" resolution="0.0065" >
-			<surface type="rectangle" width="1000" height="100"/>
+		<terrain x="300" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
+			<surface type="circle" radius="170" segments="32"/>
 		</terrain>
 		
-		<terrain x="-600" y="0" sprite="grass2" friction="0.5" elasticity="0.05" resolution="0.0065" >
-			<surface type="rectangle" width="100" height="1000"/>
+		<terrain x="-100" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
+			<surface type="circle" radius="170" segments="32"/>
 		</terrain>
 		
-		<terrain x="500" y="0" sprite="grass2" friction="0.5" elasticity="0.05" resolution="0.0065" >
-			<surface type="rectangle" width="100" height="1000"/>
+		<terrain x="-500" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
+			<surface type="circle" radius="170" segments="32"/>
 		</terrain>
 		
-		<terrain x="6" y="-100" sprite="grass1" friction="0.5" elasticity="0.05" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="500" y="0" />
-				<vector x="500" y="20" />
-				<vector x="400" y="50" />
-				<vector x="200" y="40" />
-				<vector x="0" y="20" />
-			</surface>
+		<terrain x="-900" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
+			<surface type="circle" radius="170" segments="32"/>
 		</terrain>
 		
-		<terrain x="-600" y="-100" sprite="grass1" friction="0.5" elasticity="0.05" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="500" y="0" />
-				<vector x="500" y="20" />
-				<vector x="400" y="50" />
-				<vector x="200" y="40" />
-				<vector x="0" y="20" />
-			</surface>
-		</terrain>
-		
-		<terrain x="-100" y="-150" sprite="grass2" friction="0.0" elasticity="20.0" resolution="0.0055">
-			<surface type="rectangle" width="106" height="300" />
-		</terrain>
-		
-		<terrain x="-115" y="150" sprite="grass1" friction="1.0" elasticity="0.0" resolution="0.0055">
-			<surface type="rectangle" width="136" height="30" />
-		</terrain>
-		
-		<terrain x="-100" y="450" sprite="grass2" friction="0.0" elasticity="6.0" resolution="0.0055">
-			<surface type="rectangle" width="106" height="50" />
-		</terrain>
-		
-		<terrain x="-500" y="-100" sprite="grass2" friction="0.0" elasticity="0.0" resolution="0.0055">
-			<surface type="circle" radius="150" segments="32"/>
-		</terrain>
-		<terrain x="600" y="-100" sprite="grass2" friction="0.0" elasticity="0.0" resolution="0.0055">
-			<surface type="circle" radius="150" segments="32"/>
+		<terrain x="-1300" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
+			<surface type="circle" radius="170" segments="32"/>
 		</terrain>
 	</terrainsections>
 </leveldata>

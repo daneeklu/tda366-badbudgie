@@ -13,6 +13,7 @@ import edu.chl.tda366badbudgie.core.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.Animation;
 import edu.chl.tda366badbudgie.core.Enemy;
 import edu.chl.tda366badbudgie.core.Level;
+import edu.chl.tda366badbudgie.core.LevelExit;
 import edu.chl.tda366badbudgie.core.LevelManager;
 import edu.chl.tda366badbudgie.core.Obstacle;
 import edu.chl.tda366badbudgie.core.Player;
@@ -34,10 +35,8 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class LevelParser extends AbstractParser{
 
 	//Maps used by private methods.
-	//private Map<String, Animation> animMap = new HashMap<String, Animation>();
 	private Map<String, Sprite> spriteMap = new HashMap<String, Sprite>();
 	private Map<String, Polygon> collisionMap = new HashMap<String, Polygon>();
-	//private Map<String, AbstractGameObject> gobjMap = new HashMap<String, AbstractGameObject>();
 	
 	public LevelParser(Document xmlDocument) {
 		
@@ -88,7 +87,7 @@ public class LevelParser extends AbstractParser{
 			collisionMap.put(sprite.getAttribute("id"), createPolygon(sprite));
 		}
 		
-		//Create gameobjects.		
+		//Create gameobjects.
 		Element defined = (Element)xmlData.getElementsByTagName("definedobjects").item(0);
 		Element instanced = (Element)xmlData.getElementsByTagName("placedobjects").item(0);
 		List<AbstractGameObject> gameObjList = createGameObjects(defined, instanced);
@@ -96,8 +95,7 @@ public class LevelParser extends AbstractParser{
 		for(AbstractGameObject ob : gameObjList){
 			level.addGameObject(ob);
 		}
-		
-		
+			
 		//Create terrain sections.
 		NodeList terrainList = xmlData.getElementsByTagName("terrain");
 		for(int i = 0; i < terrainList.getLength(); i++){
@@ -218,9 +216,13 @@ public class LevelParser extends AbstractParser{
 
 		String sID = e.getAttribute("spriteid");
 		String cID = e.getAttribute("colid");
-		double fric = Double.parseDouble(e.getAttribute("friction"));
-		double elas = Double.parseDouble(e.getAttribute("elasticity"));
-		
+		double fric = 1;
+		double elas = 0;
+		try{
+			fric = Double.parseDouble(e.getAttribute("friction"));
+			elas = Double.parseDouble(e.getAttribute("elasticity"));
+		} catch(NumberFormatException ex){
+		}
 			//OBSTACLE
 			if(type.equals("obstacle")){
 				
@@ -237,6 +239,10 @@ public class LevelParser extends AbstractParser{
 				
 				obj = new Enemy(z, z, new Sprite(spriteMap.get(sID)), collisionMap.get(cID), fric, elas, dam, dir);	
 			} 
+			//LEVEL EXIT
+			else if(type.equals("exit")){
+				obj = new LevelExit(z,z, spriteMap.get(sID), collisionMap.get(cID));
+			}
 			//ILLEGAL TYPE
 			else{
 				throw new IllegalArgumentException("Undefined object type");
