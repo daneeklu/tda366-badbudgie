@@ -107,7 +107,10 @@ public class CollisionHandler {
 			handleImpact(o1, o2, mtv);
 		}
 		
-		DebugInfoRenderer.getInstance().addDebugLine(o1.getPosition(), o1.getPosition().add(mtv.scalarMultiplication(30)), Color.green);
+		/* This line introduces a circular dependency, so be sure to comment it out when not in use:
+		 * DebugInfoRenderer.getInstance().addDebugLine(o1.getPosition(), o1.getPosition().add(mtv.scalarMultiplication(30)), Color.green);
+		 */
+		
 	}
 
 
