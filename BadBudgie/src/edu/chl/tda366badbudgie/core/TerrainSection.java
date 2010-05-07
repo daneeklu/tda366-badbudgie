@@ -65,5 +65,10 @@ public class TerrainSection extends AbstractCollidable {
 		return texRes;
 	}
 
+	@Override
+	public Object clone() {
+		return new TerrainSection(getSurface(), getSprite(), getFriction(), getElasticity());
+	}
+
 	
 }

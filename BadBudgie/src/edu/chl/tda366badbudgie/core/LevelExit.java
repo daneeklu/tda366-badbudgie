@@ -49,5 +49,10 @@ public class LevelExit extends AbstractCollidable {
 			other.translate(mtv.scalarMultiplication(-2));
 		}
 	}
+
+	@Override
+	public Object clone() {
+		return new LevelExit(getPosition(), getSize(), getSprite(), getCollisionData());
+	}
 	
 }

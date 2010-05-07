@@ -343,6 +343,11 @@ public class Player extends AbstractUnit {
 		return weapon;
 	}
 
+	@Override
+	public Object clone() {
+		return new Player(getPosition(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity());
+	}
+
 
 	
 }

@@ -54,5 +54,10 @@ public class Projectile extends AbstractItem {
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
+
+	@Override
+	public Object clone() {
+		return new Projectile(getPosition(), getVelocity(), getVelocity().getLength(), getDamage(), getSize(), getSprite(), getCollisionData());
+	}
 	
 }

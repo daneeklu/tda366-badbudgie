@@ -15,7 +15,7 @@ import java.util.List;
 public class Level {
 	
 	private ArrayList<AbstractGameObject> gameObjects;
-	private ArrayList<TerrainSection> terrainQuads;
+	private ArrayList<TerrainSection> terrainSections;
 	
 	private String backgroundTexId;
 	
@@ -25,11 +25,26 @@ public class Level {
 	public Level() {
 		
 		gameObjects = new ArrayList<AbstractGameObject>();
-		terrainQuads = new ArrayList<TerrainSection>();
+		terrainSections = new ArrayList<TerrainSection>();
 		
 		// TODO: Load from level data
 		setBackgroundTexId("background");
 		
+	}
+	
+	/**
+	 * Copy constructor
+	 * 
+	 * @param level
+	 */
+	public Level(Level level) {
+		this();
+		for (AbstractGameObject ago : level.getGameObjects()) {
+			addGameObject((AbstractGameObject) ago.clone());
+		}
+		for (TerrainSection ts : level.getTerrainSections()) {
+			addTerrainSection((TerrainSection) ts.clone());
+		}
 	}
 	
 	/**
@@ -59,7 +74,7 @@ public class Level {
 	 * @return a list of all TerrainSection
 	 */
 	public List<TerrainSection> getTerrainSections() {
-		return terrainQuads;
+		return terrainSections;
 	}
 	
 	/**
@@ -67,7 +82,7 @@ public class Level {
 	 * @param t the TerrainSection to add
 	 */
 	public void addTerrainSection(TerrainSection t) {
-		terrainQuads.add(t);
+		terrainSections.add(t);
 	}
 	
 	/**

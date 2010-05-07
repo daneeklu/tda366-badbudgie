@@ -151,5 +151,10 @@ public class Enemy extends AbstractUnit {
 		else
 			getSprite().setMirrored(false);
 	}
+
+	@Override
+	public Object clone() {
+		return new Enemy(getPosition(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity(), getDamage(), getDirection());
+	}
 	
 }
