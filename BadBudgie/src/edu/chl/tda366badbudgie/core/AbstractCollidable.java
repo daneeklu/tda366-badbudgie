@@ -3,7 +3,6 @@ package edu.chl.tda366badbudgie.core;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.chl.tda366badbudgie.util.Polygon;

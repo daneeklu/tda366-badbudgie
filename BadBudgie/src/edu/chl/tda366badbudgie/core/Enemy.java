@@ -159,7 +159,9 @@ public class Enemy extends AbstractUnit {
 
 	@Override
 	public Object clone() {
-		return new Enemy(getPosition(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity(), getDamage(), getDirection());
+		Enemy e = new Enemy(getPosition(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity(), getDamage(), getDirection());
+		e.setAirResistance(getAirResistance());
+		return e;
 	}
 	
 }

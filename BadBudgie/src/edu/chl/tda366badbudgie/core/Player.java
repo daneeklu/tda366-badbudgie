@@ -353,8 +353,7 @@ public class Player extends AbstractUnit {
 	@Override
 	public Object clone() {
 		Player p = new Player(getPosition(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity());
-		p.setWeapon((Weapon)weapon.clone());
-		System.out.println("Player is cloned.");
+		p.setAirResistance(this.getAirResistance());
 		return p;
 	}
 

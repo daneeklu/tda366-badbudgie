@@ -12,6 +12,10 @@
 		
 		<sprite id="rock" animated="false" textureid="rock" />
 		
+		<sprite id="asphalt1" animated="false" textureid="asphalt1" />
+		
+		<sprite id="ice1" animated="false" textureid="ice1" />
+		
 		<sprite id="catgreen" animated="true" textureid="enemy">
 			<segments x="4" y="4" />
 			<animation id="run" duration="5" indices="4,5,6,7" />
@@ -24,8 +28,8 @@
 			<animation id="idle" duration="0" indices="0" />
 		</sprite>
 		
-		<sprite id="reagan" animated="false" textureid="exit">
-		</sprite>
+		<sprite id="reagan" animated="false" textureid="exit" />
+		
 	</sprites>
 	
 	<!--Animations used by sprites * UNUSED FOR NOW! * -->
@@ -99,7 +103,7 @@
 	<!--Terrain segments used in the level -->
 	<terrainsections>
 	
-		<terrain x="0" y="-200" sprite="grass2" friction="0.5" elasticity="0.05" resolution="0.00015" >
+		<terrain x="0" y="-200" sprite="grass2" friction="0.5" elasticity="0.05" resolution="0.0075" >
 			<surface type="rectangle" width="3000" height="100"/>
 		</terrain>
 		
@@ -107,12 +111,16 @@
 			<surface type="rectangle" width="1000" height="30" />
 		</terrain>
 		
-		<terrain x="0" y="-100" sprite="grass1" friction="0.5" elasticity="0.0" resolution="0.0015">
+		<terrain x="0" y="-80" sprite="asphalt1" friction="1.0" elasticity="0.0" resolution="0.015">
 			<surface type="rectangle" width="400" height="30" />
 		</terrain>
 		
-		<terrain x="500" y="-100" sprite="asphalt1" friction="1.0" elasticity="0.0" resolution="0.0015">
+		<terrain x="0" y="-100" sprite="grass1" friction="0.5" elasticity="0.0" resolution="0.015">
 			<surface type="rectangle" width="400" height="30" />
+		</terrain>
+		
+		<terrain x="0" y="-100" sprite="grass1" friction="0.5" elasticity="0.0" resolution="0.015">
+			<surface type="circle" radius="50" segments="16" />
 		</terrain>
 		
 	</terrainsections>
