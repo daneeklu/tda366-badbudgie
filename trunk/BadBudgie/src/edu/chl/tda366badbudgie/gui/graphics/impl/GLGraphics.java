@@ -320,7 +320,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		for (Vector v : p.getVertices()) {
 			
-			gl.glTexCoord2d(v.getX() * texRes, v.getY() * texRes);
+			gl.glTexCoord2d(position.add(v).getX() * texRes, position.add(v).getY() * texRes);
 			gl.glVertex2d(position.getX() + v.getX(),position.getY() + v.getY() );
 			
 		}

@@ -122,7 +122,7 @@ public class LevelParser extends AbstractParser{
 		//Extract surface vectors
 		surface = createPolygon((Element)e.getElementsByTagName("surface").item(0));
 		
-		t = new TerrainSection(surface, new Sprite(spriteID), fric, elas);
+		t = new TerrainSection(surface, spriteMap.get(spriteID), fric, elas);
 		t.setTexRes(res);
 		t.setPosition(new Vector(x, y));
 		

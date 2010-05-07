@@ -5,7 +5,6 @@ import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.util.Rectangle;
-import edu.chl.tda366badbudgie.util.Vector;
 
 /**
  * GameRenderer

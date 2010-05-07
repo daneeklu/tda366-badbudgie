@@ -48,7 +48,9 @@ public class Obstacle extends AbstractCollidable {
 
 	@Override
 	public Object clone() {
-		return new Obstacle(getPosition(), getSize(), isStationary(), getSprite(), getCollisionData(), getFriction(), getElasticity());
+		Obstacle o = new Obstacle(getPosition(), getSize(), isStationary(), getSprite(), getCollisionData(), getFriction(), getElasticity());
+		//o.setAirResistance(getAirResistance());
+		return o;
 	}
 
 }
