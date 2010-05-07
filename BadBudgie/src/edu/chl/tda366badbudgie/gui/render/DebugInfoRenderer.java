@@ -94,8 +94,8 @@ public class DebugInfoRenderer {
 					AbstractCollidable ac = (AbstractCollidable) ago;
 					List<Vector> verts = ac.getCollisionData().getVertices();
 					for (int i = 0; i < verts.size(); i++) {
-						Vector v1 = verts.get(i);
-						Vector v2 = verts.get((i + 1) % verts.size());
+						Vector v1 = verts.get(i).add(ago.getPosition());
+						Vector v2 = verts.get((i + 1) % verts.size()).add(ago.getPosition());
 						addDebugLine(v1, v2, Color.darkGray);
 					}
 				}

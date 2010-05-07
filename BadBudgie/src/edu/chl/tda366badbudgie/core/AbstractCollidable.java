@@ -54,12 +54,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @return the collision data.
 	 */
 	public Polygon getCollisionData() {
-		// Move the collision data to the objects current position.
-		List<Vector> offsetCollisionData = new LinkedList<Vector>();
-		for (Vector v : collisionData.getVertices()) {
-			offsetCollisionData.add(v.add(getPosition()));
-		}
-		return new Polygon(offsetCollisionData);
+		return new Polygon(collisionData.getVertices());
 	}
 	
 	/**

@@ -112,18 +112,10 @@
 		</terrain>
 		
 		<terrain x="-100" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
-			<surface type="circle" radius="170" segments="32"/>
+			<surface type="rectangle" width="1000" height="100"/>
 		</terrain>
 		
-		<terrain x="-500" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
-			<surface type="circle" radius="170" segments="32"/>
-		</terrain>
-		
-		<terrain x="-900" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
-			<surface type="circle" radius="170" segments="32"/>
-		</terrain>
-		
-		<terrain x="-1300" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
+		<terrain x="-100" y="-250" sprite="grass2" friction="0.2" elasticity="0.0" resolution="0.0055">
 			<surface type="circle" radius="170" segments="32"/>
 		</terrain>
 	</terrainsections>

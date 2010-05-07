@@ -2,6 +2,8 @@ package edu.chl.tda366badbudgie.physics.impl;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import edu.chl.tda366badbudgie.core.AbstractUnit;
 import edu.chl.tda366badbudgie.core.GameRound;
@@ -52,9 +54,8 @@ public class CollisionHandler {
 			// ...check it against all following objects in the list...
 			for (int j = i + 1; j < collidableObjects.size(); j++) {
 				AbstractCollidable o2 = collidableObjects.get(j);
-
-				Vector mtv = getCollisionSAT(o1.getCollisionData(), o2
-						.getCollisionData());
+				
+				Vector mtv = getCollisionSAT(globColData(o1), globColData(o2));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, o2, mtv);
 				}
@@ -62,8 +63,7 @@ public class CollisionHandler {
 
 			// ...and all terrain segments.
 			for (AbstractCollidable t : terrainSections) {
-				Vector mtv = getCollisionSAT(o1.getCollisionData(), t
-						.getCollisionData());
+				Vector mtv = getCollisionSAT(globColData(o1), globColData(t));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, t, mtv);
 				}
@@ -72,6 +72,19 @@ public class CollisionHandler {
 		
 	}
 
+	/**
+	 * Transforms collision data of an object from local to global coordinates.
+	 * @param ac collidable object
+	 * @return globalized coordinates in a polygon.
+	 */
+	private Polygon globColData(AbstractCollidable ac){
+		List<Vector> offsColData1 = new LinkedList<Vector>(); //Object 1.
+		for (Vector v : ac.getCollisionData().getVertices()) {
+			offsColData1.add(v.add(ac.getPosition()));
+		}		
+		return new Polygon(offsColData1);
+	}
+	
 	/**
 	 * This method decides what effects the collision should have.
 	 * 
