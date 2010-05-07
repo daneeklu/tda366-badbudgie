@@ -23,7 +23,8 @@ public class Rectangle extends Polygon {
 	 * @param height the height of the rectangle.
 	 */
 	public Rectangle(double width, double height){
-		this(0,0, width, height);
+		this(-width/2,-height/2, width, height);
+		//this(0,0, width, height);
 	}
 
 	/**

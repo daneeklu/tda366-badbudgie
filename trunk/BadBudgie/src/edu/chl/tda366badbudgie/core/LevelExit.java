@@ -34,16 +34,20 @@ public class LevelExit extends AbstractCollidable {
 
 	@Override
 	public GameRoundMessage update() {
-		if (touchedByPlayer) 
+		if (touchedByPlayer){
+			touchedByPlayer = false;
 			return GameRoundMessage.LevelFinished;
+		}
 		else
 			return GameRoundMessage.NoEvent;
 	}
 	
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		if (other instanceof Player)
+		if (other instanceof Player){
 			touchedByPlayer = true;
+			other.translate(mtv.scalarMultiplication(-2));
+		}
 	}
 	
 }

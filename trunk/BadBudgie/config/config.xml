@@ -28,6 +28,7 @@
 	
 	<levels>
 		<level nr="1" path="config/level1.xml"/>
+		<level nr="2" path="config/level2.xml"/>
 			<!--Additional data-->
 	</levels>
 	
