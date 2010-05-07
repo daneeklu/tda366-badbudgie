@@ -5,12 +5,15 @@
 Here you will see some information about *bad budgie*
 
 
-= Details =
+== Details ==
 
 Bad budgie is a sidescrolling game for the java runtime engine, using the JOGL wrapper library for hardware rendering.
 
 The game is made as part of the IT programme at Chalmers.
 
+== Installation ==
+
+To run bad budgie, you need JOGL installed. First download and install jogl. Then, download the BadBudgie project from svn trunk. To properly run the game you must add a folder called "lib" to the project folder, where you put the files "jogl.jar" and "gluegen-rt.jar".
 
 = Documentation =
 
@@ -18,7 +21,9 @@ The game is made as part of the IT programme at Chalmers.
 
 [http://tda366-badbudgie.googlecode.com/files/SDD_3.2.pdf System Design Document]
 
-*Meeting Agendas*
+
+
+== Project Meeting Reports==
 
 || *Week* || *Weekly meeting #1* || *Weekly meeting #2* ||
 || 1 || [http://tda366-badbudgie.googlecode.com/files/meeting100315.pdf 2010-03-15] || [http://tda366-badbudgie.googlecode.com/files/meeting100317.pdf 2010-03-17] ||
