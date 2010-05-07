@@ -12,7 +12,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import edu.chl.tda366badbudgie.core.ImageDataHandler;
 
 /**
  * GameParser 

@@ -1,6 +1,7 @@
 package edu.chl.tda366badbudgie.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -14,8 +15,8 @@ import java.util.List;
  */
 public class Level {
 	
-	private ArrayList<AbstractGameObject> gameObjects;
-	private ArrayList<TerrainSection> terrainSections;
+	private List<AbstractGameObject> gameObjects;
+	private List<TerrainSection> terrainSections;
 	
 	private String backgroundTexId;
 	
@@ -39,8 +40,23 @@ public class Level {
 	 */
 	public Level(Level level) {
 		this();
+		Player p = null;
+		Weapon w = null;
+		
 		for (AbstractGameObject ago : level.getGameObjects()) {
-			addGameObject((AbstractGameObject) ago.clone());
+			
+			//TEMP WEAPON FIX
+			AbstractGameObject agoClone = (AbstractGameObject) ago.clone();
+			if(agoClone instanceof Player){
+				p = (Player) agoClone;
+			} else if(agoClone instanceof Weapon){
+				w = (Weapon)agoClone;
+			}
+			
+			addGameObject((AbstractGameObject) agoClone);
+		}
+		if(w != null){
+			p.setWeapon(w);
 		}
 		for (TerrainSection ts : level.getTerrainSections()) {
 			addTerrainSection((TerrainSection) ts.clone());
@@ -94,6 +110,17 @@ public class Level {
 		go.setParent(this);
 	}
 
+	/**
+	 * Adds an AbstractGameObject to the level.
+	 * @param go the AbstractGameObject to add
+	 */
+	public void addGameObject(Collection<AbstractGameObject> go) {
+		gameObjects.addAll(go);
+		for(AbstractGameObject g: go){
+			g.setParent(this);
+		}
+	}
+	
 	/**
 	 * @param backgroundTexId the background texture id
 	 */

@@ -67,7 +67,9 @@ public class TerrainSection extends AbstractCollidable {
 
 	@Override
 	public Object clone() {
-		return new TerrainSection(getSurface(), getSprite(), getFriction(), getElasticity());
+		TerrainSection t = new TerrainSection(getSurface(), getSprite(), getFriction(), getElasticity());
+		t.setPosition(getPosition());
+		return t;
 	}
 
 	

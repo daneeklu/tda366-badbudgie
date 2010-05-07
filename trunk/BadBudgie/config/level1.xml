@@ -136,7 +136,7 @@
 			</surface>
 		</terrain>
 		
-		<terrain x="-100" y="-150" sprite="grass2" friction="0.0" elasticity="20.0" resolution="0.0055">
+		<terrain x="-100" y="-150" sprite="grass2" friction="0.0" elasticity="00.0" resolution="0.0055">
 			<surface type="rectangle" width="106" height="300" />
 		</terrain>
 		
@@ -144,7 +144,7 @@
 			<surface type="rectangle" width="136" height="30" />
 		</terrain>
 		
-		<terrain x="-100" y="450" sprite="grass2" friction="0.0" elasticity="6.0" resolution="0.0055">
+		<terrain x="-100" y="450" sprite="grass2" friction="0.0" elasticity="0.0" resolution="0.0055">
 			<surface type="rectangle" width="106" height="50" />
 		</terrain>
 		
