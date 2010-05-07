@@ -339,7 +339,7 @@ public class CollisionHandler {
 			double fbT = (vbTangent2 - vbTangent) * mb;
 			
 			
-			// Apply force???
+			// Apply force
 			a.applyForce(collisionNormal.scalarMultiplication(faN).add(
 					collisionTangent.scalarMultiplication(faT)));
 			b.applyForce(collisionNormal.scalarMultiplication(fbN).add(

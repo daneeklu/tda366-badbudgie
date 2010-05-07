@@ -1,5 +1,6 @@
 package edu.chl.tda366badbudgie.ai.impl;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import edu.chl.tda366badbudgie.core.Enemy;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Projectile;
 import edu.chl.tda366badbudgie.core.TerrainSection;
+import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.StaticUtilityMethods;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -23,7 +25,7 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class EnemyAI implements IAI {
 	
 	private static double checkOffsetX = 5;
-	private static double checkOffsetY = -15;
+	private static double checkOffsetY = 5;
 	
 	public EnemyAI() {}
 
@@ -32,7 +34,7 @@ public class EnemyAI implements IAI {
 		
 		for (AbstractCollidable ago : gr.getLevel().getCollidableObjects()) {
 			// For each ago that is an enemy
-			if (ago instanceof Enemy) {//&& ((AbstractUnit) ago).getGroundContactVector().getLength() != 0) {
+			if ((ago instanceof Enemy) && ((AbstractUnit) ago).getGroundContactVector().getLength() != 0) {
 				// The object is an enemy and has ground contact
 				
 				Enemy e = (Enemy) ago;
@@ -42,18 +44,19 @@ public class EnemyAI implements IAI {
 				Vector leftCollCheck = new Vector(e.getX() - e.getWidth()/2 - checkOffsetX, e.getY());
 				Vector rightCollCheck = new Vector(e.getX() + e.getWidth()/2 + checkOffsetX, e.getY());
 				
-				boolean rightHindrance = false;
-				boolean leftHindrance = false;
+				boolean rightHindrance = true;
+				boolean leftHindrance = true;
 				
+				DebugInfoRenderer.getInstance().addDebugLine(leftGroundCheck, rightGroundCheck, Color.black);
 				// TODO: Opportunity for optimization by checking only close objects
 				
 				// Check for absence of ground if front of the enemy
 				for (TerrainSection t : gr.getLevel().getTerrainSections()) {
-					if (!StaticUtilityMethods.checkPointCollision(leftGroundCheck, globColData(t))) {
-						leftHindrance = true;
+					if (StaticUtilityMethods.checkPointCollision(leftGroundCheck, globColData(t))) {
+						leftHindrance = false;
 					}
-					if (!StaticUtilityMethods.checkPointCollision(rightGroundCheck, globColData(t))) {
-						rightHindrance = true;
+					if (StaticUtilityMethods.checkPointCollision(rightGroundCheck, globColData(t))) {
+						rightHindrance = false;
 					}
 				}
 				

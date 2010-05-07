@@ -27,17 +27,20 @@ public class Player extends AbstractUnit {
 		PLAYER_SPRITE = new Sprite("budgie", 4, 4, animations);
 	}
 	private static final Polygon PLAYER_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
-	private static final double PLAYER_FRICTION = 0.5;
+	private static final double PLAYER_FRICTION = 0.9;
 	private static final double PLAYER_ELASTICITY = 0.2;
 	
 	// Movement constants
-	private static final double MOVE_FORCE = 2.0;
+	private static final double GROUND_MOVE_FORCE = 5.0;
 	private static final double AIR_MOVE_FORCE = 0.2;
-	private static final double JUMP_FORCE = 36.0;
+	private static final double JUMP_FORCE = 15.0;
+	private static final double MAXIMUM_WALK_SPEED = 10.0;
+	private static final double MAXIMUM_AIR_SPEED = 5.0;
 	
 	private int invincibilityTimer;
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
+	private boolean jump;
 	private int flyingEnergy;
 	private int maxFlyingEnergy;
 	private boolean flying = false;
@@ -64,6 +67,7 @@ public class Player extends AbstractUnit {
 		setMaxFlyingEnergy(150);
 		
 	}
+	
 	
 	/**
 	 * Constructor
@@ -107,18 +111,12 @@ public class Player extends AbstractUnit {
 	 * @param down true if the key was pressed, false if released
 	 */
 	public void jumpOrFlap(boolean down) {
+		
 		if (down) {
-			
-			Vector groundContactVector = getGroundContactVector();
-			
-			if (!groundContactVector.hasZeroLength()) {
-				// Instant jump
-				applyForce(groundContactVector.project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
-				// If we should follow Newtons 2nd law:
-				//getGroundContactObject().applyForce(groundContactVector.normalize().scalarMultiplication(-JUMP_FORCE));
+			if (!getGroundContactVector().hasZeroLength()) {
+				jump = true;
 			}
 			else {
-				// fly
 				flying = true;
 			}
 		}
@@ -180,25 +178,37 @@ public class Player extends AbstractUnit {
 		
 		// Player wants to move left
 		if (isMovingLeft) {
-			if (!getGroundContactVector().hasZeroLength()) {
-				Vector force = getGroundContactVector().perpendicularCCW().scalarMultiplication(MOVE_FORCE);
+			if (!getGroundContactVector().hasZeroLength() && -getVelocity().getX() < MAXIMUM_WALK_SPEED) {
+				Vector force = 
+					getGroundContactVector().perpendicularCCW()
+					.scalarMultiplication(GROUND_MOVE_FORCE).add(new Vector(-AIR_MOVE_FORCE, 0));
 				applyForce(force);
 			}
-			else {
-				applyForce(new Vector(-1, 0).scalarMultiplication(AIR_MOVE_FORCE));
+			else if (-getVelocity().getX() < MAXIMUM_AIR_SPEED) {
+				applyForce(new Vector(-AIR_MOVE_FORCE, 0));
 			}
 		}
 		
 		// Player wants to move right
 		if (isMovingRight) {
-			if (!getGroundContactVector().hasZeroLength()) {
-				Vector force = getGroundContactVector().perpendicularCW().scalarMultiplication(MOVE_FORCE);
+			if (!getGroundContactVector().hasZeroLength() && getVelocity().getX() < MAXIMUM_WALK_SPEED) {
+				Vector force = 
+					getGroundContactVector().perpendicularCW()
+					.scalarMultiplication(GROUND_MOVE_FORCE).add(new Vector(AIR_MOVE_FORCE, 0));
 				applyForce(force);
 			}
-			else {
-				applyForce(new Vector(1, 0).scalarMultiplication(AIR_MOVE_FORCE));
+			else if (getVelocity().getX() < MAXIMUM_AIR_SPEED) {
+				applyForce(new Vector(AIR_MOVE_FORCE, 0));
 			}
 		}
+		
+		// Player should jump
+		if (jump) {
+			applyForce(getGroundContactVector().normalize().project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
+			jump = false;
+		}
+		
+		
 		
 		// Player is flying
 		if (flying && flyingEnergy > 0) {
@@ -258,17 +268,14 @@ public class Player extends AbstractUnit {
 	@Override
 	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
 		
-		if (other instanceof TerrainSection) {
-			// Set the ground contact vector
-			if (mtv.getY() > 0) {
-				// Player has ground beneath his feet
-				// Set ground contact vector to mean of previous and new contact vector, 
-				// to allow multiple contacts in one loop
-				this.setGroundContactVector(this.getGroundContactVector().add(
-						mtv.normalize().scalarDivision(2)));
-			}
+		if (mtv.getY() > 0) {
+			// Player has "ground" beneath his feet
+			this.setGroundContactVector(this.getGroundContactVector().add(
+					mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
+					.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
 			flying = false;
 		}
+			
 		
 		// Enemy hurts player
 		if (invincibilityTimer == 0 && other instanceof Enemy) {

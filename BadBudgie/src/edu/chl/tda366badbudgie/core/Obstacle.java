@@ -17,7 +17,7 @@ public class Obstacle extends AbstractCollidable {
 	private static final Vector OBSTACLE_SIZE = new Vector(100, 100);
 	private static final Sprite OBSTACLE_SPRITE = new Sprite("rock");
 	private static final Polygon OBSTACLE_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
-	private static final double OBSTACLE_FRICTION = 0.5;
+	private static final double OBSTACLE_FRICTION = 0.9;
 	private static final double OBSTACLE_ELASTICITY = 0.2;
 	private static final boolean OBSTACLE_STATIONARY = false;
 	

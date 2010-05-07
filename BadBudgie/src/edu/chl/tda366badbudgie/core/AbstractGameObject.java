@@ -25,7 +25,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	private Level parent;
 	private double mass = 1;
 	private boolean stationary;
-	private double airResistance = 0.0005;
+	private double airResistance = 1.001;
 	
 	/**
 	 * Constructor for AbstractGameObject.
