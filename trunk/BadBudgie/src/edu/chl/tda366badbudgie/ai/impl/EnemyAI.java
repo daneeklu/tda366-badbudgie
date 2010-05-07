@@ -47,7 +47,10 @@ public class EnemyAI implements IAI {
 				boolean rightHindrance = true;
 				boolean leftHindrance = true;
 				
-				DebugInfoRenderer.getInstance().addDebugLine(leftGroundCheck, rightGroundCheck, Color.black);
+				/* This line introduces a circular dependency, so be sure to comment it out when not in use:
+				 * DebugInfoRenderer.getInstance().addDebugLine(leftGroundCheck, rightGroundCheck, Color.black);
+				 */
+				
 				// TODO: Opportunity for optimization by checking only close objects
 				
 				// Check for absence of ground if front of the enemy
