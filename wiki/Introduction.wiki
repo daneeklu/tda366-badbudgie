@@ -10,3 +10,10 @@ Here you will see some information about *bad budgie*
 Bad budgie is a sidescrolling game for the java runtime engine, using the JOGL wrapper library for hardware rendering.
 
 The game is made as part of the IT programme at Chalmers.
+
+
+= Documentation =
+
+[http://tda366-badbudgie.googlecode.com/files/badbudgie_rad_wip05.pdf Requiremenets and Analysis Document]
+
+[http://tda366-badbudgie.googlecode.com/files/SDD_3.2.pdf System Design Document]
