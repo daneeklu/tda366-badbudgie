@@ -17,9 +17,9 @@ import javax.media.opengl.glu.GLU;
 
 import com.sun.opengl.util.GLUT;
 
-import edu.chl.tda366badbudgie.core.ImageDataHandler;
 import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
+import edu.chl.tda366badbudgie.io.impl.ImageDataHandler;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Quad;
 import edu.chl.tda366badbudgie.util.Rectangle;

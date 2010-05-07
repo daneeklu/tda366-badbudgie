@@ -1,6 +1,8 @@
 package edu.chl.tda366badbudgie.io.impl;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,9 +45,13 @@ public class FileManager implements IFileManager{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Map<String, BufferedImage> getImageData() {
+		return ImageDataHandler.getInstance().getData();
 	}
 }
