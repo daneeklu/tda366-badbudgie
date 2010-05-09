@@ -19,6 +19,7 @@ public class Menu {
 	private int currentItem;
 	private Rectangle bounds;
 	private String texId;
+	private boolean gamerunning;
 	
 	private ConfirmDialog dialog;
 	
@@ -86,6 +87,10 @@ public class Menu {
 	
 	public String getTexId() {
 		return texId;
+	}
+	
+	public void setGameRunning(boolean running){
+		gamerunning=running;
 	}
 	
 	/**
@@ -178,7 +183,7 @@ public class Menu {
 			mi.logic();
 		}
 		
-		if (StateContext.getInstance().getGameState() != null)
+		if (gamerunning)
 		{
 			if (!menuItems[3].getEnabled()) {
 				
