@@ -10,7 +10,6 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComboBox;
 
-import edu.chl.tda366badbudgieeditor.LevelTestPlayer;
 import edu.chl.tda366badbudgieeditor.core.EGameObject;
 import edu.chl.tda366badbudgieeditor.core.ELevel;
 import edu.chl.tda366badbudgieeditor.core.ETerrainSection;
