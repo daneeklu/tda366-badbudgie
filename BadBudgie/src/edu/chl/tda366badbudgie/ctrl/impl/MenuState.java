@@ -52,6 +52,7 @@ public class MenuState implements IState {
 			if (selected.equals("newgame")) {
 				
 				if (StateContext.getInstance().getGameState() == null) {
+					menu.setGameRunning(true);
 					StateContext.getInstance().setState(
 							new InGameState(new GameRound()));
 				} else {
