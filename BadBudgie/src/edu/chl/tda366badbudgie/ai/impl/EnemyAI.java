@@ -1,6 +1,5 @@
 package edu.chl.tda366badbudgie.ai.impl;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import edu.chl.tda366badbudgie.core.Enemy;
 import edu.chl.tda366badbudgie.core.GameRound;
 import edu.chl.tda366badbudgie.core.Projectile;
 import edu.chl.tda366badbudgie.core.TerrainSection;
-import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.StaticUtilityMethods;
 import edu.chl.tda366badbudgie.util.Vector;
