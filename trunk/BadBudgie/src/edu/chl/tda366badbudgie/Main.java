@@ -1,9 +1,6 @@
 package edu.chl.tda366badbudgie;
 
-import edu.chl.tda366badbudgie.core.SplashScreen;
-import edu.chl.tda366badbudgie.gui.GraphicsFrame;
-import edu.chl.tda366badbudgie.io.IFileManager;
-import edu.chl.tda366badbudgie.io.impl.FileManager;
+import edu.chl.tda366badbudgie.ctrl.impl.FlowController;
 
 /**
  * Bad Budgie
@@ -14,6 +11,8 @@ import edu.chl.tda366badbudgie.io.impl.FileManager;
 public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		
+		new FlowController();
+		/*
 		//Create splash screen
 		SplashScreen splash = new SplashScreen();
 		
@@ -22,13 +21,13 @@ public class Main {
 		fileManager.loadData();
 		
 		//1.5 second delay to avoid flashing
-		Thread.sleep(1500);
-		
+		Thread.sleep(1500);d
 		//Remove splash
 		splash.setVisible(false);
 		splash = null;
 		
 		//Create graphicsframe instance
 		(new GraphicsFrame()).setVisible(true);
+		*/
 	}
 }
