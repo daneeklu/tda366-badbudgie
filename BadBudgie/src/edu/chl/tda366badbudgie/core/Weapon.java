@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -41,16 +44,25 @@ public class Weapon extends AbstractItem {
 	}
 	
 	
-	
-	@Override
-	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-
-	}
 
 	@Override
 	public Object clone() {
 		return new Weapon(getPosition(), getDamage(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity());
 	}
 
+
+	/*
+	 * COLLISION EFFECT MEMBERS
+	 */
+	
+	@Override
+	public List<CollisionStimulus> getCollisionStimulus() {
+		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
+		stimuli.add(CollisionStimulus.WEAPON);
+		return stimuli;
+	}
+	
+	
+	
 	
 }

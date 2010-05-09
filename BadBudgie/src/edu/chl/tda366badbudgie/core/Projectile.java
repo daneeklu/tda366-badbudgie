@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -16,17 +19,23 @@ public class Projectile extends AbstractItem {
 	private int damage = 10;
 	private int lifeTimer = 200;
 	private boolean hasCollided = false;
+	private AbstractGameObject owner;
 
 	
-	public Projectile(Vector position, Vector direction, double speed, int damage, Vector size, Sprite sprite, Polygon collisionData) {
+	public Projectile(Vector position, Vector direction, double speed, int damage, Vector size, Sprite sprite, Polygon collisionData, AbstractGameObject owner) {
 		super(position, size, false, sprite, collisionData, 1, 1);
 		
 		setVelocity(direction.normalize().scalarMultiplication(speed));
 		setDamage(damage);
+		setOwner(owner);
+		
+		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new DisappearEffect());
+		addCollisionResponse(CollisionStimulus.IMPENETRABLE, new DisappearEffect());
+		addCollisionResponse(CollisionStimulus.INJURER, new DisappearEffect());
 	}
 	
-	public Projectile(Vector position, Vector direction) {
-		this(position, direction, PROJECTILE_SPEED, PROJECTILE_DAMAGE, PROJECTILE_SIZE, PROJECTILE_SPRITE, PROJECTILE_COLLISION_DATA);
+	public Projectile(Vector position, Vector direction, AbstractGameObject owner) {
+		this(position, direction, PROJECTILE_SPEED, PROJECTILE_DAMAGE, PROJECTILE_SIZE, PROJECTILE_SPRITE, PROJECTILE_COLLISION_DATA, owner);
 	}
 	
 	
@@ -39,12 +48,7 @@ public class Projectile extends AbstractItem {
 	}
 	
 	
-	@Override
-	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		if (!(other instanceof Player) && AbstractCollidable.isPhysicalCollision(this.getClass(), other.getClass())) {
-			hasCollided = true;
-		}
-	}
+
 
 	
 	public int getDamage() {
@@ -57,7 +61,34 @@ public class Projectile extends AbstractItem {
 
 	@Override
 	public Object clone() {
-		return new Projectile(getPosition(), getVelocity(), getVelocity().getLength(), getDamage(), getSize(), getSprite(), getCollisionData());
+		return new Projectile(getPosition(), getVelocity(), getVelocity().getLength(), getDamage(), getSize(), getSprite(), getCollisionData(), getOwner());
+	}
+
+	public void setOwner(AbstractGameObject owner) {
+		this.owner = owner;
+	}
+
+	public AbstractGameObject getOwner() {
+		return owner;
+	}
+	
+	
+	/*
+	 * COLLISION EFFECT MEMBERS
+	 */
+	
+	
+	@Override
+	public List<CollisionStimulus> getCollisionStimulus() {
+		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
+		stimuli.add(CollisionStimulus.IMPACT);
+		return stimuli;
+	}
+	private class DisappearEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {
+			hasCollided = true;
+		}
 	}
 	
 }

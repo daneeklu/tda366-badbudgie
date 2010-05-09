@@ -11,7 +11,7 @@ import edu.chl.tda366badbudgie.util.Vector;
  * 
  * Class representing enemy units in the game.
  * 
- * @author 
+ * @author kvarfordt
  *
  */
 public class Enemy extends AbstractUnit {
@@ -59,10 +59,14 @@ public class Enemy extends AbstractUnit {
 		setDamage(damage);
 		setDirection(direction);
 		getSprite().setAnimation("run");
+		
+		addCollisionResponse(CollisionStimulus.IMPACT, new GetHurtEffect());
+		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
+		addCollisionResponse(CollisionStimulus.PLAYER, new TurnAroundEffect());
 	}
 	
 	/**
-	 * Constructor
+	 * Convinience constructor with less important parameters left out.
 	 * 
 	 * @param position the enemy's position
 	 */
@@ -92,29 +96,6 @@ public class Enemy extends AbstractUnit {
 			return GameRoundMessage.RemoveObject;
 		
 		return GameRoundMessage.NoEvent;
-	}
-
-
-	@Override
-	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		// Set the ground contact vector
-		if (mtv.getY() > 0) {
-			// Enemy has ground beneath his feet
-			// Set ground contact vector to mean of previous and new contact vector, 
-			// to allow multiple contacts in one loop
-			this.setGroundContactVector(this.getGroundContactVector().add(
-					mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
-					.scalarDivision(2))); // +0.000001 to avoid a zero-length vector
-		}
-		
-		else if (other instanceof Player) {
-			setDirection(-1 * getDirection());
-		}
-		else if (other instanceof Projectile) {
-			setHealth(getHealth() - ((Projectile) other).getDamage());
-		}
-		
-		
 	}
 
 
@@ -163,5 +144,48 @@ public class Enemy extends AbstractUnit {
 		e.setAirResistance(getAirResistance());
 		return e;
 	}
+	
+	
+	/*
+	 * COLLISION EFFECT MEMBERS
+	 */
+	
+	
+	@Override
+	public List<CollisionStimulus> getCollisionStimulus() {
+		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
+		stimuli.add(CollisionStimulus.INJURER);
+		return stimuli;
+	}
+	
+	private class GetHurtEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {
+			setHealth(getHealth() - ((Projectile) other).getDamage());
+		}
+	}
+	
+	private class StandOnGroundEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {
+			
+			if (mtv.getY() > 0) {
+				// Enemy has "ground" beneath his feet
+				setGroundContactVector(getGroundContactVector().add(
+						mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
+						.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
+			}
+			
+		}
+	}
+	
+	private class TurnAroundEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {
+			setDirection(-1 * getDirection());
+		}
+	}
+	
+	
 	
 }
