@@ -61,6 +61,7 @@ public class Obstacle extends AbstractCollidable {
 	public List<CollisionStimulus> getCollisionStimulus() {
 		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
 		stimuli.add(CollisionStimulus.IMPENETRABLE);
+		stimuli.add(CollisionStimulus.WALKABLE_GROUND);
 		return stimuli;
 	}
 
