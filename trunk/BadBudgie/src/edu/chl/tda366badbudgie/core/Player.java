@@ -66,6 +66,8 @@ public class Player extends AbstractUnit {
 		setFlyingEnergy(100);
 		setMaxFlyingEnergy(150);
 		
+		addCollisionResponse(CollisionStimulus.INJURER, new GetHurtEffect());
+		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
 	}
 	
 	
@@ -137,7 +139,8 @@ public class Player extends AbstractUnit {
 	
 	public void shootAt(double x, double y, boolean mouseDown) {
 		if(mouseDown){
-			bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2));
+			//TODO: Get rid of hard coded screen width and height
+			bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2), this);
 			getParent().addGameObject(bullet);
 		}
 		
@@ -265,29 +268,6 @@ public class Player extends AbstractUnit {
 	}
 
 
-	@Override
-	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		
-		if (mtv.getY() > 0) {
-			// Player has "ground" beneath his feet
-			this.setGroundContactVector(this.getGroundContactVector().add(
-					mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
-					.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
-			flying = false;
-		}
-			
-		
-		// Enemy hurts player
-		if (invincibilityTimer == 0 && other instanceof Enemy) {
-			setHealth(getHealth() - ((Enemy)other).getDamage()) ;
-			invincibilityTimer = 20;
-			
-			// Bump player away from enemy
-			int dir = (int) Math.signum(getX() - other.getX());
-			applyForce(new Vector(dir * 6, 6));
-		}
-		
-	}
 
 	
 	
@@ -358,5 +338,46 @@ public class Player extends AbstractUnit {
 	}
 
 
+	/*
+	 * COLLISION EFFECT MEMBERS
+	 */
+	
+	@Override
+	public List<CollisionStimulus> getCollisionStimulus() {
+		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
+		stimuli.add(CollisionStimulus.PLAYER);
+		return stimuli;
+	}
+	
+	private class GetHurtEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {
+			
+			if (invincibilityTimer == 0) {
+				setHealth(getHealth() - ((Enemy)other).getDamage()) ;
+				invincibilityTimer = 20;
+				
+				// Bump player away from enemy
+				int dir = (int) Math.signum(getX() - other.getX());
+				applyForce(new Vector(dir * 6, 6));
+			}
+		}
+	}
+	
+	private class StandOnGroundEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {
+			
+			if (mtv.getY() > 0) {
+				// Player has "ground" beneath his feet
+				setGroundContactVector(getGroundContactVector().add(
+						mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
+						.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
+				flying = false;
+			}
+			
+		}
+	}
+	
 	
 }

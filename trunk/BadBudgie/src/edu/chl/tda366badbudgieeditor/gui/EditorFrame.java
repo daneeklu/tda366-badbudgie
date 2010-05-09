@@ -17,15 +17,11 @@ import edu.chl.tda366badbudgieeditor.ctrl.EditorController;
 @SuppressWarnings("serial")
 public class EditorFrame extends JFrame implements ILevelObserver {
 	
-	private EditorController controller;
-	private ELevel level;
 	
 	private LevelPanel levelPanel;
 	private ToolPanel toolPanel;
 	
 	public EditorFrame(EditorController controller, ELevel level) {
-		this.controller = controller;
-		this.level = level;
 		
 		levelPanel = new LevelPanel(level, controller);
 		toolPanel = new ToolPanel(controller);

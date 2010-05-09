@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -25,6 +28,8 @@ public class LevelExit extends AbstractCollidable {
 	 */
 	public LevelExit(Vector position, Vector size, Sprite sprite, Polygon collisionData) {
 		super(position, size, true, sprite, collisionData, 1, 1);
+		
+		addCollisionResponse(CollisionStimulus.PLAYER, new LevelExitEffect());
 	}
 	
 	public LevelExit(Vector position) {
@@ -42,17 +47,38 @@ public class LevelExit extends AbstractCollidable {
 			return GameRoundMessage.NoEvent;
 	}
 	
-	@Override
-	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		if (other instanceof Player){
-			touchedByPlayer = true;
-			other.translate(mtv.scalarMultiplication(-2));
-		}
-	}
+//	@Override
+//	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
+//		if (other instanceof Player){
+//			touchedByPlayer = true;
+//			other.translate(mtv.scalarMultiplication(-2));
+//		}
+//	}
 
 	@Override
 	public Object clone() {
 		return new LevelExit(getPosition(), getSize(), getSprite(), getCollisionData());
 	}
+	
+	/*
+	 * COLLISION EFFECT MEMBERS
+	 */
+	
+	
+	@Override
+	public List<CollisionStimulus> getCollisionStimulus() {
+		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
+		stimuli.add(CollisionStimulus.LEVEL_EXIT);
+		return stimuli;
+	}
+
+	
+	private class LevelExitEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {
+			touchedByPlayer = true;
+		}
+	}
+	
 	
 }

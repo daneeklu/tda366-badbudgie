@@ -110,9 +110,9 @@ public class CollisionHandler {
 		 */
 		
 	}
+	
 
-
-
+	
 	/**
 	 * Checks to see it there is a collision between two convex polygons. The
 	 * vertices must be positioned counter-clockwise or the opposite vector will

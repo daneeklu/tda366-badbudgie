@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.core;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.chl.tda366badbudgie.util.Polygon;
@@ -44,6 +45,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		setFriction(friction);
 		setElasticity(elasticity);
 
+		collisionResponses = new HashMap<CollisionStimulus, CollisionEffect>();
 	}
 	
 	/**
@@ -98,16 +100,102 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	public void setElasticity(double e) {
 		elasticity = e;
 	}
+		
+	
+	/*
+	 * COLLISION EFFECT MEMBERS
+	 */
+
+	/**
+	 * Enum whose values define different stimuli in a collision.
+	 * 
+	 * @author kvarfordt
+	 *
+	 */
+	protected enum CollisionStimulus{NO_EFFECT, PLAYER, WALKABLE_GROUND, INJURER, IMPACT, LEVEL_EXIT, IMPENETRABLE, WEAPON};
 	
 	/**
-	 * Notifies the object that there is a collision and lets it act accordingly.
+	 * Interface for collision effects. Collision effects have the method run which executes the effect on the object.
+	 * 
+	 * @author kvarfordt
+	 *
+	 */
+	protected static interface CollisionEffect {
+		public void run(AbstractCollidable other, Vector mtv);
+	}
+	
+	/**
+	 * Map between stimuli and effect.
+	 */
+	private HashMap<CollisionStimulus, CollisionEffect> collisionResponses;
+	
+	/**
+	 * Adds an entry with an effect for a given stimulus.
+	 * 
+	 * @param stimulus
+	 * @param effect
+	 */
+	protected void addCollisionResponse(CollisionStimulus stimulus, CollisionEffect effect) {
+		collisionResponses.put(stimulus, effect);
+	}
+	
+	/**
+	 * Returns the effect for the given stimulus for this object.
+	 * 
+	 * @param stimulus the stimulus
+	 * @return the collision effect
+	 */
+	private CollisionEffect getCollisionEffect(CollisionStimulus stimulus) {
+		if (collisionResponses.containsKey(stimulus)) {
+			return collisionResponses.get(stimulus);
+		}
+		else {
+			return new NoEffect();
+		}
+	}
+	
+	/**
+	 * Returns a list of the stimulus this object exercises.
+	 * 
+	 * @return
+	 */
+	protected abstract List<CollisionStimulus> getCollisionStimulus();
+	
+	/**
+	 * Executes the correct effect on this object given the collision with object 'other'.
 	 * 
 	 * @param other the colliding object
 	 * @param mtv minimum translation vector for the collision
-	 * @return true if the objects should collide physically
 	 */
-	public abstract void executeCollisionEffect(AbstractCollidable other, Vector mtv);
+	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
+		for (CollisionStimulus cs : other.getCollisionStimulus()) 
+			respondTo(cs, other, mtv);
+	}
 
+	/**
+	 * Gets and runs the right effect from the given stimulus.
+	 * 
+	 * @param stimulus the stimulus
+	 * @param other the other object
+	 * @param mtv the minimum translation vector for the collision
+	 */
+	private void respondTo(CollisionStimulus stimulus, AbstractCollidable other, Vector mtv) {
+		CollisionEffect effect = getCollisionEffect(stimulus);
+		effect.run(other, mtv);
+	}
+	
+	/**
+	 * Effect class with no effect. Returned if the stimulus in getCollisionEffect has no effect.
+	 * 
+	 * @author kvarfordt
+	 *
+	 */
+	private static class NoEffect implements CollisionEffect {
+		@Override
+		public void run(AbstractCollidable other, Vector mtv) {}
+	}
+	
+	
 	
 	/**
 	 * Returns true if the objects of the two given classes should collide physically.

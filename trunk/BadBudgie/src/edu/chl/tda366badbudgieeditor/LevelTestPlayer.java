@@ -3,7 +3,6 @@ package edu.chl.tda366badbudgieeditor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import edu.chl.tda366badbudgie.core.Enemy;
 import edu.chl.tda366badbudgie.core.GameRound;
@@ -12,7 +11,6 @@ import edu.chl.tda366badbudgie.core.LevelExit;
 import edu.chl.tda366badbudgie.core.LevelManager;
 import edu.chl.tda366badbudgie.core.Obstacle;
 import edu.chl.tda366badbudgie.core.Player;
-import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.core.TerrainSection;
 import edu.chl.tda366badbudgie.ctrl.impl.InGameState;
 import edu.chl.tda366badbudgie.ctrl.impl.StateContext;
