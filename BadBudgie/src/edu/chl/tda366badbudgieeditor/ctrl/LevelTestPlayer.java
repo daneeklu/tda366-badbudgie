@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgieeditor;
+package edu.chl.tda366badbudgieeditor.ctrl;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
