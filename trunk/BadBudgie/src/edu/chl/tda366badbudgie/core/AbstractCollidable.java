@@ -112,7 +112,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @author kvarfordt
 	 *
 	 */
-	protected enum CollisionStimulus{NO_EFFECT, PLAYER, WALKABLE_GROUND, INJURER, IMPACT, LEVEL_EXIT, IMPENETRABLE, WEAPON};
+	public enum CollisionStimulus{NO_EFFECT, PLAYER, WALKABLE_GROUND, INJURER, IMPACT, LEVEL_EXIT, IMPENETRABLE, WEAPON};
 	
 	/**
 	 * Interface for collision effects. Collision effects have the method run which executes the effect on the object.
@@ -120,7 +120,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @author kvarfordt
 	 *
 	 */
-	protected static interface CollisionEffect {
+	public static interface CollisionEffect {
 		public void run(AbstractCollidable other, Vector mtv);
 	}
 	
