@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core;
 
+import edu.chl.tda366badbudgie.ctrl.IState;
+import edu.chl.tda366badbudgie.ctrl.IStateContext;
+import edu.chl.tda366badbudgie.ctrl.impl.StateContext;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
 
@@ -18,7 +21,8 @@ public class Menu {
 	private int currentItem;
 	private Rectangle bounds;
 	private String texId;
-	private boolean gamerunning;
+	private boolean gameIsActive;
+	
 	
 	private ConfirmDialog dialog;
 	
@@ -86,10 +90,6 @@ public class Menu {
 	
 	public String getTexId() {
 		return texId;
-	}
-	
-	public void setGameRunning(boolean running){
-		gamerunning=running;
 	}
 	
 	/**
@@ -174,6 +174,11 @@ public class Menu {
 		return menuItems;
 	}
 
+	public void setGameState(boolean gameIsActive){
+		this.gameIsActive = gameIsActive;
+	}
+	
+	
 	/**
 	 * A method for doing all "game logic" of the menu
 	 */ 
@@ -181,8 +186,8 @@ public class Menu {
 		for (MenuItem mi : menuItems) {
 			mi.logic();
 		}
-		
-		if (gamerunning)
+		System.out.println(gameIsActive);
+		if (gameIsActive)
 		{
 			if (!menuItems[3].getEnabled()) {
 				
