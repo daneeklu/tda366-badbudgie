@@ -186,7 +186,7 @@ public class Menu {
 		for (MenuItem mi : menuItems) {
 			mi.logic();
 		}
-		System.out.println(gameIsActive);
+		
 		if (gameIsActive)
 		{
 			if (!menuItems[3].getEnabled()) {
