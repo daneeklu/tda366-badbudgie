@@ -174,7 +174,7 @@ public class Menu {
 		return menuItems;
 	}
 
-	public void setGameState(boolean gameIsActive){
+	public void setGameRunning(boolean gameIsActive){
 		this.gameIsActive = gameIsActive;
 	}
 	
