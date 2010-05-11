@@ -32,6 +32,11 @@ public class Obstacle extends AbstractCollidable {
 	 */
 	public Obstacle(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
 		super(position, size, stationary, sprite, collisionData, friction, elasticity);
+
+		addPhysicalCollision("TerrainSection");
+		addPhysicalCollision("Player");
+		addPhysicalCollision("Enemy");
+		addPhysicalCollision("Obstacle");
 	}
 	
 	/**

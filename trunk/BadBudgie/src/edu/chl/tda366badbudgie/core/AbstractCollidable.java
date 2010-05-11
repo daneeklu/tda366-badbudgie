@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -196,22 +198,20 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	}
 	
 	
-	
 	/**
-	 * Returns true if the objects of the two given classes should collide physically.
+	 * Returns true if the two given game objects should collide physically.
 	 * 
 	 * @param class1
 	 * @param class2
 	 * @return
 	 */
-	public static boolean isPhysicalCollision(Class<? extends AbstractCollidable> class1, Class<? extends AbstractCollidable> class2) {
-		
+	public static boolean isPhysicalCollision(AbstractCollidable class1, AbstractCollidable class2) {
 		/*
 		 * Using the static list physicalCollisions below.
 		 * Implementation might change.
 		 */
-		String cn1 = class1.getSimpleName();
-		String cn2 = class2.getSimpleName();
+		String cn1 = class1.getClass().getSimpleName().toLowerCase();
+		String cn2 = class2.getClass().getSimpleName().toLowerCase();
 		String concat;
 		
 		// Sort the two class names lexicographically
@@ -229,22 +229,33 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		return false;
 	}
 	
-	private static List<String> physicalCollisions = new ArrayList<String>();
-	static {
-		physicalCollisions.add("Enemy-TerrainSection");
-		physicalCollisions.add("Enemy-Obstacle");
-		physicalCollisions.add("Enemy-Player");
-		physicalCollisions.add("Enemy-Projectile");
-		physicalCollisions.add("Obstacle-Obstacle");
-		physicalCollisions.add("Obstacle-Player");
-		physicalCollisions.add("Obstacle-Projectile");
-		physicalCollisions.add("Obstacle-TerrainSection");
-		physicalCollisions.add("Player-TerrainSection");
-		physicalCollisions.add("Projectile-TerrainSection");
+	/**
+	 * Adds the given class name to the physical collision set for this object.
+	 * 
+	 * @param other a string 
+	 */
+	protected void addPhysicalCollision(String other) {
 		
+		String cn1 = this.getClass().getSimpleName().toLowerCase().trim();
+		String cn2 = other.toLowerCase().trim();
+		String concat;
+		
+		// Sort the two class names lexicographically
+		if (cn1.compareTo(cn2) < 0) {
+			concat = cn1 + "-" + cn2;
+		}
+		else {
+			concat = cn2 + "-" + cn1;
+		}
+		
+		physicalCollisions.add(concat);
 	}
 	
+	private static Set<String> physicalCollisions = new HashSet<String>();
 	
+	/**
+	 * Default collision data
+	 */
 	public final static Polygon defaultCollisionData;
 	static {
 		Vector v = new Vector(40, 40);
@@ -254,6 +265,5 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 				new Vector(v.getX(), v.getY()), 
 				new Vector(-v.getX(), v.getY()))));
 	}
-	
 	
 }

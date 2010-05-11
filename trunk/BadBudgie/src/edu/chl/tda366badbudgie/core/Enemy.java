@@ -38,7 +38,6 @@ public class Enemy extends AbstractUnit {
 	private static final double MAXIMUM_WALK_SPEED = 5.0;
 	
 	private int damage;
-	private int direction = 0;
 	
 	/**
 	 * Constructor
@@ -59,7 +58,11 @@ public class Enemy extends AbstractUnit {
 		setDamage(damage);
 		setDirection(direction);
 		getSprite().setAnimation("run");
+		setAIControlled(true);
 		
+		addPhysicalCollision("TerrainSection");
+		addPhysicalCollision("Player");
+		addPhysicalCollision("Obstacle");
 		addCollisionResponse(CollisionStimulus.IMPACT, new GetHurtEffect());
 		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
 		addCollisionResponse(CollisionStimulus.PLAYER, new TurnAroundEffect());
@@ -81,7 +84,7 @@ public class Enemy extends AbstractUnit {
 		// Walking
 		if (!getGroundContactVector().hasZeroLength() 
 				&& Math.abs(getVelocity().getX()) < MAXIMUM_WALK_SPEED) 
-			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication((GROUND_MOVE_FORCE) * Math.signum(direction)));
+			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication((GROUND_MOVE_FORCE) * Math.signum(getDirection())));
 
 	}
 	
@@ -90,7 +93,7 @@ public class Enemy extends AbstractUnit {
 		
 		getSprite().animate();
 		
-
+		
 		
 		if (getHealth() <= 0)
 			return GameRoundMessage.RemoveObject;
@@ -119,19 +122,12 @@ public class Enemy extends AbstractUnit {
 	}
 
 	/**
-	 * Gets the enemy's direction.
-	 * @return 1 if heading right, -1 if heading left
-	 */
-	public int getDirection() {
-		return direction;
-	}
-
-	/**
 	 * Sets the enemy's direction.
 	 * @param direction 1 if heading right, -1 if heading left
 	 */
+	@Override
 	public void setDirection(int direction) {
-		this.direction = direction;
+		super.setDirection(direction);
 		if(direction == 1) 
 			getSprite().setMirrored(true);
 		else

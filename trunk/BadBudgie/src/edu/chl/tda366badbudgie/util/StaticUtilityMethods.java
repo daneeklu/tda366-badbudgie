@@ -11,12 +11,13 @@ import java.util.ArrayList;
 public class StaticUtilityMethods {
 
 	/**
+	 * Checks to see if the point given is inside the specified polygon.
 	 * 
-	 * @param point
-	 * @param p
-	 * @return
+	 * @param point the point to check
+	 * @param p the polygon to check
+	 * @return true if the point is inside
 	 */
-	public static boolean checkPointCollision(Vector point, Polygon p) {
+	public static boolean isPointInPolygon(Vector point, Polygon p) {
 		
 		ArrayList<Vector> pVerts = new ArrayList<Vector>(p.getVertices());
 		

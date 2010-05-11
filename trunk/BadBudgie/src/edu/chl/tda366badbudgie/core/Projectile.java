@@ -29,6 +29,9 @@ public class Projectile extends AbstractItem {
 		setDamage(damage);
 		setOwner(owner);
 		
+		addPhysicalCollision("TerrainSection");
+		addPhysicalCollision("Enemy");
+		addPhysicalCollision("Obstacle");
 		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new DisappearEffect());
 		addCollisionResponse(CollisionStimulus.IMPENETRABLE, new DisappearEffect());
 		addCollisionResponse(CollisionStimulus.INJURER, new DisappearEffect());

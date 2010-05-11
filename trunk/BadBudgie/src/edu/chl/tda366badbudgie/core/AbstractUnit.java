@@ -15,6 +15,8 @@ import edu.chl.tda366badbudgie.util.Vector;
 public abstract class AbstractUnit extends AbstractCollidable {
 
 	private Vector groundContactVector;
+	private int direction = 0;
+	private boolean isAIControlled;
 	
 	private int health;
 	
@@ -65,6 +67,39 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	 */
 	public int getHealth() {
 		return health;
+	}
+
+	/**
+	 * Sets the direction of the unit. -1 means left, 1 means right.
+	 * @param direction the direction
+	 */
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
+	/**
+	 * Returns the direction of the unit. -1 means left, 1 means right.
+	 * @return the direction
+	 */
+	public int getDirection() {
+		return direction;
+	}
+
+	/**
+	 * Controls whether the unit is AI-controlled or not.
+	 * @param isAIControlled
+	 */
+	public void setAIControlled(boolean isAIControlled) {
+		this.isAIControlled = isAIControlled;
+	}
+
+	/**
+	 * Returns true if the unit is AI-controlled.
+	 * 
+	 * @return true if the unit is AI-controlled
+	 */
+	public boolean isAIControlled() {
+		return isAIControlled;
 	}
 	
 	
