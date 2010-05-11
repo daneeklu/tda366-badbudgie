@@ -65,6 +65,22 @@ public class Level {
 	}
 	
 	/**
+	 * Returns a list of all the game objects in the level.
+	 * @return a list of AbstractGameObject
+	 */
+	public List<AbstractGameObject> getGameObjects() {
+		return gameObjects;
+	}
+	
+	/**
+	 * Returns a list of all the terrain sections in the level.
+	 * @return a list of all TerrainSection
+	 */
+	public List<TerrainSection> getTerrainSections() {
+		return terrainSections;
+	}
+	
+	/**
 	 * Returns a list of all the game objects inheriting AbstractCollidable 
 	 * @return list of collidable objects
 	 */
@@ -79,19 +95,17 @@ public class Level {
 	}
 	
 	/**
-	 * Returns a list of all the game objects in the level.
-	 * @return a list of AbstractGameObject
+	 * Returns a list of all the game objects which are AbstractUnits
+	 * @return list of units
 	 */
-	public List<AbstractGameObject> getGameObjects() {
-		return gameObjects;
-	}
-	
-	/**
-	 * Returns a list of all the terrain sections in the level.
-	 * @return a list of all TerrainSection
-	 */
-	public List<TerrainSection> getTerrainSections() {
-		return terrainSections;
+	public List<AbstractUnit> getUnits() {
+		
+		ArrayList<AbstractUnit> units = new ArrayList<AbstractUnit>();
+		for (AbstractGameObject ago : gameObjects) {
+			if (ago instanceof AbstractUnit)
+				units.add((AbstractUnit) ago);
+		}
+		return units;
 	}
 	
 	/**

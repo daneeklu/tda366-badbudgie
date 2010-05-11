@@ -97,17 +97,13 @@ public class CollisionHandler {
 		o1.executeCollisionEffect(o2, mtv);
 		o2.executeCollisionEffect(o1, mtv.scalarMultiplication(-1));
 		
-		if (AbstractCollidable.isPhysicalCollision(o1.getClass(), o2.getClass())) {
+		if (AbstractCollidable.isPhysicalCollision(o1, o2)) {
 			// Resolve the collision by translating one or both of the objects
 			resolveCollision(o1, o2, mtv);
 	
 			// Change velocity of the objects
 			handleImpact(o1, o2, mtv);
 		}
-		
-		/* This line introduces a circular dependency, so be sure to comment it out when not in use:
-		 * DebugInfoRenderer.getInstance().addDebugLine(o1.getPosition(), o1.getPosition().add(mtv.scalarMultiplication(30)), Color.green);
-		 */
 		
 	}
 	

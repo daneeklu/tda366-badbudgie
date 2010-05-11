@@ -21,7 +21,6 @@ public class MouseController implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseEntered(MouseEvent evt) {
-		System.out.println("Mouse support initiated!");
 		
 	}
 

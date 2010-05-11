@@ -3,7 +3,6 @@ package edu.chl.tda366badbudgie.ctrl.impl;
 import edu.chl.tda366badbudgie.ai.IAI;
 import edu.chl.tda366badbudgie.ai.impl.EnemyAI;
 import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.Menu;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;

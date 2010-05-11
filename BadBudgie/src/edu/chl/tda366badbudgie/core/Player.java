@@ -65,7 +65,11 @@ public class Player extends AbstractUnit {
 		setHealth(100);
 		setFlyingEnergy(100);
 		setMaxFlyingEnergy(150);
+		setAIControlled(false);
 		
+		addPhysicalCollision("TerrainSection");
+		addPhysicalCollision("Enemy");
+		addPhysicalCollision("Obstacle");
 		addCollisionResponse(CollisionStimulus.INJURER, new GetHurtEffect());
 		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
 	}
@@ -179,8 +183,18 @@ public class Player extends AbstractUnit {
 	@Override
 	public void updateForces() {
 		
+		if (isMovingLeft && !isMovingRight) {
+			setDirection(-1);
+		}
+		else if (isMovingRight && !isMovingLeft) {
+			setDirection(1);
+		}
+		else {
+			setDirection(0);
+		}
+		
 		// Player wants to move left
-		if (isMovingLeft) {
+		if (getDirection() == -1) {
 			if (!getGroundContactVector().hasZeroLength() && -getVelocity().getX() < MAXIMUM_WALK_SPEED) {
 				Vector force = 
 					getGroundContactVector().perpendicularCCW()
@@ -193,7 +207,7 @@ public class Player extends AbstractUnit {
 		}
 		
 		// Player wants to move right
-		if (isMovingRight) {
+		if (getDirection() == 1) {
 			if (!getGroundContactVector().hasZeroLength() && getVelocity().getX() < MAXIMUM_WALK_SPEED) {
 				Vector force = 
 					getGroundContactVector().perpendicularCW()
@@ -247,13 +261,7 @@ public class Player extends AbstractUnit {
 		}
 		
 		getSprite().animate();
-		if (isMovingLeft || isMovingRight) {
-			//if(isMovingRight)
-			//	getSprite().setMirrored(true);
-			//else
-			//	getSprite().setMirrored(false);
-			
-			
+		if (getDirection() != 0) {
 			getSprite().setAnimation("run");
 		} else {
 			getSprite().setAnimation("idle");
