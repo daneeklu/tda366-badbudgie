@@ -14,7 +14,7 @@ import java.util.List;
  * @author kvarfordt
  *
  */
-public class Level {
+public class Level implements Cloneable {
 	
 	private List<AbstractGameObject> gameObjects;
 	private List<TerrainSection> terrainSections;
@@ -32,36 +32,6 @@ public class Level {
 		// TODO: Load from level data
 		setBackgroundTexId("background");
 		
-	}
-	
-	/**
-	 * Copy constructor
-	 * 
-	 * @param level
-	 */
-	public Level(Level level) {
-		this();
-		Player p = null;
-		Weapon w = null;
-		
-		for (AbstractGameObject ago : level.getGameObjects()) {
-			
-			//TEMP WEAPON FIX
-			AbstractGameObject agoClone = (AbstractGameObject) ago.clone();
-			if(agoClone instanceof Player){
-				p = (Player) agoClone;
-			} else if(agoClone instanceof Weapon){
-				w = (Weapon)agoClone;
-			}
-			
-			addGameObject((AbstractGameObject) agoClone);
-		}
-		if(w != null){
-			p.setWeapon(w);
-		}
-		for (TerrainSection ts : level.getTerrainSections()) {
-			addTerrainSection((TerrainSection) ts.clone());
-		}
 	}
 	
 	/**
@@ -162,6 +132,29 @@ public class Level {
 				return (Player) ago;
 		}
 		throw new IllegalStateException("No player in level.");
+		
+	}
+	
+	
+	@Override
+	public Level clone() {
+		try {
+			Level l;
+			l = (Level) super.clone();
+			l.gameObjects = new ArrayList<AbstractGameObject>();
+			l.terrainSections = new ArrayList<TerrainSection>();
+			
+			for (AbstractGameObject ago : gameObjects) {
+				l.addGameObject(ago);
+			}
+			for(TerrainSection ts : terrainSections) {
+				l.addTerrainSection(ts);
+			}
+			
+			return l;
+		} catch (CloneNotSupportedException e) {
+			throw new AssertionError("Clone not supported");
+		}
 		
 	}
 	

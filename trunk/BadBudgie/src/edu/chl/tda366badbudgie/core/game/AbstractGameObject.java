@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.core.game;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -27,6 +30,8 @@ public abstract class AbstractGameObject implements Cloneable {
 	private double mass = 1;
 	private boolean stationary;
 	private double airResistance = 1.001;
+	
+	private List<AbstractGameObject> children = new LinkedList<AbstractGameObject>();
 	
 	/**
 	 * Constructor for AbstractGameObject.
@@ -65,7 +70,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @return position vector ...
 	 */
 	public Vector getPosition() {
-		return (Vector) position.clone();
+		return position;
 	}
 
 	/**
@@ -73,7 +78,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @return the objects velocity vector
 	 */
 	public Vector getVelocity() {
-		return (Vector) velocity.clone();
+		return velocity;
 	}
 	
 	/**
@@ -81,7 +86,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @return the objects velocity vector
 	 */
 	public Vector getForce() {
-		return (Vector) force.clone();
+		return force;
 	}
 	
 	/**
@@ -113,7 +118,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @param v the new position
 	 */
 	public void setPosition(Vector v) {
-		position = (Vector) v.clone();
+		position = v;
 	}
 	
 	/**
@@ -129,7 +134,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @param v the velocity vector
 	 */
 	public void setVelocity(Vector v) {
-		velocity = (Vector) v.clone();
+		velocity = v;
 	}
 
 	/**
@@ -137,7 +142,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @param v the velocity vector
 	 */
 	public void setForce(Vector v) {
-		force = (Vector) v.clone();
+		force = v;
 	}
 
 	/**
@@ -225,7 +230,13 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @return
 	 */
 	public Level getParent() {
-		return parent;
+		try {
+			return parent;
+		} 
+		catch (NullPointerException npe) {
+			throw new IllegalStateException("The parent level of the object has " +
+					"not been set, most likely because the object has not been added to a level.");
+		}
 	}
 
 
@@ -258,7 +269,23 @@ public abstract class AbstractGameObject implements Cloneable {
 	}
 
 	@Override
-	public abstract Object clone();
+	public AbstractGameObject clone() {
+		try {
+			AbstractGameObject ago = (AbstractGameObject) super.clone();
+			ago.sprite = sprite.clone();
+			return ago;
+		} catch (CloneNotSupportedException e) {
+			throw new AssertionError("Clone not supported");
+		}
+	}
+
+	public void addChild(AbstractGameObject child) {
+		children.add(child);
+	}
+
+	public List<AbstractGameObject> getChildren() {
+		return children;
+	}
 	
 	
 	

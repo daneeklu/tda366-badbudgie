@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Polygon
  * 
- * A convex 2-dimensional polygon.
+ * Represents an immutable convex 2-dimensional polygon.
  * 
  * @author kvarfordt, jesper
  * 

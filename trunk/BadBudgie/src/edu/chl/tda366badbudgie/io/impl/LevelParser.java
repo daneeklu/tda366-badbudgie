@@ -60,10 +60,9 @@ public class LevelParser extends AbstractParser{
 		
 		Player player = new Player(new Vector(pX, pY));
 		player.setCollisionData(new RoundedRectangle(40, 80, 15));
-		Weapon wep = new Weapon(new Vector(player.getX(), player.getY()), new Sprite("gun1"));
+		Weapon wep = new Weapon(new Vector(), new Sprite("gun1"));
 		player.setWeapon(wep);
 		level.addGameObject(player);
-		level.addGameObject(wep);
 		
 		//TODO: Possibly remove this section
 		//Create animations.

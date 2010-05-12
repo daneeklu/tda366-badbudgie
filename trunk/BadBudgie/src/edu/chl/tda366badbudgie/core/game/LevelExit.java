@@ -48,17 +48,10 @@ public class LevelExit extends AbstractCollidable {
 			return GameRoundMessage.NoEvent;
 	}
 	
-//	@Override
-//	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-//		if (other instanceof Player){
-//			touchedByPlayer = true;
-//			other.translate(mtv.scalarMultiplication(-2));
-//		}
-//	}
 
 	@Override
-	public Object clone() {
-		return new LevelExit(getPosition(), getSize(), getSprite(), getCollisionData());
+	public LevelExit clone() {
+		return (LevelExit) super.clone();
 	}
 	
 	/*

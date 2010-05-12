@@ -62,9 +62,9 @@ public class Enemy extends AbstractUnit {
 		getSprite().setAnimation("run");
 		setAIControlled(true);
 		
-		addPhysicalCollision("TerrainSection");
-		addPhysicalCollision("Player");
-		addPhysicalCollision("Obstacle");
+		addPhysicalCollision(TerrainSection.class);
+		addPhysicalCollision(Player.class);
+		addPhysicalCollision(Obstacle.class);
 		addCollisionResponse(CollisionStimulus.IMPACT, new GetHurtEffect());
 		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
 		addCollisionResponse(CollisionStimulus.PLAYER, new TurnAroundEffect());
@@ -137,10 +137,8 @@ public class Enemy extends AbstractUnit {
 	}
 
 	@Override
-	public Object clone() {
-		Enemy e = new Enemy(getPosition(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity(), getDamage(), getDirection());
-		e.setAirResistance(getAirResistance());
-		return e;
+	public Enemy clone() {
+		return (Enemy) super.clone();
 	}
 	
 	

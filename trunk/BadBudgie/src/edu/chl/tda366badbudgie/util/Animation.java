@@ -7,7 +7,7 @@ package edu.chl.tda366badbudgie.util;
  * @author jesper, d.skalle
  *
  */
-public class Animation {
+public class Animation implements Cloneable {
 
 	private Frame[] frames;
 	private String animId;
@@ -125,6 +125,17 @@ public class Animation {
 
 	public boolean isLooping() {
 		return loop;
+	}
+	
+	@Override
+	public Animation clone() {
+		try {
+			Animation a = (Animation) super.clone();
+			a.frames = frames.clone();
+			return a;
+		} catch (CloneNotSupportedException e) {
+			throw new AssertionError("Clone not supported");
+		}
 	}
 	
 }

@@ -21,7 +21,7 @@ public class Projectile extends AbstractItem {
 	private int lifeTimer = 200;
 	private boolean hasCollided = false;
 	private AbstractGameObject owner;
-
+	
 	
 	public Projectile(Vector position, Vector direction, double speed, int damage, Vector size, Sprite sprite, Polygon collisionData, AbstractGameObject owner) {
 		super(position, size, false, sprite, collisionData, 1, 1);
@@ -30,10 +30,10 @@ public class Projectile extends AbstractItem {
 		setDamage(damage);
 		setOwner(owner);
 		
-		addPhysicalCollision("TerrainSection");
-		addPhysicalCollision("Enemy");
-		addPhysicalCollision("Obstacle");
-		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new DisappearEffect());
+		addPhysicalCollision(TerrainSection.class);
+		addPhysicalCollision(Enemy.class);
+		addPhysicalCollision(Obstacle.class);
+		//addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new DisappearEffect());
 		addCollisionResponse(CollisionStimulus.IMPENETRABLE, new DisappearEffect());
 		addCollisionResponse(CollisionStimulus.INJURER, new DisappearEffect());
 	}
@@ -45,6 +45,7 @@ public class Projectile extends AbstractItem {
 	
 	@Override
 	public GameRoundMessage update() {
+		
 		if (--lifeTimer == 0 || hasCollided)
 			return GameRoundMessage.RemoveObject;
 		
@@ -64,8 +65,8 @@ public class Projectile extends AbstractItem {
 	}
 
 	@Override
-	public Object clone() {
-		return new Projectile(getPosition(), getVelocity(), getVelocity().getLength(), getDamage(), getSize(), getSprite(), getCollisionData(), getOwner());
+	public Projectile clone() {
+		return (Projectile) super.clone();
 	}
 
 	public void setOwner(AbstractGameObject owner) {

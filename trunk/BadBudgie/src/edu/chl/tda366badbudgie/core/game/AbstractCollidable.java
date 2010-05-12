@@ -235,10 +235,10 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * 
 	 * @param other a string 
 	 */
-	protected void addPhysicalCollision(String other) {
+	protected void addPhysicalCollision(Class<? extends AbstractCollidable> otherClass) {
 		
 		String cn1 = this.getClass().getSimpleName().toLowerCase().trim();
-		String cn2 = other.toLowerCase().trim();
+		String cn2 = otherClass.getSimpleName().toLowerCase().trim();
 		String concat;
 		
 		// Sort the two class names lexicographically
@@ -265,6 +265,11 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 				new Vector(v.getX(), -v.getY()), 
 				new Vector(v.getX(), v.getY()), 
 				new Vector(-v.getX(), v.getY()))));
+	}
+	
+	@Override
+	public AbstractCollidable clone() {
+		return (AbstractCollidable) super.clone();
 	}
 	
 }
