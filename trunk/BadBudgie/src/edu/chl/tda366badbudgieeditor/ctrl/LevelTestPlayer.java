@@ -35,7 +35,7 @@ public class LevelTestPlayer {
 		
 		//Load assets
 		IFileManager fileManager = new FileManager();
-		fileManager.loadData();
+		fileManager.loadData("config/config.xml");
 		
 
 		

@@ -42,7 +42,7 @@ public class FlowController implements ActionListener {
 		
 		//Load assets
 		IFileManager fileManager = new FileManager();
-		fileManager.loadData();
+		fileManager.loadData("config/config.xml");
 		
 		//1.5 second delay to avoid flashing
 		Thread.sleep(1500);

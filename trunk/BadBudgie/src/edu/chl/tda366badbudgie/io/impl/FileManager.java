@@ -20,17 +20,8 @@ import edu.chl.tda366badbudgie.io.IFileManager;
  */
 public class FileManager implements IFileManager{
 	
-	/**
-	 * Create a new filemanager, using a
-	 * specified graphics object to load
-	 * the textures.
-	 * @param g the graphics object.
-	 */
-	public FileManager(){
-	}
-
 	@Override
-	public void loadData() {
+	public void loadData(String configPath) {
 		
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db;
@@ -38,7 +29,7 @@ public class FileManager implements IFileManager{
 		try {
 			db = dbFactory.newDocumentBuilder();
 		 	GameParser gameParser = 
-		 		new GameParser(db.parse("config/config.xml"));
+		 		new GameParser(db.parse(configPath));
 		 	gameParser.parseData();
 		 	
 		} catch (SAXException e) {

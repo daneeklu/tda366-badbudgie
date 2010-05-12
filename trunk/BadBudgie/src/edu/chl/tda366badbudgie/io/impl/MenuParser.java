@@ -75,7 +75,7 @@ public class MenuParser extends AbstractParser{
 			
 			// Create the menu using all its submenus
 			Menu menu = new Menu(menuId, texId, menuBounds, menuItems);
-			MenuManager.getInstance().addMenu(menuId, menu);
+			MenuManager.getInstance().addMenu(menu);
 		}
 	}
 

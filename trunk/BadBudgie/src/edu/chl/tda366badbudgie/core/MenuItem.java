@@ -18,6 +18,7 @@ public class MenuItem {
 	private Sprite sprite;
 	private Rectangle bounds;
 	private String action;
+	
 	private boolean selected;
 	private boolean enabled;
 	
@@ -46,6 +47,12 @@ public class MenuItem {
 		
 	}
 	
+	/**
+	 * Create a MenuItem, usin
+	 * @param action
+	 * @param texId
+	 * @param bounds
+	 */
 	public MenuItem(String action, String texId, Rectangle bounds) {
 		this(action, texId, bounds, true);
 	}
@@ -80,6 +87,11 @@ public class MenuItem {
 		return enabled;
 	}
 	
+	/**
+	 * Mark the menu as enabled
+	 * or disabled
+	 * @param enabled true, if enabled
+	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
@@ -101,12 +113,10 @@ public class MenuItem {
 	}
 
 	/**
-	 * Do the logic for the MenuItem.
+	 * Get the id of the action associated with the
+	 * MenuItem
+	 * @return the action's string id
 	 */
-	public void logic() {
-		// TODO Should menuitem have logic?
-	}
-	
 	public String getAction() {
 		return action;
 	}

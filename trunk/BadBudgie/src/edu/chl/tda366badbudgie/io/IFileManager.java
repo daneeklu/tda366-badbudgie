@@ -7,8 +7,9 @@ public interface IFileManager {
 	
 	/**
 	 * A function for loading resources from the file system.
+	 * @param configPath
 	 */
-	public void loadData();
+	public void loadData(String configPath);
 	
 	/**
 	 * Returns loaded image data.
