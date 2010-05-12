@@ -65,6 +65,11 @@ public class GameRenderer {
 		g.drawSprite(go.getSprite(), new Rectangle(
 				go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2,
 				go.getWidth(), go.getHeight()));
+				
+		// Draw the ago's children if any
+		for (AbstractGameObject child : go.getChildren()) {
+			drawGameObject(child, g);
+		}
 	}
 	
 	/**

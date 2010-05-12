@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Sprite
@@ -14,7 +15,7 @@ import java.util.Map;
  * @author jesper, d.skalle
  *
  */
-public class Sprite {
+public class Sprite implements Cloneable {
 	
 	// The texture and orientation of the sprite
 	private String texId;
@@ -228,6 +229,21 @@ public class Sprite {
 			if(currentFrame >= animations.get(currentAnim).getFrames().length) {
 				nextAnimation();
 			}
+		}
+		
+	}
+	
+	@Override
+	public Sprite clone() {
+		try {
+			Sprite s = (Sprite) super.clone();
+			s.animations = new HashMap<String, Animation>();
+			for (Entry<String, Animation> e : animations.entrySet()) {
+				s.animations.put(e.getKey(), e.getValue().clone());
+			}
+			return s;
+		} catch (CloneNotSupportedException e) {
+			throw new AssertionError("Clone not supported");
 		}
 		
 	}

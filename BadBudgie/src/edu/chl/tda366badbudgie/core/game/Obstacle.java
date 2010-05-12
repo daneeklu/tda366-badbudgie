@@ -34,10 +34,10 @@ public class Obstacle extends AbstractCollidable {
 	public Obstacle(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
 		super(position, size, stationary, sprite, collisionData, friction, elasticity);
 
-		addPhysicalCollision("TerrainSection");
-		addPhysicalCollision("Player");
-		addPhysicalCollision("Enemy");
-		addPhysicalCollision("Obstacle");
+		addPhysicalCollision(TerrainSection.class);
+		addPhysicalCollision(Player.class);
+		addPhysicalCollision(Enemy.class);
+		addPhysicalCollision(Obstacle.class);
 	}
 	
 	/**
@@ -52,10 +52,8 @@ public class Obstacle extends AbstractCollidable {
 
 
 	@Override
-	public Object clone() {
-		Obstacle o = new Obstacle(getPosition(), getSize(), isStationary(), getSprite(), getCollisionData(), getFriction(), getElasticity());
-		//o.setAirResistance(getAirResistance());
-		return o;
+	public Obstacle clone() {
+		return (Obstacle) super.clone();
 	}
 	
 	

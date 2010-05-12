@@ -48,7 +48,6 @@ public class Player extends AbstractUnit {
 	private boolean flying = false;
 	
 	private Weapon weapon;
-	private Projectile bullet;
 
 
 	/**
@@ -69,9 +68,9 @@ public class Player extends AbstractUnit {
 		setMaxFlyingEnergy(150);
 		setAIControlled(false);
 		
-		addPhysicalCollision("TerrainSection");
-		addPhysicalCollision("Enemy");
-		addPhysicalCollision("Obstacle");
+		addPhysicalCollision(TerrainSection.class);
+		addPhysicalCollision(Enemy.class);
+		addPhysicalCollision(Obstacle.class);
 		addCollisionResponse(CollisionStimulus.INJURER, new GetHurtEffect());
 		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
 	}
@@ -146,7 +145,7 @@ public class Player extends AbstractUnit {
 	public void shootAt(double x, double y, boolean mouseDown) {
 		if(mouseDown){
 			//TODO: Get rid of hard coded screen width and height
-			bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2), this);
+			Projectile bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2), this);
 			getParent().addGameObject(bullet);
 		}
 		
@@ -334,6 +333,7 @@ public class Player extends AbstractUnit {
 	
 	public void setWeapon(Weapon wep){
 		this.weapon = wep;
+		addChild(wep);
 	}
 	
 	public Weapon getActiveWeapon(){
@@ -341,9 +341,8 @@ public class Player extends AbstractUnit {
 	}
 
 	@Override
-	public Object clone() {
-		Player p = new Player(getPosition(), getSize(), getSprite(), getCollisionData(), getFriction(), getElasticity());
-		p.setAirResistance(this.getAirResistance());
+	public Player clone() {
+		Player p = (Player) super.clone();
 		return p;
 	}
 
