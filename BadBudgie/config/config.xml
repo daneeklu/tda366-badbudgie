@@ -25,14 +25,16 @@
 		<texture id="gun1" path="res/gun1_small.png"/>
 		<texture id="resume" path="res/resumegame.png"/>
 		<texture id="bullet1" path="res/bullet1.png" />
+		<texture id="mud1" path="res/mud01.png" />
+		<texture id="rocktex" path="res/rocktex.png" />
 		<texture id="arm" path="res/arm.png" />
 	</textures>
 	
 	<levels>
-		<level nr="1" path="config/level1.xml"/>
-		<level nr="2" path="config/level2.xml"/>
-		<level nr="3" path="config/level3.xml"/>
-			<!--Additional data-->
+		<level nr="1" path="config/uno.xml" />
+		<level nr="2" path="config/level1.xml"/>
+		<level nr="3" path="config/level2.xml"/>
+		<level nr="4" path="config/level3.xml"/>
 	</levels>
 	
 </gamedata>
