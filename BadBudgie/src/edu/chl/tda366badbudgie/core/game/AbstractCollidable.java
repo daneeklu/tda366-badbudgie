@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core;
+package edu.chl.tda366badbudgie.core.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import edu.chl.tda366badbudgie.util.Polygon;
+import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**

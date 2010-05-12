@@ -1,5 +1,6 @@
-package edu.chl.tda366badbudgie.core;
+package edu.chl.tda366badbudgie.core.game;
 
+import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**

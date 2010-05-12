@@ -2,8 +2,8 @@ package edu.chl.tda366badbudgie.physics.impl;
 
 import java.util.List;
 
-import edu.chl.tda366badbudgie.core.AbstractGameObject;
-import edu.chl.tda366badbudgie.core.GameRound;
+import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
+import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.util.Vector;
 
 public class MovementHandler {

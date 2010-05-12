@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.chl.tda366badbudgie.ai.IAI;
-import edu.chl.tda366badbudgie.core.AbstractCollidable;
-import edu.chl.tda366badbudgie.core.AbstractUnit;
-import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.TerrainSection;
+import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
+import edu.chl.tda366badbudgie.core.game.AbstractUnit;
+import edu.chl.tda366badbudgie.core.game.GameRound;
+import edu.chl.tda366badbudgie.core.game.TerrainSection;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.StaticUtilityMethods;
 import edu.chl.tda366badbudgie.util.Vector;

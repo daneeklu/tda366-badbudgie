@@ -1,8 +1,8 @@
-package edu.chl.tda366badbudgie.core;
+package edu.chl.tda366badbudgie.core.game;
 
 import java.util.Iterator;
 
-import edu.chl.tda366badbudgie.core.AbstractGameObject.GameRoundMessage;
+import edu.chl.tda366badbudgie.core.game.AbstractGameObject.GameRoundMessage;
 
 
 /**

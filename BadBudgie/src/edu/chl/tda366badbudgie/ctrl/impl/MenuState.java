@@ -1,8 +1,8 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
-import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.Menu;
-import edu.chl.tda366badbudgie.core.MenuManager;
+import edu.chl.tda366badbudgie.core.game.GameRound;
+import edu.chl.tda366badbudgie.core.menu.Menu;
+import edu.chl.tda366badbudgie.core.menu.MenuManager;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.MenuRenderer;

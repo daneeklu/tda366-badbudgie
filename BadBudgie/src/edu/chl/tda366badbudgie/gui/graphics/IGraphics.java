@@ -4,10 +4,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import edu.chl.tda366badbudgie.core.Sprite;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Quad;
 import edu.chl.tda366badbudgie.util.Rectangle;
+import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**

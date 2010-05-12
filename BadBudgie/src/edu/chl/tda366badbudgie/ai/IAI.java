@@ -1,6 +1,6 @@
 package edu.chl.tda366badbudgie.ai;
 
-import edu.chl.tda366badbudgie.core.GameRound;
+import edu.chl.tda366badbudgie.core.game.GameRound;
 
 /**
  * 

@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import edu.chl.tda366badbudgie.core.SplashScreen;
 import edu.chl.tda366badbudgie.ctrl.IStateContext;
 import edu.chl.tda366badbudgie.gui.GraphicsFrame;
+import edu.chl.tda366badbudgie.gui.SplashScreen;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.io.IFileManager;
 import edu.chl.tda366badbudgie.io.impl.FileManager;

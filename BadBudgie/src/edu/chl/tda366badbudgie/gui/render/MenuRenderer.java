@@ -1,8 +1,8 @@
 package edu.chl.tda366badbudgie.gui.render;
 
-import edu.chl.tda366badbudgie.core.Menu;
-import edu.chl.tda366badbudgie.core.MenuItem;
-import edu.chl.tda366badbudgie.core.Menu.ConfirmDialog;
+import edu.chl.tda366badbudgie.core.menu.Menu;
+import edu.chl.tda366badbudgie.core.menu.MenuItem;
+import edu.chl.tda366badbudgie.core.menu.Menu.ConfirmDialog;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
