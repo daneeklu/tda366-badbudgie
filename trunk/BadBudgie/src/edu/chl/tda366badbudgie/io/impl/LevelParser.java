@@ -23,6 +23,7 @@ import edu.chl.tda366badbudgie.core.Weapon;
 import edu.chl.tda366badbudgie.util.Circle;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Rectangle;
+import edu.chl.tda366badbudgie.util.RoundedRectangle;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
@@ -58,7 +59,7 @@ public class LevelParser extends AbstractParser{
 		pY = Double.parseDouble(playPosL.getAttribute("y"));
 		
 		Player player = new Player(new Vector(pX, pY));
-		player.setCollisionData(new Rectangle(-20,-40,40,80));
+		player.setCollisionData(new RoundedRectangle(40,80, 15));
 		Weapon wep = new Weapon(new Vector(player.getX(), player.getY()), new Sprite("gun1"));
 		player.setWeapon(wep);
 		level.addGameObject(player);
@@ -154,8 +155,14 @@ public class LevelParser extends AbstractParser{
 				vectors.add(createVector((Element)vectorData.item(i)));
 			}
 			p = new Polygon(vectors);
-			
-		} else{
+		} else if(type.equals("roundrectangle")){
+			double width = Double.parseDouble(e.getAttribute("width"));
+			double height = Double.parseDouble(e.getAttribute("height"));
+			double radius = Double.parseDouble(e.getAttribute("radius"));
+			p = new RoundedRectangle(width, height, radius);
+		}
+		
+		else{
 			throw new IllegalArgumentException("NO TYPE DEFINED FOR POLYGON");
 		}
 		return p;
