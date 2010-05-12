@@ -13,7 +13,7 @@ import edu.chl.tda366badbudgie.util.Rectangle;
  */
 public class Menu {
 	
-	private String id;
+	private final String id;
 	private MenuItem[] menuItems;
 	private int currentItem;
 	private Rectangle bounds;
@@ -23,6 +23,14 @@ public class Menu {
 	
 	private ConfirmDialog dialog;
 	
+	/**
+	 * Create a new menu object
+	 * 
+	 * @param id the id of the menu
+	 * @param texId the id of the texture used by the menu
+	 * @param bounds the boundary rectangle of the menu graphic
+	 * @param items the menu items to be included in the menu
+	 */
 	public Menu(String id, String texId, Rectangle bounds, MenuItem[] items) {
 		dialog = null;
 		this.id = id;
@@ -177,12 +185,11 @@ public class Menu {
 	
 	
 	/**
-	 * A method for doing all "game logic" of the menu
+	 * A method for doing all "game logic" of the menu.
+	 * Currently this includes setting menus as 
+	 * enabled/disabled when necessary.
 	 */ 
 	public void logic() {
-		for (MenuItem mi : menuItems) {
-			mi.logic();
-		}
 		
 		if (gameIsActive)
 		{
@@ -205,7 +212,7 @@ public class Menu {
 	 * Show a confirmation dialog for the current menuItem
 	 */
 	public void showConfirmDialog() {
-		dialog = new ConfirmDialog(menuItems[currentItem].getAction(), "confirm:" + menuItems[currentItem].getSprite().getId());
+		dialog = new ConfirmDialog("confirm:" + menuItems[currentItem].getSprite().getId());
 	}
 
 	/**
@@ -226,12 +233,10 @@ public class Menu {
 	 */
 	public static class ConfirmDialog {
 		
-		boolean value;
-		String action;
-		String texId;
+		private boolean value;
+		private final String texId;
 		
-		private ConfirmDialog(String action, String texId) {
-			this.action = action;
+		private ConfirmDialog(String texId) {
 			this.texId = texId;
 			value = false;
 		}

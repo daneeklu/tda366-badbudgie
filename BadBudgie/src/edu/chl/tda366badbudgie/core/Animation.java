@@ -4,7 +4,7 @@ package edu.chl.tda366badbudgie.core;
  * Animation
  * 
  * An indexed sequence denoting parts of a segmented image.
- * @author jesper
+ * @author jesper, d.skalle
  *
  */
 public class Animation {
@@ -13,16 +13,26 @@ public class Animation {
 	private String animId;
 	private boolean loop;
 	
-	public Animation(String animId, int[] indices, double[] durationTimes, boolean loop){
-		frames = new Frame[indices.length];
-		
-		for(int i = 0; i < indices.length; i ++){
-			frames[i] = new Frame(indices[i], durationTimes[i]);
-		}
-		this.setLooping(loop);
+	/**
+	 * Create an animation
+	 * 
+	 * @param animId the id for the animation
+	 * @param indices the sequence of frame indices 
+	 * @param durationTimes the sequence of duration times for the indices
+	 * @param loop true if the animation loops
+	 */
+	public Animation(String animId, Frame[] frames, boolean loop){
+		this.frames = frames;
+		this.loop = loop;
 		this.animId = animId;
 	}
 	
+	/**
+	 * Create an animation
+	 * @param animId the id for the animation
+	 * @param indices the sequence of frame indices 
+	 * @param durationTime the duration time for every frame
+	 */
 	public Animation(String animId, int[] indices, double durationTime, boolean loop){
 		frames = new Frame[indices.length];
 		
@@ -33,10 +43,12 @@ public class Animation {
 		this.animId = animId;
 	}
 	
-	public Animation(String animId, int[] indices,  double[] durationTimes){
-		this(animId, indices, durationTimes, false);
-	}
-	
+	/**
+	 * Create an animation
+	 * @param animId the id for the animation
+	 * @param indices the sequence of frame indices 
+	 * @param durationTime the duration time for every frame
+	 */
 	public Animation(String animId, int[] indices, double durationTime){
 		this(animId, indices, durationTime, false);
 	}

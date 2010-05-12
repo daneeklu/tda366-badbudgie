@@ -16,14 +16,20 @@ import java.util.Map;
  */
 public class Sprite {
 	
+	// The texture and orientation of the sprite
 	private String texId;
+	private boolean mirrored;
+	private double rotation;
+	
+	// The animations and resolution of the sprite
+	private Map<String, Animation> animations;
 	private int horFrames, verFrames;
+
+	// The current animation state of the frame
 	private String currentAnim;
 	private int currentFrame;
 	private double currentTime;
-	private boolean mirrored;
-	private double rotation;
-	private Map<String, Animation> animations;
+
 	
 	/**
 	 * Create a new sprite
@@ -114,8 +120,15 @@ public class Sprite {
 		return texId;
 	}
 	
-	//TODO: Question this method.
-	public void nextAnimation(){}
+	/**
+	 * Skip to the next animation, looping the
+	 * current animation if it's set to loop.
+	 */
+	public void nextAnimation() {
+		currentFrame = 0;
+		if (animations.get(currentAnim).isLooping())
+			setAnimation("idle");
+	}
 	
 	/**
 	 * Get the horizontal frame resolution of
@@ -149,22 +162,42 @@ public class Sprite {
 		}
 	}
 	
+	/**
+	 * Set the mirrored value for the sprite
+	 * @param mirrored true if mirrored
+	 */
 	public void setMirrored(boolean mirrored) {
 		this.mirrored = mirrored;
 	}
 	
+	/**
+	 * Get the mirrored value for the sprite
+	 * @return mirrored true if the sprite is mirrored
+	 */
 	public boolean getMirrored() {
 		return mirrored;
 	}
 	
+	/**
+	 * Set the rotation values for the sprite
+	 * @param rotation the rotation, in degrees
+	 */
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
 	}
 	
+	/**
+	 * Get the rotation values for the sprite
+	 * @return the rotation, in degrees
+	 */
 	public double getRotation() {
 		return rotation;
 	}
 	
+	/**
+	 * Step the sprite one step forward in the animation,
+	 * changing the animations as frames as fit.
+	 */
 	public void animate() {
 		
 		currentTime+=1.0;
@@ -174,6 +207,26 @@ public class Sprite {
 			currentTime = 0;
 			if(currentFrame >= animations.get(currentAnim).getFrames().length) {
 				currentFrame = 0;
+			}
+		}
+		
+	}
+	
+	
+	/**
+	 * Step the sprite one step forward in the animation,
+	 * changing the animations as frames as fit.
+	 * @param t the number of time steps
+	 */
+	public void animate(double t) {
+		
+		currentTime+=1.0;
+		
+		if(currentTime >= animations.get(currentAnim).getFrameDuration(currentFrame)) {
+			currentFrame++;
+			currentTime = 0;
+			if(currentFrame >= animations.get(currentAnim).getFrames().length) {
+				nextAnimation();
 			}
 		}
 		

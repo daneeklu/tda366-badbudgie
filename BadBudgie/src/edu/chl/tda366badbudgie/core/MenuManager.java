@@ -12,10 +12,12 @@ import java.util.Map;
  */
 public class MenuManager {
 
-	private static MenuManager mm;
+	//Singleton instance
+	private static MenuManager instance;
+	
 	private Map<String,Menu> menus = new HashMap<String,Menu>();
 	
-	private MenuManager(){
+	private MenuManager() {
 
 	}
 	
@@ -23,19 +25,19 @@ public class MenuManager {
 	 * Returns the instance of the MenuManager
 	 * @return the MenuManager
 	 */
-	public static MenuManager getInstance(){
-		if(mm==null){
-			mm = new MenuManager();
+	public static MenuManager getInstance() {
+		if(instance==null){
+			instance = new MenuManager();
 		}
-		return mm;
+		return instance;
 	}
 	
 	/**
 	 * Adds a Menu object to the menu manager.
 	 * @param menu the menu that will be added.
 	 */
-	public void addMenu(String id, Menu menu){
-		menus.put(id, menu);
+	public void addMenu(Menu menu) {
+		menus.put(menu.getId(), menu);
 	}
 	
 	/**
