@@ -2,7 +2,7 @@ package edu.chl.tda366badbudgie.ctrl.impl;
 
 import edu.chl.tda366badbudgie.ai.IAI;
 import edu.chl.tda366badbudgie.ai.impl.EnemyAI;
-import edu.chl.tda366badbudgie.core.GameRound;
+import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
@@ -65,7 +65,6 @@ public class InGameState implements IState {
 	@Override
 	public void mouseActionClick(boolean pressed) {
 		gameRound.mouseAction(mX, mY, pressed);
-		//new Projectile(mX, mY);
 	}
 
 	@Override
@@ -73,7 +72,6 @@ public class InGameState implements IState {
 		mX = x;
 		mY = y;
 		gameRound.mouseMove(x,y);
-		//System.out.println("Aiming at x: " + x + " y: " + y);
 	}
 
 	

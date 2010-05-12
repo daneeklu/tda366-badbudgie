@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.core;
+package edu.chl.tda366badbudgie.core.menu;
 
 import java.util.HashMap;
 import java.util.Map;

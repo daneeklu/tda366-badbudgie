@@ -3,9 +3,9 @@ package edu.chl.tda366badbudgie.io.impl;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import edu.chl.tda366badbudgie.core.Menu;
-import edu.chl.tda366badbudgie.core.MenuItem;
-import edu.chl.tda366badbudgie.core.MenuManager;
+import edu.chl.tda366badbudgie.core.menu.Menu;
+import edu.chl.tda366badbudgie.core.menu.MenuItem;
+import edu.chl.tda366badbudgie.core.menu.MenuManager;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
 /**

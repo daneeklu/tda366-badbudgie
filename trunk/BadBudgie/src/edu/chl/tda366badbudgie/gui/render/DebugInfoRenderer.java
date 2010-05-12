@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.chl.tda366badbudgie.core.AbstractCollidable;
-import edu.chl.tda366badbudgie.core.AbstractGameObject;
-import edu.chl.tda366badbudgie.core.GameRound;
-import edu.chl.tda366badbudgie.core.Menu;
-import edu.chl.tda366badbudgie.core.Player;
+import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
+import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
+import edu.chl.tda366badbudgie.core.game.GameRound;
+import edu.chl.tda366badbudgie.core.game.Player;
+import edu.chl.tda366badbudgie.core.menu.Menu;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.util.Vector;
 

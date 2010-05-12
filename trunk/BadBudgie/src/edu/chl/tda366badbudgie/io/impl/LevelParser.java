@@ -9,21 +9,21 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import edu.chl.tda366badbudgie.core.AbstractGameObject;
-import edu.chl.tda366badbudgie.core.Animation;
-import edu.chl.tda366badbudgie.core.Enemy;
-import edu.chl.tda366badbudgie.core.Level;
-import edu.chl.tda366badbudgie.core.LevelExit;
-import edu.chl.tda366badbudgie.core.LevelManager;
-import edu.chl.tda366badbudgie.core.Obstacle;
-import edu.chl.tda366badbudgie.core.Player;
-import edu.chl.tda366badbudgie.core.Sprite;
-import edu.chl.tda366badbudgie.core.TerrainSection;
-import edu.chl.tda366badbudgie.core.Weapon;
+import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
+import edu.chl.tda366badbudgie.core.game.Enemy;
+import edu.chl.tda366badbudgie.core.game.Level;
+import edu.chl.tda366badbudgie.core.game.LevelExit;
+import edu.chl.tda366badbudgie.core.game.LevelManager;
+import edu.chl.tda366badbudgie.core.game.Obstacle;
+import edu.chl.tda366badbudgie.core.game.Player;
+import edu.chl.tda366badbudgie.core.game.TerrainSection;
+import edu.chl.tda366badbudgie.core.game.Weapon;
+import edu.chl.tda366badbudgie.util.Animation;
 import edu.chl.tda366badbudgie.util.Circle;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.RoundedRectangle;
+import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
@@ -59,7 +59,7 @@ public class LevelParser extends AbstractParser{
 		pY = Double.parseDouble(playPosL.getAttribute("y"));
 		
 		Player player = new Player(new Vector(pX, pY));
-		player.setCollisionData(new RoundedRectangle(40,80, 15));
+		player.setCollisionData(new RoundedRectangle(40, 80, 15));
 		Weapon wep = new Weapon(new Vector(player.getX(), player.getY()), new Sprite("gun1"));
 		player.setWeapon(wep);
 		level.addGameObject(player);
@@ -155,14 +155,15 @@ public class LevelParser extends AbstractParser{
 				vectors.add(createVector((Element)vectorData.item(i)));
 			}
 			p = new Polygon(vectors);
-		} else if(type.equals("roundrectangle")){
+			
+		} else if(type.equals("roundrectangle")){			
 			double width = Double.parseDouble(e.getAttribute("width"));
 			double height = Double.parseDouble(e.getAttribute("height"));
 			double radius = Double.parseDouble(e.getAttribute("radius"));
 			p = new RoundedRectangle(width, height, radius);
-		}
-		
-		else{
+	
+		} else{
+			System.out.println("a" + type);
 			throw new IllegalArgumentException("NO TYPE DEFINED FOR POLYGON");
 		}
 		return p;

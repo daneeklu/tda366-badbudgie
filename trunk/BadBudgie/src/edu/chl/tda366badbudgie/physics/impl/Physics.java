@@ -1,6 +1,6 @@
 package edu.chl.tda366badbudgie.physics.impl;
 
-import edu.chl.tda366badbudgie.core.GameRound;
+import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.physics.IPhysics;
 
 /**
