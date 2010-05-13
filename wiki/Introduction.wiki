@@ -32,5 +32,5 @@ To run bad budgie, you need JOGL installed. First download and install jogl. The
 || 4 || [http://tda366-badbudgie.googlecode.com/files/meeting100419.pdf 2010-04-19] || [http://tda366-badbudgie.googlecode.com/files/meeting100422.pdf 2010-04-22] ||
 || 5 || [http://tda366-badbudgie.googlecode.com/files/meeting100426.pdf 2010-04-26] || [http://tda366-badbudgie.googlecode.com/files/meeting100429.pdf 2010-04-29] ||
 || 6 || [http://tda366-badbudgie.googlecode.com/files/meeting20100503.pdf 2010-05-03] || [http://tda366-badbudgie.googlecode.com/files/meeting100506.pdf 2010-05-06] ||
-|| 7 || [http://tda366-badbudgie.googlecode.com/files/meeting100510.pdf 2010-05-10] || - ||
+|| 7 || [http://tda366-badbudgie.googlecode.com/files/meeting100510.pdf 2010-05-10] || [http://code.google.com/p/tda366-badbudgie/downloads/detail?name=meeting100512.pdf 2010-05-12] ||
 || 8 || - || - || 
