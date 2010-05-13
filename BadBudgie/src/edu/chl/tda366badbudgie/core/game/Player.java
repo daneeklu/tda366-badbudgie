@@ -339,7 +339,6 @@ public class Player extends AbstractUnit {
 				}
 				
 				applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
-				p.setHasCollided(true);
 			}
 		}
 	}
