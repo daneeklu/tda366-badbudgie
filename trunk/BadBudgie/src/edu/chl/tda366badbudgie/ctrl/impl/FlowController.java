@@ -34,7 +34,7 @@ public class FlowController implements ActionListener {
 	 * Flowcontroller constructor.
 	 * Inits the flowcontroller and all of it's parts.
 	 * 
-	 * @throws InterruptedException If the thread was interuppted
+	 * @throws InterruptedException If the thread was interrupted
 	 */
 	public FlowController() throws InterruptedException {
 		
@@ -55,6 +55,7 @@ public class FlowController implements ActionListener {
 		GraphicsFrame frame = new GraphicsFrame();
 		frame.setVisible(true);
 		Canvas canvas = frame.getIGraphics().getCanvas();
+		graphics = frame.getIGraphics();
 		
 		//Create a statecontext for the app, and forward
 		//the graphicsframe to it (for rendering calls)
@@ -77,22 +78,15 @@ public class FlowController implements ActionListener {
 		
 
 		// TODO: Change 17 to some defined constant or add a comment saying that 17 ms = x fps
-		Timer timer = new Timer(17, (ActionListener) (new FlowController(app, frame.getIGraphics())));
+		Timer timer = new Timer(17, (ActionListener) (this));
 		timer.start();
 		
 	}
 	
-	public FlowController(IStateContext app, IGraphics graphics) {
-		super();
-		this.stateContext = app;
-		this.graphics = graphics;
-	}
-	
 	public void loop() {
-		stateContext.doLogic();
-		stateContext.draw(graphics);
+		StateContext.getInstance().doLogic();
+		StateContext.getInstance().draw(graphics);
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
