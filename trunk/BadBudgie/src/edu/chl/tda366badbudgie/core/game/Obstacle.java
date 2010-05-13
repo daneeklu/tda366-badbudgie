@@ -1,8 +1,5 @@
 package edu.chl.tda366badbudgie.core.game;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -55,18 +52,6 @@ public class Obstacle extends AbstractCollidable {
 	public Obstacle clone() {
 		return (Obstacle) super.clone();
 	}
-	
-	
-	/*
-	 * COLLISION EFFECT MEMBERS
-	 */
-	
-	@Override
-	public List<CollisionStimulus> getCollisionStimulus() {
-		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
-		stimuli.add(CollisionStimulus.IMPENETRABLE);
-		stimuli.add(CollisionStimulus.WALKABLE_GROUND);
-		return stimuli;
-	}
+
 
 }

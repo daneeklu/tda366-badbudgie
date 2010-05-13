@@ -83,18 +83,25 @@ public class GameRound {
 			gameEvent = ago.update();
 			
 			// See if an event requiring action from GameRound has occurred
-			if (gameEvent == GameRoundMessage.LevelFinished) {
+			if (gameEvent == GameRoundMessage.LEVEL_FINISHED) {
 				currentLevel = LevelManager.getInstance().getLevel(++currentLevelNumber);
 				player = currentLevel.getPlayer();
 				break;
 			}
-			else if (gameEvent == GameRoundMessage.PlayerDied) {
+			else if (gameEvent == GameRoundMessage.PLAYER_DIED) {
 				// TODO: Player dies
 			}
-			else if (gameEvent == GameRoundMessage.RemoveObject) {
+			else if (gameEvent == GameRoundMessage.REMOVE_OBJECT) {
 				i.remove();
 			}
 		}
+		
+		// If any objects were scheduled for addition to the level, add them
+		for (AbstractGameObject ago : currentLevel.getScheduledForAddition()) {
+			currentLevel.addGameObject(ago);
+		}
+		currentLevel.getScheduledForAddition().clear();
+		
 	}
 
 	public Level getCurrentLevel(){
@@ -107,7 +114,7 @@ public class GameRound {
 	}
 
 	public void mouseAction(double x, double y, boolean mouseDown) {
-		getPlayer().shootAt(x, y, mouseDown);
+		getPlayer().shootToggle(mouseDown);
 	}
 	
 	public boolean isPlayerAlive() {
@@ -115,7 +122,7 @@ public class GameRound {
 	}
 
 	public void mouseMove(double x, double y) {
-		getPlayer().setAim(x, y);
+		getPlayer().setAimScreenCoords(x, y);
 		
 	}
 

@@ -35,11 +35,16 @@ public class Enemy extends AbstractUnit {
 		ENEMY_SPRITE = new Sprite("enemy", 4, 4, animations);
 	}
 	
-	// Movement constants
+	// Constants
 	private static final double GROUND_MOVE_FORCE = 1.5;
 	private static final double MAXIMUM_WALK_SPEED = 5.0;
 	
-	private int damage;
+	
+	private int meleeDamage;
+	private double sightDistance = 400;
+	
+	
+	private int attackTimer = 0;
 	
 	/**
 	 * Constructor
@@ -50,24 +55,23 @@ public class Enemy extends AbstractUnit {
 	 * @param collisionData
 	 * @param friction
 	 * @param elasticity
-	 * @param damage
+	 * @param meleeDamage
 	 * @param direction
 	 */
-	public Enemy(Vector position, Vector size, Sprite sprite, Polygon collisionData, double friction, double elasticity, int damage, int direction) {
+	public Enemy(Vector position, Vector size, Sprite sprite, Polygon collisionData, double friction, double elasticity, int meleeDamage, int direction) {
 		super(position, size, false, sprite, collisionData, friction, elasticity);
 
 		setHealth(100);
-		setDamage(damage);
+		setMeleeDamage(meleeDamage);
 		setDirection(direction);
 		getSprite().setAnimation("run");
 		setAIControlled(true);
+		getWeapon().setSprite(new Sprite("gun"));
+		getWeapon().setCooldown(10);
 		
 		addPhysicalCollision(TerrainSection.class);
 		addPhysicalCollision(Player.class);
 		addPhysicalCollision(Obstacle.class);
-		addCollisionResponse(CollisionStimulus.IMPACT, new GetHurtEffect());
-		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
-		addCollisionResponse(CollisionStimulus.PLAYER, new TurnAroundEffect());
 	}
 	
 	/**
@@ -78,13 +82,19 @@ public class Enemy extends AbstractUnit {
 	public Enemy(Vector position) {
 		this(position, ENEMY_SIZE, ENEMY_SPRITE, ENEMY_COLLISION_DATA, ENEMY_FRICTION, ENEMY_ELASTICITY, ENEMY_DAMAGE, ENEMY_DIRECTION);
 	}
-	
+
+	public void aimAtPlayer() {
+		Player p = getParent().getPlayer();
+		double pdx = p.getX() - getX();
+		setAim(p.getX(), p.getY() + Math.abs(pdx/6));
+		setDirection( (p.getX() - getX() > 0) ? 1 : -1);
+	}
 	
 	@Override
 	public void updateForces() {
 
 		// Walking
-		if (!getGroundContactVector().hasZeroLength() 
+		if (getAttackTimer() == 0 && !getGroundContactVector().hasZeroLength() 
 				&& Math.abs(getVelocity().getX()) < MAXIMUM_WALK_SPEED) 
 			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication((GROUND_MOVE_FORCE) * Math.signum(getDirection())));
 
@@ -93,14 +103,25 @@ public class Enemy extends AbstractUnit {
 	@Override
 	public GameRoundMessage update(){
 		
-		getSprite().animate();
+		// Run update on superclass and return its value if it has an event.
+		GameRoundMessage superMessage = super.update();
+		if (superMessage != GameRoundMessage.NO_EVENT)
+			return superMessage;
 		
-		
+		if (getAttackTimer() > 0) {
+			setAttackTimer(getAttackTimer() - 1);
+			getSprite().setAnimation("idle");
+		}
+		else {
+			getWeapon().getSprite().setRotation(0);
+			getWeapon().getSprite().setMirrored(getDirection() > 0);
+			getSprite().setAnimation("run");
+		}
 		
 		if (getHealth() <= 0)
-			return GameRoundMessage.RemoveObject;
+			return GameRoundMessage.REMOVE_OBJECT;
 		
-		return GameRoundMessage.NoEvent;
+		return GameRoundMessage.NO_EVENT;
 	}
 
 
@@ -109,20 +130,35 @@ public class Enemy extends AbstractUnit {
 	 * 
 	 * @param damage the damage
 	 */
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setMeleeDamage(int damage) {
+		this.meleeDamage = damage;
 	}
-
 
 	/**
 	 * Gets the amount of damage this enemy does to the player.
 	 * 
 	 * @return the damage
 	 */
-	public int getDamage() {
-		return damage;
+	public int getMeleeDamage() {
+		return meleeDamage;
+	}
+	
+	public void setSightDistance(double sightDistance) {
+		this.sightDistance = sightDistance;
 	}
 
+	public double getSightDistance() {
+		return sightDistance;
+	}
+	
+	public void setAttackTimer(int attackTimer) {
+		this.attackTimer = attackTimer;
+	}
+
+	public int getAttackTimer() {
+		return attackTimer;
+	}
+	
 	/**
 	 * Sets the enemy's direction.
 	 * @param direction 1 if heading right, -1 if heading left
@@ -135,52 +171,43 @@ public class Enemy extends AbstractUnit {
 		else
 			getSprite().setMirrored(false);
 	}
-
+	
 	@Override
 	public Enemy clone() {
 		return (Enemy) super.clone();
 	}
 	
 	
-	/*
-	 * COLLISION EFFECT MEMBERS
-	 */
-	
-	
 	@Override
-	public List<CollisionStimulus> getCollisionStimulus() {
-		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
-		stimuli.add(CollisionStimulus.INJURER);
-		return stimuli;
-	}
-	
-	private class GetHurtEffect implements CollisionEffect {
-		@Override
-		public void run(AbstractCollidable other, Vector mtv) {
-			setHealth(getHealth() - ((Projectile) other).getDamage());
-		}
-	}
-	
-	private class StandOnGroundEffect implements CollisionEffect {
-		@Override
-		public void run(AbstractCollidable other, Vector mtv) {
-			
+	public void collisionEffect(AbstractCollidable other, Vector mtv) {
+		
+		// TODO: Explain here why class check is bad, but OK in this case.
+		
+		Class<? extends AbstractCollidable> otherClass = other.getClass();
+		
+		if (otherClass.equals(TerrainSection.class)) {
 			if (mtv.getY() > 0) {
-				// Enemy has "ground" beneath his feet
+				// Player has "ground" beneath his feet
 				setGroundContactVector(getGroundContactVector().add(
 						mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
 						.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
 			}
-			
 		}
-	}
-	
-	private class TurnAroundEffect implements CollisionEffect {
-		@Override
-		public void run(AbstractCollidable other, Vector mtv) {
-			setDirection(-1 * getDirection());
+		
+		if (otherClass.equals(Projectile.class)) {
+			Projectile p = (Projectile) other;
+			if (!p.getOwner().getClass().equals(getClass()) && p.isLive()) {
+				setHealth(getHealth() - p.getDamage()) ;
+				
+				applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
+				p.setHasCollided(true);
+			}
 		}
+		
 	}
+
+
+
 	
 	
 	

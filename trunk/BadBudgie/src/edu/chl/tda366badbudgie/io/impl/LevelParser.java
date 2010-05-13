@@ -18,7 +18,6 @@ import edu.chl.tda366badbudgie.core.game.LevelManager;
 import edu.chl.tda366badbudgie.core.game.Obstacle;
 import edu.chl.tda366badbudgie.core.game.Player;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
-import edu.chl.tda366badbudgie.core.game.Weapon;
 import edu.chl.tda366badbudgie.util.Animation;
 import edu.chl.tda366badbudgie.util.Circle;
 import edu.chl.tda366badbudgie.util.Polygon;
@@ -66,8 +65,8 @@ public class LevelParser extends AbstractParser{
 		//TODO: Replace with a better solution.
 		Player player = new Player(new Vector(pX, pY));
 		player.setCollisionData(new RoundedRectangle(40, 80, 15));
-		Weapon wep = new Weapon(new Vector(), new Sprite("gun1"));
-		player.setWeapon(wep);
+		//Weapon wep = new Weapon(new Vector(), new Sprite("gun1"));
+		//player.setWeapon(wep);
 		level.addGameObject(player);
 		
 		//Create sprites.

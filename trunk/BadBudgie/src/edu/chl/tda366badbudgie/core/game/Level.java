@@ -16,8 +16,10 @@ import java.util.List;
  */
 public class Level implements Cloneable {
 	
-	private List<AbstractGameObject> gameObjects;
-	private List<TerrainSection> terrainSections;
+	private List<AbstractGameObject> gameObjects = new ArrayList<AbstractGameObject>();;
+	private List<TerrainSection> terrainSections = new ArrayList<TerrainSection>();
+	
+	private List<AbstractGameObject> scheduledForAddition = new ArrayList<AbstractGameObject>();
 	
 	private String backgroundTexId;
 	
@@ -25,9 +27,6 @@ public class Level implements Cloneable {
 	 * Constructs a new Level object.
 	 */
 	public Level() {
-		
-		gameObjects = new ArrayList<AbstractGameObject>();
-		terrainSections = new ArrayList<TerrainSection>();
 		
 		// TODO: Load from level data
 		setBackgroundTexId("background");
@@ -68,12 +67,12 @@ public class Level implements Cloneable {
 	 * Returns a list of all the game objects which are AbstractUnits
 	 * @return list of units
 	 */
-	public List<AbstractUnit> getUnits() {
+	public List<Enemy> getEnemies() {
 		
-		ArrayList<AbstractUnit> units = new ArrayList<AbstractUnit>();
+		ArrayList<Enemy> units = new ArrayList<Enemy>();
 		for (AbstractGameObject ago : gameObjects) {
-			if (ago instanceof AbstractUnit)
-				units.add((AbstractUnit) ago);
+			if (ago instanceof Enemy)
+				units.add((Enemy) ago);
 		}
 		return units;
 	}
@@ -156,6 +155,14 @@ public class Level implements Cloneable {
 			throw new AssertionError("Clone not supported");
 		}
 		
+	}
+
+	public void scheduleForAddition(AbstractGameObject gameObject) {
+		scheduledForAddition.add(gameObject);
+	}
+
+	public List<AbstractGameObject> getScheduledForAddition() {
+		return scheduledForAddition;
 	}
 	
 }

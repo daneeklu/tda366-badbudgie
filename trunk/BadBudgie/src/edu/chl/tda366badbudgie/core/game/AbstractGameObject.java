@@ -19,7 +19,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	/**
 	 * Enum containing possible "passback values" from an AbstractGameObject to the GameRound
 	 */
-	public enum GameRoundMessage{NoEvent, LevelFinished, PlayerDied, RemoveObject};
+	public enum GameRoundMessage{NO_EVENT, LEVEL_FINISHED, PLAYER_DIED, REMOVE_OBJECT};
 	
 	private Vector position;
 	private Vector velocity;
@@ -175,7 +175,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * with in GameRound has occurred.
 	 */
 	public GameRoundMessage update() {
-		return GameRoundMessage.NoEvent;
+		return GameRoundMessage.NO_EVENT;
 	}
 
 	/**

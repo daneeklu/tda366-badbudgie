@@ -15,19 +15,81 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public abstract class AbstractUnit extends AbstractCollidable {
 
+	private boolean isAIControlled;
+	private Weapon weapon;
+	
 	private Vector groundContactVector;
 	private int direction = 0;
-	private boolean isAIControlled;
-	
 	private int health;
+	private int invincibilityTimer;
+	
 	
 	/**
 	 * Constructs a new AbstractUnit instance.
 	 */
 	public AbstractUnit(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
 		super(position, size, stationary, sprite, collisionData, friction, elasticity);
+		setWeapon(new Weapon(getPosition(), new Sprite("gun1"), this));
 		groundContactVector = new Vector();
 	}
+	
+	
+	@Override
+	public GameRoundMessage update() {
+		
+		getWeapon().setPosition(getPosition());
+		getWeapon().update();
+
+		getSprite().animate();
+		
+		return GameRoundMessage.NO_EVENT;
+	}
+	
+	
+	
+	/**
+	 * 
+	 * 
+	 * @param x - the x coordinate for the aim, or mouse position if you will.
+	 * @param y - the y coordinate for the aim, or mouse position if you will.
+	 */
+	
+	public void shoot() {
+		//TODO: Get rid of hard coded screen width and height
+//		Projectile bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2), this);
+//		getParent().addGameObject(bullet);
+		getWeapon().shoot();
+		
+	}
+	
+	/**
+	 * Makes the unit aim at the given x and y position.
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void setAim(double x, double y) {
+		
+		getWeapon().setAim(x, y);
+		
+	}
+	
+
+	/**
+	 * @param invincibilityTimer the invincibilityTimer to set
+	 */
+	public void setInvincibilityTimer(int invincibilityTimer) {
+		this.invincibilityTimer = invincibilityTimer;
+	}
+
+	/**
+	 * @return the invincibilityTimer
+	 */
+	public int getInvincibilityTimer() {
+		return invincibilityTimer;
+	}
+	
+	
 	
 	
 	/**
@@ -102,6 +164,14 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	public boolean isAIControlled() {
 		return isAIControlled;
 	}
+
+	public void setWeapon(Weapon wep){
+		this.weapon = wep;
+		addChild(wep);
+	}
 	
+	public Weapon getWeapon(){
+		return weapon;
+	}
 	
 }
