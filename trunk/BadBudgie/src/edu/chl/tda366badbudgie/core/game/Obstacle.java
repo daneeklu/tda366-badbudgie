@@ -54,4 +54,17 @@ public class Obstacle extends AbstractCollidable {
 	}
 
 
+	@Override
+	public void collisionEffect(AbstractCollidable other, Vector mtv) {
+		
+		// TODO: Explain here why class check is bad, but OK in this case.
+		
+		Class<? extends AbstractCollidable> otherClass = other.getClass();
+
+		if (otherClass.equals(Projectile.class)) {
+			Projectile p = (Projectile) other;
+			applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
+			
+		}
+	}
 }

@@ -28,9 +28,6 @@ public class Projectile extends AbstractItem {
 		setVelocity(direction.normalize().scalarMultiplication(speed));
 		setDamage(damage);
 		setOwner(owner);
-		
-		addPhysicalCollision(TerrainSection.class);
-		addPhysicalCollision(Obstacle.class);
 	}
 	
 	public Projectile(Vector position, Vector direction, AbstractGameObject owner) {
@@ -92,13 +89,7 @@ public class Projectile extends AbstractItem {
 	@Override
 	public void collisionEffect(AbstractCollidable other, Vector mtv) {
 		
-		// TODO: Explain here why class check is bad, but OK in this case.
-		
-		Class<? extends AbstractCollidable> otherClass = other.getClass();
-		
-		if (isLive() && otherClass.equals(TerrainSection.class)) {
-			hasCollided = true;
-		}
+		hasCollided = true;
 		
 	}
 	
