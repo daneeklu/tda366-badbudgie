@@ -67,6 +67,7 @@ public class Player extends AbstractUnit {
 		setFlyingEnergy(100);
 		setMaxFlyingEnergy(150);
 		setAIControlled(false);
+		getWeapon().setNozzleOffset(new Vector(65, 8));
 		
 		addPhysicalCollision(TerrainSection.class);
 		addPhysicalCollision(Enemy.class);

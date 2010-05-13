@@ -66,8 +66,11 @@ public class Enemy extends AbstractUnit {
 		setDirection(direction);
 		getSprite().setAnimation("run");
 		setAIControlled(true);
-		getWeapon().setSprite(new Sprite("gun"));
-		getWeapon().setCooldown(10);
+		
+		getWeapon().setSprite(new Sprite("enemygun"));
+		setWeaponOffset(new Vector(-10, -4));
+		getWeapon().setNozzleOffset(new Vector(57, -8));
+		getWeapon().setCooldown(50);
 		
 		addPhysicalCollision(TerrainSection.class);
 		addPhysicalCollision(Player.class);

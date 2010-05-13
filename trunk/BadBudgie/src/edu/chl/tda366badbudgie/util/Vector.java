@@ -159,7 +159,23 @@ public class Vector {
 	public Vector perpendicularCCW() {
 		return new Vector(-y, x);
 	}
-
+	
+	/**
+	 * Returns a vector which is mirrored on the y-axis.
+	 * @return
+	 */
+	public Vector mirrorY() {
+		return new Vector(-getX(), getY());
+	}
+	
+	/**
+	 * Returns a vector which is mirrored on the x-axis.
+	 * @return
+	 */
+	public Vector mirrorX() {
+		return new Vector(getX(), -getY());
+	}
+	
 	/**
 	 * Returns true if the vector has a length of zero.
 	 * 
@@ -186,7 +202,7 @@ public class Vector {
 			coeff = v.x / x;
 		} else if(y == 0 || v.y == 0) {
 			coeff = 0;
-		} else if(v.x /x == v.y /y){
+		} else if(v.x /x == v.y /y){ // TODO: Fix equality check between doubles
 			coeff = v.x /x;
 		}
 		
@@ -255,7 +271,7 @@ public class Vector {
 	 * @param rot the angle to rotate, in degrees
 	 * @return the rotated vector
 	 */
-	private Vector rotate(double rot) {
+	public Vector rotate(double rot) {
 		rot = rot * Math.PI / 180.0;
 		return new Vector(getX() * Math.cos(rot) + getY() * Math.sin(rot),
 				-getX() * Math.sin(rot) + getY() * Math.cos(rot));

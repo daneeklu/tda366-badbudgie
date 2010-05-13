@@ -97,7 +97,7 @@ public class Projectile extends AbstractItem {
 		Class<? extends AbstractCollidable> otherClass = other.getClass();
 		
 		if (isLive() && otherClass.equals(TerrainSection.class)) {
-			setLive(false);
+			hasCollided = true;
 		}
 		
 	}

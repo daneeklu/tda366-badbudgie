@@ -17,6 +17,7 @@ public abstract class AbstractUnit extends AbstractCollidable {
 
 	private boolean isAIControlled;
 	private Weapon weapon;
+	private Vector weaponOffset;
 	
 	private Vector groundContactVector;
 	private int direction = 0;
@@ -31,13 +32,14 @@ public abstract class AbstractUnit extends AbstractCollidable {
 		super(position, size, stationary, sprite, collisionData, friction, elasticity);
 		setWeapon(new Weapon(getPosition(), new Sprite("gun1"), this));
 		groundContactVector = new Vector();
+		weaponOffset = new Vector();
 	}
 	
 	
 	@Override
 	public GameRoundMessage update() {
 		
-		getWeapon().setPosition(getPosition());
+		getWeapon().setPosition(getPosition().add(getSprite().getMirrored() ? weaponOffset : weaponOffset.mirrorY()));
 		getWeapon().update();
 
 		getSprite().animate();
@@ -172,6 +174,21 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	
 	public Weapon getWeapon(){
 		return weapon;
+	}
+
+
+	protected Vector getWeaponOffset() {
+		return weaponOffset;
+	}
+
+
+	protected void setWeaponOffset(Vector weaponOffset) {
+		this.weaponOffset = weaponOffset;
+	}
+	
+	@Override
+	public void setScale(double scale) {
+		super.setScale(scale);
 	}
 	
 }
