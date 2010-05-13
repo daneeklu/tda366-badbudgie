@@ -50,16 +50,32 @@ public class CollisionHandler {
 
 			// ...check it against all following objects in the list...
 			for (int j = i + 1; j < collidableObjects.size(); j++) {
+				
 				AbstractCollidable o2 = collidableObjects.get(j);
+				
+				// Early exclusion
+				if ( Math.abs(o1.getX() - o2.getX()) > (o1.getWidth() + o2.getWidth())/2 )
+					continue;
 				
 				Vector mtv = getCollisionSAT(o1.getCollisionData(true), o2.getCollisionData(true));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, o2, mtv);
 				}
 			}
-
+			
 			// ...and all terrain segments.
 			for (AbstractCollidable t : terrainSections) {
+				
+				// Early exclusion
+				Polygon tcd = t.getCollisionData(true);
+				Polygon ocd = o1.getCollisionData(true);
+				if ( 		ocd.getBoundingBoxPosition().getX() + ocd.getBoundingBoxSize().getX() < tcd.getBoundingBoxPosition().getX() - 0.01 
+						|| 	ocd.getBoundingBoxPosition().getY() + ocd.getBoundingBoxSize().getY() < tcd.getBoundingBoxPosition().getY() - 0.01
+						|| 	ocd.getBoundingBoxPosition().getX() > tcd.getBoundingBoxPosition().getX() + tcd.getBoundingBoxSize().getX() + 0.01
+						|| 	ocd.getBoundingBoxPosition().getY() > tcd.getBoundingBoxPosition().getY() + tcd.getBoundingBoxSize().getY() + 0.01) {
+					continue;
+				}
+				
 				Vector mtv = getCollisionSAT(o1.getCollisionData(true), t.getCollisionData(true));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, t, mtv);

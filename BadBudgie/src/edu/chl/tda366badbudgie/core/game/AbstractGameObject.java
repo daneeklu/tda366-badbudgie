@@ -271,6 +271,8 @@ public abstract class AbstractGameObject implements Cloneable {
 
 	public void setScale(double scale) {
 		this.scale = scale;
+		for (AbstractGameObject c : children)
+			c.setScale(scale);
 	}
 
 	public double getScale() {

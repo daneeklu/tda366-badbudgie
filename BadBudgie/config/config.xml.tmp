@@ -3,38 +3,36 @@
 	<menu path="config/menu.xml" />
 
 	<textures>
-		<texture id="intro" path="res/introscreen.png"/>
-		<texture id="exit" path="res/exit.png"/>
-		<texture id="smurf" path="res/SmurfSpin.png"/>
-		<texture id="newgame" path="res/newgame.png"/>
-		<texture id="options" path="res/options.png"/>
-		<texture id="budgie" path="res/budgiesheet.png"/>
-		<texture id="enemy" path="res/cat_noarm.png"/>
-		<texture id="enemy2" path="res/cat_ghost.png"/>
-		<texture id="rock" path="res/rock.png"/>
-		<texture id="confirm:exit" path="res/confirm_exit.png"/>
-		<texture id="confirm:newgame" path="res/confirm_newgame.png"/>
-		<texture id="yesno" path="res/yesno.png"/>
-		<texture id="grass1" path="res/grass1_256.png"/>
-		<texture id="grass2" path="res/grass2_256.png"/>
-		<texture id="ice1" path="res/ice1_256.png"/>
 		<texture id="asphalt1" path="res/asphalt1_256.png"/>
 		<texture id="background" path="res/temp_background.png"/>
+		<texture id="budgie" path="res/budgiesheet.png"/>
+		<texture id="bullet1" path="res/bullet1.png"/>
+		<texture id="confirm:exit" path="res/confirm_exit.png"/>
+		<texture id="confirm:newgame" path="res/confirm_newgame.png"/>
+		<texture id="enemy" path="res/cat_noarm.png"/>
+		<texture id="enemy2" path="res/cat_ghost.png"/>
+		<texture id="exit" path="res/exit.png"/>
+		<texture id="grass1" path="res/grass1_256.png"/>
+		<texture id="grass2" path="res/grass2_256.png"/>
+		<texture id="gun" path="res/gun1_small_noarm.png"/>
+		<texture id="gun1" path="res/gun1_small.png"/>
+		<texture id="ice1" path="res/ice1_256.png"/>
+		<texture id="intro" path="res/introscreen.png"/>
+		<texture id="mud1" path="res/mud01.png" />
+		<texture id="newgame" path="res/newgame.png"/>
+		<texture id="options" path="res/options.png"/>
 		<texture id="resume" path="res/resumegame.png" />
 		<texture id="reagan" path="res/reagan.png" />
-		<texture id="gun1" path="res/gun1_small.png"/>
-		<texture id="gun" path="res/gun1_small_noarm.png"/>
 		<texture id="enemygun" path="res/gun_arm_enemy.png"/>
 		<texture id="resume" path="res/resumegame.png"/>
-		<texture id="bullet1" path="res/bullet1.png" />
-		<texture id="mud1" path="res/mud01.png" />
+		<texture id="rock" path="res/rock.png"/>
 		<texture id="rocktex" path="res/rocktex.png" />
-		<texture id="arm" path="res/arm.png" />
+		<texture id="yesno" path="res/yesno.png"/>
 	</textures>
 	
 	<levels>
 		<level nr="1" path="config/uno.xml" />
-		<!--<level nr="2" path="config/level1.xml"/>
+		<!--<level n r="2" path="config/level1.xml"/>
 		<level nr="3" path="config/level2.xml"/>
 		<level nr="4" path="config/level3.xml"/>-->
 	</levels>
