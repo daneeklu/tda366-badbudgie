@@ -188,6 +188,15 @@
 		</terrain>
 		
 		<!--FLOATING PLATFORMS-->
+		
+		<terrain x="500" y="700" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
+			<surface type="rectangle" width="200" height="100" />
+		</terrain>		
+		
+		<terrain x="500" y="770" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
+			<surface type="roundrectangle" width="250" height="40" radius="15"/>
+		</terrain>
+		
 		<terrain x="500" y="1100" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
 			<surface type="rectangle" width="200" height="100" />
 		</terrain>		
