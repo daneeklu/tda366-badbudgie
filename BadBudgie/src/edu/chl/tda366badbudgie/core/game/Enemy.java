@@ -71,7 +71,7 @@ public class Enemy extends AbstractUnit {
 	}
 	
 	/**
-	 * Convinience constructor with less important parameters left out.
+	 * Convenience constructor with less important parameters left out.
 	 * 
 	 * @param position the enemy's position
 	 */

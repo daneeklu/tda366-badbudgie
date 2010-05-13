@@ -342,8 +342,7 @@ public class Player extends AbstractUnit {
 
 	@Override
 	public Player clone() {
-		Player p = (Player) super.clone();
-		return p;
+		return (Player) super.clone();
 	}
 
 

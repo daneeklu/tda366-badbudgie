@@ -28,6 +28,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	private Sprite sprite;
 	private Level parent;
 	private double mass = 1;
+	private double scale = 1;
 	private boolean stationary;
 	private double airResistance = 1.001;
 	
@@ -268,6 +269,14 @@ public abstract class AbstractGameObject implements Cloneable {
 		return stationary;
 	}
 
+	public void setScale(double scale) {
+		this.scale = scale;
+	}
+
+	public double getScale() {
+		return scale;
+	}
+	
 	@Override
 	public AbstractGameObject clone() {
 		try {
@@ -286,7 +295,5 @@ public abstract class AbstractGameObject implements Cloneable {
 	public List<AbstractGameObject> getChildren() {
 		return children;
 	}
-	
-	
 	
 }

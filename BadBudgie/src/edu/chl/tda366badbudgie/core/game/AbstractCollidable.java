@@ -57,8 +57,21 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * 
 	 * @return the collision data.
 	 */
-	public Polygon getCollisionData() {
-		return new Polygon(collisionData.getVertices());
+	public Polygon getCollisionData(boolean transformed) {
+		List<Vector> verts = new ArrayList<Vector>(collisionData.getVertices().size());
+		if(!transformed){
+		verts.addAll(collisionData.getVertices());}
+		else{
+			for(Vector v: collisionData.getVertices()){
+				v = v.scalarMultiplication(getScale()).add(getPosition());
+				verts.add(v);
+			}
+		}
+		return new Polygon(verts);
+	}
+	
+	public Polygon getCollisionData(){
+		return getCollisionData(false);
 	}
 	
 	/**

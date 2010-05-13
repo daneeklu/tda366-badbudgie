@@ -62,9 +62,14 @@ public class GameRenderer {
 	 * @param g the Graphics object to do the rendering. 
 	 */
 	private static void drawGameObject(AbstractGameObject go, IGraphics g) {
-		g.drawSprite(go.getSprite(), new Rectangle(
-				go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2,
-				go.getWidth(), go.getHeight()));
+		
+		double x, y, h, w;
+		w = go.getWidth()*go.getScale();
+		h = go.getHeight()*go.getScale();
+		x = go.getX() - w/2;
+		y = go.getY() - h/2;
+		
+		g.drawSprite(go.getSprite(), new Rectangle(x, y, w, h));
 				
 		// Draw the ago's children if any
 		for (AbstractGameObject child : go.getChildren()) {
