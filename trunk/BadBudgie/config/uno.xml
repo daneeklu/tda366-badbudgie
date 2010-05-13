@@ -4,6 +4,9 @@
 	<!--The starting location of the player. -->
 	<playerposition x="300" y="20"/>
 	
+	<!--World scale, different strokes for different levels-->
+	<worldscale scale="1" />
+	
 	<!--Sprites used in the level -->
 	<sprites>
 		<sprite id="grass1" animated="false" textureid="grass1" />
@@ -44,7 +47,7 @@
 	
 	<!--Defined collision data-->
 	<collisiondata>
-		<col id="cat" type="polygon">
+		<!--<col id="cat" type="polygon">
 			<vector x="-20" y="40" />
 			<vector x="-30" y="20" />
 			<vector x="-30" y="0" />
@@ -52,7 +55,8 @@
 			<vector x="30" y="-40" />
 			<vector x="40" y="0" />
 			<vector x="30" y="40" />
-		</col>
+		</col>-->
+		<col id="cat" type="rectangle" width="45" height="70" radius="20" />
 		
 		<col id="rock" type="polygon">
 			<vector x="-20" y="15" />
@@ -63,80 +67,72 @@
 			<vector x="20" y="15" />
 		</col>
 		
-		<col id="test" type="rectangle" width="100" height="100" />
+		<col id="test" type="rectangle" width="100" height="300" />
 	</collisiondata>
 	
 	<!--Defined game objects MAY BE REVISED-->
 	<definedobjects>
-		<object obid="catsoldier" type="enemy" colid="cat" spriteid="catgreen" friction="0.5" elasticity="0.4" damage="10" direction="-1"/>
-		<object obid="catghost" type="enemy" colid="cat" spriteid="catghost" friction="1" elasticity="0" damage="35" direction="1"/>
-		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" />
-		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" />
+		<object obid="catsoldier" type="enemy" colid="cat" spriteid="catgreen" friction="0.5" elasticity="0.4" damage="10" direction="-1" sizeX="100" sizeY="100"/>
+		<object obid="catghost" type="enemy" colid="cat" spriteid="catghost" friction="1" elasticity="0" damage="35" direction="1" sizeX="100" sizeY="100"/>
+		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" sizeX="60" sizeY="60" />
+		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" sizeX="100" sizeY="300" />
 	</definedobjects>
 	
 	<!--placed game objects-->
 	<placedobjects>
 		
-		<gameobject id="reaganexit">
+		<gameobject id="reaganexit" scale="1">
 			<position x="2900" y="1800" />
-			<size x="100" y="300" />
 		</gameobject>
 		
-		<gameobject id="catsoldier">
+		<gameobject id="catsoldier" scale="1">
 			<position x="100" y="100" />
-			<size x="100" y="100" />
 		</gameobject>
 		
-		<gameobject id="catsoldier">
-			<position x="800" y="100" />
-			<size x="100" y="100" />
+		<gameobject id="catsoldier" scale="3">
+			<position x="900" y="300" />
 		</gameobject>
 		
-		<gameobject id="catsoldier">
-			<position x="1600" y="100" />
-			<size x="100" y="100" />
+		<gameobject id="catsoldier" scale="1">
+			<position x="1750" y="100" />
 		</gameobject>
 		
-		<gameobject id="catsoldier">
+		<gameobject id="catsoldier" scale="0.8">
+			<position x="1650" y="100" />
+		</gameobject>
+		
+		<gameobject id="catsoldier" scale="0.6">
+			<position x="1550" y="100" />
+		</gameobject>
+		
+		<gameobject id="catsoldier" scale="0.4">
+			<position x="1450" y="100" />
+		</gameobject>
+		
+		<gameobject id="catsoldier" scale="1.3">
 			<position x="1400" y="2000" />
-			<size x="100" y="100" />
-		</gameobject>
+		</gameobject>->
 		
-		<gameobject id="catsoldier">
+		<gameobject id="catsoldier" scale="1.2">
 			<position x="900" y="1510" />
-			<size x="100" y="100" />
+		</gameobject>-->
+		
+		<gameobject id="catghost" scale="1">
+			<position x="2600" y="2000"/>
 		</gameobject>
 		
-		<gameobject id="catghost">
-			<position x="2600" y="2000" />
-			<size x="100" y="100" />
+		<gameobject id="catghost" scale="2">
+			<position x="2800" y="2000"/>
 		</gameobject>
 		
-		
-		<gameobject id="catghost">
-			<position x="2800" y="2000" />
-			<size x="100" y="100" />
+		<gameobject id="smoothrock" scale="1">
+			<position x="1300" y="2000" />
 		</gameobject>
 		
-		<gameobject id="smoothrock">
-			<position x="400" y="200" />
-			<size x="60" y="60" />
+		<gameobject id="smoothrock" scale="2">
+			<position x="1500" y="2000" />
 		</gameobject>
 		
-		<gameobject id="smoothrock">
-			<position x="850" y="600" />
-			<size x="60" y="60" />
-		</gameobject>
-		
-		<gameobject id="smoothrock">
-			<position x="950" y="600" />
-			<size x="60" y="60" />
-		</gameobject>
-		
-		<gameobject id="smoothrock">
-			<position x="1100" y="600" />
-			<size x="60" y="60" />
-		</gameobject>
 	</placedobjects>
 
 	<!--Terrain segments used in the level -->
@@ -150,7 +146,6 @@
 			<surface type="roundrectangle" width="330" height="40" radius="15"/>
 		</terrain>
 		
-		
 		<terrain x="900" y="200" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
 			<surface type="rectangle" width="300" height="400" />
 		</terrain>
@@ -162,17 +157,19 @@
 		<terrain x="1200" y="0" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.003">
 			<surface type="circle" radius="50" segments="6"/>
 		</terrain>
+		
 		<terrain x="1370" y="20" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.003">
 			<surface type="circle" radius="60" segments="6"/>
 		</terrain>
+		
 		<terrain x="1300" y="100" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.003">
 			<surface type="circle" radius="70" segments="5"/>
 		</terrain>
+		
 		<terrain x="1280" y="30" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.003">
 			<surface type="circle" radius="100" segments="5"/>
 		</terrain>
-		
-		
+			
 		<!--LEFT PLATEU-->
 		<terrain x="0" y="850" sprite="grass1" friction="0.5" elasticity="0.0" resolution="0.003">
 			<surface type="polygon">
@@ -194,6 +191,7 @@
 		<terrain x="500" y="1100" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
 			<surface type="rectangle" width="200" height="100" />
 		</terrain>		
+		
 		<terrain x="500" y="1170" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
 			<surface type="roundrectangle" width="250" height="40" radius="15"/>
 		</terrain>
@@ -201,14 +199,15 @@
 		<terrain x="900" y="1400" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
 			<surface type="rectangle" width="200" height="100" />
 		</terrain>		
+		
 		<terrain x="900" y="1470" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
 			<surface type="roundrectangle" width="250" height="40" radius="15"/>
 		</terrain>
 		
-		
 		<terrain x="1400" y="1700" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
 			<surface type="rectangle" width="400" height="100" />
 		</terrain>		
+		
 		<terrain x="1400" y="1770" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
 			<surface type="roundrectangle" width="450" height="40" radius="15"/>
 		</terrain>
@@ -216,6 +215,7 @@
 		<terrain x="1800" y="1700" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
 			<surface type="rectangle" width="400" height="100" />
 		</terrain>		
+		
 		<terrain x="1800" y="1770" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
 			<surface type="roundrectangle" width="450" height="40" radius="15"/>
 		</terrain>
@@ -224,9 +224,11 @@
 		<terrain x="1900" y="215" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="rectangle" width="140" height="430"/>
 		</terrain>
+		
 		<terrain x="1830" y="330" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="circle" radius="100" segments="24"/>
 		</terrain>
+		
 		<terrain x="1780" y="165" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="rectangle" width="100" height="330"/>
 		</terrain>
@@ -239,6 +241,7 @@
 				<vector x="0" y="420" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2000" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -247,6 +250,7 @@
 				<vector x="0" y="340" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2030" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -255,6 +259,7 @@
 				<vector x="0" y="280" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2060" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -263,6 +268,7 @@
 				<vector x="0" y="240" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2090" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -271,6 +277,7 @@
 				<vector x="0" y="210" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2120" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -279,6 +286,7 @@
 				<vector x="0" y="190" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2150" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -287,6 +295,7 @@
 				<vector x="0" y="180" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2250" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -304,6 +313,7 @@
 				<vector x="0" y="140" />
 			</surface>
 		</terrain>
+		
 		<terrain x="2600" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
@@ -312,25 +322,6 @@
 				<vector x="0" y="120" />
 			</surface>
 		</terrain>
-		
-		<!--ICE SLIDE
-		<terrain x="2100" y="750" sprite="ice1" friction="-0.02" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="600" y="-500" />
-				<vector x="600" y="-480" />
-				<vector x="0" y="20" />
-			</surface>
-		</terrain>
-		<terrain x="2100" y="730" sprite="asphalt1" friction="1" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="600" y="-500" />
-				<vector x="600" y="-480" />
-				<vector x="0" y="20" />
-			</surface>
-		</terrain>
-		-->
 		
 		<!--BOUNCY BIT-->
 		<terrain x="2950" y="190" sprite="asphalt1" friction="1" elasticity="20.0" resolution="0.009">
@@ -371,7 +362,5 @@
 		<terrain x="3250" y="1000" sprite="grass1" friction="0.5" elasticity="0.0" resolution="0.0015">
 			<surface type="rectangle" width="500" height="3000" />
 		</terrain>
-		
-		
 	</terrainsections>
 </leveldata>

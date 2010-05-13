@@ -1,7 +1,6 @@
 package edu.chl.tda366badbudgie.physics.impl;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
@@ -53,7 +52,7 @@ public class CollisionHandler {
 			for (int j = i + 1; j < collidableObjects.size(); j++) {
 				AbstractCollidable o2 = collidableObjects.get(j);
 				
-				Vector mtv = getCollisionSAT(globColData(o1), globColData(o2));
+				Vector mtv = getCollisionSAT(o1.getCollisionData(true), o2.getCollisionData(true));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, o2, mtv);
 				}
@@ -61,26 +60,13 @@ public class CollisionHandler {
 
 			// ...and all terrain segments.
 			for (AbstractCollidable t : terrainSections) {
-				Vector mtv = getCollisionSAT(globColData(o1), globColData(t));
+				Vector mtv = getCollisionSAT(o1.getCollisionData(true), t.getCollisionData(true));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, t, mtv);
 				}
 			}
 		}
 		
-	}
-
-	/**
-	 * Transforms collision data of an object from local to global coordinates.
-	 * @param ac collidable object
-	 * @return globalized coordinates in a polygon.
-	 */
-	private Polygon globColData(AbstractCollidable ac){
-		List<Vector> offsColData1 = new LinkedList<Vector>(); //Object 1.
-		for (Vector v : ac.getCollisionData().getVertices()) {
-			offsColData1.add(v.add(ac.getPosition()));
-		}		
-		return new Polygon(offsColData1);
 	}
 	
 	/**
@@ -129,10 +115,10 @@ public class CollisionHandler {
 	 */
 	Vector getCollisionSAT(Polygon a, Polygon b) {
 
-		ArrayList<Vector> aVerts = new ArrayList<Vector>(a.getVertices());
-		ArrayList<Vector> bVerts = new ArrayList<Vector>(b.getVertices());
+		List<Vector> aVerts = new ArrayList<Vector>(a.getVertices());
+		List<Vector> bVerts = new ArrayList<Vector>(b.getVertices());
 		
-		ArrayList<Vector> normals = new ArrayList<Vector>();
+		List<Vector> normals = new ArrayList<Vector>();
 
 		Vector aMidPoint = new Vector();
 		Vector bMidPoint = new Vector();

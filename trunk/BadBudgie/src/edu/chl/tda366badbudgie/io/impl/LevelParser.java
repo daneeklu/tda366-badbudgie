@@ -9,6 +9,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
 import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.game.Enemy;
 import edu.chl.tda366badbudgie.core.game.Level;
@@ -38,6 +39,8 @@ public class LevelParser extends AbstractParser{
 	//Maps used by private methods.
 	private Map<String, Sprite> spriteMap = new HashMap<String, Sprite>();
 	private Map<String, Polygon> collisionMap = new HashMap<String, Polygon>();
+	private double worldScale;
+	
 	
 	public LevelParser(Document xmlDocument) {
 		
@@ -52,27 +55,21 @@ public class LevelParser extends AbstractParser{
 		//Create level.
 		Level level = new Level();
 		
+		worldScale = Double.parseDouble(((Element)xmlData.getElementsByTagName("worldscale").item(0)).getAttribute("scale"));
+		
 		//Create and add player //TODO:Remove this section when it's handled by the GameRound class properly.
 		double pX, pY;
 		Element playPosL = (Element)xmlData.getElementsByTagName("playerposition").item(0);
 		pX = Double.parseDouble(playPosL.getAttribute("x"));
 		pY = Double.parseDouble(playPosL.getAttribute("y"));
 		
+		//TODO: Replace with a better solution.
 		Player player = new Player(new Vector(pX, pY));
 		player.setCollisionData(new RoundedRectangle(40, 80, 15));
 		Weapon wep = new Weapon(new Vector(), new Sprite("gun1"));
 		player.setWeapon(wep);
 		level.addGameObject(player);
 		
-		//TODO: Possibly remove this section
-		//Create animations.
-		/*
-		NodeList animList = ((Element)xmlData.getElementsByTagName("animations").item(0)).getElementsByTagName("animation");
-		for(int i = 0; i < animList.getLength(); i++){
-			Element anim = (Element)animList.item(i);
-			animMap.put(anim.getAttribute("id"), createAnimation(anim));
-		}*/
-				
 		//Create sprites.
 		NodeList spriteList = ((Element)xmlData.getElementsByTagName("sprites").item(0)).getElementsByTagName("sprite");
 		for(int i = 0; i < spriteList.getLength(); i++){
@@ -102,6 +99,8 @@ public class LevelParser extends AbstractParser{
 			Element ts = (Element) terrainList.item(i);
 			level.addTerrainSection(createTS(ts));
 		}
+		
+		scaleLevel(level);
 		
 		//Add level to manager.
 		LevelManager.getInstance().addLevel(level);
@@ -194,17 +193,18 @@ public class LevelParser extends AbstractParser{
 			Element defOb = defMap.get(instOb.getAttribute("id"));
 			AbstractGameObject gamOb = instantiateGameObject(defOb);
 			
-			double px, py, sx, sy;
+			double px, py;//, sx, sy;
 			
-			Element size = (Element)instOb.getElementsByTagName("size").item(0);
+			//Element size = (Element)instOb.getElementsByTagName("size").item(0);
 			Element pos = (Element)instOb.getElementsByTagName("position").item(0);
 			
 			px = Double.parseDouble(pos.getAttribute("x"));
 			py = Double.parseDouble(pos.getAttribute("y"));
-			sx = Double.parseDouble(size.getAttribute("x"));
-			sy = Double.parseDouble(size.getAttribute("y"));
-			
-			gamOb.setSize(new Vector(sx, sy));
+			//sx = Double.parseDouble(size.getAttribute("x"));
+			//sy = Double.parseDouble(size.getAttribute("y"));
+			double scale = Double.parseDouble(instOb.getAttribute("scale"));
+			//gamOb.setSize(new Vector(sx, sy));
+			gamOb.setScale(scale);
 			gamOb.setPosition(new Vector(px, py));
 			
 			l.add(gamOb);
@@ -223,6 +223,13 @@ public class LevelParser extends AbstractParser{
 
 		String sID = e.getAttribute("spriteid");
 		String cID = e.getAttribute("colid");
+		double sx=0.5, sy=0.5;
+		try{
+		sx= Double.parseDouble(e.getAttribute("sizeX"));
+		sy= Double.parseDouble(e.getAttribute("sizeY"));
+		} catch(NumberFormatException e3){
+			
+		}
 		double fric = 1;
 		double elas = 0;
 		try{
@@ -255,6 +262,8 @@ public class LevelParser extends AbstractParser{
 				throw new IllegalArgumentException("Undefined object type");
 			}
 		
+			obj.setSize(new Vector(sx, sy));
+			
 		return obj;
 	}
 	
@@ -270,6 +279,32 @@ public class LevelParser extends AbstractParser{
 		}
 		
 		return new Animation(id, indices, duration);
+	}
+	
+	
+	private void scaleLevel(Level l){
+		for(AbstractGameObject ago : l.getGameObjects()){
+			ago.setSize(ago.getSize().scalarMultiplication(worldScale));
+			ago.setPosition(ago.getPosition().scalarMultiplication(worldScale));
+		}
+		
+		for(AbstractCollidable ac : l.getCollidableObjects()){
+			List<Vector> scaledColData = new LinkedList<Vector>();
+			for(Vector v : ac.getCollisionData().getVertices()){
+				scaledColData.add(v.scalarMultiplication(worldScale));
+			}
+			ac.setCollisionData(new Polygon(scaledColData));
+		}
+		
+		for(TerrainSection t : l.getTerrainSections()){
+			t.setSize(t.getSize().scalarMultiplication(worldScale));
+			t.setPosition(t.getPosition().scalarMultiplication(worldScale));
+			List<Vector> scaledColData = new LinkedList<Vector>();
+			for(Vector v : t.getCollisionData().getVertices()){
+				scaledColData.add(v.scalarMultiplication(worldScale));
+			}
+			t.setCollisionData(new Polygon(scaledColData));
+		}
 	}
 	
 	private Sprite createSprite(Element e){
@@ -298,6 +333,7 @@ public class LevelParser extends AbstractParser{
 		}
 		return s;
 	}
+	
 	
 	@Override
 	public boolean validate() {

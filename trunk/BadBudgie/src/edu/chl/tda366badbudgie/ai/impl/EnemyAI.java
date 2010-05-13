@@ -1,6 +1,5 @@
 package edu.chl.tda366badbudgie.ai.impl;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.chl.tda366badbudgie.ai.IAI;
@@ -8,7 +7,6 @@ import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
 import edu.chl.tda366badbudgie.core.game.AbstractUnit;
 import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
-import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.StaticUtilityMethods;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -20,8 +18,8 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class EnemyAI implements IAI {
 	
-	private static double checkOffsetX = 5;
-	private static double checkOffsetY = 5;
+	private static double chkOffsX = 10;
+	private static double chkOffsY = 10;
 	
 	public EnemyAI() {}
 
@@ -33,10 +31,13 @@ public class EnemyAI implements IAI {
 			if (unit.isAIControlled() && unit.getGroundContactVector().getLength() != 0) {
 				// The object is AI controlled and has ground contact
 				
-				Vector leftGroundCheck = new Vector(unit.getX() - unit.getWidth()/2 - checkOffsetX, unit.getY() - unit.getHeight()/2 - checkOffsetY);
-				Vector rightGroundCheck = new Vector(unit.getX() + unit.getWidth()/2 + checkOffsetX, unit.getY() - unit.getHeight()/2 - checkOffsetY);
-				Vector leftCollCheck = new Vector(unit.getX() - unit.getWidth()/2 - checkOffsetX, unit.getY());
-				Vector rightCollCheck = new Vector(unit.getX() + unit.getWidth()/2 + checkOffsetX, unit.getY());
+				Vector bBoxS = unit.getCollisionData(true).getBoundingBoxSize();
+				Vector bBoxP = unit.getCollisionData(true).getBoundingBoxPosition();
+				
+				Vector leftGroundCheck = new Vector(bBoxP.getX() - chkOffsX, bBoxP.getY() - chkOffsY);
+				Vector rightGroundCheck = new Vector(bBoxP.add(bBoxS).getX() + chkOffsX,  bBoxP.getY() - chkOffsY);
+				Vector leftCollCheck = new Vector(bBoxP.getX() - chkOffsX, unit.getY());
+				Vector rightCollCheck = new Vector(bBoxP.add(bBoxS).getX() + chkOffsX, unit.getY());
 				
 				boolean rightHindrance = true;
 				boolean leftHindrance = true;
@@ -49,10 +50,10 @@ public class EnemyAI implements IAI {
 				
 				// Check for absence of ground if front of the enemy
 				for (TerrainSection t : gr.getLevel().getTerrainSections()) {
-					if (StaticUtilityMethods.isPointInPolygon(leftGroundCheck, globColData(t))) {
+					if (StaticUtilityMethods.isPointInPolygon(leftGroundCheck, t.getCollisionData(true))) {
 						leftHindrance = false;
 					}
-					if (StaticUtilityMethods.isPointInPolygon(rightGroundCheck, globColData(t))) {
+					if (StaticUtilityMethods.isPointInPolygon(rightGroundCheck, t.getCollisionData(true))) {
 						rightHindrance = false;
 					}
 				}
@@ -67,22 +68,22 @@ public class EnemyAI implements IAI {
 					for (AbstractCollidable c : gr.getLevel().getCollidableObjects()) {
 						if (!units.contains(c) && AbstractCollidable.isPhysicalCollision(c, unit)) {
 							// Ignore non-physical collisions and the player
-							if (unit.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, globColData(c))) {
+							if (unit.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
 								leftHindrance = true;
 								break;
 							}
-							else if (unit.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, globColData(c))) {
+							else if (unit.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
 								rightHindrance = true;
 								break;
 							}
 						}
 					}
 					for (AbstractCollidable c : gr.getLevel().getTerrainSections()) {
-						if (unit.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, globColData(c))) {
+						if (unit.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
 							leftHindrance = true;
 							break;
 						}
-						else if (unit.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, globColData(c))) {
+						else if (unit.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
 							rightHindrance = true;
 							break;
 						}
@@ -106,12 +107,12 @@ public class EnemyAI implements IAI {
 	 * Transforms collision data of an object from local to global coordinates.
 	 * @param ac collidable object
 	 * @return globalized coordinates in a polygon.
-	 */
+	 *//*
 	private Polygon globColData(AbstractCollidable ac){
 		List<Vector> offsColData1 = new LinkedList<Vector>(); //Object 1.
 		for (Vector v : ac.getCollisionData().getVertices()) {
 			offsColData1.add(v.add(ac.getPosition()));
 		}		
 		return new Polygon(offsColData1);
-	}
+	}*/
 }
