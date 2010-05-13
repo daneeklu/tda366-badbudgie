@@ -39,15 +39,15 @@ public class Player extends AbstractUnit {
 	private static final double MAXIMUM_WALK_SPEED = 10.0;
 	private static final double MAXIMUM_AIR_SPEED = 5.0;
 	
-	private int invincibilityTimer;
+	
 	private boolean isMovingLeft;
 	private boolean isMovingRight;
-	private boolean jump;
+	private boolean isJumping;
+	private boolean isShooting;
 	private int flyingEnergy;
 	private int maxFlyingEnergy;
 	private boolean flying = false;
 	
-	private Weapon weapon;
 
 
 	/**
@@ -71,8 +71,6 @@ public class Player extends AbstractUnit {
 		addPhysicalCollision(TerrainSection.class);
 		addPhysicalCollision(Enemy.class);
 		addPhysicalCollision(Obstacle.class);
-		addCollisionResponse(CollisionStimulus.INJURER, new GetHurtEffect());
-		addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new StandOnGroundEffect());
 	}
 	
 	
@@ -121,7 +119,7 @@ public class Player extends AbstractUnit {
 		
 		if (down) {
 			if (!getGroundContactVector().hasZeroLength()) {
-				jump = true;
+				isJumping = true;
 			}
 			else {
 				flying = true;
@@ -134,56 +132,11 @@ public class Player extends AbstractUnit {
 	}
 	
 	
-	/**
-	 * 
-	 * @param x - the x coordinate for the aim, or mouse position if you will.
-	 * @param y - the y coordinate for the aim, or mouse position if you will.
-	 * @param mouseDown - a boolean that says if the mouse is pressed or not.
-	 */
-	
-	
-	public void shootAt(double x, double y, boolean mouseDown) {
-		if(mouseDown){
-			//TODO: Get rid of hard coded screen width and height
-			Projectile bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2), this);
-			getParent().addGameObject(bullet);
-		}
-		
-	}
-	
-	
-	public void setAim(double x, double y) {
-		
-		// TODO: Translate the screen coordinates to world coordinates correctly
-		Vector v = new Vector(x,y);
-		
-		Vector dist = new Vector(400,300);
-		v = v.subtract(dist);
-		
-		//v = v.subtract(getPosition());
-		
-		double rot = Math.atan2(v.getY(),v.getX());
-		rot = Math.toDegrees(rot) + 180;
-
-		if(rot > 90 && rot < 270) {
-			getSprite().setMirrored(true);
-			rot-=180;
-			weapon.getSprite().setMirrored(true);
-
-		}
-		else {
-			getSprite().setMirrored(false);
-			weapon.getSprite().setMirrored(false);			
-		}
-
-		
-		
-		weapon.getSprite().setRotation(rot);
-	}
 	
 	@Override
 	public void updateForces() {
 		
+		// The booleans are needed to make the controls work nicely.
 		if (isMovingLeft && !isMovingRight) {
 			setDirection(-1);
 		}
@@ -221,9 +174,9 @@ public class Player extends AbstractUnit {
 		}
 		
 		// Player should jump
-		if (jump) {
+		if (isJumping) {
 			applyForce(getGroundContactVector().normalize().project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
-			jump = false;
+			isJumping = false;
 		}
 		
 		
@@ -237,31 +190,37 @@ public class Player extends AbstractUnit {
 		}
 		
 		
-		
 	}
 	
 	@Override
 	public GameRoundMessage update(){
 		
-		GameRoundMessage grMessage = GameRoundMessage.NoEvent;
+		// Run update on superclass and return its value if it has an event.
+		GameRoundMessage superMessage = super.update();
+		if (superMessage != GameRoundMessage.NO_EVENT)
+			return superMessage;
+		
+		GameRoundMessage grMessage = GameRoundMessage.NO_EVENT;
 		
 		if(getFlyingEnergy() < maxFlyingEnergy){
 			setFlyingEnergy(getFlyingEnergy() + 1);
 		}
 		
-		if(this.weapon != null){
-			weapon.setPosition(this.getPosition());
+		if(this.getWeapon() != null){
+			getWeapon().setPosition(this.getPosition());
 		}
+
+		if (isShooting)
+			getWeapon().shoot();
 		
 		if (flyingEnergy <= 0) {
 			flying = false;
 		}
 		
-		if(invincibilityTimer > 0) {
-			invincibilityTimer--;
+		if(getInvincibilityTimer() > 0) {
+			setInvincibilityTimer(getInvincibilityTimer() - 1);
 		}
 		
-		getSprite().animate();
 		if (getDirection() != 0) {
 			getSprite().setAnimation("run");
 		} else {
@@ -269,7 +228,7 @@ public class Player extends AbstractUnit {
 		}
 
 		if(getHealth() <= 0) {
-			grMessage = GameRoundMessage.PlayerDied;
+			grMessage = GameRoundMessage.PLAYER_DIED;
 		}
 		
 		return grMessage;
@@ -277,7 +236,28 @@ public class Player extends AbstractUnit {
 	}
 
 
-
+	public void setAimScreenCoords(double mx, double my) {
+		
+		int screenWidth = 800;
+		int screenHeight = 600;
+		
+		setAim(getX() - screenWidth/2 + mx, getY() - screenHeight/2 + screenHeight - my);
+		
+		double dx = mx - screenWidth/2;
+		double dy = screenHeight/2 - my;
+		
+		double rotation = Math.toDegrees(Math.atan2(dx, dy)) + 90;
+		
+		if (rotation > 90 && rotation < 270)
+			getSprite().setMirrored(true);
+		else
+			getSprite().setMirrored(false);
+		
+	}
+	
+	public void shootToggle(boolean shoot) {
+		isShooting = shoot;
+	}
 	
 	
 	/*
@@ -285,7 +265,6 @@ public class Player extends AbstractUnit {
 	 * GETTERS AND SETTERS
 	 * 
 	 */
-	
 	
 	
 	/**
@@ -317,65 +296,19 @@ public class Player extends AbstractUnit {
 	}
 	
 
-	/**
-	 * @param invincibilityTimer the invincibilityTimer to set
-	 */
-	public void setInvincibilityTimer(int invincibilityTimer) {
-		this.invincibilityTimer = invincibilityTimer;
-	}
-
-	/**
-	 * @return the invincibilityTimer
-	 */
-	public int getInvincibilityTimer() {
-		return invincibilityTimer;
-	}
-	
-	public void setWeapon(Weapon wep){
-		this.weapon = wep;
-		addChild(wep);
-	}
-	
-	public Weapon getActiveWeapon(){
-		return weapon;
-	}
-
 	@Override
 	public Player clone() {
 		return (Player) super.clone();
 	}
 
-
-	/*
-	 * COLLISION EFFECT MEMBERS
-	 */
-	
 	@Override
-	public List<CollisionStimulus> getCollisionStimulus() {
-		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
-		stimuli.add(CollisionStimulus.PLAYER);
-		return stimuli;
-	}
-	
-	private class GetHurtEffect implements CollisionEffect {
-		@Override
-		public void run(AbstractCollidable other, Vector mtv) {
-			
-			if (invincibilityTimer == 0) {
-				setHealth(getHealth() - ((Enemy)other).getDamage()) ;
-				invincibilityTimer = 20;
-				
-				// Bump player away from enemy
-				int dir = (int) Math.signum(getX() - other.getX());
-				applyForce(new Vector(dir * 6, 6));
-			}
-		}
-	}
-	
-	private class StandOnGroundEffect implements CollisionEffect {
-		@Override
-		public void run(AbstractCollidable other, Vector mtv) {
-			
+	public void collisionEffect(AbstractCollidable other, Vector mtv) {
+		
+		// TODO: Explain here why class check is bad, but OK in this case.
+		
+		Class<? extends AbstractCollidable> otherClass = other.getClass();
+		
+		if (otherClass.equals(TerrainSection.class)) {
 			if (mtv.getY() > 0) {
 				// Player has "ground" beneath his feet
 				setGroundContactVector(getGroundContactVector().add(
@@ -383,9 +316,32 @@ public class Player extends AbstractUnit {
 						.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
 				flying = false;
 			}
-			
+		}
+		
+		if (otherClass.equals(Enemy.class)) {
+			if (getInvincibilityTimer() == 0) {
+				setHealth(getHealth() - ((Enemy)other).getMeleeDamage()) ;
+				setInvincibilityTimer(20);
+				
+				// Bump player away from enemy
+				int dir = (int) Math.signum(getX() - other.getX());
+				applyForce(new Vector(dir * 6, 6));
+			}
+		}
+		
+		if (otherClass.equals(Projectile.class)) {
+			Projectile p = (Projectile) other;
+			if (p.getOwner() != this && p.isLive()) {
+				if (getInvincibilityTimer() == 0) {
+					setHealth(getHealth() - p.getDamage());
+					setInvincibilityTimer(20);
+				}
+				
+				applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
+				p.setHasCollided(true);
+			}
 		}
 	}
-	
+
 	
 }

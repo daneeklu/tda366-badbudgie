@@ -1,8 +1,5 @@
 package edu.chl.tda366badbudgie.core.game;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Sprite;
@@ -20,22 +17,20 @@ public class Projectile extends AbstractItem {
 	private int damage = 10;
 	private int lifeTimer = 200;
 	private boolean hasCollided = false;
+	private boolean isLive = true;
 	private AbstractGameObject owner;
 	
 	
 	public Projectile(Vector position, Vector direction, double speed, int damage, Vector size, Sprite sprite, Polygon collisionData, AbstractGameObject owner) {
 		super(position, size, false, sprite, collisionData, 1, 1);
 		
+		setMass(0.1);
 		setVelocity(direction.normalize().scalarMultiplication(speed));
 		setDamage(damage);
 		setOwner(owner);
 		
 		addPhysicalCollision(TerrainSection.class);
-		addPhysicalCollision(Enemy.class);
 		addPhysicalCollision(Obstacle.class);
-		//addCollisionResponse(CollisionStimulus.WALKABLE_GROUND, new DisappearEffect());
-		addCollisionResponse(CollisionStimulus.IMPENETRABLE, new DisappearEffect());
-		addCollisionResponse(CollisionStimulus.INJURER, new DisappearEffect());
 	}
 	
 	public Projectile(Vector position, Vector direction, AbstractGameObject owner) {
@@ -47,9 +42,9 @@ public class Projectile extends AbstractItem {
 	public GameRoundMessage update() {
 		
 		if (--lifeTimer == 0 || hasCollided)
-			return GameRoundMessage.RemoveObject;
+			return GameRoundMessage.REMOVE_OBJECT;
 		
-		return GameRoundMessage.NoEvent;
+		return GameRoundMessage.NO_EVENT;
 	}
 	
 	
@@ -76,24 +71,35 @@ public class Projectile extends AbstractItem {
 	public AbstractGameObject getOwner() {
 		return owner;
 	}
-	
-	
-	/*
-	 * COLLISION EFFECT MEMBERS
-	 */
+
+	public boolean hasCollided() {
+		return hasCollided;
+	}
+
+	public void setHasCollided(boolean hasCollided) {
+		this.hasCollided = hasCollided;
+	}
+
+	public boolean isLive() {
+		return isLive;
+	}
+
+	public void setLive(boolean isLive) {
+		this.isLive = isLive;
+	}
 	
 	
 	@Override
-	public List<CollisionStimulus> getCollisionStimulus() {
-		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
-		stimuli.add(CollisionStimulus.IMPACT);
-		return stimuli;
-	}
-	private class DisappearEffect implements CollisionEffect {
-		@Override
-		public void run(AbstractCollidable other, Vector mtv) {
-			hasCollided = true;
+	public void collisionEffect(AbstractCollidable other, Vector mtv) {
+		
+		// TODO: Explain here why class check is bad, but OK in this case.
+		
+		Class<? extends AbstractCollidable> otherClass = other.getClass();
+		
+		if (isLive() && otherClass.equals(TerrainSection.class)) {
+			setLive(false);
 		}
+		
 	}
 	
 }

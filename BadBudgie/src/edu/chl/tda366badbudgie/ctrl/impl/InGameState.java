@@ -68,7 +68,7 @@ public class InGameState implements IState {
 	}
 
 	@Override
-	public void mouseActionMoved(int x, int y) {
+	public void mouseMoved(int x, int y) {
 		mX = x;
 		mY = y;
 		gameRound.mouseMove(x,y);

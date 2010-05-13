@@ -33,6 +33,6 @@ public interface IState {
 	 * @param x x-coordinate of the mouse pointer.
 	 * @param y y-coordinate of the mouse pointer.
 	 */
-	public void mouseActionMoved(int x, int y);
+	public void mouseMoved(int x, int y);
 	
 }

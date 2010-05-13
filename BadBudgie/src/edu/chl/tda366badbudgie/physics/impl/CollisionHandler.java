@@ -80,8 +80,8 @@ public class CollisionHandler {
 			AbstractCollidable o2, Vector mtv) {
 		
 		// Let the classes exercise any side effects of the collision
-		o1.executeCollisionEffect(o2, mtv);
-		o2.executeCollisionEffect(o1, mtv.scalarMultiplication(-1));
+		o1.collisionEffect(o2, mtv);
+		o2.collisionEffect(o1, mtv.scalarMultiplication(-1));
 		
 		if (AbstractCollidable.isPhysicalCollision(o1, o2)) {
 			// Resolve the collision by translating one or both of the objects

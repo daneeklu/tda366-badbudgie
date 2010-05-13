@@ -1,8 +1,5 @@
 package edu.chl.tda366badbudgie.core.game;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -50,11 +47,6 @@ public class TerrainSection extends AbstractCollidable {
 		return getCollisionData();
 	}
 	
-	@Override
-	public void executeCollisionEffect(AbstractCollidable other, Vector mtv) {
-		// Collisions has no effects on terrain
-	}
-	
 	/**
 	 * @param texRes the texRes to set
 	 */
@@ -73,19 +65,5 @@ public class TerrainSection extends AbstractCollidable {
 	public TerrainSection clone() {
 		return (TerrainSection) super.clone();
 	}
-
-
-	/*
-	 * COLLISION EFFECT MEMBERS
-	 */
-	
-	@Override
-	public List<CollisionStimulus> getCollisionStimulus() {
-		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
-		stimuli.add(CollisionStimulus.WALKABLE_GROUND);
-		stimuli.add(CollisionStimulus.IMPENETRABLE);
-		return stimuli;
-	}
-	
 	
 }

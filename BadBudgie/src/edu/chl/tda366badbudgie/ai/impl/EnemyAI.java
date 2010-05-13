@@ -4,8 +4,9 @@ import java.util.List;
 
 import edu.chl.tda366badbudgie.ai.IAI;
 import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
-import edu.chl.tda366badbudgie.core.game.AbstractUnit;
+import edu.chl.tda366badbudgie.core.game.Enemy;
 import edu.chl.tda366badbudgie.core.game.GameRound;
+import edu.chl.tda366badbudgie.core.game.Player;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
 import edu.chl.tda366badbudgie.util.StaticUtilityMethods;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -26,18 +27,28 @@ public class EnemyAI implements IAI {
 	@Override
 	public void doAI(GameRound gr) {
 		
-		List<AbstractUnit> units = gr.getLevel().getUnits();
-		for (AbstractUnit unit : units) {
-			if (unit.isAIControlled() && unit.getGroundContactVector().getLength() != 0) {
-				// The object is AI controlled and has ground contact
+		List<Enemy> enemies = gr.getLevel().getEnemies();
+		for (Enemy e : enemies) {
+			if (e.getGroundContactVector().getLength() != 0 && e.getAttackTimer() == 0) {
+				// The object is AI controlled, has ground contact and is currently not attacking
 				
-				Vector bBoxS = unit.getCollisionData(true).getBoundingBoxSize();
-				Vector bBoxP = unit.getCollisionData(true).getBoundingBoxPosition();
+				// See if player is nearby
+				Player p = gr.getPlayer();
+				
+				double pdx = p.getX() - e.getX();
+				double pdy = p.getY() - e.getY();
+				
+				if (Math.signum(pdx * e.getDirection()) > 0 && (pdx * pdx + pdy * pdy) < Math.pow(e.getSightDistance(), 2)) {
+					e.setAttackTimer(200);
+				}
+				
+				Vector bBoxS = e.getCollisionData(true).getBoundingBoxSize();
+				Vector bBoxP = e.getCollisionData(true).getBoundingBoxPosition();
 				
 				Vector leftGroundCheck = new Vector(bBoxP.getX() - chkOffsX, bBoxP.getY() - chkOffsY);
 				Vector rightGroundCheck = new Vector(bBoxP.add(bBoxS).getX() + chkOffsX,  bBoxP.getY() - chkOffsY);
-				Vector leftCollCheck = new Vector(bBoxP.getX() - chkOffsX, unit.getY());
-				Vector rightCollCheck = new Vector(bBoxP.add(bBoxS).getX() + chkOffsX, unit.getY());
+				Vector leftCollCheck = new Vector(bBoxP.getX() - chkOffsX, e.getY());
+				Vector rightCollCheck = new Vector(bBoxP.add(bBoxS).getX() + chkOffsX, e.getY());
 				
 				boolean rightHindrance = true;
 				boolean leftHindrance = true;
@@ -66,24 +77,24 @@ public class EnemyAI implements IAI {
 				// Check for obstructing objects in the enemy's path
 				if (!rightHindrance && !leftHindrance) {
 					for (AbstractCollidable c : gr.getLevel().getCollidableObjects()) {
-						if (!units.contains(c) && AbstractCollidable.isPhysicalCollision(c, unit)) {
+						if (c != p && !enemies.contains(c) && AbstractCollidable.isPhysicalCollision(c, e)) {
 							// Ignore non-physical collisions and the player
-							if (unit.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
+							if (e.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
 								leftHindrance = true;
 								break;
 							}
-							else if (unit.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
+							else if (e.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
 								rightHindrance = true;
 								break;
 							}
 						}
 					}
 					for (AbstractCollidable c : gr.getLevel().getTerrainSections()) {
-						if (unit.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
+						if (e.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
 							leftHindrance = true;
 							break;
 						}
-						else if (unit.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
+						else if (e.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
 							rightHindrance = true;
 							break;
 						}
@@ -91,12 +102,16 @@ public class EnemyAI implements IAI {
 				}
 				
 				if (rightHindrance) {
-					unit.setDirection(-1);
+					e.setDirection(-1);
 				}
 				if (leftHindrance) {
-					unit.setDirection(1);
+					e.setDirection(1);
 				}
 				
+			}
+			else if (e.getAttackTimer() > 0) {
+				e.aimAtPlayer();
+				e.shoot();
 			}
 		}
 		

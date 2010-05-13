@@ -1,8 +1,5 @@
 package edu.chl.tda366badbudgie.core.game;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -30,7 +27,6 @@ public class LevelExit extends AbstractCollidable {
 	public LevelExit(Vector position, Vector size, Sprite sprite, Polygon collisionData) {
 		super(position, size, true, sprite, collisionData, 1, 1);
 		
-		addCollisionResponse(CollisionStimulus.PLAYER, new LevelExitEffect());
 	}
 	
 	public LevelExit(Vector position) {
@@ -42,10 +38,10 @@ public class LevelExit extends AbstractCollidable {
 	public GameRoundMessage update() {
 		if (touchedByPlayer){
 			touchedByPlayer = false;
-			return GameRoundMessage.LevelFinished;
+			return GameRoundMessage.LEVEL_FINISHED;
 		}
 		else
-			return GameRoundMessage.NoEvent;
+			return GameRoundMessage.NO_EVENT;
 	}
 	
 
@@ -54,25 +50,16 @@ public class LevelExit extends AbstractCollidable {
 		return (LevelExit) super.clone();
 	}
 	
-	/*
-	 * COLLISION EFFECT MEMBERS
-	 */
-	
-	
 	@Override
-	public List<CollisionStimulus> getCollisionStimulus() {
-		LinkedList<CollisionStimulus> stimuli = new LinkedList<CollisionStimulus>();
-		stimuli.add(CollisionStimulus.LEVEL_EXIT);
-		return stimuli;
-	}
-
-	
-	private class LevelExitEffect implements CollisionEffect {
-		@Override
-		public void run(AbstractCollidable other, Vector mtv) {
+	public void collisionEffect(AbstractCollidable other, Vector mtv) {
+		
+		// TODO: Explain here why class check is bad, but OK in this case.
+		
+		Class<? extends AbstractCollidable> otherClass = other.getClass();
+		
+		if (otherClass.equals(Player.class)) {
 			touchedByPlayer = true;
 		}
 	}
-	
 	
 }
