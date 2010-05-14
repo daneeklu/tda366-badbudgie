@@ -52,6 +52,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * Returns the collision data of the object.
 	 * If no collision data is set an empty list will be returned.
 	 * 
+	 * @param transformed if true, returns global transformed coordinates.
 	 * @return the collision data.
 	 */
 	public Polygon getCollisionData(boolean transformed) {
@@ -67,6 +68,11 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		return new Polygon(verts);
 	}
 	
+	/**
+	 * Returns the collision data of the object.
+	 * 
+	 * @return the collision data.
+	 */
 	public Polygon getCollisionData(){
 		return getCollisionData(false);
 	}
@@ -84,6 +90,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	/**
 	 * Returns the elasticity coefficient.
 	 * 1 = superball, 0 = lump of clay
+	 * 
 	 * @return the elasticity coefficient
 	 */
 	public double getElasticity() {
@@ -118,9 +125,9 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	/**
 	 * Returns true if the two given game objects should collide physically.
 	 * 
-	 * @param class1
-	 * @param class2
-	 * @return
+	 * @param class1 the first collidable object.
+	 * @param class2 the second collidable object.
+	 * @return true if the objects should collide.
 	 */
 	public static boolean isPhysicalCollision(AbstractCollidable class1, AbstractCollidable class2) {
 		/*

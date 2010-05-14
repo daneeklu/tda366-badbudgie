@@ -30,7 +30,7 @@ public class LevelTestPlayer {
 
 		ArrayList<Level> levelList = new ArrayList<Level>();
 		levelList.add(convertToGameLevel(elevel));
-		LevelManager.getInstance().setLevels(levelList);
+		LevelManager.getInstance().addLevel(convertToGameLevel(elevel));
 		
 		
 		//Load assets
