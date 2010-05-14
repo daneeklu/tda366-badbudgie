@@ -17,6 +17,7 @@ public class Weapon extends AbstractItem {
 	
 	private int cooldown;
 	private int damage;
+	private double nozzleSpeed;
 	private String weaponId;
 	private AbstractGameObject owner;
 	private double aimX;
@@ -32,6 +33,7 @@ public class Weapon extends AbstractItem {
 		setCooldown(cooldown);
 		setOwner(owner);
 		setNozzleOffset(new Vector());
+		setNozzleSpeed(15);
 	}
 	
 	public Weapon(Vector position, Sprite sprite, AbstractGameObject owner) {
@@ -71,9 +73,9 @@ public class Weapon extends AbstractItem {
 			owner.getParent().scheduleForAddition(
 					new Projectile(
 							getPosition().add(getSprite().getMirrored() ? 
-									nozzleOffset.rotate(getSprite().getRotation())
-									: nozzleOffset.mirrorY().rotate(getSprite().getRotation())), 
-							new Vector(aimX, aimY), getOwner()));
+									getNozzleOffset().rotate(getSprite().getRotation())
+									: getNozzleOffset().mirrorY().rotate(getSprite().getRotation())), 
+							new Vector(aimX, aimY), getNozzleSpeed(), getOwner()));
 			cooldownTimer = getCooldown();
 		}
 	}
@@ -128,7 +130,15 @@ public class Weapon extends AbstractItem {
 	}
 
 	public Vector getNozzleOffset() {
-		return nozzleOffset;
+		return nozzleOffset.scalarMultiplication(getScale());
+	}
+
+	public void setNozzleSpeed(double nozzleSpeed) {
+		this.nozzleSpeed = nozzleSpeed;
+	}
+
+	public double getNozzleSpeed() {
+		return nozzleSpeed;
 	}
 	
 	

@@ -12,12 +12,10 @@ public class Projectile extends AbstractItem {
 	private static final Sprite PROJECTILE_SPRITE = new Sprite("bullet1");
 	private static final Polygon PROJECTILE_COLLISION_DATA = new Rectangle(-5,-5,10,10);
 	private static final int PROJECTILE_DAMAGE = 10;
-	private static final int PROJECTILE_SPEED = 30;
 	
 	private int damage = 10;
 	private int lifeTimer = 200;
 	private boolean hasCollided = false;
-	private boolean isLive = true;
 	private AbstractGameObject owner;
 	
 	
@@ -30,10 +28,14 @@ public class Projectile extends AbstractItem {
 		setOwner(owner);
 	}
 	
-	public Projectile(Vector position, Vector direction, AbstractGameObject owner) {
-		this(position, direction, PROJECTILE_SPEED, PROJECTILE_DAMAGE, PROJECTILE_SIZE, PROJECTILE_SPRITE, PROJECTILE_COLLISION_DATA, owner);
+	public Projectile(Vector position, Vector direction, double speed, AbstractGameObject owner) {
+		this(position, direction, speed, PROJECTILE_DAMAGE, PROJECTILE_SIZE, PROJECTILE_SPRITE, PROJECTILE_COLLISION_DATA, owner);
 	}
 	
+	@Override
+	public void updateForces() {
+		applyForce(new Vector(0, 0.05));
+	}
 	
 	@Override
 	public GameRoundMessage update() {
@@ -44,9 +46,6 @@ public class Projectile extends AbstractItem {
 		return GameRoundMessage.NO_EVENT;
 	}
 	
-	
-
-
 	
 	public int getDamage() {
 		return damage;
@@ -77,19 +76,31 @@ public class Projectile extends AbstractItem {
 		this.hasCollided = hasCollided;
 	}
 
-	public boolean isLive() {
-		return isLive;
-	}
-
-	public void setLive(boolean isLive) {
-		this.isLive = isLive;
-	}
 	
 	
 	@Override
 	public void collisionEffect(AbstractCollidable other, Vector mtv) {
 		
-		hasCollided = true;
+		/*
+		 * NOTE:
+		 * The effect of the collision depends on the class of other. 
+		 * We know that switching on class should normally be avoided, 
+		 * but we think in this case it's fine. 
+		 * If a new class is added, you don't want it to have any collision 
+		 * effects unless explicitly specified in that class' collisionEffect.
+		 * Note that physical collision response (bouncing etc.) is handled by 
+		 * a map in AbstractCollidable and not this method.
+		 * By using Class objects, it is also type safe.
+		 */
+		
+		Class<? extends AbstractCollidable> otherClass = other.getClass();
+
+		if (		otherClass.equals(TerrainSection.class)
+				||  otherClass.equals(Obstacle.class)
+				|| (otherClass.equals(Player.class) && owner != other)
+				|| (otherClass.equals(Enemy.class) && owner != other)) {
+			hasCollided = true;
+		}
 		
 	}
 	

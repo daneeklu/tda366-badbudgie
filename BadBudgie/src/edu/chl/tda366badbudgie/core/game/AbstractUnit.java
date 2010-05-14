@@ -39,7 +39,7 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	@Override
 	public GameRoundMessage update() {
 		
-		getWeapon().setPosition(getPosition().add(getSprite().getMirrored() ? weaponOffset : weaponOffset.mirrorY()));
+		getWeapon().setPosition(getPosition().add(getSprite().getMirrored() ? getWeaponOffset() : getWeaponOffset().mirrorY()));
 		getWeapon().update();
 
 		getSprite().animate();
@@ -48,20 +48,14 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	}
 	
 	
-	
 	/**
 	 * 
 	 * 
 	 * @param x - the x coordinate for the aim, or mouse position if you will.
 	 * @param y - the y coordinate for the aim, or mouse position if you will.
 	 */
-	
 	public void shoot() {
-		//TODO: Get rid of hard coded screen width and height
-//		Projectile bullet = new Projectile(new Vector(getX(), getY()), new Vector(x - 800/2, - y + 600/2), this);
-//		getParent().addGameObject(bullet);
 		getWeapon().shoot();
-		
 	}
 	
 	/**
@@ -90,9 +84,6 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	public int getInvincibilityTimer() {
 		return invincibilityTimer;
 	}
-	
-	
-	
 	
 	/**
 	 * Sets the ground contact vector for the unit.
@@ -178,7 +169,7 @@ public abstract class AbstractUnit extends AbstractCollidable {
 
 
 	protected Vector getWeaponOffset() {
-		return weaponOffset;
+		return weaponOffset.scalarMultiplication(getScale());
 	}
 
 
