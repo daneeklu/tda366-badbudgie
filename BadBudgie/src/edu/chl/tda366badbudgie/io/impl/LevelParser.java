@@ -96,7 +96,8 @@ public class LevelParser extends AbstractParser{
 		NodeList terrainList = xmlData.getElementsByTagName("terrain");
 		for(int i = 0; i < terrainList.getLength(); i++){
 			Element ts = (Element) terrainList.item(i);
-			level.addTerrainSection(createTS(ts));
+			TerrainSection t = createTS(ts);
+			level.addTerrainSection(t);
 		}
 		
 		scaleLevel(level);
@@ -199,10 +200,9 @@ public class LevelParser extends AbstractParser{
 			
 			px = Double.parseDouble(pos.getAttribute("x"));
 			py = Double.parseDouble(pos.getAttribute("y"));
-			//sx = Double.parseDouble(size.getAttribute("x"));
-			//sy = Double.parseDouble(size.getAttribute("y"));
+
 			double scale = Double.parseDouble(instOb.getAttribute("scale"));
-			//gamOb.setSize(new Vector(sx, sy));
+			
 			gamOb.setScale(scale);
 			gamOb.setPosition(new Vector(px, py));
 			

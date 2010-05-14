@@ -87,7 +87,7 @@ public class Enemy extends AbstractUnit {
 	}
 
 	public void aimAtPlayer() {
-		Player p = getParent().getPlayer();
+		Player p = getLevel().getPlayer();
 		double pdx = p.getX() - getX();
 		setAim(p.getX(), p.getY() + Math.abs(pdx/6));
 		setDirection( (p.getX() - getX() > 0) ? 1 : -1);

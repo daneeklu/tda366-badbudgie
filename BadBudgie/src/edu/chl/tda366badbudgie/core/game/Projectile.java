@@ -40,6 +40,9 @@ public class Projectile extends AbstractItem {
 	@Override
 	public GameRoundMessage update() {
 		
+		
+		getSprite().setRotation(getVelocity().getRotation());
+		
 		if (--lifeTimer == 0 || hasCollided)
 			return GameRoundMessage.REMOVE_OBJECT;
 		
