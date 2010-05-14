@@ -69,9 +69,10 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	}
 	
 	/**
-	 * Returns the collision data of the object.
+	 * Returns this objects collision data in object local coordinates. 
+	 * If no collision data is set an empty list will be returned.
 	 * 
-	 * @return the collision data.
+	 * @return the collision data
 	 */
 	public Polygon getCollisionData(){
 		return getCollisionData(false);
@@ -90,7 +91,6 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	/**
 	 * Returns the elasticity coefficient.
 	 * 1 = superball, 0 = lump of clay
-	 * 
 	 * @return the elasticity coefficient
 	 */
 	public double getElasticity() {
@@ -123,11 +123,12 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		
 	
 	/**
-	 * Returns true if the two given game objects should collide physically.
+	 * Returns true if the two given collidable game objects should 
+	 * have a physical collision response.
 	 * 
-	 * @param class1 the first collidable object.
-	 * @param class2 the second collidable object.
-	 * @return true if the objects should collide.
+	 * @param class1
+	 * @param class2
+	 * @return
 	 */
 	public static boolean isPhysicalCollision(AbstractCollidable class1, AbstractCollidable class2) {
 		/*
@@ -155,17 +156,26 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	/**
 	 * Collision effect method to be overridden by subclasses that have 
-	 * additional effects from a collision.
+	 * side effects from a collision.
+	 * 
+	 * This method is called whether the two object have a physical collision 
+	 * response or not.
 	 *  
 	 * @param other the other object
-	 * @param mtv minimum translation vector, points towards this object from other
+	 * @param mtv minimum translation vector, 
+	 * points towards this object from the other object
 	 */
-	public void collisionEffect(AbstractCollidable other, Vector mtv) {
-		
-	}
+	public void collisionEffect(AbstractCollidable other, Vector mtv) { }
 	
 	/**
-	 * Adds the given class name to the physical collision set for this object.
+	 * Adds this and the given class to the physical collision set.
+	 * 
+	 * A game object class uses this method to specify which other 
+	 * classes should have a physical collision response when colliding.
+	 * Preferably this method should be called from the constructor of the class.
+	 * 
+	 * Note that it's sufficient to call this method from one of the two classes,
+	 * and it still gives a mutual collision response.
 	 * 
 	 * @param other a string 
 	 */
@@ -186,7 +196,12 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		physicalCollisions.add(concat);
 	}
 	
+	/**
+	 * The set of physical collisions.
+	 */
 	private static Set<String> physicalCollisions = new HashSet<String>();
+	
+	
 	
 	/**
 	 * Default collision data

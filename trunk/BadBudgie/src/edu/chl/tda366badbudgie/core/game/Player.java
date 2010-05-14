@@ -68,6 +68,7 @@ public class Player extends AbstractUnit {
 		setMaxFlyingEnergy(150);
 		setAIControlled(false);
 		getWeapon().setNozzleOffset(new Vector(65, 8));
+		getWeapon().setNozzleSpeed(25);
 		
 		addPhysicalCollision(TerrainSection.class);
 		addPhysicalCollision(Enemy.class);
@@ -305,11 +306,22 @@ public class Player extends AbstractUnit {
 	@Override
 	public void collisionEffect(AbstractCollidable other, Vector mtv) {
 		
-		// TODO: Explain here why class check is bad, but OK in this case.
+		/*
+		 * NOTE:
+		 * The effect of the collision depends on the class of other. 
+		 * We know that switching on class should normally be avoided, 
+		 * but we think in this case it's fine. 
+		 * If a new class is added, you don't want it to have any collision 
+		 * effects unless explicitly specified in that class' collisionEffect.
+		 * Note that physical collision response (bouncing etc.) is handled by 
+		 * a map in AbstractCollidable and not this method.
+		 * By using Class objects, it is also type safe.
+		 */
 		
 		Class<? extends AbstractCollidable> otherClass = other.getClass();
 		
-		if (otherClass.equals(TerrainSection.class)) {
+		if (		otherClass.equals(TerrainSection.class)
+				||	otherClass.equals(Obstacle.class) ) {
 			if (mtv.getY() > 0) {
 				// Player has "ground" beneath his feet
 				setGroundContactVector(getGroundContactVector().add(
@@ -332,12 +344,13 @@ public class Player extends AbstractUnit {
 		
 		if (otherClass.equals(Projectile.class)) {
 			Projectile p = (Projectile) other;
-			if (p.getOwner() != this && p.isLive()) {
+			if (p.getOwner() != this) {
 				if (getInvincibilityTimer() == 0) {
 					setHealth(getHealth() - p.getDamage());
 					setInvincibilityTimer(20);
 				}
 				
+				// Total transfer of momentum
 				applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
 			}
 		}

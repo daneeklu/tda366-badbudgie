@@ -57,14 +57,25 @@ public class Obstacle extends AbstractCollidable {
 	@Override
 	public void collisionEffect(AbstractCollidable other, Vector mtv) {
 		
-		// TODO: Explain here why class check is bad, but OK in this case.
+		/*
+		 * NOTE:
+		 * The effect of the collision depends on the class of other. 
+		 * We know that switching on class should normally be avoided, 
+		 * but we think in this case it's fine. 
+		 * If a new class is added, you don't want it to have any collision 
+		 * effects unless explicitly specified in that class' collisionEffect.
+		 * Note that physical collision response (bouncing etc.) is handled by 
+		 * a map in AbstractCollidable and not this method.
+		 * By using Class objects, it is also type safe.
+		 */
 		
 		Class<? extends AbstractCollidable> otherClass = other.getClass();
 
 		if (otherClass.equals(Projectile.class)) {
 			Projectile p = (Projectile) other;
-			applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
 			
+			// Total transfer of momentum
+			applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
 		}
 	}
 }

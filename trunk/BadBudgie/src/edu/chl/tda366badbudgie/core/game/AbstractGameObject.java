@@ -95,7 +95,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @return the mass
 	 */
 	public double getMass() {
-		return mass;
+		return mass*getScale();
 	}
 
 	/**
@@ -163,7 +163,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	}
 
 	/**
-	 * Method to be overridden by objects that have movement logic.
+	 * Method to be overridden by objects that have additional movement logic.
 	 */
 	public void updateForces() {}
 	
