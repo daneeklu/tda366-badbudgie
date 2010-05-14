@@ -26,7 +26,7 @@ public class GameRound {
 	 * Makes a new GameRound
 	 */
 	public GameRound() {
-
+		score = 0;
 		currentLevelNumber = 0;
 		currentLevel = LevelManager.getInstance().getLevel(currentLevelNumber);
 		player = currentLevel.getPlayer();
@@ -157,6 +157,10 @@ public class GameRound {
 	 */
 	public int getScore(){
 		return score;
+	}
+	
+	public void setScore(int score){
+		this.score = score;
 	}
 	
 }

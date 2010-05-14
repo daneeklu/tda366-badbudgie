@@ -44,8 +44,8 @@ public class Player extends AbstractUnit {
 	private boolean isMovingRight;
 	private boolean isJumping;
 	private boolean isShooting;
-	private int flyingEnergy;
-	private int maxFlyingEnergy;
+	private double flyingEnergy;
+	private double maxFlyingEnergy;
 	private boolean flying = false;
 	
 
@@ -65,7 +65,7 @@ public class Player extends AbstractUnit {
 		
 		setHealth(100);
 		setFlyingEnergy(100);
-		setMaxFlyingEnergy(150);
+		setMaxFlyingEnergy(100);
 		setAIControlled(false);
 		getWeapon().setNozzleOffset(new Vector(65, 8));
 		getWeapon().setNozzleSpeed(25);
@@ -188,7 +188,7 @@ public class Player extends AbstractUnit {
 			double yVel = getVelocity().getY();
 			applyForce(new Vector(0, yVel < 0 ? 1.5 : (6 - yVel) / 2));
 			
-			flyingEnergy -= 4;
+			flyingEnergy -= 2;
 		}
 		
 		
@@ -205,7 +205,7 @@ public class Player extends AbstractUnit {
 		GameRoundMessage grMessage = GameRoundMessage.NO_EVENT;
 		
 		if(getFlyingEnergy() < maxFlyingEnergy){
-			setFlyingEnergy(getFlyingEnergy() + 1);
+			setFlyingEnergy(getFlyingEnergy() + 0.5);
 		}
 		
 		if(this.getWeapon() != null){
@@ -272,21 +272,21 @@ public class Player extends AbstractUnit {
 	/**
 	 * @param flyingEnergy the flyingEnergy to set
 	 */
-	public void setFlyingEnergy(int flyingEnergy) {
+	public void setFlyingEnergy(double flyingEnergy) {
 		this.flyingEnergy = flyingEnergy;
 	}
 
 	/**
 	 * @return the flyingEnergy
 	 */
-	public int getFlyingEnergy() {
+	public double getFlyingEnergy() {
 		return flyingEnergy;
 	}
 	
 	/**
 	 * @return the maxFlyingEnergy
 	 */
-	public int getMaxFlyingEnergy() {
+	public double getMaxFlyingEnergy() {
 		return maxFlyingEnergy;
 	}
 	

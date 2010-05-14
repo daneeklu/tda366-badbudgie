@@ -1,5 +1,8 @@
 package edu.chl.tda366badbudgie.gui.render;
 
+import java.awt.Color;
+
+
 import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
@@ -35,7 +38,7 @@ public class GameRenderer {
 			drawGameObject(go, g);
 		}
 		
-		renderHUD();
+		renderHUD(g, gameRound);
 		
 		DebugInfoRenderer.getInstance().drawDebugInfo(gameRound, g);
 		
@@ -62,26 +65,71 @@ public class GameRenderer {
 	 * @param g the Graphics object to do the rendering. 
 	 */
 	private static void drawGameObject(AbstractGameObject go, IGraphics g) {
-		
-		double x, y, h, w;
-		w = go.getWidth()*go.getScale();
-		h = go.getHeight()*go.getScale();
-		x = go.getX() - w/2;
-		y = go.getY() - h/2;
-		
-		g.drawSprite(go.getSprite(), new Rectangle(x, y, w, h));
-				
-		// Draw the ago's children if any
-		for (AbstractGameObject child : go.getChildren()) {
-			drawGameObject(child, g);
-		}
+		g.drawSprite(go.getSprite(), new Rectangle(
+				go.getX() - go.getWidth() / 2,go.getY() - go.getHeight() / 2,
+				go.getWidth(), go.getHeight()));
 	}
 	
 	/**
 	 * Render heads up display showing score and health among 
 	 * other things about the players status.
 	 */
-	private static void renderHUD() {
+	private static void renderHUD(IGraphics g, GameRound gameRound) {
+		
+		int health = gameRound.getPlayer().getHealth();
+		
+		int xPos;
+		xPos = (int)(g.getCanvas().getWidth()*0.12);
+		
+		
+		//This is health converted to a multiple of 2.55 to make the color of the health bar right
+		int healthHigh = (int)(health*2.55);
+		int healthLow = (int)((100-health)*2.55);
+
+		//Depending on how much health the player has, it will change color. 
+		//Also adds 1 (one) to all values to secure that no division with zero will happen. 
+		Color c1 = new Color(healthLow+1, healthHigh+1, 1);
+		
+		
+		//Draw the health bar Background
+		g.drawColoredRect(
+				new Rectangle(400, 55), 
+				Color.BLACK, 
+				gameRound.getPlayer().getX()-400,
+				gameRound.getPlayer().getY()+200);
+		//Draws the energy bar Background
+		g.drawColoredRect(
+				new Rectangle(400, 55),
+				Color.BLACK,
+				gameRound.getPlayer().getX()-400,
+				gameRound.getPlayer().getY()+120);
+
+		
+		//Draw the health bar
+		g.drawColoredRect(
+				new Rectangle(health*4, 55), 
+				c1, 
+				gameRound.getPlayer().getX()-400,
+				gameRound.getPlayer().getY()+200);
+		//Draws the energy bar
+		g.drawColoredRect(
+				new Rectangle(gameRound.getPlayer().getFlyingEnergy()*4, 55),
+				Color.GRAY,
+				gameRound.getPlayer().getX()-400,
+				gameRound.getPlayer().getY()+120);
+		
+		
+		//Draws Health text
+		g.drawText("Health", xPos, 53, 6);
+		g.drawText(health + "/100", xPos, 68, 6);
+		
+		
+		//Draws Energy text
+		g.drawText("Energy", xPos, 133, 6);
+		g.drawText((int)gameRound.getPlayer().getFlyingEnergy() + "/100", xPos, 148, 6);
+		
+		//Draws the score points
+		//g.drawText("Current score " + gameRound.getScore(), 600, 50, 5);
 		
 	}
 
