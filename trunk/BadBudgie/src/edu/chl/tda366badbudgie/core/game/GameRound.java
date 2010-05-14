@@ -10,6 +10,7 @@ import edu.chl.tda366badbudgie.core.game.AbstractGameObject.GameRoundMessage;
  * 
  * A session of the game. 
  * Keeps track of the current level and the players score.
+ * Delegates input-events to game logic.
  * 
  * @author kvarfordt, lumbo
  * 
@@ -39,6 +40,10 @@ public class GameRound {
 		return currentLevel;
 	}
 
+	/**
+	 * Returns the reference to the Player associated with the GameRound.
+	 * @return the Player reference.
+	 */
 	public Player getPlayer() {
 		return player;
 	}
@@ -46,11 +51,9 @@ public class GameRound {
 	/**
 	 * Delegates actions to the right objects.
 	 * 
-	 * @param id
-	 *            a string identifying the action
-	 * @param down
-	 *            a boolean that's true if the key was pressed, and false if it
-	 *            was released.
+	 * @param id a string identifying the action
+	 * @param down a boolean that's true if the 
+	 * key was pressed, and false if it was released.
 	 */
 	public void keyboardAction(String id, boolean down) {
 
@@ -104,28 +107,54 @@ public class GameRound {
 		
 	}
 
+	/**
+	 * Retrives a reference to the current level.
+	 * @return the Level object currently used by the GameRound.
+	 */
 	public Level getCurrentLevel(){
 		return currentLevel;
 	}
 	
-	
+	/**
+	 * Adds an AbstractGameObject to the current level.
+	 * @param agb the AbstractGameObject to be added.
+	 */
 	public void addGameObject(AbstractGameObject agb){
 		getCurrentLevel().addGameObject(agb);
 	}
 
+	/**
+	 * Delegates mouse-press events to game logic.
+	 * @param x the x-coordinate of the mouse position.
+	 * @param y the y-coordinate of the mouse position.
+	 * @param mouseDown denotes whether the mouse is pressed.
+	 */
 	public void mouseAction(double x, double y, boolean mouseDown) {
 		getPlayer().shootToggle(mouseDown);
 	}
 	
+	/**
+	 * Retrieves the players status with regards to being alive.
+	 * @return true if the player is alive.
+	 */
 	public boolean isPlayerAlive() {
 		return (getPlayer().getHealth() > 0);
 	}
 
+	/**
+	 * Delegates mouse-movement events to game logic.
+	 * @param x the x-coordinate of the mouse position.
+	 * @param y the y-coordinate of the mouse position.
+	 */
 	public void mouseMove(double x, double y) {
 		getPlayer().setAimScreenCoords(x, y);
 		
 	}
-
+	
+	/**
+	 * Returns the score.
+	 * @return the score.
+	 */
 	public int getScore(){
 		return score;
 	}

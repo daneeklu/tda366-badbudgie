@@ -15,7 +15,7 @@ public class LevelManager {
 		
 	//Singleton instance
 	private static LevelManager instance;
-	
+	//List of levels held by manager.
 	private List<Level> levels = new LinkedList<Level>();
 	
 	private LevelManager(){
@@ -47,16 +47,7 @@ public class LevelManager {
 	 * @return the Level corresponding to the given index.
 	 */
 	public Level getLevel(int index){
-		return levels.get(index%levels.size()).clone();
-	}
-	
-	/**
-	 * Sets the level list. Used by the level editor to test a level.
-	 * 
-	 * @param levels
-	 */
-	public void setLevels(List<Level> levels) {
-		this.levels = levels;
+		return (Level)(levels.get(index%levels.size()).clone());
 	}
 	
 }
