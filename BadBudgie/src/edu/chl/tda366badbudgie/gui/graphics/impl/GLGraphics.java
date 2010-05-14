@@ -23,6 +23,7 @@ import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Quad;
 import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Sprite;
+import edu.chl.tda366badbudgie.util.StaticUtils;
 import edu.chl.tda366badbudgie.util.Vector;
 /**
  * 
@@ -188,6 +189,10 @@ public class GLGraphics implements GLEventListener, IGraphics{
 				this.height = (fullheight * height * ratio) / (fullwidth / 2.0);
 			}
 		}
+		
+		StaticUtils.setScreenWidth(canvas.getWidth());
+		StaticUtils.setScreenHeight(canvas.getHeight());
+		
 	}
 
 	@Override

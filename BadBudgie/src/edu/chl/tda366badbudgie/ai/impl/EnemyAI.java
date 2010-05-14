@@ -8,7 +8,7 @@ import edu.chl.tda366badbudgie.core.game.Enemy;
 import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.core.game.Player;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
-import edu.chl.tda366badbudgie.util.StaticUtilityMethods;
+import edu.chl.tda366badbudgie.util.StaticUtils;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
@@ -61,10 +61,10 @@ public class EnemyAI implements IAI {
 				
 				// Check for absence of ground if front of the enemy
 				for (TerrainSection t : gr.getLevel().getTerrainSections()) {
-					if (StaticUtilityMethods.isPointInPolygon(leftGroundCheck, t.getCollisionData(true))) {
+					if (StaticUtils.isPointInPolygon(leftGroundCheck, t.getCollisionData(true))) {
 						leftHindrance = false;
 					}
-					if (StaticUtilityMethods.isPointInPolygon(rightGroundCheck, t.getCollisionData(true))) {
+					if (StaticUtils.isPointInPolygon(rightGroundCheck, t.getCollisionData(true))) {
 						rightHindrance = false;
 					}
 				}
@@ -79,22 +79,22 @@ public class EnemyAI implements IAI {
 					for (AbstractCollidable c : gr.getLevel().getCollidableObjects()) {
 						if (c != p && !enemies.contains(c) && AbstractCollidable.isPhysicalCollision(c, e)) {
 							// Ignore non-physical collisions and the player
-							if (e.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
+							if (e.getDirection() == -1 && StaticUtils.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
 								leftHindrance = true;
 								break;
 							}
-							else if (e.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
+							else if (e.getDirection() == 1 && StaticUtils.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
 								rightHindrance = true;
 								break;
 							}
 						}
 					}
 					for (AbstractCollidable c : gr.getLevel().getTerrainSections()) {
-						if (e.getDirection() == -1 && StaticUtilityMethods.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
+						if (e.getDirection() == -1 && StaticUtils.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
 							leftHindrance = true;
 							break;
 						}
-						else if (e.getDirection() == 1 && StaticUtilityMethods.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
+						else if (e.getDirection() == 1 && StaticUtils.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
 							rightHindrance = true;
 							break;
 						}

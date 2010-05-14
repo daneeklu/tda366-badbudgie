@@ -20,10 +20,10 @@ public class Weapon extends AbstractItem {
 	private double nozzleSpeed;
 	private String weaponId;
 	private AbstractGameObject owner;
-	private double aimX;
-	private double aimY;
 	private Vector nozzleOffset;
 	
+	private double aimX;
+	private double aimY;
 	private int cooldownTimer = 0;
 	
 	
@@ -41,7 +41,7 @@ public class Weapon extends AbstractItem {
 	}
 	
 	/**
-	 * Aims the weapon towards the given world coordiantes.
+	 * Aims the weapon towards the given world coordinates.
 	 * 
 	 * @param x
 	 * @param y
