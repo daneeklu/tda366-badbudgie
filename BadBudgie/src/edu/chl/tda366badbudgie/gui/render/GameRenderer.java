@@ -92,9 +92,12 @@ public class GameRenderer {
 		
 		
 		//This is health converted to a multiple of 2.55 to make the color of the health bar right
+		if(health<0){
+			health = 0;
+		}
 		int healthHigh = (int)(health*2.55);
 		int healthLow = (int)((100-health)*2.55);
-
+		
 		//Depending on how much health the player has, it will change color. 
 		//Also adds 1 (one) to all values to secure that no division with zero will happen. 
 		Color c1 = new Color(healthLow+1, healthHigh+1, 1);
