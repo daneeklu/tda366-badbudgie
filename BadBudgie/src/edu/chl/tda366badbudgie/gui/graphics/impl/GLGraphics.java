@@ -347,7 +347,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawText(String text, int x, int y) {
+	public void drawText(String text, double x, double y, int size) {
 		
 		GLUT glut = new GLUT();
 		
@@ -355,7 +355,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glRasterPos2d(-width / 2 + x + ((float) cameraPosition.getX()),
 						 height / 2 - y - 30 + ((float) cameraPosition.getY()));
 		gl.glDisable(GL.GL_TEXTURE_2D);
-		glut.glutBitmapString(7, text);
+		glut.glutBitmapString(size, text);
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glRasterPos2d(0, 0);
 		
@@ -447,7 +447,7 @@ public class GLGraphics implements GLEventListener, IGraphics{
 
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		
-		gl.glEnd();	
+		gl.glEnd();
 		
 	}
 
@@ -518,6 +518,33 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	public void drawTexturedQuad(Vector position, Quad q, String textureId,
 			double textureResolution) {
 		drawTexturedPolygon(position, q, textureId, textureResolution);
+	}
+
+	@Override
+	public void drawColoredRect(Rectangle r, Color color, double xPos, double yPos) {
+
+		gl.glDisable(GL.GL_TEXTURE_2D);
+		gl.glBegin(GL.GL_QUADS);
+		
+		
+		
+		
+		gl.glColor3d(((double) color.getRed()) / 256, ((double) color.getGreen()) / 256, ((double) color.getBlue()) / 256);
+		
+		
+		
+		gl.glVertex2d(xPos-r.getX(), yPos);
+		gl.glVertex2d(xPos, yPos);
+		gl.glVertex2d(xPos, yPos-r.getY());
+		gl.glVertex2d(xPos-r.getX(), yPos-r.getY());
+		
+		
+		gl.glColor3d(1,1,1);
+		
+		gl.glEnd();
+		
+		gl.glEnable(GL.GL_TEXTURE_2D);
+		
 	}
 	
 }

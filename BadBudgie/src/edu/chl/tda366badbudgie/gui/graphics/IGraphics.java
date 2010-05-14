@@ -112,7 +112,7 @@ public interface IGraphics {
 	 * Draw text at the specified pixel position from the upper left corner.
 	 * @param text the text to be drawn
 	 */
-	public void drawText(String text, int x, int y);
+	public void drawText(String text, double x, double y, int size);
 
 	
 	/**
@@ -161,8 +161,14 @@ public interface IGraphics {
 	 */
 	void drawPolygon(Polygon p, Polygon t);
 
-
-
+	/**
+	 * Draws a rectangle which has a given color 
+	 * @param r - Declares the size of the Rectangle
+	 * @param color - Sets the color of the rectangle
+	 * @param xPos - Sets the x coordinate for the rectangle position
+	 * @param yPos - Sets the y coordinate for the rectangle position
+	 */
+	public void drawColoredRect(Rectangle r, Color color, double xPos, double yPos);
 
 
 	
