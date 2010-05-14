@@ -8,8 +8,12 @@ import java.util.ArrayList;
  * @author kvarfordt
  *
  */
-public class StaticUtilityMethods {
+public class StaticUtils {
 
+	private static int sWidth;
+	private static int sHeight;
+	
+	
 	/**
 	 * Checks to see if the point given is inside the specified polygon.
 	 * 
@@ -62,6 +66,26 @@ public class StaticUtilityMethods {
 		}
 		
 		return true;
+	}
+
+
+	public static void setScreenWidth(int screenWidth) {
+		sWidth = screenWidth;
+	}
+
+
+	public static int getScreenWidth() {
+		return sWidth;
+	}
+
+
+	public static void setScreenHeight(int screenHeight) {
+		sHeight = screenHeight;
+	}
+
+
+	public static int getScreenHeight() {
+		return sHeight;
 	}
 	
 	

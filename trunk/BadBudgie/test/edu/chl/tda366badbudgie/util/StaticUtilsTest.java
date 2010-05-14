@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StaticUtilityMethodsTest {
+public class StaticUtilsTest {
 
 	Polygon polygon;
 	Vector p1;
@@ -25,8 +25,8 @@ public class StaticUtilityMethodsTest {
 	@Test
 	public void testIsPointInPolygon() {
 		
-		assertTrue(StaticUtilityMethods.isPointInPolygon(p1, polygon));
-		assertFalse(StaticUtilityMethods.isPointInPolygon(p2, polygon));
+		assertTrue(StaticUtils.isPointInPolygon(p1, polygon));
+		assertFalse(StaticUtils.isPointInPolygon(p2, polygon));
 		
 	}
 
