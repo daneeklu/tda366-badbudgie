@@ -61,6 +61,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		verts.addAll(collisionData.getVertices());}
 		else{
 			for(Vector v: collisionData.getVertices()){
+				//v = v.scalarMultiplication(getScale()).rotate(getRotation()).add(getPosition());
 				v = v.scalarMultiplication(getScale()).add(getPosition());
 				verts.add(v);
 			}

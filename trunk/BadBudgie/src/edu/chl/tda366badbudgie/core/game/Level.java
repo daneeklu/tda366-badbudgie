@@ -91,7 +91,7 @@ public class Level implements Cloneable {
 	 */
 	public void addGameObject(AbstractGameObject go) {
 		gameObjects.add(go);
-		go.setParent(this);
+		go.setLevel(this);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class Level implements Cloneable {
 	public void addGameObject(Collection<AbstractGameObject> go) {
 		gameObjects.addAll(go);
 		for(AbstractGameObject g: go){
-			g.setParent(this);
+			g.setLevel(this);
 		}
 	}
 	

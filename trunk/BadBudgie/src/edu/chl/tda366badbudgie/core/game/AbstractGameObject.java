@@ -32,6 +32,8 @@ public abstract class AbstractGameObject implements Cloneable {
 	private boolean stationary;
 	private double airResistance = 1.001;
 	
+	private double rotation = 0;
+	
 	private List<AbstractGameObject> children = new LinkedList<AbstractGameObject>();
 	
 	/**
@@ -230,7 +232,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * Returns the level
 	 * @return
 	 */
-	public Level getParent() {
+	public Level getLevel() {
 		try {
 			return parent;
 		} 
@@ -240,22 +242,35 @@ public abstract class AbstractGameObject implements Cloneable {
 		}
 	}
 
-
-	public void setParent(Level parent) {
+	/**
+	 * 
+	 * @param parent
+	 */
+	public void setLevel(Level parent) {
 		this.parent = parent;
 	}
 
-
+	/**
+	 * Sets the air resistance of the object.
+	 * @return air resistance variable.
+	 */
 	public void setAirResistance(double airResistance) {
 		this.airResistance = airResistance;
 	}
 
-
+	/**
+	 * Returns the air resistance of the object.
+	 * @return air resistance variable.
+	 */
 	public double getAirResistance() {
 		return airResistance;
 	}
 
-
+	/**
+	 * Control whether object is stationary.
+	 * 
+	 * @param stationary true if stationary.
+	 */
 	public void setStationary(boolean stationary) {
 		this.stationary = stationary;
 	}
@@ -269,12 +284,21 @@ public abstract class AbstractGameObject implements Cloneable {
 		return stationary;
 	}
 
+	/**
+	 * Set the scale of the object.
+	 * 
+	 * @param scale the scale of the object.
+	 */
 	public void setScale(double scale) {
 		this.scale = scale;
 		for (AbstractGameObject c : children)
 			c.setScale(scale);
 	}
-
+	
+	/**
+	 * Returns the objects scale.
+	 * @return the scale of the object.
+	 */
 	public double getScale() {
 		return scale;
 	}
@@ -290,12 +314,36 @@ public abstract class AbstractGameObject implements Cloneable {
 		}
 	}
 
+	/**
+	 * Adds a child AbstractGameObject to this object.
+	 * @param child the child object.
+	 */
 	public void addChild(AbstractGameObject child) {
 		children.add(child);
 	}
-
+	
+	/**
+	 * Returns the children AbstractGameObjects of this object.
+	 * @return list containing children.
+	 */
 	public List<AbstractGameObject> getChildren() {
 		return children;
+	}
+
+	/**
+	 * Sets the rotation of the object.
+	 * @param rotation rotation in degrees.
+	 */
+	public void setRotation(double rotation) {
+		this.rotation = rotation;
+	}
+
+	/**
+	 * Returns the rotation of the object.
+	 * @return rotation in degrees. 
+	 */
+	public double getRotation() {
+		return rotation;
 	}
 	
 }

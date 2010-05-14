@@ -70,7 +70,7 @@ public class Weapon extends AbstractItem {
 	 */
 	public void shoot() {
 		if (cooldownTimer == 0) {
-			owner.getParent().scheduleForAddition(
+			owner.getLevel().scheduleForAddition(
 					new Projectile(
 							getPosition().add(getSprite().getMirrored() ? 
 									getNozzleOffset().rotate(getSprite().getRotation())

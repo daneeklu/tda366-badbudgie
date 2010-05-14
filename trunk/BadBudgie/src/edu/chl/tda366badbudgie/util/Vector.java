@@ -276,4 +276,13 @@ public class Vector {
 		return new Vector(getX() * Math.cos(rot) + getY() * Math.sin(rot),
 				-getX() * Math.sin(rot) + getY() * Math.cos(rot));
 	}
+	
+	/**
+	 * Get the rotation of the vector, in degrees.
+	 * 
+	 * @return the rotation
+	 */
+	public double getRotation(){
+		return  Math.atan2(x, y) * (180/Math.PI) - 90;
+	}
 }
