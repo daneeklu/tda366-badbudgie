@@ -61,7 +61,7 @@ public class Enemy extends AbstractUnit {
 	public Enemy(Vector position, Vector size, Sprite sprite, Polygon collisionData, double friction, double elasticity, int meleeDamage, int direction) {
 		super(position, size, false, sprite, collisionData, friction, elasticity);
 
-		setHealth(100);
+		setHealth(40);
 		setMeleeDamage(meleeDamage);
 		setDirection(direction);
 		getSprite().setAnimation("run");
@@ -211,7 +211,7 @@ public class Enemy extends AbstractUnit {
 			Projectile p = (Projectile) other;
 			if (!p.getOwner().getClass().equals(getClass())) {
 				setHealth(getHealth() - p.getDamage());
-				attackTimer = 200;
+				setAttackTimer(200);
 				
 				// Total transfer of momentum
 				applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
