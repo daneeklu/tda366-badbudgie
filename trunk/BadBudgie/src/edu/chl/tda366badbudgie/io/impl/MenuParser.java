@@ -1,6 +1,10 @@
 package edu.chl.tda366badbudgie.io.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import edu.chl.tda366badbudgie.core.menu.Menu;
@@ -29,54 +33,65 @@ public class MenuParser extends AbstractParser{
 
 		for (int l = 0; l < menuList.getLength(); l++) {
 			
-			// Load all menuitems in the menu
-			NodeList menuItemList = xml.getElementsByTagName("menuitem");
-			int numItems = menuItemList.getLength();
-			
-			MenuItem[] menuItems = new MenuItem[numItems];
-
-			for (int i = 0; i < numItems; i++) {
-				String itemName;
-				String itemTexture;
-				String []boundsStrings;
-				Rectangle itemBounds;
-									
-				
-				//For each menuitem, get its id, textureID, and boundary rectangle
-				itemName = menuItemList.item(i).getAttributes().getNamedItem(
-				"id").getNodeValue();
-				itemTexture =	menuItemList.item(i).getAttributes().getNamedItem(
-				"tex").getNodeValue();
-				
-				boundsStrings =	menuItemList.item(i).getAttributes().getNamedItem(
-				"bounds").getNodeValue().trim().split(",");
-				
-				itemBounds = new Rectangle(Integer.parseInt(boundsStrings[0]),
-						Integer.parseInt(boundsStrings[1]),
-						Integer.parseInt(boundsStrings[2]),
-						Integer.parseInt(boundsStrings[3]));
-				
-				menuItems[i] = new MenuItem(itemName, itemTexture, itemBounds);
-			}
-			
-			
-			// For the menu, get all 
-			String menuId =	menuList.item(l).getAttributes().getNamedItem(
-			"id").getNodeValue();
-			String texId =	menuList.item(l).getAttributes().getNamedItem(
-			"tex").getNodeValue();
-			String[] boundsStrings =	menuList.item(l).getAttributes().getNamedItem(
-			"bounds").getNodeValue().split(",");
-			
-			Rectangle menuBounds = new Rectangle(Integer.parseInt(boundsStrings[0]),
-					Integer.parseInt(boundsStrings[1]),
-					Integer.parseInt(boundsStrings[2]),
-					Integer.parseInt(boundsStrings[3]));
-			
-			// Create the menu using all its submenus
-			Menu menu = new Menu(menuId, texId, menuBounds, menuItems);
+			Menu menu = parseMenu(menuList.item(l));
 			MenuManager.getInstance().addMenu(menu);
+
 		}
+	}
+	
+	private Menu parseMenu(Node menuNode) {
+
+		// For the menu, get all attributes
+		String menuId =	menuNode.getAttributes().getNamedItem(
+		"id").getNodeValue();
+		String texId =	menuNode.getAttributes().getNamedItem(
+		"tex").getNodeValue();
+		String[] boundsStrings = menuNode.getAttributes().getNamedItem(
+		"bounds").getNodeValue().split(",");
+		
+		Rectangle menuBounds = new Rectangle(Integer.parseInt(boundsStrings[0]),
+				Integer.parseInt(boundsStrings[1]),
+				Integer.parseInt(boundsStrings[2]),
+				Integer.parseInt(boundsStrings[3]));
+		
+
+		NodeList menuItemNodes = menuNode.getChildNodes();
+		List<MenuItem> menuItemList = new LinkedList<MenuItem>();
+		
+		// Load all menuitems in the menu
+		for (int i = 0; i < menuItemNodes.getLength(); i++) {
+			if (menuItemNodes.item(i).getNodeType() == Node.ELEMENT_NODE 
+					&& menuItemNodes.item(i).getNodeName().equals("menuitem"))
+
+				menuItemList.add(parseMenuItem(menuItemNodes.item(i)));
+		}
+		
+		
+		Menu menu = new Menu(menuId, texId, menuBounds, menuItemList.toArray(new MenuItem[0]));
+		return menu;
+	}
+
+	private MenuItem parseMenuItem(Node menuItemNode) {
+		String itemName;
+		String itemTexture;
+		String []boundsStrings;
+		Rectangle itemBounds;
+		
+		//For each menuitem, get its id, textureID, and boundary rectangle
+		itemName = menuItemNode.getAttributes().getNamedItem(
+		"id").getNodeValue();
+		itemTexture =	menuItemNode.getAttributes().getNamedItem(
+		"tex").getNodeValue();
+		
+		boundsStrings =	menuItemNode.getAttributes().getNamedItem(
+		"bounds").getNodeValue().trim().split(",");
+		
+		itemBounds = new Rectangle(Integer.parseInt(boundsStrings[0]),
+				Integer.parseInt(boundsStrings[1]),
+				Integer.parseInt(boundsStrings[2]),
+				Integer.parseInt(boundsStrings[3]));
+		
+		return new MenuItem(itemName, itemTexture, itemBounds);
 	}
 
 	@Override
