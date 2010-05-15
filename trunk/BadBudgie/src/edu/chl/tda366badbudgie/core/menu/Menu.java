@@ -18,7 +18,6 @@ public class Menu {
 	private int currentItem;
 	private Rectangle bounds;
 	private String texId;
-	private boolean gameIsActive;
 	
 	
 	private ConfirmDialog dialog;
@@ -178,16 +177,6 @@ public class Menu {
 	}
 
 	public void setGameRunning(boolean gameIsActive){
-		this.gameIsActive = gameIsActive;
-	}
-	
-	
-	/**
-	 * A method for doing all "game logic" of the menu.
-	 * Currently this includes setting menus as 
-	 * enabled/disabled when necessary.
-	 */ 
-	public void logic() {
 
 		for (int i = 0; i < menuItems.length; i++) {
 			
@@ -206,6 +195,18 @@ public class Menu {
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 * A method for doing all "game logic" of the menu.
+	 * Currently this includes setting menus as 
+	 * enabled/disabled when necessary.
+	 */ 
+	public void logic() {
+
+		if (!menuItems[currentItem].getEnabled())
+			setCurrentItem(currentItem+1);
 	}
 
 

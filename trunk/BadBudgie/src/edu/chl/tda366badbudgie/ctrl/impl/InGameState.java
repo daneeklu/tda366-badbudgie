@@ -3,6 +3,8 @@ package edu.chl.tda366badbudgie.ctrl.impl;
 import edu.chl.tda366badbudgie.ai.IAI;
 import edu.chl.tda366badbudgie.ai.impl.EnemyAI;
 import edu.chl.tda366badbudgie.core.game.GameRound;
+import edu.chl.tda366badbudgie.core.game.LevelManager;
+import edu.chl.tda366badbudgie.core.game.GameRound.GameRoundMessage;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.gui.render.DebugInfoRenderer;
@@ -27,6 +29,7 @@ public class InGameState implements IState {
 	
 	public InGameState(GameRound gr) {
 		gameRound = gr;
+		gameRound.setLevel(LevelManager.getInstance().getLevel(0));
 		physics = new Physics();
 		enemyAi = new EnemyAI();
 		
@@ -37,7 +40,20 @@ public class InGameState implements IState {
 		
 		enemyAi.doAI(gameRound);
 		physics.doPhysics(gameRound);		
-		gameRound.updateGameObjects();
+		GameRoundMessage gameAction = gameRound.updateGameObjects();
+		 
+		// If something important happened in the game logic, deal with it:
+		
+		// If a level is finished, switch to the next
+		if (gameAction == GameRoundMessage.LEVEL_FINISHED) {
+			gameRound.setLevel(LevelManager.getInstance().getLevel(
+					gameRound.getLevel().getNumber() + 1));
+			
+		// If the player died, terminate the game state and return to menu
+		} else if (gameAction == GameRoundMessage.PLAYER_DIED) {
+			StateContext.getInstance().setGameState(null);
+			StateContext.getInstance().setMenuState();
+		}
 	}
 	
 	@Override
@@ -51,7 +67,7 @@ public class InGameState implements IState {
 		gameRound.keyboardAction(id, down);
 		
 		if (down && id.equals("escape")) {
-			StateContext.getInstance().setState(StateContext.getInstance().getMenuState());
+			StateContext.getInstance().setMenuState();
 			return;
 		}
 		

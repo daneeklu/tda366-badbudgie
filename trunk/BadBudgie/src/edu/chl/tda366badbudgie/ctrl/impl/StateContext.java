@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
+import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.ctrl.IState;
 import edu.chl.tda366badbudgie.ctrl.IStateContext;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
@@ -67,18 +68,6 @@ public class StateContext implements IStateContext {
 	public void draw(IGraphics g) {
 		currentState.draw(g);
 	}
-
-	@Override
-	public void setState(IState state) {
-		
-		if (state instanceof InGameState)
-			inGameState = state;
-		else if (state instanceof MenuState)
-			menuState = state;
-		
-		currentState = state;
-	}
-
 	
 	@Override
 	public void setFrame(JFrame graphicsFrame) {
@@ -88,6 +77,18 @@ public class StateContext implements IStateContext {
 	@Override
 	public IState getGameState() {
 		return inGameState;
+	}
+	
+	public void setGameState(IState state) {
+		inGameState = state;
+		if (state != null)
+			currentState = state;
+	}
+	
+	public void setMenuState(IState state) {
+		menuState = state;
+		if (state != null)
+			currentState = state;
 	}
 
 	@Override
@@ -114,6 +115,21 @@ public class StateContext implements IStateContext {
     	else {
     		graphicsFrame.setExtendedState(JFrame.NORMAL);
     	}
+	}
+
+	@Override
+	public void setMenuState() {
+		if (menuState == null)
+			menuState = new MenuState();
+		currentState = menuState;
+	}
+
+	@Override
+	public void setGameState() {
+		if (inGameState == null)
+			inGameState = new InGameState(new GameRound());
+		currentState = inGameState;
+		
 	}
 	
 	
