@@ -16,7 +16,6 @@ import edu.chl.tda366badbudgie.core.game.Level;
 import edu.chl.tda366badbudgie.core.game.LevelExit;
 import edu.chl.tda366badbudgie.core.game.LevelManager;
 import edu.chl.tda366badbudgie.core.game.Obstacle;
-import edu.chl.tda366badbudgie.core.game.Player;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
 import edu.chl.tda366badbudgie.util.Animation;
 import edu.chl.tda366badbudgie.util.Circle;
@@ -50,24 +49,18 @@ public class LevelParser extends AbstractParser{
 	public void parseData() {
 
 		Document xmlData = getData();
-
-		//Create level.
-		Level level = new Level();
 		
 		worldScale = Double.parseDouble(((Element)xmlData.getElementsByTagName("worldscale").item(0)).getAttribute("scale"));
 		
-		//Create and add player //TODO:Remove this section when it's handled by the GameRound class properly.
+		//Get player starting coordinates.
 		double pX, pY;
 		Element playPosL = (Element)xmlData.getElementsByTagName("playerposition").item(0);
 		pX = Double.parseDouble(playPosL.getAttribute("x"));
 		pY = Double.parseDouble(playPosL.getAttribute("y"));
+
+		//Create level.
+		Level level = new Level(new Vector(pX, pY));
 		
-		//TODO: Replace with a better solution.
-		Player player = new Player(new Vector(pX, pY));
-		player.setCollisionData(new RoundedRectangle(40, 80, 15));
-		//Weapon wep = new Weapon(new Vector(), new Sprite("gun1"));
-		//player.setWeapon(wep);
-		level.addGameObject(player);
 		
 		//Create sprites.
 		NodeList spriteList = ((Element)xmlData.getElementsByTagName("sprites").item(0)).getElementsByTagName("sprite");

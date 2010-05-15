@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.core.game;
 import java.util.Iterator;
 
 import edu.chl.tda366badbudgie.core.game.AbstractGameObject.GameRoundMessage;
+import edu.chl.tda366badbudgie.util.*;
 
 
 /**
@@ -29,7 +30,9 @@ public class GameRound {
 		score = 0;
 		currentLevelNumber = 0;
 		currentLevel = LevelManager.getInstance().getLevel(currentLevelNumber);
-		player = currentLevel.getPlayer();
+		player = new Player(currentLevel.getStartPosition());
+		player.setCollisionData(new RoundedRectangle(40, 80, 15));
+		currentLevel.setPlayer(player);
 	}
 
 	/**
@@ -88,7 +91,8 @@ public class GameRound {
 			// See if an event requiring action from GameRound has occurred
 			if (gameEvent == GameRoundMessage.LEVEL_FINISHED) {
 				currentLevel = LevelManager.getInstance().getLevel(++currentLevelNumber);
-				player = currentLevel.getPlayer();
+				player.setPosition(currentLevel.getStartPosition());
+				currentLevel.setPlayer(player);
 				break;
 			}
 			else if (gameEvent == GameRoundMessage.PLAYER_DIED) {

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import edu.chl.tda366badbudgie.util.Vector;
+
 
 
 /**
@@ -16,21 +18,21 @@ import java.util.List;
  */
 public class Level implements Cloneable {
 	
-	private List<AbstractGameObject> gameObjects = new ArrayList<AbstractGameObject>();;
+	private List<AbstractGameObject> gameObjects = new ArrayList<AbstractGameObject>();
 	private List<TerrainSection> terrainSections = new ArrayList<TerrainSection>();
-	
 	private List<AbstractGameObject> scheduledForAddition = new ArrayList<AbstractGameObject>();
 	
 	private String backgroundTexId;
+	private Vector startPosition;
+	private Player player;
 	
 	/**
 	 * Constructs a new Level object.
 	 */
-	public Level() {
-		
+	public Level(Vector startPosition) {
 		// TODO: Load from level data
 		setBackgroundTexId("background");
-		
+		this.setStartPosition(startPosition);
 	}
 	
 	/**
@@ -126,12 +128,14 @@ public class Level implements Cloneable {
 	 * @return the player
 	 */
 	public Player getPlayer() {
-		for (AbstractGameObject ago : gameObjects) {
-			if (ago instanceof Player)
-				return (Player) ago;
+		return player;
+	}
+	
+	public void setPlayer(Player p){
+		player = p;
+		if(!gameObjects.contains(p)){
+			addGameObject(p);
 		}
-		throw new IllegalStateException("No player in level.");
-		
 	}
 	
 	
@@ -144,7 +148,7 @@ public class Level implements Cloneable {
 			l.terrainSections = new ArrayList<TerrainSection>();
 			
 			for (AbstractGameObject ago : gameObjects) {
-				l.addGameObject(ago);
+				l.addGameObject(ago.clone());
 			}
 			for(TerrainSection ts : terrainSections) {
 				l.addTerrainSection(ts);
@@ -163,6 +167,14 @@ public class Level implements Cloneable {
 
 	public List<AbstractGameObject> getScheduledForAddition() {
 		return scheduledForAddition;
+	}
+
+	public void setStartPosition(Vector startPosition) {
+		this.startPosition = startPosition;
+	}
+
+	public Vector getStartPosition() {
+		return startPosition;
 	}
 	
 }

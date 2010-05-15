@@ -59,7 +59,7 @@ public class LevelTestPlayer {
 	 */
 	private Level convertToGameLevel(ELevel elevel) {
 
-		Level result = new Level();
+		Level result = new Level(new Vector());
 		
 		// Convert terrain sections
 		for (ETerrainSection et : elevel.getTerrainSections()) {
