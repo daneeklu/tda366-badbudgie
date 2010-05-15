@@ -30,6 +30,10 @@
 		<texture id="mud1" path="res/mud01.png" />
 		<texture id="rocktex" path="res/rocktex.png" />
 		<texture id="arm" path="res/arm.png" />
+		<texture id="fullscreen" path="res/fullscreen.png" />
+		<texture id="howtoplay" path="res/howtoplay.png" />
+		<texture id="instructions" path="res/budgiesheet.png" />
+		<texture id="back" path="res/back.png" />
 	</textures>
 	
 	<levels>
