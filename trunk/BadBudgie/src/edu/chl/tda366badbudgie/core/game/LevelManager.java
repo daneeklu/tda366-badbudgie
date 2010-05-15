@@ -1,6 +1,6 @@
 package edu.chl.tda366badbudgie.core.game;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ public class LevelManager {
 	//Singleton instance
 	private static LevelManager instance;
 	//List of levels held by manager.
-	private List<Level> levels = new LinkedList<Level>();
+	private List<Level> levels = new ArrayList<Level>();
 	
 	private LevelManager(){
 	}
@@ -48,6 +48,14 @@ public class LevelManager {
 	 */
 	public Level getLevel(int index){
 		return (Level)(levels.get(index%levels.size()).clone());
+	}
+	
+	/**
+	 * Returns the number of levels held by the LevelManager
+	 * @return
+	 */
+	public int numberOfLevels(){
+		return levels.size();
 	}
 	
 }
