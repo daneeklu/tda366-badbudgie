@@ -22,8 +22,8 @@ import edu.chl.tda366badbudgie.io.impl.ImageDataHandler;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Quad;
 import edu.chl.tda366badbudgie.util.Rectangle;
+import edu.chl.tda366badbudgie.util.Screen;
 import edu.chl.tda366badbudgie.util.Sprite;
-import edu.chl.tda366badbudgie.util.StaticUtils;
 import edu.chl.tda366badbudgie.util.Vector;
 /**
  * 
@@ -190,8 +190,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			}
 		}
 		
-		StaticUtils.setScreenWidth(canvas.getWidth());
-		StaticUtils.setScreenHeight(canvas.getHeight());
+		Screen.setScreenWidth(canvas.getWidth());
+		Screen.setScreenHeight(canvas.getHeight());
 		
 	}
 

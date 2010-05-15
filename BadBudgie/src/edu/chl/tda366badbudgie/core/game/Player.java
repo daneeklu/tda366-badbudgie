@@ -6,7 +6,7 @@ import java.util.List;
 import edu.chl.tda366badbudgie.util.Animation;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Sprite;
-import edu.chl.tda366badbudgie.util.StaticUtils;
+import edu.chl.tda366badbudgie.util.Screen;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
@@ -241,8 +241,8 @@ public class Player extends AbstractUnit {
 
 	public void setAimScreenCoords(double mx, double my) {
 		
-		int screenWidth = StaticUtils.getScreenWidth();
-		int screenHeight = StaticUtils.getScreenHeight();
+		int screenWidth = Screen.getScreenWidth();
+		int screenHeight = Screen.getScreenHeight();
 		
 		setAim(getX() - screenWidth/2 + mx, getY() - screenHeight/2 + screenHeight - my);
 		
