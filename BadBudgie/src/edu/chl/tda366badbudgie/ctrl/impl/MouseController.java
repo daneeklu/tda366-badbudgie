@@ -31,13 +31,13 @@ public class MouseController implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mousePressed(MouseEvent evt) {
-		stateContext.getState().mouseActionClick(true);
+		stateContext.getState().mouseActionClick(evt.getButton(), true);
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent evt) {
-		stateContext.getState().mouseActionClick(false);
+		stateContext.getState().mouseActionClick(evt.getButton(), false);
 	}
 
 	@Override

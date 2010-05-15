@@ -26,7 +26,7 @@ public interface IState {
 	 * Handle a mouse click/release.
 	 * @param pressed true if the mouse button was pressed.
 	 */
-	public void mouseActionClick(boolean pressed);
+	public void mouseActionClick(int button, boolean pressed);
 	
 	/**
 	 * Handle mouse movements.

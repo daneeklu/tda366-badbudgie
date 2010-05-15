@@ -79,8 +79,8 @@ public class InGameState implements IState {
 
 
 	@Override
-	public void mouseActionClick(boolean pressed) {
-		gameRound.mouseAction(mX, mY, pressed);
+	public void mouseActionClick(int button, boolean pressed) {
+		gameRound.mouseAction(button, mX, mY, pressed);
 	}
 
 	@Override
