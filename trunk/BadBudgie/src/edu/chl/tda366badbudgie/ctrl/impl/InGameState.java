@@ -29,7 +29,7 @@ public class InGameState implements IState {
 	
 	public InGameState(GameRound gr) {
 		gameRound = gr;
-		gameRound.setLevel(LevelManager.getInstance().getLevel(0));
+		gameRound.setLevel(LevelManager.getInstance().getLevel(1));
 		physics = new Physics();
 		enemyAi = new EnemyAI();
 		

@@ -57,12 +57,9 @@ public class LevelParser extends AbstractParser{
 		Element playPosL = (Element)xmlData.getElementsByTagName("playerposition").item(0);
 		pX = Double.parseDouble(playPosL.getAttribute("x"));
 		pY = Double.parseDouble(playPosL.getAttribute("y"));
-		
-		int levelNr;
-		levelNr = Integer.parseInt(playPosL.getAttribute("nr"));
 
 		//Create level.
-		Level level = new Level(levelNr,new Vector(pX, pY));
+		Level level = new Level(new Vector(pX, pY));
 		
 		
 		//Create sprites.
