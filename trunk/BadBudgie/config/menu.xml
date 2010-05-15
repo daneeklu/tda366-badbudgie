@@ -8,7 +8,7 @@
 		<menuitem id="resume" tex="resume" bounds="280,360,240,60" />
 	</menu>
 	<menu id="helpmenu" tex="instructions" bounds="0,0,800,600">
-		<menuitem id="mainmenu" tex="back" bounds="280,240,240,60" />
+		<menuitem id="mainmenu" tex="back" bounds="280,20,240,60" />
 	</menu>
 	<menu id="optionsmenu" tex="intro" bounds="0,0,800,600">
 		<menuitem id="fullscreen" tex="fullscreen" bounds="280,240,240,60" />
