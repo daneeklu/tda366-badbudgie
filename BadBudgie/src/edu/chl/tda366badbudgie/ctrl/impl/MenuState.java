@@ -61,9 +61,7 @@ public class MenuState implements IState {
 			} else if (selected.equals("resume")) {
 				if (StateContext.getInstance().getGameState() != null) 
 					StateContext.getInstance().setState(StateContext.getInstance().getGameState());
-			} else if (selected.equals("options")) {
-				//TODO: Add options dialog, selecting options temporarily switches to fullscreen
-				StateContext.getInstance().toggleFullscreen();
+
 			} else if (selected.equals("exit")) {
 				menu.showConfirmDialog();
 
@@ -73,6 +71,13 @@ public class MenuState implements IState {
 			} else if (selected.equals("confirm:newgame")) {
 				StateContext.getInstance().setState(
 					new InGameState(new GameRound()));
+			} else if (selected.equals("mainmenu")) {
+				menu = MenuManager.getInstance().getMenu("mainmenu");
+			} else if (selected.equals("optionsmenu")) {
+				menu = MenuManager.getInstance().getMenu("optionsmenu");
+				//StateContext.getInstance().toggleFullscreen();
+			} else if (selected.equals("helpmenu")) {
+				menu = MenuManager.getInstance().getMenu("helpmenu");
 			}
 
 			return;

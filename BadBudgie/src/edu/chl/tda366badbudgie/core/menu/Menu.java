@@ -106,12 +106,12 @@ public class Menu {
 	private void setCurrentItem(int item) {
 		
 
-		if (item == -1) {
-			setCurrentItem(menuItems.length - 1);
+		if (item < 0) {
+			setCurrentItem(item + menuItems.length);
 			return;
 		}
-		if (item == menuItems.length) {
-			setCurrentItem(0);
+		if (item > menuItems.length) {
+			setCurrentItem(item - menuItems.length);
 			return;
 		}
 		
@@ -190,20 +190,23 @@ public class Menu {
 	 * enabled/disabled when necessary.
 	 */ 
 	public void logic() {
-		
-		if (gameIsActive)
-		{
-			if (!menuItems[3].getEnabled()) {
-				
-				// After a new game has been started, highlight "resume game"
-				// after returning to the menu
-				menuItems[3].setEnabled(true);
-				setCurrentItem(3);
+
+		for (int i = 0; i < menuItems.length; i++) {
+			
+			if (menuItems[i].getAction().equals("resume")) {
+				if (gameIsActive) {
+					if (!menuItems[i].getEnabled()) {
+						
+						// After a new game has been started, highlight "resume game"
+						// after returning to the menu
+						menuItems[i].setEnabled(true);
+						setCurrentItem(i);
+					}
+				} else {
+					// If there's no active game state, "resume game" should be disabled
+					menuItems[i].setEnabled(false);
+				}
 			}
-		}
-		else {
-			// If there's no game state, "resume game" should be disabled
-			menuItems[3].setEnabled(false);
 		}
 	}
 
