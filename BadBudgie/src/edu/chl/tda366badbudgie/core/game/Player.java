@@ -205,8 +205,8 @@ public class Player extends AbstractUnit {
 		
 		GameRoundMessage grMessage = GameRoundMessage.NO_EVENT;
 		
-		if(getFlyingEnergy() < maxFlyingEnergy){
-			setFlyingEnergy(getFlyingEnergy() + 0.5);
+		if(!getGroundContactVector().hasZeroLength() && getFlyingEnergy() < maxFlyingEnergy){
+			setFlyingEnergy(getFlyingEnergy() + 4);
 		}
 		
 		if(this.getWeapon() != null){
