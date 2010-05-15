@@ -26,11 +26,12 @@ public class Level implements Cloneable {
 	private Vector startPosition;
 	private Player player;
 	
+	private int levelNumber;
 	/**
 	 * Constructs a new Level object.
 	 */
-	public Level(Vector startPosition) {
-		// TODO: Load from level data
+	public Level(int levelNumber, Vector startPosition) {
+		this.levelNumber = levelNumber;
 		setBackgroundTexId("background");
 		this.setStartPosition(startPosition);
 	}
@@ -175,6 +176,10 @@ public class Level implements Cloneable {
 
 	public Vector getStartPosition() {
 		return startPosition;
+	}
+
+	public int getNumber() {
+		return levelNumber;
 	}
 	
 }

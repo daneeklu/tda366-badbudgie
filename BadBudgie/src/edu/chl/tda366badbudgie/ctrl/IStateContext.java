@@ -23,13 +23,6 @@ public interface IStateContext {
 	 * @param g
 	 */
 	public void draw(IGraphics g);
-
-	/**
-	 * Sets the current state.
-	 * 
-	 * @param state the state to set
-	 */
-	public void setState(IState state);
 	
 	/**
 	 * Returns the game state object.
@@ -44,6 +37,10 @@ public interface IStateContext {
 	 * @return the menu state
 	 */
 	public IState getMenuState();
+	
+	
+	public void setGameState(IState state);
+	public void setMenuState(IState state);
 	
 	/**
 	 * Tells the GraphicsFrame to shut down the program.
@@ -67,5 +64,9 @@ public interface IStateContext {
 	 * @param frame the frame to set
 	 */
 	public void setFrame(JFrame frame);
+
+	public void setMenuState();
+
+	public void setGameState();
 		
 }

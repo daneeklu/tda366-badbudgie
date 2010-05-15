@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.core.game;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.chl.tda366badbudgie.core.game.GameRound.GameRoundMessage;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -15,11 +16,6 @@ import edu.chl.tda366badbudgie.util.Vector;
  * 
  */
 public abstract class AbstractGameObject implements Cloneable {
-
-	/**
-	 * Enum containing possible "passback values" from an AbstractGameObject to the GameRound
-	 */
-	public enum GameRoundMessage{NO_EVENT, LEVEL_FINISHED, PLAYER_DIED, REMOVE_OBJECT};
 	
 	private Vector position;
 	private Vector velocity;

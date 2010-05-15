@@ -1,5 +1,6 @@
 package edu.chl.tda366badbudgie.core.game;
 
+import edu.chl.tda366badbudgie.core.game.GameRound.GameRoundMessage;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Sprite;

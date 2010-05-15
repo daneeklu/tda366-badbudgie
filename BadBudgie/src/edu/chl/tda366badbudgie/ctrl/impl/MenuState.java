@@ -17,7 +17,6 @@ public class MenuState implements IState {
 
 	private Menu menu;
 	
-	boolean startGame = false;
 	
 	public MenuState () {
 		menu = MenuManager.getInstance().getMenu("mainmenu");
@@ -25,12 +24,14 @@ public class MenuState implements IState {
 	
 	@Override
 	public void logic() {
-		if (startGame) {
-			StateContext.getInstance().setState(
-					StateContext.getInstance().getGameState());
-		} else {
+		//if (startGame) {
+	//		StateContext.getInstance().setGameState();
+		//} else {
+		
+			menu.setGameRunning(StateContext.getInstance().getGameState() != null);
+		
 			menu.logic();
-		}
+	//	}
 	}
 	
 	@Override
@@ -52,15 +53,13 @@ public class MenuState implements IState {
 			if (selected.equals("newgame")) {
 				
 				if (StateContext.getInstance().getGameState() == null) {
-					StateContext.getInstance().setState(
-							new InGameState(new GameRound()));
+					StateContext.getInstance().setGameState();
 					menu.setGameRunning(true);
 				} else {
 					menu.showConfirmDialog();
 				}
 			} else if (selected.equals("resume")) {
-				if (StateContext.getInstance().getGameState() != null) 
-					StateContext.getInstance().setState(StateContext.getInstance().getGameState());
+				StateContext.getInstance().setGameState();
 
 			} else if (selected.equals("exit")) {
 				menu.showConfirmDialog();
@@ -69,7 +68,7 @@ public class MenuState implements IState {
 				StateContext.getInstance().shutDown();
 				
 			} else if (selected.equals("confirm:newgame")) {
-				StateContext.getInstance().setState(
+				StateContext.getInstance().setGameState(
 					new InGameState(new GameRound()));
 			} else if (selected.equals("mainmenu")) {
 				menu = MenuManager.getInstance().getMenu("mainmenu");

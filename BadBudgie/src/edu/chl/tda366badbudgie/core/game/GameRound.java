@@ -1,8 +1,6 @@
 package edu.chl.tda366badbudgie.core.game;
 
 import java.util.Iterator;
-
-import edu.chl.tda366badbudgie.core.game.AbstractGameObject.GameRoundMessage;
 import edu.chl.tda366badbudgie.util.*;
 
 
@@ -17,9 +15,13 @@ import edu.chl.tda366badbudgie.util.*;
  * 
  */
 public class GameRound {
+	
+	/**
+	 * Enum containing possible "passback values" from an AbstractGameObject to the GameRound
+	 */
+	public enum GameRoundMessage{NO_EVENT, LEVEL_FINISHED, PLAYER_DIED, REMOVE_OBJECT};
 
 	private Level currentLevel;
-	private int currentLevelNumber;
 	private Player player;
 	private int score;
 
@@ -28,11 +30,9 @@ public class GameRound {
 	 */
 	public GameRound() {
 		score = 0;
-		currentLevelNumber = 0;
-		currentLevel = LevelManager.getInstance().getLevel(currentLevelNumber);
-		player = new Player(currentLevel.getStartPosition());
+		currentLevel = null;
+		player = new Player(new Vector(0,0));
 		player.setCollisionData(new RoundedRectangle(40, 80, 15));
-		currentLevel.setPlayer(player);
 	}
 
 	/**
@@ -41,6 +41,16 @@ public class GameRound {
 	 */
 	public Level getLevel() {
 		return currentLevel;
+	}
+	
+	/**
+	 * Set the current level
+	 * @param level the level to set as active
+	 */
+	public void setLevel(Level level) {
+		this.currentLevel = level;
+		currentLevel.setPlayer(player);
+		player.setPosition(level.getStartPosition());
 	}
 
 	/**
@@ -76,7 +86,7 @@ public class GameRound {
 	 * This method calls the updateState on all objects inheriting
 	 * AbstractGameObject.
 	 */
-	public void updateGameObjects() {
+	public GameRoundMessage updateGameObjects() {
 		
 		// The objects pass back events as strings
 		GameRoundMessage gameEvent;
@@ -88,19 +98,16 @@ public class GameRound {
 			// Update each object and receive the passed back GameRoundMessage
 			gameEvent = ago.update();
 			
-			// See if an event requiring action from GameRound has occurred
-			if (gameEvent == GameRoundMessage.LEVEL_FINISHED) {
-				currentLevel = LevelManager.getInstance().getLevel(++currentLevelNumber);
-				player.setPosition(currentLevel.getStartPosition());
-				currentLevel.setPlayer(player);
-				break;
-			}
-			else if (gameEvent == GameRoundMessage.PLAYER_DIED) {
-				// TODO: Player dies
-			}
-			else if (gameEvent == GameRoundMessage.REMOVE_OBJECT) {
+			
+			if (gameEvent == GameRoundMessage.REMOVE_OBJECT) {
 				i.remove();
 			}
+			// Forward some of the messages through return value to the InGameState object
+			if (gameEvent == GameRoundMessage.LEVEL_FINISHED
+				|| gameEvent == GameRoundMessage.PLAYER_DIED) {
+				return gameEvent;
+			}
+
 		}
 		
 		// If any objects were scheduled for addition to the level, add them
@@ -109,22 +116,16 @@ public class GameRound {
 		}
 		currentLevel.getScheduledForAddition().clear();
 		
+		return GameRoundMessage.NO_EVENT;
+		
 	}
 
-	/**
-	 * Retrives a reference to the current level.
-	 * @return the Level object currently used by the GameRound.
-	 */
-	public Level getCurrentLevel(){
-		return currentLevel;
-	}
-	
 	/**
 	 * Adds an AbstractGameObject to the current level.
 	 * @param agb the AbstractGameObject to be added.
 	 */
 	public void addGameObject(AbstractGameObject agb){
-		getCurrentLevel().addGameObject(agb);
+		getLevel().addGameObject(agb);
 	}
 
 	/**
@@ -137,14 +138,6 @@ public class GameRound {
 		getPlayer().shootToggle(mouseDown);
 	}
 	
-	/**
-	 * Retrieves the players status with regards to being alive.
-	 * @return true if the player is alive.
-	 */
-	public boolean isPlayerAlive() {
-		return (getPlayer().getHealth() > 0);
-	}
-
 	/**
 	 * Delegates mouse-movement events to game logic.
 	 * @param x the x-coordinate of the mouse position.

@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.core.game;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * LevelManager
  * Singleton class that handles references 
@@ -19,6 +20,7 @@ public class LevelManager {
 	private List<Level> levels = new ArrayList<Level>();
 	
 	private LevelManager(){
+		
 	}
 	
 	/**
@@ -40,16 +42,14 @@ public class LevelManager {
 		levels.add(level);
 	}
 	
-	
 	/**
-	 * Returns the Level of the index.
-	 * @param index
-	 * @return the Level corresponding to the given index.
+	 * Get a level from the manager.
+	 * @return the number of the level to get, starting from 1.
 	 */
-	public Level getLevel(int index){
-		return (Level)(levels.get(index%levels.size()).clone());
+	public Level getLevel(int levelNumber) {
+		return (Level)(levels.get((levelNumber-1)%levels.size()).clone());
 	}
-	
+
 	/**
 	 * Returns the number of levels held by the LevelManager
 	 * @return

@@ -3,6 +3,7 @@ package edu.chl.tda366badbudgie.core.menu;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * A manager for menus, keeping a map of
  * menus and their id strings.
