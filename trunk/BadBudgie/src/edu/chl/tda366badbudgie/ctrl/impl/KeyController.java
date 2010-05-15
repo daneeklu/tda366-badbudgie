@@ -32,10 +32,16 @@ public class KeyController extends KeyAdapter{
 		Arrays.fill(keyDown, false);
 		
 		// Menu key bindings
-		menuKeyMap.put(KeyEvent.VK_LEFT, "left");
-		menuKeyMap.put(KeyEvent.VK_RIGHT, "right");
 		menuKeyMap.put(KeyEvent.VK_UP, "up");
 		menuKeyMap.put(KeyEvent.VK_DOWN, "down");
+		menuKeyMap.put(KeyEvent.VK_LEFT, "left");
+		menuKeyMap.put(KeyEvent.VK_RIGHT, "right");
+
+		menuKeyMap.put(KeyEvent.VK_W, "up");
+		menuKeyMap.put(KeyEvent.VK_S, "down");
+		menuKeyMap.put(KeyEvent.VK_A, "left");
+		menuKeyMap.put(KeyEvent.VK_D, "right");
+		
 		menuKeyMap.put(KeyEvent.VK_ENTER, "select");
 		menuKeyMap.put(KeyEvent.VK_SPACE, "select");
 		menuKeyMap.put(KeyEvent.VK_ESCAPE, "escape");

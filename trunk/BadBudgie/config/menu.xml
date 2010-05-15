@@ -2,16 +2,16 @@
 <menus>
 	<menu id="mainmenu" tex="intro" bounds="0,0,800,600">
 		<menuitem id="newgame" tex="newgame" bounds="280,280,240,60" />
-		<menuitem id="helpmenu" tex="newgame" bounds="280,200,240,60" />
+		<menuitem id="helpmenu" tex="howtoplay" bounds="280,200,240,60" />
 		<menuitem id="optionsmenu" tex="options" bounds="280,120,240,60" />
 		<menuitem id="exit" tex="exit" bounds="280,40,240,60" />
 		<menuitem id="resume" tex="resume" bounds="280,360,240,60" />
 	</menu>
-	<menu id="helpmenu" tex="budgie" bounds="0,0,800,600">
-		<menuitem id="mainmenu" tex="exit" bounds="280,240,240,60" />
+	<menu id="helpmenu" tex="instructions" bounds="0,0,800,600">
+		<menuitem id="mainmenu" tex="back" bounds="280,240,240,60" />
 	</menu>
 	<menu id="optionsmenu" tex="intro" bounds="0,0,800,600">
-		<menuitem id="fullscreen" tex="options" bounds="280,240,240,60" />
-		<menuitem id="mainmenu" tex="exit" bounds="280,160,240,60" />
+		<menuitem id="fullscreen" tex="fullscreen" bounds="280,240,240,60" />
+		<menuitem id="mainmenu" tex="back" bounds="280,160,240,60" />
 	</menu>
 </menus>

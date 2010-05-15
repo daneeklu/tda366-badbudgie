@@ -110,7 +110,7 @@ public class Menu {
 			setCurrentItem(item + menuItems.length);
 			return;
 		}
-		if (item > menuItems.length) {
+		if (item >= menuItems.length) {
 			setCurrentItem(item - menuItems.length);
 			return;
 		}
@@ -140,8 +140,6 @@ public class Menu {
 			if (id.equals("up"))
 				selectPrevious();
 			
-			if (id.equals("escape"))
-				setCurrentItem(2);
 		} else {
 			if (id.equals("right"))
 				dialog.change(-1);
