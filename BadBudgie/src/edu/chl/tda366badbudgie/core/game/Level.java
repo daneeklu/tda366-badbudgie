@@ -30,7 +30,8 @@ public class Level implements Cloneable {
 	/**
 	 * Constructs a new Level object.
 	 */
-	public Level(Vector startPosition) {
+	public Level(int levelNumber, Vector startPosition) {
+		this.levelNumber = levelNumber;
 		setBackgroundTexId("background");
 		this.setStartPosition(startPosition);
 	}
