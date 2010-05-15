@@ -58,8 +58,8 @@ public class LevelParser extends AbstractParser{
 		pX = Double.parseDouble(playPosL.getAttribute("x"));
 		pY = Double.parseDouble(playPosL.getAttribute("y"));
 
-		//Create level.
-		Level level = new Level(new Vector(pX, pY));
+		//Create level, added to the end of the sequence of levels
+		Level level = new Level(LevelManager.getInstance().numberOfLevels() + 1, new Vector(pX, pY));
 		
 		
 		//Create sprites.
