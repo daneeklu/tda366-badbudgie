@@ -86,7 +86,7 @@ public class MenuState implements IState {
 
 
 	@Override
-	public void mouseActionClick(boolean pressed) {
+	public void mouseActionClick(int button, boolean pressed) {
 		// Do nothing with the mouse in-menu, at least for now
 	}
 

@@ -71,13 +71,13 @@ public class GameRound {
 	public void keyboardAction(String id, boolean down) {
 
 		if (id.equals("moveleft")) {
-			player.moveLeft(down);
+			getPlayer().moveLeft(down);
 		}
 		if (id.equals("moveright")) {
-			player.moveRight(down);
+			getPlayer().moveRight(down);
 		}
 		if (id.equals("jump")) {
-			player.jumpOrFlap(down);
+			getPlayer().jumpOrFlap(down);
 		}
 
 	}
@@ -134,8 +134,12 @@ public class GameRound {
 	 * @param y the y-coordinate of the mouse position.
 	 * @param mouseDown denotes whether the mouse is pressed.
 	 */
-	public void mouseAction(double x, double y, boolean mouseDown) {
-		getPlayer().shootToggle(mouseDown);
+	public void mouseAction(int button, double x, double y, boolean mouseDown) {
+		if (button == 1)
+			getPlayer().shootToggle(mouseDown);
+		else if (button == 3) {
+			getPlayer().jumpOrFlap(mouseDown);
+		}
 	}
 	
 	/**
