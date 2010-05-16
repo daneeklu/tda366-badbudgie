@@ -3,7 +3,8 @@ package edu.chl.tda366badbudgie.util;
 /**
  * Vector
  * 
- * Immutable class holding fields and methods for two-dimensional vectors with double precision.
+ * Immutable class holding fields and methods for two-dimensional vectors with 
+ * double precision.
  * 
  * @author kvarfordt, jesper, d.skalle
  * 

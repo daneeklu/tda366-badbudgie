@@ -13,7 +13,8 @@ import java.util.Map;
  */
 public class ImageDataHandler {
 		
-	private Map<String, BufferedImage> images = new HashMap<String, BufferedImage>();
+	private Map<String, BufferedImage> images = 
+		new HashMap<String, BufferedImage>();
 	private static ImageDataHandler handleInstance;
 	
 	/**
@@ -42,7 +43,8 @@ public class ImageDataHandler {
 	/**
 	 * Returns a shallow copy of the image map.
 	 * 
-	 * @return a map containing references to the images currently held by the handler.
+	 * @return a map containing references to the images 
+	 * 			currently held by the handler.
 	 */
 	public Map<String, BufferedImage> getData(){
 		Map<String, BufferedImage> map = new HashMap<String, BufferedImage>();

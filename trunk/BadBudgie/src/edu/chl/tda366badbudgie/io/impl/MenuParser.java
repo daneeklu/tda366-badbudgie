@@ -67,7 +67,8 @@ public class MenuParser extends AbstractParser{
 		}
 		
 		
-		Menu menu = new Menu(menuId, texId, menuBounds, menuItemList.toArray(new MenuItem[0]));
+		Menu menu = new Menu(menuId, texId, menuBounds, 
+					menuItemList.toArray(new MenuItem[0]));
 		return menu;
 	}
 
