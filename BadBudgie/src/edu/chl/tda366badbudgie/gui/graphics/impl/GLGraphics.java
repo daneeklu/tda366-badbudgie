@@ -274,28 +274,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		gl.glEnd();
 		
 	}
-
-	@Override
-	public void drawQuad(Vector position, Quad q) {
-		
-		GL gl = canvas.getGL();
-		GLContext con = canvas.getContext();
-		if (GLContext.getCurrent() != con) {
-			return;
-		}
-		
-		gl.glDisable(GL.GL_TEXTURE_2D);
-		gl.glBegin(GL.GL_POLYGON);
-		
-		gl.glColor3d(0.5, 0.5, 0.5);
-		for (Vector v : q.getVertices()) {
-			gl.glVertex2d(position.getX()+v.getX(), position.getY()+v.getY() );
-		}
-		
-		gl.glColor3d(1.0, 1.0, 1.0);
-		gl.glEnable(GL.GL_TEXTURE_2D);
-		gl.glEnd();		
-	}
 	
 	@Override
 	public void drawTexturedPolygon(Vector position, Polygon p, String textureId, double texRes) {

@@ -5,6 +5,13 @@ import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
+/**
+ * A class describing a weapon
+ * 
+ * @author lumbo
+ *
+ */
+
 public class Weapon extends AbstractItem {
 	
 	// Default constructor parameters

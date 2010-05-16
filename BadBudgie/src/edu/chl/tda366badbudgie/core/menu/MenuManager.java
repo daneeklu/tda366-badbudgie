@@ -5,8 +5,8 @@ import java.util.Map;
 
 
 /**
- * A manager for menus, keeping a map of
- * menus and their id strings.
+ * A class for keeping a map of all
+ * menus in the game, and their id strings.
  * 
  * @author d.skalle
  *
@@ -18,9 +18,7 @@ public class MenuManager {
 	
 	private Map<String,Menu> menus = new HashMap<String,Menu>();
 	
-	private MenuManager() {
-
-	}
+	private MenuManager () { }
 	
 	/**
 	 * Returns the instance of the MenuManager

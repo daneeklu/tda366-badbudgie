@@ -13,14 +13,6 @@ import edu.chl.tda366badbudgie.util.Vector;
  *
  */
 public class Obstacle extends AbstractCollidable {
-
-	// Default constructor parameters
-	private static final Vector OBSTACLE_SIZE = new Vector(100, 100);
-	private static final Sprite OBSTACLE_SPRITE = new Sprite("rock");
-	private static final Polygon OBSTACLE_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
-	private static final double OBSTACLE_FRICTION = 0.9;
-	private static final double OBSTACLE_ELASTICITY = 0.2;
-	private static final boolean OBSTACLE_STATIONARY = false;
 	
 	/**
 	 * Constructor
@@ -36,17 +28,6 @@ public class Obstacle extends AbstractCollidable {
 		addPhysicalCollision(Enemy.class);
 		addPhysicalCollision(Obstacle.class);
 	}
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param texId the texture id
-	 */
-	public Obstacle(Vector position) {
-		super(position, OBSTACLE_SIZE, OBSTACLE_STATIONARY, OBSTACLE_SPRITE, OBSTACLE_COLLISION_DATA, OBSTACLE_FRICTION, OBSTACLE_ELASTICITY);
-	}
-	
-
 
 	@Override
 	public Obstacle clone() {

@@ -22,6 +22,8 @@ public class KeyController extends KeyAdapter{
 	private HashMap<Integer, String> menuKeyMap;
 	private HashMap<Integer, String> inGameKeyMap;
 	private HashMap<Integer, String> currentKeyMap;
+	
+	// An array storing the current states of all keys
 	private boolean[] keyDown;
 	
 	public KeyController(IStateContext stateContext) {
@@ -31,7 +33,7 @@ public class KeyController extends KeyAdapter{
 		keyDown = new boolean[65536];
 		Arrays.fill(keyDown, false);
 		
-		// Menu key bindings
+		// Key bindings for the menu
 		menuKeyMap.put(KeyEvent.VK_UP, "up");
 		menuKeyMap.put(KeyEvent.VK_DOWN, "down");
 		menuKeyMap.put(KeyEvent.VK_LEFT, "left");
@@ -46,7 +48,7 @@ public class KeyController extends KeyAdapter{
 		menuKeyMap.put(KeyEvent.VK_SPACE, "select");
 		menuKeyMap.put(KeyEvent.VK_ESCAPE, "escape");
 		
-		// TODO: Temp in game key bindings
+		// Key bindings for the ingame state
 		inGameKeyMap.put(KeyEvent.VK_LEFT, "moveleft");
 		inGameKeyMap.put(KeyEvent.VK_RIGHT, "moveright");
 		inGameKeyMap.put(KeyEvent.VK_UP, "moveup");

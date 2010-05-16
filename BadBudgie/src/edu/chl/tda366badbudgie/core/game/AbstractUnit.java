@@ -50,13 +50,11 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	
 	
 	/**
-	 * 
-	 * 
-	 * @param x - the x coordinate for the aim, or mouse position if you will.
-	 * @param y - the y coordinate for the aim, or mouse position if you will.
+	 * Shoot a bullet with the current weapon
 	 */
 	public void shoot() {
-		getWeapon().shoot();
+		if (getWeapon() != null)
+			getWeapon().shoot();
 	}
 	
 	/**
@@ -66,21 +64,25 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	 * @param y
 	 */
 	public void setAim(double x, double y) {
-		
 		getWeapon().setAim(x, y);
-		
 	}
 	
 
 	/**
-	 * @param invincibilityTimer the invincibilityTimer to set
+	 * Set the duration for the invincibility timer:
+	 * for instance if a unit was hit, it will remain
+	 * invincible for a short time.
+	 * 
+	 * @param invincibilityTimer the duration of the timer, in frames
 	 */
 	public void setInvincibilityTimer(int invincibilityTimer) {
 		this.invincibilityTimer = invincibilityTimer;
 	}
 
 	/**
-	 * @return the invincibilityTimer
+	 * Get the remaining duration of the invincibility timer
+	 * 
+	 * @return the remaining time (in frames) the unit is invincible
 	 */
 	public int getInvincibilityTimer() {
 		return invincibilityTimer;
@@ -144,7 +146,7 @@ public abstract class AbstractUnit extends AbstractCollidable {
 
 	/**
 	 * Controls whether the unit is AI-controlled or not.
-	 * @param isAIControlled
+	 * @param isAIControlled true if the unit should be AI-controlled.
 	 */
 	public void setAIControlled(boolean isAIControlled) {
 		this.isAIControlled = isAIControlled;
@@ -159,28 +161,41 @@ public abstract class AbstractUnit extends AbstractCollidable {
 		return isAIControlled;
 	}
 
-	public void setWeapon(Weapon wep){
-		this.weapon = wep;
-		addChild(wep);
+	/**
+	 * Set the weapon for the unit
+	 * 
+	 * @param weapon the weapon to set.
+	 */
+	public void setWeapon(Weapon weapon){
+		this.weapon = weapon;
+		addChild(weapon);
 	}
 	
+	/**
+	 * Get the current weapon for the unit
+	 * 
+	 * @return the weapon
+	 */
 	public Weapon getWeapon(){
 		return weapon;
 	}
 
-
+	/**
+	 * Get the offset of the weapon, relative to the
+	 * unit's position
+	 * @return the offset vector
+	 */
 	protected Vector getWeaponOffset() {
 		return weaponOffset.scalarMultiplication(getScale());
 	}
 
-
+	/**
+	 * Set the offset of the weapon, relative to the
+	 * unit's position
+	 * 
+	 * @param weaponOffset the offset vector
+	 */
 	protected void setWeaponOffset(Vector weaponOffset) {
 		this.weaponOffset = weaponOffset;
 	}
-	
-	@Override
-	public void setScale(double scale) {
-		super.setScale(scale);
-	}
-	
 }

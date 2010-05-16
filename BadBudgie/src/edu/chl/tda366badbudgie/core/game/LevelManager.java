@@ -19,9 +19,7 @@ public class LevelManager {
 	//List of levels held by manager.
 	private List<Level> levels = new ArrayList<Level>();
 	
-	private LevelManager(){
-		
-	}
+	private LevelManager() {}
 	
 	/**
 	 * Returns the instance of the LevelManager

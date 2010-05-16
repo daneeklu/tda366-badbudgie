@@ -6,12 +6,11 @@ import java.util.List;
 
 import edu.chl.tda366badbudgie.util.Vector;
 
-
-
 /**
  * Level
  * 
- * Class representing a game level with terrain and objects.
+ * Class representing a game level, containing 
+ * terrain data and game objects.
  * 
  * @author kvarfordt
  *
@@ -109,6 +108,9 @@ public class Level implements Cloneable {
 	}
 	
 	/**
+	 * Get the id for the texture used as the background
+	 * image for the level.
+	 * 
 	 * @param backgroundTexId the background texture id
 	 */
 	public void setBackgroundTexId(String backgroundTexId) {
@@ -116,6 +118,9 @@ public class Level implements Cloneable {
 	}
 
 	/**
+	 * Set the id for the texture used as the background
+	 * image for the level.
+	 * 
 	 * @return the background texture id
 	 */
 	public String getBackgroundTexId() {
@@ -132,10 +137,15 @@ public class Level implements Cloneable {
 		return player;
 	}
 	
-	public void setPlayer(Player p){
-		player = p;
-		if(!gameObjects.contains(p)){
-			addGameObject(p);
+	/**
+	 * Set the player object in this level
+	 * 
+	 * @param p
+	 */
+	public void setPlayer(Player player){
+		this.player = player;
+		if(!gameObjects.contains(player)){
+			addGameObject(player);
 		}
 	}
 	
@@ -143,41 +153,66 @@ public class Level implements Cloneable {
 	@Override
 	public Level clone() {
 		try {
-			Level l;
-			l = (Level) super.clone();
-			l.gameObjects = new ArrayList<AbstractGameObject>();
-			l.terrainSections = new ArrayList<TerrainSection>();
+			Level level;
+			level = (Level) super.clone();
+			level.gameObjects = new ArrayList<AbstractGameObject>();
+			level.terrainSections = new ArrayList<TerrainSection>();
 			
 			for (AbstractGameObject ago : gameObjects) {
-				l.addGameObject(ago.clone());
+				level.addGameObject(ago.clone());
 			}
 			for(TerrainSection ts : terrainSections) {
-				l.addTerrainSection(ts);
+				level.addTerrainSection(ts);
 			}
 			
-			return l;
+			return level;
 		} catch (CloneNotSupportedException e) {
 			throw new AssertionError("Clone not supported");
 		}
 		
 	}
 
+	/**
+	 * Schedule an object for addition to the level, at the next
+	 * logic call
+	 * @param gameObject the object to add
+	 */
 	public void scheduleForAddition(AbstractGameObject gameObject) {
 		scheduledForAddition.add(gameObject);
 	}
 
+	/**
+	 * Get a list of all game objects scheduled for addition to this level
+	 * @return the list of game objects
+	 */
 	public List<AbstractGameObject> getScheduledForAddition() {
 		return scheduledForAddition;
 	}
 
+	/**
+	 * Set the start position for the player on this level
+	 * 
+	 * @param startPosition the position vector
+	 */
 	public void setStartPosition(Vector startPosition) {
 		this.startPosition = startPosition;
 	}
 
+	/**
+	 * Get the start position for the player on this level
+	 * 
+	 * @return the position vector
+	 */
 	public Vector getStartPosition() {
 		return startPosition;
 	}
 
+	/**
+	 * Get the level number for this level,
+	 * starting with number = 1 for the first level.
+	 * 
+	 * @return the level number
+	 */
 	public int getNumber() {
 		return levelNumber;
 	}

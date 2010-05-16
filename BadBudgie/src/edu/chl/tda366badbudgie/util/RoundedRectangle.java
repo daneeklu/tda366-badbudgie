@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A rounded rectangle
+ * 
+ * @author jesper
+ *
+ */
+
 public class RoundedRectangle extends Polygon {
 
 	private static int RESOLUTION = 4;

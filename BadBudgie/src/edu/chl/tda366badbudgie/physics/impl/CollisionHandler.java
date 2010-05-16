@@ -21,7 +21,7 @@ public class CollisionHandler {
 	 * Checks all game objects for collision with each other, and all game
 	 * objects for collision with terrain.
 	 * 
-	 * @param gr
+	 * @param gr the gameround containing all objects
 	 */
 	public void handleCollisions(GameRound gr) {
 
@@ -54,7 +54,7 @@ public class CollisionHandler {
 				AbstractCollidable o2 = collidableObjects.get(j);
 				
 				// Early exclusion
-				if ( Math.abs(o1.getX() - o2.getX()) > (o1.getWidth() + o2.getWidth())/2 )
+				if ( Math.abs(o1.getX() - o2.getX()) > (o1.getSize().getX() + o2.getSize().getY())/2 )
 					continue;
 				
 				Vector mtv = getCollisionSAT(o1.getCollisionData(true), o2.getCollisionData(true));

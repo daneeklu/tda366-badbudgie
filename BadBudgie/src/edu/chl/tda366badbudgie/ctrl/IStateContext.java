@@ -38,9 +38,30 @@ public interface IStateContext {
 	 */
 	public IState getMenuState();
 	
-	
+	/**
+	 * Set the game state
+	 * @param state the state to set the game state to
+	 */
 	public void setGameState(IState state);
+	
+	/**
+	 * Set the menu state
+	 * @param state the state to set the menu state to
+	 */
 	public void setMenuState(IState state);
+	
+
+	/**
+	 * Switch to the menu state. If the menu state is
+	 * currently null, instantiate it then switch to it.
+	 */
+	public void setMenuState();
+	
+	/**
+	 * Switch to the game state. If the game state is
+	 * currently null, instantiate it then switch to it.
+	 */
+	public void setGameState();
 	
 	/**
 	 * Tells the GraphicsFrame to shut down the program.
@@ -65,8 +86,5 @@ public interface IStateContext {
 	 */
 	public void setFrame(JFrame frame);
 
-	public void setMenuState();
-
-	public void setGameState();
 		
 }

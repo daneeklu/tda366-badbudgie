@@ -23,7 +23,9 @@ public interface IState {
 	public void keyboardAction(String id, boolean down);
 	
 	/**
+	 * 
 	 * Handle a mouse click/release.
+	 * @param button the mouse button that was affected
 	 * @param pressed true if the mouse button was pressed.
 	 */
 	public void mouseActionClick(int button, boolean pressed);

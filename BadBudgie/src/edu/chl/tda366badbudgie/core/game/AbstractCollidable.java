@@ -27,16 +27,35 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	private double elasticity;
 	
 	/**
+	 * The set of physical collisions.
+	 */
+	private static Set<String> physicalCollisions = new HashSet<String>();
+	
+	/**
+	 * Default collision data
+	 */
+	public final static Polygon defaultCollisionData;
+	static {
+		Vector v = new Vector(40, 40);
+		defaultCollisionData = new Polygon(new ArrayList<Vector>(Arrays.asList(
+				new Vector(-v.getX(), -v.getY()), 
+				new Vector(v.getX(), -v.getY()), 
+				new Vector(v.getX(), v.getY()), 
+				new Vector(-v.getX(), v.getY()))));
+	}
+	
+	/**
 	 * Creates a new AbstractCollidable object with the given properties.
 	 * 
-	 * @param collisionData
-	 * @param friction
-	 * @param elasticity
+	 * @param collisionData a polygon describing the object collision data
+	 * @param friction the friction for the object
+	 * @param elasticity the elasticity for collision
 	 */
 	public AbstractCollidable(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
 		super(position, size, stationary, sprite);
 		
-		// Make sure the collision data is valid
+		// Make sure the collision data is valid,
+		// the polygon must be convex.
 		if (!Polygon.checkConvexity(collisionData)) {
 			throw new IllegalArgumentException("Collisiondata polygon is not convex.");
 		} else if (!Polygon.checkCCW(collisionData)) {
@@ -57,11 +76,14 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 */
 	public Polygon getCollisionData(boolean transformed) {
 		List<Vector> verts = new ArrayList<Vector>(collisionData.getVertices().size());
-		if(!transformed){
-		verts.addAll(collisionData.getVertices());}
-		else{
-			for(Vector v: collisionData.getVertices()){
-				//v = v.scalarMultiplication(getScale()).rotate(getRotation()).add(getPosition());
+		
+		if (!transformed) {
+			
+			verts.addAll(collisionData.getVertices());
+			
+		} else {
+			
+			for (Vector v: collisionData.getVertices()) {
 				v = v.scalarMultiplication(getScale()).add(getPosition());
 				verts.add(v);
 			}
@@ -132,10 +154,9 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @return
 	 */
 	public static boolean isPhysicalCollision(AbstractCollidable class1, AbstractCollidable class2) {
-		/*
-		 * Using the static list physicalCollisions below.
-		 * Implementation might change.
-		 */
+		
+		// Using the static list physicalCollisions below.
+		// Implementation might change.
 		String cn1 = class1.getClass().getSimpleName().toLowerCase();
 		String cn2 = class2.getClass().getSimpleName().toLowerCase();
 		String concat;
@@ -195,26 +216,6 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		}
 		
 		physicalCollisions.add(concat);
-	}
-	
-	/**
-	 * The set of physical collisions.
-	 */
-	private static Set<String> physicalCollisions = new HashSet<String>();
-	
-	
-	
-	/**
-	 * Default collision data
-	 */
-	public final static Polygon defaultCollisionData;
-	static {
-		Vector v = new Vector(40, 40);
-		defaultCollisionData = new Polygon(new ArrayList<Vector>(Arrays.asList(
-				new Vector(-v.getX(), -v.getY()), 
-				new Vector(v.getX(), -v.getY()), 
-				new Vector(v.getX(), v.getY()), 
-				new Vector(-v.getX(), v.getY()))));
 	}
 	
 	@Override

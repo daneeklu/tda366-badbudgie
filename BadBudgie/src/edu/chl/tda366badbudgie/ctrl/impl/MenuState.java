@@ -24,14 +24,11 @@ public class MenuState implements IState {
 	
 	@Override
 	public void logic() {
-		//if (startGame) {
-	//		StateContext.getInstance().setGameState();
-		//} else {
 		
-			menu.setGameRunning(StateContext.getInstance().getGameState() != null);
-		
-			menu.logic();
-	//	}
+		// Signal to the menu whether the game is running or not,
+		// then let the menu handle its logic
+		menu.setGameRunning(StateContext.getInstance().getGameState() != null);
+		menu.logic();
 	}
 	
 	@Override

@@ -19,8 +19,9 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class EnemyAI implements IAI {
 	
-	private static double chkOffsX = 10;
-	private static double chkOffsY = 10;
+	//Offset for checking for the ground.
+	private static double checkOffsetX = 10;
+	private static double checkOffsetY = 10;
 	
 	public EnemyAI() {}
 
@@ -45,17 +46,13 @@ public class EnemyAI implements IAI {
 				Vector bBoxS = e.getCollisionData(true).getBoundingBoxSize();
 				Vector bBoxP = e.getCollisionData(true).getBoundingBoxPosition();
 				
-				Vector leftGroundCheck = new Vector(bBoxP.getX() - chkOffsX, bBoxP.getY() - chkOffsY);
-				Vector rightGroundCheck = new Vector(bBoxP.add(bBoxS).getX() + chkOffsX,  bBoxP.getY() - chkOffsY);
-				Vector leftCollCheck = new Vector(bBoxP.getX() - chkOffsX, e.getY());
-				Vector rightCollCheck = new Vector(bBoxP.add(bBoxS).getX() + chkOffsX, e.getY());
+				Vector leftGroundCheck = new Vector(bBoxP.getX() - checkOffsetX, bBoxP.getY() - checkOffsetY);
+				Vector rightGroundCheck = new Vector(bBoxP.add(bBoxS).getX() + checkOffsetX,  bBoxP.getY() - checkOffsetY);
+				Vector leftCollCheck = new Vector(bBoxP.getX() - checkOffsetX, e.getY());
+				Vector rightCollCheck = new Vector(bBoxP.add(bBoxS).getX() + checkOffsetX, e.getY());
 				
 				boolean rightHindrance = true;
 				boolean leftHindrance = true;
-				
-				/* This line introduces a circular dependency, so be sure to comment it out when not in use:
-				 * DebugInfoRenderer.getInstance().addDebugLine(leftGroundCheck, rightGroundCheck, Color.black);
-				 */
 				
 				// TODO: Opportunity for optimization by checking only close objects
 				
@@ -116,18 +113,4 @@ public class EnemyAI implements IAI {
 		}
 		
 	}
-	
-	
-	/**
-	 * Transforms collision data of an object from local to global coordinates.
-	 * @param ac collidable object
-	 * @return globalized coordinates in a polygon.
-	 *//*
-	private Polygon globColData(AbstractCollidable ac){
-		List<Vector> offsColData1 = new LinkedList<Vector>(); //Object 1.
-		for (Vector v : ac.getCollisionData().getVertices()) {
-			offsColData1.add(v.add(ac.getPosition()));
-		}		
-		return new Polygon(offsColData1);
-	}*/
 }

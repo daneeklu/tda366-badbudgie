@@ -6,6 +6,13 @@ import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
+/**
+ * A class describing an ingame projectile.
+ * 
+ * @author lumbo
+ *
+ */
+
 public class Projectile extends AbstractItem {
 
 	// Default constructor parameters

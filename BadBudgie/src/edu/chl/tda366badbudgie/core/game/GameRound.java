@@ -160,6 +160,10 @@ public class GameRound {
 		return score;
 	}
 	
+	/**
+	 * Set the score.
+	 * @param score
+	 */
 	public void setScore(int score){
 		this.score = score;
 	}

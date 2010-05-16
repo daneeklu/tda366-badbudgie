@@ -19,27 +19,18 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class Enemy extends AbstractUnit {
 	
-	// Default constructor parameters
-	private static final Vector ENEMY_SIZE = new Vector(120, 120);
-	private static final Sprite ENEMY_SPRITE;
-	private static final Polygon ENEMY_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
-	private static final double ENEMY_FRICTION = 0.5;
-	private static final double ENEMY_ELASTICITY = 0.2;
-	private static final int ENEMY_DAMAGE = 10;
-	private static final int ENEMY_DIRECTION = 1;
-	
 	static {
 		List<Animation> animations = new LinkedList<Animation>();
 		int[] indices = {4,5,6,7};
 		animations.add(new Animation("idle", 0));
 		animations.add(new Animation("run", indices, 5));
-		ENEMY_SPRITE = new Sprite("enemy", 4, 4, animations);
 	}
 	
 	// Constants
 	private static final double GROUND_MOVE_FORCE = 1.5;
 	private static final double MAXIMUM_WALK_SPEED = 5.0;
 	
+	// The damage the enemy does if the player touches it
 	
 	private int meleeDamage;
 	private double sightDistance = 400;
@@ -77,16 +68,10 @@ public class Enemy extends AbstractUnit {
 		addPhysicalCollision(Player.class);
 		addPhysicalCollision(Obstacle.class);
 	}
-	
-	/**
-	 * Convenience constructor with less important parameters left out.
-	 * 
-	 * @param position the enemy's position
-	 */
-	public Enemy(Vector position) {
-		this(position, ENEMY_SIZE, ENEMY_SPRITE, ENEMY_COLLISION_DATA, ENEMY_FRICTION, ENEMY_ELASTICITY, ENEMY_DAMAGE, ENEMY_DIRECTION);
-	}
 
+	/**
+	 * Make the enemy aim at the player's position
+	 */
 	public void aimAtPlayer() {
 		Player p = getLevel().getPlayer();
 		double pdx = p.getX() - getX();
@@ -147,18 +132,38 @@ public class Enemy extends AbstractUnit {
 		return meleeDamage;
 	}
 	
+	/**
+	 * Set the sight distance for finding the player
+	 * @param sightDistance
+	 */
 	public void setSightDistance(double sightDistance) {
 		this.sightDistance = sightDistance;
 	}
 
+	/**
+	 * Get the sight distance for finding the player
+	 * @return
+	 */
 	public double getSightDistance() {
 		return sightDistance;
 	}
 	
+	/**
+	 * Set the interval at which the enemy attacks
+	 * with its weapon
+	 * 
+	 * @param attackTimer the interval in frames.
+	 */
 	public void setAttackTimer(int attackTimer) {
 		this.attackTimer = attackTimer;
 	}
 
+	/**
+	 * Set the interval at which the enemy attacks
+	 * with its weapon
+	 * 
+	 * @return the interval in frames.
+	 */
 	public int getAttackTimer() {
 		return attackTimer;
 	}
@@ -180,7 +185,6 @@ public class Enemy extends AbstractUnit {
 	public Enemy clone() {
 		return (Enemy) super.clone();
 	}
-	
 	
 	@Override
 	public void collisionEffect(AbstractCollidable other, Vector mtv) {
@@ -219,11 +223,6 @@ public class Enemy extends AbstractUnit {
 			}
 		}
 		
-	}
-
-
-
-	
-	
+	}	
 	
 }
