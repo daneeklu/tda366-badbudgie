@@ -66,8 +66,8 @@ public class GameRenderer {
 	 */
 	private static void drawGameObject(AbstractGameObject go, IGraphics g) {
 		double x, y, h, w;
-		w = go.getWidth()*go.getScale();
-		h = go.getHeight()*go.getScale();
+		w = go.getSize().getX()*go.getScale();
+		h = go.getSize().getY()*go.getScale();
 		x = go.getX() - w/2;
 		y = go.getY() - h/2;
 		

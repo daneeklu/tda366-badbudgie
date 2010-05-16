@@ -36,6 +36,12 @@ public interface IGraphics {
 	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
 	 */
 	public boolean startRendering(Rectangle bounds);
+	
+	/**
+	 * Call stopRendering when you are done drawing to
+	 * tell the system you're finished
+	 */
+	public void stopRendering();
 
 	/**
 	 * Draws a rectangle 
@@ -44,15 +50,6 @@ public interface IGraphics {
 	 * 
 	 */
 	public void drawRect(Rectangle r);
-	
-	/**
-	 * Draws a quad 
-	 * 
-	 * @param position the reference position of the quad.
-	 * @param r the rectangle to be drawn
-	 * 
-	 */
-	public void drawQuad(Vector position, Quad q);
 	
 	/**
 	 * Draws a polygon
@@ -102,12 +99,6 @@ public interface IGraphics {
 	 */
 	public String getActiveTexture();
 
-	/**
-	 * Call stopRendering when you are done drawing to
-	 * tell the system you're finished
-	 */
-	public void stopRendering();
-	
 	/**
 	 * Draw text at the specified pixel position from the upper left corner.
 	 * @param text the text to be drawn

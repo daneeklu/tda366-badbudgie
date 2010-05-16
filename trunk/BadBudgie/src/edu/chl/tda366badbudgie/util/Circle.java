@@ -3,6 +3,13 @@ package edu.chl.tda366badbudgie.util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Circle
+ * 
+ * @author jesper
+ *
+ */
+
 public class Circle extends Polygon {
 	
 	public Circle(double radius, int resolution){

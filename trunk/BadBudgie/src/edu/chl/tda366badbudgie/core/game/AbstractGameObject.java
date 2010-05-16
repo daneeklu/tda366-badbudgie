@@ -93,7 +93,7 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @return the mass
 	 */
 	public double getMass() {
-		return mass*getScale();
+		return mass * getScale();
 	}
 
 	/**
@@ -190,22 +190,6 @@ public abstract class AbstractGameObject implements Cloneable {
 	 */
 	public void setSprite(Sprite sprite) {
 		this.sprite = sprite;
-	}
-	
-	/**
-	 * Returns the width of the object.
-	 * @return the width of the object.
-	 */
-	public double getWidth() {
-		return size.getX();
-	}
-
-	/**
-	 * Returns the height of the object.
-	 * @return the height of the object.
-	 */
-	public double getHeight() {
-		return size.getY();
 	}
 	
 	/**

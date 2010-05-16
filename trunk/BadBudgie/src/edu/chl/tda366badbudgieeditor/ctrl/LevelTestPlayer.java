@@ -84,7 +84,7 @@ public class LevelTestPlayer {
 					result.addGameObject(p);
 					break;
 				case Enemy:
-					Enemy enemy = new Enemy(new Vector(ego.getX(), -ego.getY()));
+					//Enemy enemy = new Enemy(new Vector(ego.getX(), -ego.getY()));
 //					pcd = new LinkedList<Vector>();
 //					pcd.add(new Vector(-40, -40));
 //					pcd.add(new Vector(40, -40));
@@ -92,10 +92,10 @@ public class LevelTestPlayer {
 //					pcd.add(new Vector(-40, 40));
 //					enemy.setCollisionData(new Polygon(pcd));
 					
-					result.addGameObject(enemy);
+					//result.addGameObject(enemy);
 					break;
 				case Obstacle:
-					Obstacle rock = new Obstacle(new Vector(ego.getX(), -ego.getY()));
+					//Obstacle rock = new Obstacle(new Vector(ego.getX(), -ego.getY()));
 //					pcd = new LinkedList<Vector>();
 //					pcd.add(new Vector(-40, -15));
 //					
@@ -107,7 +107,7 @@ public class LevelTestPlayer {
 //					pcd.add(new Vector(-20, 20));
 //					rock.setCollisionData(new Polygon(pcd));
 					
-					result.addGameObject(rock);
+					//result.addGameObject(rock);
 					break;
 				case Exit:
 					LevelExit lf = new LevelExit(new Vector(ego.getX(), -ego.getY()));

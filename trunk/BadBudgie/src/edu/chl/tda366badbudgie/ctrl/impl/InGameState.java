@@ -24,15 +24,17 @@ public class InGameState implements IState {
 	private GameRound gameRound;
 	private Physics physics;
 	private IAI enemyAi;
+	
+	// The current mouse position on the screen
 	private int mX, mY;
 	
 	
-	public InGameState(GameRound gr) {
-		gameRound = gr;
+	public InGameState(GameRound gameRound) {
+		
+		this.gameRound = gameRound;
 		gameRound.setLevel(LevelManager.getInstance().getLevel(1));
 		physics = new Physics();
-		enemyAi = new EnemyAI();
-		
+		enemyAi = new EnemyAI();		
 	}
 	
 	@Override
@@ -40,9 +42,10 @@ public class InGameState implements IState {
 		
 		enemyAi.doAI(gameRound);
 		physics.doPhysics(gameRound);		
+		
+		// Update the game world, and get a signal if something happened
 		GameRoundMessage gameAction = gameRound.updateGameObjects();
 		 
-		// If something important happened in the game logic, deal with it:
 		
 		// If a level is finished, switch to the next
 		if (gameAction == GameRoundMessage.LEVEL_FINISHED) {
@@ -90,7 +93,10 @@ public class InGameState implements IState {
 		gameRound.mouseMove(x,y);
 	}
 
-	
+	/**
+	 * Get the active gameRound object for this state.
+	 * @return gameRound
+	 */
 	public GameRound getGameRound() {
 		return gameRound;
 	}

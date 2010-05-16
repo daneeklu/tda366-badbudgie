@@ -239,7 +239,12 @@ public class Player extends AbstractUnit {
 		
 	}
 
-
+	/**
+	 * Transform the screen coordinates to world coordinates,
+	 * then aim at them
+	 * @param mx the screen x coordinate
+	 * @param my the screen y coordinate
+	 */
 	public void setAimScreenCoords(double mx, double my) {
 		
 		int screenWidth = Screen.getScreenWidth();
@@ -259,6 +264,10 @@ public class Player extends AbstractUnit {
 		
 	}
 	
+	/**
+	 * Set whether the player is shooting
+	 * @param shoot true if the player should be shooting
+	 */
 	public void shootToggle(boolean shoot) {
 		isShooting = shoot;
 	}
@@ -357,6 +366,5 @@ public class Player extends AbstractUnit {
 			}
 		}
 	}
-
 	
 }

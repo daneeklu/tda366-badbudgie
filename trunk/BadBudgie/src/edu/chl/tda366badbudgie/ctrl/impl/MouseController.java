@@ -14,25 +14,13 @@ public class MouseController implements MouseListener, MouseMotionListener{
 		this.stateContext = stateContext;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent evt) {
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent evt) {
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent evt) {
-		
-	}
+	/*
+	 * For these methods, forward the input to the active state
+	 */
 
 	@Override
 	public void mousePressed(MouseEvent evt) {
 		stateContext.getState().mouseActionClick(evt.getButton(), true);
-		
 	}
 
 	@Override
@@ -50,4 +38,21 @@ public class MouseController implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		stateContext.getState().mouseMoved(e.getX(), e.getY());
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent evt) {
+		// Do nothing, method needed for implemented interface
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent evt) {
+		// Do nothing, method needed for implemented interface
+	}
+
+	@Override
+	public void mouseExited(MouseEvent evt) {
+		// Do nothing, method needed for implemented interface
+	}
+	
+	
 }

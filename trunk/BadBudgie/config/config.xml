@@ -5,7 +5,6 @@
 	<textures>
 		<texture id="intro" path="res/introscreen.png"/>
 		<texture id="exit" path="res/exit.png"/>
-		<texture id="smurf" path="res/SmurfSpin.png"/>
 		<texture id="newgame" path="res/newgame.png"/>
 		<texture id="options" path="res/options.png"/>
 		<texture id="budgie" path="res/budgiesheet.png"/>
@@ -23,13 +22,11 @@
 		<texture id="resume" path="res/resumegame.png" />
 		<texture id="reagan" path="res/reagan.png" />
 		<texture id="gun1" path="res/gun1_small.png"/>
-		<texture id="gun" path="res/gun1_small_noarm.png"/>
 		<texture id="enemygun" path="res/gun_arm_enemy.png"/>
 		<texture id="resume" path="res/resumegame.png"/>
 		<texture id="bullet1" path="res/bullet1.png" />
 		<texture id="mud1" path="res/mud01.png" />
 		<texture id="rocktex" path="res/rocktex.png" />
-		<texture id="arm" path="res/arm.png" />
 		<texture id="fullscreen" path="res/fullscreen.png" />
 		<texture id="howtoplay" path="res/howtoplay.png" />
 		<texture id="instructions" path="res/instructions.png" />

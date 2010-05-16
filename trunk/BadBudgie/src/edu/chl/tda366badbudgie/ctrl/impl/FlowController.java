@@ -24,8 +24,6 @@ import edu.chl.tda366badbudgie.io.impl.FileManager;
  *
  */
 public class FlowController implements ActionListener {
-
-	public static FlowController ctrl;
 	
 	public IStateContext stateContext;
 	public IGraphics graphics;
@@ -77,8 +75,12 @@ public class FlowController implements ActionListener {
 		canvas.addMouseMotionListener(mc);
 		
 
-		// TODO: Change 17 to some defined constant or add a comment saying that 17 ms = x fps
-		Timer timer = new Timer(17, (ActionListener) (this));
+		// Create a timer calling the loop method of this
+		// FlowController, at a rate of 60 frames / second.
+		//
+		// An interval of 1000 / 60 ms corresponds to 60 FPS
+		int interval = 1000 / 60;
+		Timer timer = new Timer(interval, (ActionListener) (this));
 		timer.start();
 		
 	}
