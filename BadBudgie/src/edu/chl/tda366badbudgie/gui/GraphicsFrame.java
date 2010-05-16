@@ -25,10 +25,11 @@ public class GraphicsFrame extends JFrame {
 		
 		add(ig.getCanvas());
 
+		setTitle("Bad Budgie");
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		
-		
+
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e){
