@@ -30,7 +30,8 @@ public class Player extends AbstractUnit {
 		animations.add(new Animation("run",indices,5));
 		PLAYER_SPRITE = new Sprite("budgie", 4, 4, animations);
 	}
-	private static final Polygon PLAYER_COLLISION_DATA = AbstractCollidable.defaultCollisionData;
+	private static final Polygon PLAYER_COLLISION_DATA = 
+		AbstractCollidable.defaultCollisionData;
 	private static final double PLAYER_FRICTION = 0.9;
 	private static final double PLAYER_ELASTICITY = 0.2;
 	
@@ -62,8 +63,10 @@ public class Player extends AbstractUnit {
 	 * @param friction
 	 * @param elasticity
 	 */
-	public Player(Vector position, Vector size, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
-		super(position, size, false, sprite, collisionData, friction, elasticity);
+	public Player(Vector position, Vector size, Sprite sprite, 
+			Polygon collisionData, double friction, double elasticity) {
+		super(position, size, false, sprite, 
+				collisionData, friction, elasticity);
 		
 		setHealth(100);
 		setFlyingEnergy(100);
@@ -84,7 +87,8 @@ public class Player extends AbstractUnit {
 	 * @param position the players position
 	 */
 	public Player(Vector position) {
-		this(position, PLAYER_SIZE, PLAYER_SPRITE, PLAYER_COLLISION_DATA, PLAYER_FRICTION, PLAYER_ELASTICITY);
+		this(position, PLAYER_SIZE, PLAYER_SPRITE, PLAYER_COLLISION_DATA, 
+				PLAYER_FRICTION, PLAYER_ELASTICITY);
 	}
 	
 	
@@ -153,10 +157,12 @@ public class Player extends AbstractUnit {
 		
 		// Player wants to move left
 		if (getDirection() == -1) {
-			if (!getGroundContactVector().hasZeroLength() && -getVelocity().getX() < MAXIMUM_WALK_SPEED) {
+			if (!getGroundContactVector().hasZeroLength() 
+					&& -getVelocity().getX() < MAXIMUM_WALK_SPEED) {
 				Vector force = 
 					getGroundContactVector().perpendicularCCW()
-					.scalarMultiplication(GROUND_MOVE_FORCE).add(new Vector(-AIR_MOVE_FORCE, 0));
+					.scalarMultiplication(GROUND_MOVE_FORCE)
+					.add(new Vector(-AIR_MOVE_FORCE, 0));
 				applyForce(force);
 			}
 			else if (-getVelocity().getX() < MAXIMUM_AIR_SPEED) {
@@ -166,10 +172,12 @@ public class Player extends AbstractUnit {
 		
 		// Player wants to move right
 		if (getDirection() == 1) {
-			if (!getGroundContactVector().hasZeroLength() && getVelocity().getX() < MAXIMUM_WALK_SPEED) {
+			if (!getGroundContactVector().hasZeroLength() 
+					&& getVelocity().getX() < MAXIMUM_WALK_SPEED) {
 				Vector force = 
 					getGroundContactVector().perpendicularCW()
-					.scalarMultiplication(GROUND_MOVE_FORCE).add(new Vector(AIR_MOVE_FORCE, 0));
+					.scalarMultiplication(GROUND_MOVE_FORCE)
+					.add(new Vector(AIR_MOVE_FORCE, 0));
 				applyForce(force);
 			}
 			else if (getVelocity().getX() < MAXIMUM_AIR_SPEED) {
@@ -179,11 +187,10 @@ public class Player extends AbstractUnit {
 		
 		// Player should jump
 		if (isJumping) {
-			applyForce(getGroundContactVector().normalize().project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
+			applyForce(getGroundContactVector().normalize()
+					.project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
 			isJumping = false;
 		}
-		
-		
 		
 		// Player is flying
 		if (flying && flyingEnergy > 0) {
@@ -192,7 +199,6 @@ public class Player extends AbstractUnit {
 			
 			flyingEnergy -= 2;
 		}
-		
 		
 	}
 	
@@ -206,7 +212,8 @@ public class Player extends AbstractUnit {
 		
 		GameRoundMessage grMessage = GameRoundMessage.NO_EVENT;
 		
-		if(!getGroundContactVector().hasZeroLength() && getFlyingEnergy() < maxFlyingEnergy){
+		if(!getGroundContactVector().hasZeroLength() 
+				&& getFlyingEnergy() < maxFlyingEnergy){
 			setFlyingEnergy(getFlyingEnergy() + 4);
 		}
 		
@@ -236,7 +243,6 @@ public class Player extends AbstractUnit {
 		}
 		
 		return grMessage;
-		
 	}
 
 	/**
@@ -321,7 +327,8 @@ public class Player extends AbstractUnit {
 		 * NOTE:
 		 * The effect of the collision depends on the class of other. 
 		 * We know that switching on class should normally be avoided, 
-		 * but we think in this case it's fine. 
+		 * but we think in this case it's fine, and we have not found a better 
+		 * solution.
 		 * If a new class is added, you don't want it to have any collision 
 		 * effects unless explicitly specified in that class' collisionEffect.
 		 * Note that physical collision response (bouncing etc.) is handled by 

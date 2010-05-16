@@ -29,6 +29,7 @@ public class StateContext implements IStateContext {
 	// The current state of the game.
 	private IState currentState;
 	
+	// Singleton instance
 	private static StateContext instance;
 	
 	private StateContext() {
@@ -69,16 +70,6 @@ public class StateContext implements IStateContext {
 		currentState.draw(g);
 	}
 	
-	@Override
-	public void setFrame(JFrame graphicsFrame) {
-		this.graphicsFrame = graphicsFrame;
-	}
-
-	@Override
-	public IState getGameState() {
-		return inGameState;
-	}
-	
 	public void setGameState(IState state) {
 		inGameState = state;
 		if (state != null)
@@ -90,6 +81,16 @@ public class StateContext implements IStateContext {
 		if (state != null)
 			currentState = state;
 	}
+	
+	@Override
+	public void setFrame(JFrame graphicsFrame) {
+		this.graphicsFrame = graphicsFrame;
+	}
+
+	@Override
+	public IState getGameState() {
+		return inGameState;
+	}
 
 	@Override
 	public IState getMenuState() {
@@ -99,11 +100,13 @@ public class StateContext implements IStateContext {
 	@Override
 	public void shutDown() {
 		if (graphicsFrame != null) {
-			WindowEvent wev = new WindowEvent(graphicsFrame, WindowEvent.WINDOW_CLOSING);
+			WindowEvent wev = 
+				new WindowEvent(graphicsFrame, WindowEvent.WINDOW_CLOSING);
 	        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
 		}
 		else {
-			throw new IllegalStateException("The GraphicsFrame has not been set.");
+			throw new IllegalStateException("The GraphicsFrame " +
+					"has not been set.");
 		}
 	}
 	

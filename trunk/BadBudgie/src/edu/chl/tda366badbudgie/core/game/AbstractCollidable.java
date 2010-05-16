@@ -51,13 +51,16 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @param friction the friction for the object
 	 * @param elasticity the elasticity for collision
 	 */
-	public AbstractCollidable(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
+	public AbstractCollidable(Vector position, Vector size, boolean stationary,
+			Sprite sprite, Polygon collisionData, double friction, 
+			double elasticity) {
 		super(position, size, stationary, sprite);
 		
 		// Make sure the collision data is valid,
 		// the polygon must be convex.
 		if (!Polygon.checkConvexity(collisionData)) {
-			throw new IllegalArgumentException("Collisiondata polygon is not convex.");
+			throw new IllegalArgumentException("Collisiondata polygon " +
+					"is not convex.");
 		} else if (!Polygon.checkCCW(collisionData)) {
 			Collections.reverse(collisionData.getVertices());
 		}
@@ -75,7 +78,8 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @return the collision data.
 	 */
 	public Polygon getCollisionData(boolean transformed) {
-		List<Vector> verts = new ArrayList<Vector>(collisionData.getVertices().size());
+		List<Vector> verts = 
+			new ArrayList<Vector>(collisionData.getVertices().size());
 		
 		if (!transformed) {
 			
@@ -153,12 +157,13 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @param class2
 	 * @return
 	 */
-	public static boolean isPhysicalCollision(AbstractCollidable class1, AbstractCollidable class2) {
+	public static boolean isPhysicalCollision(AbstractCollidable class1, 
+			AbstractCollidable class2) {
 		
 		// Using the static list physicalCollisions below.
 		// Implementation might change.
-		String cn1 = class1.getClass().getSimpleName().toLowerCase();
-		String cn2 = class2.getClass().getSimpleName().toLowerCase();
+		String cn1 = class1.getClass().getSimpleName();
+		String cn2 = class2.getClass().getSimpleName();
 		String concat;
 		
 		// Sort the two class names lexicographically
@@ -177,34 +182,24 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	}
 	
 	/**
-	 * Collision effect method to be overridden by subclasses that have 
-	 * side effects from a collision.
-	 * 
-	 * This method is called whether the two object have a physical collision 
-	 * response or not.
-	 *  
-	 * @param other the other object
-	 * @param mtv minimum translation vector, 
-	 * points towards this object from the other object
-	 */
-	public void collisionEffect(AbstractCollidable other, Vector mtv) { }
-	
-	/**
-	 * Adds this and the given class to the physical collision set.
+	 * Adds this objects class and the given class to the physical collision 
+	 * set.
 	 * 
 	 * A game object class uses this method to specify which other 
 	 * classes should have a physical collision response when colliding.
-	 * Preferably this method should be called from the constructor of the class.
+	 * Preferably this method should be called from the constructor of the 
+	 * class.
 	 * 
-	 * Note that it's sufficient to call this method from one of the two classes,
-	 * and it still gives a mutual collision response.
+	 * Note that it's sufficient to call this method from one of the two 
+	 * classes, and it still gives a mutual collision response.
 	 * 
 	 * @param other a string 
 	 */
-	protected void addPhysicalCollision(Class<? extends AbstractCollidable> otherClass) {
+	protected void addPhysicalCollision(
+			Class<? extends AbstractCollidable> otherClass) {
 		
-		String cn1 = this.getClass().getSimpleName().toLowerCase().trim();
-		String cn2 = otherClass.getSimpleName().toLowerCase().trim();
+		String cn1 = this.getClass().getSimpleName();
+		String cn2 = otherClass.getSimpleName();
 		String concat;
 		
 		// Sort the two class names lexicographically
@@ -217,6 +212,20 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 		
 		physicalCollisions.add(concat);
 	}
+	
+	/**
+	 * Collision effect method to be overridden by subclasses that have 
+	 * side effects from a collision.
+	 * 
+	 * This method is called whether the two object have a physical collision 
+	 * response or not, to apply other effects such as damage or finishing the 
+	 * level.
+	 *  
+	 * @param other the other object
+	 * @param mtv minimum translation vector, 
+	 * points towards this object from the other object
+	 */
+	public void collisionEffect(AbstractCollidable other, Vector mtv) { }
 	
 	@Override
 	public AbstractCollidable clone() {

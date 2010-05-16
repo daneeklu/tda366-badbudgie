@@ -193,7 +193,8 @@ public class Enemy extends AbstractUnit {
 		 * NOTE:
 		 * The effect of the collision depends on the class of other. 
 		 * We know that switching on class should normally be avoided, 
-		 * but we think in this case it's fine. 
+		 * but we think in this case it's fine, and we have not found a better 
+		 * solution. 
 		 * If a new class is added, you don't want it to have any collision 
 		 * effects unless explicitly specified in that class' collisionEffect.
 		 * Note that physical collision response (bouncing etc.) is handled by 
@@ -207,8 +208,13 @@ public class Enemy extends AbstractUnit {
 			if (mtv.getY() > 0) {
 				// Player has "ground" beneath his feet
 				setGroundContactVector(getGroundContactVector().add(
-						mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
-						.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
+						mtv.normalize()
+						.scalarMultiplication(other.getFriction() + 0.000001)
+						.scalarDivision(2))); 
+				/*
+				 *  +0.000001 to avoid a zero-length 
+				 *  vector in case of zero friction
+				 */
 			}
 		}
 		
@@ -218,8 +224,9 @@ public class Enemy extends AbstractUnit {
 				setHealth(getHealth() - p.getDamage());
 				setAttackTimer(200);
 				
-				// Total transfer of momentum
-				applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
+				// Transfer of momentum
+				applyForce(p.getVelocity()
+						.scalarMultiplication(p.getMass()/getMass()));
 			}
 		}
 		

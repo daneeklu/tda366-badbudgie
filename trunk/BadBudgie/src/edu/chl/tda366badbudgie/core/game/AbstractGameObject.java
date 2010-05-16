@@ -30,7 +30,8 @@ public abstract class AbstractGameObject implements Cloneable {
 	
 	private double rotation = 0;
 	
-	private List<AbstractGameObject> children = new LinkedList<AbstractGameObject>();
+	private List<AbstractGameObject> children = 
+		new LinkedList<AbstractGameObject>();
 	
 	/**
 	 * Constructor for AbstractGameObject.
@@ -39,7 +40,8 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * @param size the size of the object
 	 * @param stationary true if the object should be immovable
 	 */
-	public AbstractGameObject(Vector position, Vector size, boolean stationary, Sprite sprite){
+	public AbstractGameObject(Vector position, Vector size, boolean stationary,
+			Sprite sprite){
 		setPosition(position);
 		setSize(size);
 		setStationary(stationary);
@@ -217,8 +219,9 @@ public abstract class AbstractGameObject implements Cloneable {
 			return parent;
 		} 
 		catch (NullPointerException npe) {
-			throw new IllegalStateException("The parent level of the object has " +
-					"not been set, most likely because the object has not been added to a level.");
+			throw new IllegalStateException("The parent level of the object " +
+					"has not been set, most likely because the object has " +
+					"not been added to a level.");
 		}
 	}
 

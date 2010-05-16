@@ -2,7 +2,6 @@ package edu.chl.tda366badbudgie.core.menu;
 
 import edu.chl.tda366badbudgie.util.Rectangle;
 
-
 /**
  * Menu
  * 
@@ -184,13 +183,14 @@ public class Menu {
 				if (gameIsActive) {
 					if (!menuItems[i].getEnabled()) {
 						
-						// After a new game has been started, highlight "resume game"
-						// after returning to the menu
+						// After a new game has been started, highlight
+						// "resume game" after returning to the menu
 						menuItems[i].setEnabled(true);
 						setCurrentItem(i);
 					}
 				} else {
-					// If there's no active game state, "resume game" should be disabled
+					// If there's no active game state, "resume game" 
+					// should be disabled
 					menuItems[i].setEnabled(false);
 				}
 			}
@@ -214,7 +214,9 @@ public class Menu {
 	 * Show a confirmation dialog for the current menuItem
 	 */
 	public void showConfirmDialog() {
-		dialog = new ConfirmDialog("confirm:" + menuItems[currentItem].getSprite().getId());
+		dialog = 
+			new ConfirmDialog("confirm:" + menuItems[currentItem]
+			                                         .getSprite().getId());
 	}
 
 	/**

@@ -28,7 +28,8 @@ public class GameRenderer {
 		if(!g.startRendering(gameRound.getPlayer().getPosition())) 
 			return;
 		
-		g.drawBackgroundRect(new Rectangle(0, 0, 800, 600), gameRound.getLevel().getBackgroundTexId());
+		g.drawBackgroundRect(new Rectangle(0, 0, 800, 600), gameRound.getLevel()
+				.getBackgroundTexId());
 		
 		for (TerrainSection ts : gameRound.getLevel().getTerrainSections()) {
 			drawTerrainSection(ts, g);
@@ -53,14 +54,16 @@ public class GameRenderer {
 	 * @param g the Graphics object to do the rendering. 
 	 */
 	private static void drawTerrainSection(TerrainSection ts, IGraphics g) {
-		if (ts.getSprite().getId() != null && !ts.getSprite().getId().equals(""))
-			g.drawTexturedPolygon(ts.getPosition(),ts.getSurface(), ts.getSprite().getId(), ts.getTexRes());
+		if (ts.getSprite().getId() != null 
+				&& !ts.getSprite().getId().equals(""))
+			g.drawTexturedPolygon(ts.getPosition(),ts.getSurface(), 
+					ts.getSprite().getId(), ts.getTexRes());
 		else 
 			g.drawPolygon(ts.getPosition(),ts.getSurface());
 	}
 	
 	/**
-	 * Render a GameObject.
+	 * Render a GameObject and it's children.
 	 * @param go the GameObject to draw.
 	 * @param g the Graphics object to do the rendering. 
 	 */
@@ -90,8 +93,8 @@ public class GameRenderer {
 		int xPos;
 		xPos = (int)(g.getCanvas().getWidth()*0.12);
 		
-		
-		//This is health converted to a multiple of 2.55 to make the color of the health bar right
+		//This is health converted to a multiple of 2.55 to make the 
+		//color of the health bar right
 		if(health<0){
 			health = 0;
 		}
@@ -99,9 +102,9 @@ public class GameRenderer {
 		int healthLow = (int)((100-health)*2.55);
 		
 		//Depending on how much health the player has, it will change color. 
-		//Also adds 1 (one) to all values to secure that no division with zero will happen. 
+		//Also adds 1 (one) to all values to secure that no division with zero 
+		//will happen. 
 		Color c1 = new Color(healthLow+1, healthHigh+1, 1);
-		
 		
 		//Draw the health bar Background
 		g.drawColoredRect(
@@ -116,7 +119,6 @@ public class GameRenderer {
 				gameRound.getPlayer().getX()-400,
 				gameRound.getPlayer().getY()+120);
 
-		
 		//Draw the health bar
 		g.drawColoredRect(
 				new Rectangle(health*4, 55), 
@@ -130,11 +132,9 @@ public class GameRenderer {
 				gameRound.getPlayer().getX()-400,
 				gameRound.getPlayer().getY()+120);
 		
-		
 		//Draws Health text
 		g.drawText("Health", xPos, 53, 6);
 		g.drawText(health + "/100", xPos, 68, 6);
-		
 		
 		//Draws Energy text
 		g.drawText("Energy", xPos, 133, 6);

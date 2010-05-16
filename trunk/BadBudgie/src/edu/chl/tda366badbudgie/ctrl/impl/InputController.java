@@ -1,7 +1,10 @@
 package edu.chl.tda366badbudgie.ctrl.impl;
 
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -9,14 +12,15 @@ import edu.chl.tda366badbudgie.ctrl.IStateContext;
 
 
 /**
- * KeyController
+ * InputController
  * 
- * Controller class for keyboard input.
+ * Controller class for input.
  * 
- * @author tda366-badbudgie
+ * @author kvarfordt, lumbo
  *
  */
-public class KeyController extends KeyAdapter{
+public class InputController implements KeyListener, MouseListener, 
+		MouseMotionListener {
 
 	private IStateContext stateContext;
 	private HashMap<Integer, String> menuKeyMap;
@@ -24,26 +28,29 @@ public class KeyController extends KeyAdapter{
 	private HashMap<Integer, String> currentKeyMap;
 	
 	// An array storing the current states of all keys
-	private boolean[] keyDown;
+	private boolean[] isKeyDown;
 	
-	public KeyController(IStateContext stateContext) {
+	/**
+	 * Constructor for InputController
+	 * @param stateContext the state context that receives delegation of input 
+	 * commands.
+	 */
+	public InputController(IStateContext stateContext) {
 		this.stateContext = stateContext;
 		menuKeyMap = new HashMap<Integer, String>();
 		inGameKeyMap = new HashMap<Integer, String>();
-		keyDown = new boolean[65536];
-		Arrays.fill(keyDown, false);
+		isKeyDown = new boolean[65536];
+		Arrays.fill(isKeyDown, false);
 		
 		// Key bindings for the menu
 		menuKeyMap.put(KeyEvent.VK_UP, "up");
 		menuKeyMap.put(KeyEvent.VK_DOWN, "down");
 		menuKeyMap.put(KeyEvent.VK_LEFT, "left");
 		menuKeyMap.put(KeyEvent.VK_RIGHT, "right");
-
 		menuKeyMap.put(KeyEvent.VK_W, "up");
 		menuKeyMap.put(KeyEvent.VK_S, "down");
 		menuKeyMap.put(KeyEvent.VK_A, "left");
 		menuKeyMap.put(KeyEvent.VK_D, "right");
-		
 		menuKeyMap.put(KeyEvent.VK_ENTER, "select");
 		menuKeyMap.put(KeyEvent.VK_SPACE, "select");
 		menuKeyMap.put(KeyEvent.VK_ESCAPE, "escape");
@@ -65,8 +72,6 @@ public class KeyController extends KeyAdapter{
 		
 	}
 	
-	
-	
 	@Override
 	public void keyPressed(KeyEvent ke) {
 
@@ -78,11 +83,10 @@ public class KeyController extends KeyAdapter{
 		}
 		
 		int kc = ke.getKeyCode();
-		if (currentKeyMap.containsKey(kc) && !keyDown[kc]) {
+		if (currentKeyMap.containsKey(kc) && !isKeyDown[kc]) {
 			stateContext.getState().keyboardAction(currentKeyMap.get(kc), true);
-			keyDown[kc] = true;
+			isKeyDown[kc] = true;
 		}
-		
 	}
 
 	@Override
@@ -96,12 +100,46 @@ public class KeyController extends KeyAdapter{
 		}
 		
 		int kc = ke.getKeyCode();
-		if (currentKeyMap.containsKey(kc) && keyDown[kc]) {
+		if (currentKeyMap.containsKey(kc) && isKeyDown[kc]) {
 			stateContext.getState().keyboardAction(currentKeyMap.get(kc), false);
-			keyDown[kc] = false;
+			isKeyDown[kc] = false;
 		}
 		
 	}
 
+	@Override
+	public void mousePressed(MouseEvent evt) {
+		stateContext.getState().mouseButtonAction(evt.getButton(), true);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent evt) {
+		stateContext.getState().mouseButtonAction(evt.getButton(), false);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		stateContext.getState().mouseMoved(e.getX(), e.getY());
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		stateContext.getState().mouseMoved(e.getX(), e.getY());
+	}
+
+	/*
+	 * Unused interface methods.
+	 */
+	@Override
+	public void mouseClicked(MouseEvent evt) {}
+
+	@Override
+	public void mouseEntered(MouseEvent evt) {}
+
+	@Override
+	public void mouseExited(MouseEvent evt) {}
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
 	
 }

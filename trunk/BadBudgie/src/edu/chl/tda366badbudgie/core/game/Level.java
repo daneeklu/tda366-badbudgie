@@ -17,15 +17,19 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public class Level implements Cloneable {
 	
-	private List<AbstractGameObject> gameObjects = new ArrayList<AbstractGameObject>();
-	private List<TerrainSection> terrainSections = new ArrayList<TerrainSection>();
-	private List<AbstractGameObject> scheduledForAddition = new ArrayList<AbstractGameObject>();
+	private List<AbstractGameObject> gameObjects = 
+		new ArrayList<AbstractGameObject>();
+	private List<TerrainSection> terrainSections = 
+		new ArrayList<TerrainSection>();
+	private List<AbstractGameObject> scheduledForAddition = 
+		new ArrayList<AbstractGameObject>();
 	
 	private String backgroundTexId;
 	private Vector startPosition;
 	private Player player;
 	
 	private int levelNumber;
+	
 	/**
 	 * Constructs a new Level object.
 	 */
@@ -57,7 +61,9 @@ public class Level implements Cloneable {
 	 */
 	public List<AbstractCollidable> getCollidableObjects() {
 		
-		ArrayList<AbstractCollidable> col = new ArrayList<AbstractCollidable>();
+		ArrayList<AbstractCollidable> col = 
+			new ArrayList<AbstractCollidable>();
+		
 		for (AbstractGameObject ago : gameObjects) {
 			if (ago instanceof AbstractCollidable)
 				col.add((AbstractCollidable) ago);
@@ -174,7 +180,8 @@ public class Level implements Cloneable {
 
 	/**
 	 * Schedule an object for addition to the level, at the next
-	 * logic call
+	 * logic call. This method is used to add objects to a running 
+	 * level, to avoid concurrent modification of the gameObjects list.
 	 * @param gameObject the object to add
 	 */
 	public void scheduleForAddition(AbstractGameObject gameObject) {

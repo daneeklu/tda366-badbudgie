@@ -63,16 +63,15 @@ public class FlowController implements ActionListener {
 		
 		//Create listeners for input and add them as observers
 		//to the graphicsframe and it's canvas
-		KeyController kc = new KeyController(app);
-		MouseController mc = new MouseController(app);
+		InputController kc = new InputController(app);
 		
 		frame.addKeyListener(kc);
-		frame.addMouseListener(mc);
-		frame.addMouseMotionListener(mc);
+		frame.addMouseListener(kc);
+		frame.addMouseMotionListener(kc);
 		
 		canvas.addKeyListener(kc);
-		canvas.addMouseListener(mc);
-		canvas.addMouseMotionListener(mc);
+		canvas.addMouseListener(kc);
+		canvas.addMouseMotionListener(kc);
 		
 
 		// Create a timer calling the loop method of this

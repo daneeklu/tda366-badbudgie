@@ -14,8 +14,22 @@ import edu.chl.tda366badbudgie.util.Vector;
  */
 public abstract class AbstractItem extends AbstractCollidable {
 	
-	public AbstractItem(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
-		super(position, size, stationary, sprite, collisionData, friction, elasticity);
+	/**
+	 * Constructor
+	 * 
+	 * @param position
+	 * @param size
+	 * @param stationary
+	 * @param sprite
+	 * @param collisionData
+	 * @param friction
+	 * @param elasticity
+	 */
+	public AbstractItem(Vector position, Vector size, boolean stationary, 
+			Sprite sprite, Polygon collisionData, double friction, 
+			double elasticity) {
+		super(position, size, stationary, sprite, collisionData, friction, 
+				elasticity);
 	}
 	
 	

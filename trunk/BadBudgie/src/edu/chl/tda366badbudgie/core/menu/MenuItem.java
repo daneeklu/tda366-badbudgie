@@ -31,7 +31,8 @@ public class MenuItem {
 	 * @param position the position of the MenuItem.
 	 * @param size the size of the MenuItem.
 	 */
-	public MenuItem(String action, String texId, Rectangle bounds, boolean enabled) {
+	public MenuItem(String action, String texId, Rectangle bounds, 
+			boolean enabled) {
 		
 		Animation idleAnim = new Animation("idle",0);
 		
