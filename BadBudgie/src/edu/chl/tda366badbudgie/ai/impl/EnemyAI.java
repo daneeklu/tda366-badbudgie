@@ -30,38 +30,48 @@ public class EnemyAI implements IAI {
 		
 		List<Enemy> enemies = gr.getLevel().getEnemies();
 		for (Enemy e : enemies) {
-			if (e.getGroundContactVector().getLength() != 0 && e.getAttackTimer() == 0) {
+			if (e.getGroundContactVector().getLength() != 0 
+					&& e.getAttackTimer() == 0) {
 				// The object is AI controlled, has ground contact and is currently not attacking
 				
 				// See if player is nearby
 				Player p = gr.getPlayer();
-				
 				double pdx = p.getX() - e.getX();
 				double pdy = p.getY() - e.getY();
 				
-				if (Math.signum(pdx * e.getDirection()) > 0 && (pdx * pdx + pdy * pdy) < Math.pow(e.getSightDistance(), 2)) {
+				if (Math.signum(pdx * e.getDirection()) > 0 
+						&& (pdx * pdx + pdy * pdy) 
+							< Math.pow(e.getSightDistance(), 2)) {
+					// Player is in sight, attack
 					e.setAttackTimer(200);
 				}
-				
-				Vector bBoxS = e.getCollisionData(true).getBoundingBoxSize();
-				Vector bBoxP = e.getCollisionData(true).getBoundingBoxPosition();
-				
-				Vector leftGroundCheck = new Vector(bBoxP.getX() - checkOffsetX, bBoxP.getY() - checkOffsetY);
-				Vector rightGroundCheck = new Vector(bBoxP.add(bBoxS).getX() + checkOffsetX,  bBoxP.getY() - checkOffsetY);
-				Vector leftCollCheck = new Vector(bBoxP.getX() - checkOffsetX, e.getY());
-				Vector rightCollCheck = new Vector(bBoxP.add(bBoxS).getX() + checkOffsetX, e.getY());
 				
 				boolean rightHindrance = true;
 				boolean leftHindrance = true;
 				
-				// TODO: Opportunity for optimization by checking only close objects
+				Vector bBoxS = 
+					e.getCollisionData(true).getBoundingBoxSize();
+				Vector bBoxP = 
+					e.getCollisionData(true).getBoundingBoxPosition();
+
+				// Generate points for ground check
+				Vector leftGroundCheck = 
+					new Vector(bBoxP.getX() - checkOffsetX, 
+							   bBoxP.getY() - checkOffsetY);
+				Vector rightGroundCheck = 
+					new Vector(bBoxP.add(bBoxS).getX() + checkOffsetX,  
+							   bBoxP.getY() - checkOffsetY);
 				
-				// Check for absence of ground if front of the enemy
+				// TODO: Opportunity for optimization by checking only close obj
+				
+				// Check for ground in front of e
 				for (TerrainSection t : gr.getLevel().getTerrainSections()) {
-					if (Polygon.isPointInPolygon(leftGroundCheck, t.getCollisionData(true))) {
+					if (Polygon.isPointInPolygon(
+							leftGroundCheck, t.getCollisionData(true))) {
 						leftHindrance = false;
 					}
-					if (Polygon.isPointInPolygon(rightGroundCheck, t.getCollisionData(true))) {
+					if (Polygon.isPointInPolygon(
+							rightGroundCheck, t.getCollisionData(true))) {
 						rightHindrance = false;
 					}
 				}
@@ -71,31 +81,68 @@ public class EnemyAI implements IAI {
 					leftHindrance = rightHindrance = false;
 				}
 				
+				// Generate points for collision check
+				Vector leftCollCheck = 
+					new Vector(bBoxP.getX() - checkOffsetX, 
+							   e.getY());
+				Vector rightCollCheck = 
+					new Vector(bBoxP.add(bBoxS).getX() + checkOffsetX, 
+							   e.getY());
+				
 				// Check for obstructing objects in the enemy's path
 				if (!rightHindrance && !leftHindrance) {
-					for (AbstractCollidable c : gr.getLevel().getCollidableObjects()) {
-						if (c != p && !enemies.contains(c) && AbstractCollidable.isPhysicalCollision(c, e)) {
-							// Ignore non-physical collisions and the player
-							if (e.getDirection() == -1 && Polygon.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
+					
+					// Check for obstructing game objects
+					for (AbstractCollidable c 
+							: gr.getLevel().getCollidableObjects()) {
+						if (c != p 
+								&& !enemies.contains(c) 
+								&& AbstractCollidable.isPhysicalCollision(c, e)
+								) {
+							
+							if (e.getDirection() == -1 
+									&& Polygon.isPointInPolygon(
+											leftCollCheck, 
+											c.getCollisionData(true))) {
+								// e is facing left and has obstacle in front
 								leftHindrance = true;
 								break;
 							}
-							else if (e.getDirection() == 1 && Polygon.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
+							else if (e.getDirection() == 1 
+									&& Polygon.isPointInPolygon(
+											rightCollCheck, 
+											c.getCollisionData(true))) {
+								// e is facing right and has obstacle in front
 								rightHindrance = true;
 								break;
 							}
+							
 						}
 					}
-					for (AbstractCollidable c : gr.getLevel().getTerrainSections()) {
-						if (e.getDirection() == -1 && Polygon.isPointInPolygon(leftCollCheck, c.getCollisionData(true))) {
+					
+					// Check for obstructing terrain
+					for (AbstractCollidable c 
+							: gr.getLevel().getTerrainSections()) {
+						
+						if (e.getDirection() == -1 
+								&& Polygon.isPointInPolygon(
+										leftCollCheck, 
+										c.getCollisionData(true))) {
+							// e is facing left and has obstacle in front
 							leftHindrance = true;
 							break;
 						}
-						else if (e.getDirection() == 1 && Polygon.isPointInPolygon(rightCollCheck, c.getCollisionData(true))) {
+						else if (e.getDirection() == 1 
+								&& Polygon.isPointInPolygon(
+										rightCollCheck, 
+										c.getCollisionData(true))) {
+							// e is facing right and has obstacle in front
 							rightHindrance = true;
 							break;
 						}
+						
 					}
+					
 				}
 				
 				if (rightHindrance) {

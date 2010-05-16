@@ -36,8 +36,12 @@ public class Rectangle extends Polygon {
 	 * @param height the height of the rectangle.
 	 */
 	public Rectangle(double x, double y, double width, double height){
-		super(new ArrayList<Vector>(Arrays.asList(new Vector(x, y), new Vector(x, y + height), new Vector(x + width, y + height), new Vector(x + width, y))));
-		//super(new ArrayList<Vector>(Arrays.asList(new Vector(x, y), new Vector(x + width, y ), new Vector(x + width, y + height), new Vector(x , y + height))));
+		super(new ArrayList<Vector>(Arrays.asList(
+				new Vector(x, y), 
+				new Vector(x, y + height), 
+				new Vector(x + width, y + height), 
+				new Vector(x + width, y))));
+
 		this.x = x;
 		this.y = y;
 		this.width = width;

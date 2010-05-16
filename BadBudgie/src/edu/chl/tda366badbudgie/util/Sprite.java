@@ -89,7 +89,8 @@ public class Sprite implements Cloneable {
 	 * @param s
 	 */
 	public Sprite(Sprite s){
-		this(s.getId(), s.getHorFrames(), s.getVerFrames(), new ArrayList<Animation>(s.animations.values()));
+		this(s.getId(), s.getHorFrames(), s.getVerFrames(), 
+				new ArrayList<Animation>(s.animations.values()));
 	}
 	
 	/**
@@ -203,7 +204,8 @@ public class Sprite implements Cloneable {
 		
 		currentTime+=1.0;
 		
-		if(currentTime >= animations.get(currentAnim).getFrameDuration(currentFrame)) {
+		if(currentTime 
+				>= animations.get(currentAnim).getFrameDuration(currentFrame)) {
 			currentFrame++;
 			currentTime = 0;
 			if(currentFrame >= animations.get(currentAnim).getFrames().length) {
@@ -223,7 +225,8 @@ public class Sprite implements Cloneable {
 		
 		currentTime+=1.0;
 		
-		if(currentTime >= animations.get(currentAnim).getFrameDuration(currentFrame)) {
+		if(currentTime 
+				>= animations.get(currentAnim).getFrameDuration(currentFrame)) {
 			currentFrame++;
 			currentTime = 0;
 			if(currentFrame >= animations.get(currentAnim).getFrames().length) {
