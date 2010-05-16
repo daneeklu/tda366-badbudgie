@@ -28,7 +28,7 @@
 			<animation id="idle" duration="0" indices="0" />
 		</sprite>
 		
-		<sprite id="reagan" animated="false" textureid="exit" />
+		<sprite id="reagan" animated="false" textureid="reagan" />
 		
 	</sprites>
 	

@@ -35,7 +35,7 @@
 			<animation id="idle" duration="0" indices="0" />
 		</sprite>
 		
-		<sprite id="reagan" animated="false" textureid="exit" />
+		<sprite id="reagan" animated="false" textureid="reagan" />
 		
 	</sprites>
 	
@@ -67,7 +67,7 @@
 			<vector x="20" y="15" />
 		</col>
 		
-		<col id="test" type="rectangle" width="100" height="300" />
+		<col id="test" type="rectangle" width="100" height="100" />
 	</collisiondata>
 	
 	<!--Defined game objects MAY BE REVISED-->
@@ -75,7 +75,7 @@
 		<object obid="catsoldier" type="enemy" colid="cat" spriteid="catgreen" friction="0.5" elasticity="0.4" damage="10" direction="-1" sizeX="100" sizeY="100"/>
 		<object obid="catghost" type="enemy" colid="cat" spriteid="catghost" friction="1" elasticity="0" damage="35" direction="1" sizeX="100" sizeY="100"/>
 		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" sizeX="60" sizeY="60" />
-		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" sizeX="100" sizeY="300" />
+		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" sizeX="100" sizeY="100" />
 	</definedobjects>
 	
 	<!--placed game objects-->
