@@ -20,6 +20,9 @@ public class GraphicsFrame extends JFrame {
 	
 	private transient IGraphics ig;
 	
+	/**
+	 * Constructor for GraphicsFrame
+	 */
 	public GraphicsFrame(){
 		ig = new GLGraphics(800, 600);
 		
@@ -38,6 +41,10 @@ public class GraphicsFrame extends JFrame {
 		});
 	}
 	
+	/**
+	 * Returns the IGraphics object of this frame.
+	 * @return
+	 */
 	public IGraphics getIGraphics() {
 		return ig;
 	}

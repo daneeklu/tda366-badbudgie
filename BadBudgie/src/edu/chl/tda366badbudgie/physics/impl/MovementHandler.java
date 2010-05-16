@@ -6,11 +6,22 @@ import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.util.Vector;
 
+/**
+ * Handles game objects movement.
+ * 
+ * @author kvarfordt
+ *
+ */
 public class MovementHandler {
 
+	/**
+	 * Handles game objects movement and updates their position.
+	 * @param gameRound
+	 */
 	public void handleMovement(GameRound gameRound) {
 		
-		List<AbstractGameObject> gameObjects = gameRound.getLevel().getGameObjects();
+		List<AbstractGameObject> gameObjects = 
+			gameRound.getLevel().getGameObjects();
 		
 		for(AbstractGameObject ago : gameObjects) {
 			
@@ -19,15 +30,15 @@ public class MovementHandler {
 				ago.updateForces();
 				
 				// Air friction
-				//ago.applyForce(ago.getVelocity().scalarMultiplication(ago.getVelocity().getLength()*-1.0*ago.getAirResistance()));
-				ago.setVelocity(ago.getVelocity().scalarDivision(ago.getAirResistance()));
-				
+				ago.setVelocity(ago.getVelocity()
+						.scalarDivision(ago.getAirResistance()));
 				
 				// Apply gravity
 				ago.applyForce(new Vector(0, -Physics.g * ago.getMass()));
 				
 				// Set the new speed of the object
-				ago.setVelocity(ago.getVelocity().add(ago.getForce().scalarDivision(ago.getMass())));
+				ago.setVelocity(ago.getVelocity().add(ago.getForce()
+						.scalarDivision(ago.getMass())));
 				
 				// Set the new position of the object
 				ago.setPosition(ago.getPosition().add(ago.getVelocity()));

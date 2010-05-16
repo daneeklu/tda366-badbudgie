@@ -75,6 +75,7 @@ public class DebugInfoRenderer {
 	 * @param g the IGraphics to use
 	 */
 	public void drawDebugInfo(GameRound gameRound, IGraphics g) {
+		
 		if (isDebugInfoEnabled()) {
 			for (AbstractGameObject ago : gameRound.getLevel().getGameObjects()) {
 				
@@ -108,8 +109,6 @@ public class DebugInfoRenderer {
 			renderDebugInfo(g);
 		}
 		
-		
-		
 	}
 	
 	/**
@@ -141,9 +140,6 @@ public class DebugInfoRenderer {
 		debugText.clear();
 	}
 	
-	
-	
-	
 	/**
 	 * Enable or disable drawing of debug info.
 	 * 
@@ -161,7 +157,6 @@ public class DebugInfoRenderer {
 	public boolean isDebugInfoEnabled() {
 		return debugInfoEnabled;
 	}
-
 
 	/**
 	 * Private inner class for a line in the buffer.

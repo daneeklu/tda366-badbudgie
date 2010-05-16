@@ -12,7 +12,7 @@ import edu.chl.tda366badbudgie.util.Vector;
 /**
  * A collision detection and handling class.
  * 
- * @author tda366-badbudgie
+ * @author kvarfordt
  * 
  */
 public class CollisionHandler {
@@ -27,10 +27,12 @@ public class CollisionHandler {
 
 		// TODO: broader checking for possible collisions before using SAT
 
-		ArrayList<AbstractCollidable> collidableObjects = new ArrayList<AbstractCollidable>(
+		ArrayList<AbstractCollidable> collidableObjects = 
+			new ArrayList<AbstractCollidable>(
 				gr.getLevel().getCollidableObjects());
 
-		ArrayList<AbstractCollidable> terrainSections = new ArrayList<AbstractCollidable>(
+		ArrayList<AbstractCollidable> terrainSections = 
+			new ArrayList<AbstractCollidable>(
 				gr.getLevel().getTerrainSections());
 
 		// Reset ground contact vectors
@@ -40,8 +42,8 @@ public class CollisionHandler {
 		}
 		
 		/*
-		 * The collision checks are separated into two nested loops for performance, 
-		 * since we don't want to test terrain against terrain 
+		 * The collision checks are separated into two nested loops for 
+		 * performance, since we don't want to test terrain against terrain 
 		 */
 		
 		// For every object in the list...
@@ -54,10 +56,12 @@ public class CollisionHandler {
 				AbstractCollidable o2 = collidableObjects.get(j);
 				
 				// Early exclusion
-				if ( Math.abs(o1.getX() - o2.getX()) > (o1.getSize().getX() + o2.getSize().getY())/2 )
+				if ( Math.abs(o1.getX() - o2.getX()) 
+						> (o1.getSize().getX() + o2.getSize().getY())/2 )
 					continue;
 				
-				Vector mtv = getCollisionSAT(o1.getCollisionData(true), o2.getCollisionData(true));
+				Vector mtv = getCollisionSAT(o1.getCollisionData(true), 
+						o2.getCollisionData(true));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, o2, mtv);
 				}
@@ -76,7 +80,8 @@ public class CollisionHandler {
 					continue;
 				}
 				
-				Vector mtv = getCollisionSAT(o1.getCollisionData(true), t.getCollisionData(true));
+				Vector mtv = getCollisionSAT(o1.getCollisionData(true), 
+						t.getCollisionData(true));
 				if (mtv != null && !mtv.hasZeroLength()) {
 					collide(o1, t, mtv);
 				}
@@ -108,8 +113,6 @@ public class CollisionHandler {
 		}
 		
 	}
-	
-
 	
 	/**
 	 * Checks to see it there is a collision between two convex polygons. The
@@ -232,7 +235,6 @@ public class CollisionHandler {
 		}
 
 		return minOverlapVector;
-
 	}
 
 	/**
@@ -276,7 +278,6 @@ public class CollisionHandler {
 		}
 	}
 	
-	
 	/**
 	 * Changes the velocities of the colliding objects, taking into account 
 	 * friction and elasticity.
@@ -309,7 +310,6 @@ public class CollisionHandler {
 			double ma = a.getMass();
 			double mb = b.getMass();
 
-			
 			// Effect normal to collision
 			double vaNormal = a.getVelocity().dotProduct(collisionNormal);
 			double vbNormal = b.getVelocity().dotProduct(collisionNormal);
@@ -322,7 +322,6 @@ public class CollisionHandler {
 			double vbNormal2 = (2 * vCentreOfMassNormal - vbNormal)
 					* totalRestitution;
 
-			
 			// Effect tangent to collision
 			double vaTangent = a.getVelocity().dotProduct(collisionTangent);
 			double vbTangent = b.getVelocity().dotProduct(collisionTangent);
@@ -332,8 +331,10 @@ public class CollisionHandler {
 
 
 			// Calculate required forces
-			double faN = (vaNormal2 - vaNormal) * ma + b.getForce().dotProduct(collisionNormal);
-			double fbN = (vbNormal2 - vbNormal) * mb + a.getForce().dotProduct(collisionNormal);
+			double faN = (vaNormal2 - vaNormal) * ma 
+					+ b.getForce().dotProduct(collisionNormal);
+			double fbN = (vbNormal2 - vbNormal) * mb 
+					+ a.getForce().dotProduct(collisionNormal);
 			double faT = (vaTangent2 - vaTangent) * ma;
 			double fbT = (vbTangent2 - vbTangent) * mb;
 			
@@ -344,8 +345,6 @@ public class CollisionHandler {
 			b.applyForce(collisionNormal.scalarMultiplication(fbN).add(
 					collisionTangent.scalarMultiplication(fbT)));
 			
-			
-
 		} else if (a.isStationary()) {
 			
 			// Needed vectors and constants
@@ -359,7 +358,8 @@ public class CollisionHandler {
 			double vbTangent = b.getVelocity().dotProduct(collisionTangent);
 			
 			// Calculate required forces
-			double fN = (vbNormal + vbNormal * totalRestitution) *  -1 * b.getMass();
+			double fN = 
+				(vbNormal + vbNormal * totalRestitution) *  -1 * b.getMass();
 			double fT = (vbTangent / totalFriction - vbTangent) * b.getMass(); 
 			
 			// Apply force???
@@ -379,17 +379,16 @@ public class CollisionHandler {
 			double vaTangent = a.getVelocity().dotProduct(collisionTangent);
 			
 			// Calculate required forces
-			double fN = (vaNormal + vaNormal * totalRestitution) *  -1 * a.getMass();
+			double fN = 
+				(vaNormal + vaNormal * totalRestitution) *  -1 * a.getMass();
 			double fT = (vaTangent / totalFriction - vaTangent) * a.getMass(); 
 			
 			// Apply force???
 			a.applyForce(collisionNormal.scalarMultiplication(fN).add(
 					collisionTangent.scalarMultiplication(fT)));
 
-
 		}
 		
-		
 	}
-
+	
 }

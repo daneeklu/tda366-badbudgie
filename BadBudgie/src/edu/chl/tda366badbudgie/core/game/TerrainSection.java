@@ -29,8 +29,10 @@ public class TerrainSection extends AbstractCollidable {
 	 * @param friction 
 	 * @param elasticity
 	 */
-	public TerrainSection(Polygon surface, Sprite sprite, double friction, double elasticity) {
-		super(new Vector(), new Vector(), true, sprite, surface, friction, elasticity);
+	public TerrainSection(Polygon surface, Sprite sprite, double friction, 
+			double elasticity) {
+		super(new Vector(), new Vector(), true, sprite, surface, friction, 
+				elasticity);
 	}
 	
 	public TerrainSection(Polygon surface) {

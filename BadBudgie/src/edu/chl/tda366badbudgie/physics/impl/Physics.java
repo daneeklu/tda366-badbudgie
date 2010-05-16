@@ -6,7 +6,7 @@ import edu.chl.tda366badbudgie.physics.IPhysics;
 /**
  * Physics
  * 
- * Contains methods to handle the physics.
+ * Handles the physics of the game.
  * 
  * @author kvarfordt
  *

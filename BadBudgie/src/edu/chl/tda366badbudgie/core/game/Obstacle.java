@@ -20,8 +20,11 @@ public class Obstacle extends AbstractCollidable {
 	 * @param texId the texture id
 	 * @param stationary the obstacle is immovable if true
 	 */
-	public Obstacle(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
-		super(position, size, stationary, sprite, collisionData, friction, elasticity);
+	public Obstacle(Vector position, Vector size, boolean stationary, 
+			Sprite sprite, Polygon collisionData, double friction, 
+			double elasticity) {
+		super(position, size, stationary, 
+				sprite, collisionData, friction, elasticity);
 
 		addPhysicalCollision(TerrainSection.class);
 		addPhysicalCollision(Player.class);
@@ -42,10 +45,11 @@ public class Obstacle extends AbstractCollidable {
 		 * NOTE:
 		 * The effect of the collision depends on the class of other. 
 		 * We know that switching on class should normally be avoided, 
-		 * but we think in this case it's fine. 
+		 * but we think in this case it's fine, and we have not found a better 
+		 * solution.
 		 * If a new class is added, you don't want it to have any collision 
 		 * effects unless explicitly specified in that class' collisionEffect.
-		 * Note that physical collision response (bouncing etc.) is handled by 
+		 * Note that physical collision response (bouncing etc.) is handled by
 		 * a map in AbstractCollidable and not this method.
 		 * By using Class objects, it is also type safe.
 		 */
@@ -55,8 +59,8 @@ public class Obstacle extends AbstractCollidable {
 		if (otherClass.equals(Projectile.class)) {
 			Projectile p = (Projectile) other;
 			
-			// Total transfer of momentum
-			applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
+			applyForce(p.getVelocity()
+					.scalarMultiplication(p.getMass()/getMass()));
 		}
 	}
 }

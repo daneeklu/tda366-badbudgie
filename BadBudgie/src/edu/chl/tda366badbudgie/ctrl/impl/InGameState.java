@@ -28,7 +28,10 @@ public class InGameState implements IState {
 	// The current mouse position on the screen
 	private int mX, mY;
 	
-	
+	/**
+	 * Constructor
+	 * @param gameRound
+	 */
 	public InGameState(GameRound gameRound) {
 		
 		this.gameRound = gameRound;
@@ -75,14 +78,15 @@ public class InGameState implements IState {
 		}
 		
 		if (down && id.equals("debug")) {
-			DebugInfoRenderer.getInstance().setDebugInfoEnabled(!DebugInfoRenderer.getInstance().isDebugInfoEnabled());
+			DebugInfoRenderer.getInstance().setDebugInfoEnabled(
+					!DebugInfoRenderer.getInstance().isDebugInfoEnabled());
 		}
 	}
 
 
 
 	@Override
-	public void mouseActionClick(int button, boolean pressed) {
+	public void mouseButtonAction(int button, boolean pressed) {
 		gameRound.mouseAction(button, mX, mY, pressed);
 	}
 

@@ -94,7 +94,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			init(canvas);
 		}
 		
-		cameraPosition = new Vector(bounds.getX() + bounds.getWidth() / 2, bounds.getY() + bounds.getHeight() / 2);
+		cameraPosition = new Vector(bounds.getX() + bounds.getWidth() / 2, 
+				bounds.getY() + bounds.getHeight() / 2);
 		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		
@@ -105,7 +106,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 				cameraPosition.getX() + width / 2,
 				cameraPosition.getY() - height / 2,
 				cameraPosition.getY() + height / 2);
-		//gl.glTranslatef((float)(width/2 - ( cameraPosition.getX())),(float)(height/2 - ( cameraPosition.getY())), 0);
 
 		return true;
 	}
@@ -125,7 +125,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		System.out.println("OpenGL init");
 		textureManager = new TextureManager();
 
-		Map<String, BufferedImage> imgMap = ImageDataHandler.getInstance().getData();
+		Map<String, BufferedImage> imgMap = 
+			ImageDataHandler.getInstance().getData();
 		Iterator<String> it = imgMap.keySet().iterator();
 		
 		while(it.hasNext()){
@@ -149,7 +150,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
+	public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, 
+			boolean deviceChanged) {
 		//Nothing to be implemented
 		
 	}
@@ -173,7 +175,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 			//crop rather than zoom
 			if (height < fullheight / 2.0) {
 				this.height = 2.0 * height;
-				this.width = (fullwidth * (double)width ) / (ratio * ((double)fullheight / 2.0));
+				this.width = (fullwidth * (double)width ) 
+						/ (ratio * ((double)fullheight / 2.0));
 			}
 			
 		} else {
@@ -276,7 +279,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 	
 	@Override
-	public void drawTexturedPolygon(Vector position, Polygon p, String textureId, double texRes) {
+	public void drawTexturedPolygon(Vector position, Polygon p, 
+			String textureId, double texRes) {
 		
 		GL gl = canvas.getGL();
 		GLContext con = canvas.getContext();
@@ -285,8 +289,10 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		}
 
 		gl.glEnable(GL.GL_TEXTURE_2D);
-		gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
-	    gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
+		gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, 
+				GL.GL_REPEAT);
+	    gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, 
+	    		GL.GL_REPEAT);
 		setActiveTexture(textureId);
 
 		switch (p.getVertices().size()) {
@@ -303,8 +309,10 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		for (Vector v : p.getVertices()) {
 			
-			gl.glTexCoord2d(position.add(v).getX() * texRes, position.add(v).getY() * texRes);
-			gl.glVertex2d(position.getX() + v.getX(),position.getY() + v.getY() );
+			gl.glTexCoord2d(position.add(v).getX() * texRes, 
+					position.add(v).getY() * texRes);
+			gl.glVertex2d(position.getX() + v.getX(),
+					position.getY() + v.getY() );
 			
 		}
 		
@@ -421,7 +429,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glBegin(GL.GL_LINE_STRIP);
-		gl.glColor3d(((double) c.getRed()) / 256, ((double) c.getGreen()) / 256, ((double) c.getBlue()) / 256);
+		gl.glColor3d(((double) c.getRed()) / 256, ((double) c.getGreen()) / 256, 
+				((double) c.getBlue()) / 256);
 		
 		gl.glLineWidth(2f);
 		
@@ -435,8 +444,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawRectSection(Vector position, Rectangle rectangle, int section, int hres,
-			int vres) {
+	public void drawRectSection(Vector position, Rectangle rectangle, 
+			int section, int hres, int vres) {
 		
 		double tx, ty;
 		double frameWidth = 1.0 / hres;
@@ -489,9 +498,11 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		// Flip the texture data horizontally if needed
 		if (sprite.getMirrored())
-			texRect = new Rectangle(tx + frameWidth, ty+frameHeight, -frameWidth, -frameHeight);
+			texRect = new Rectangle(tx + frameWidth, ty+frameHeight, 
+					-frameWidth, -frameHeight);
 		else
-			texRect = new Rectangle(tx, ty + frameHeight, frameWidth, -frameHeight);
+			texRect = new Rectangle(tx, ty + frameHeight, 
+					frameWidth, -frameHeight);
 		
 		drawPolygon(poly, texRect);
 
@@ -504,7 +515,8 @@ public class GLGraphics implements GLEventListener, IGraphics{
 	}
 
 	@Override
-	public void drawColoredRect(Rectangle r, Color color, double xPos, double yPos) {
+	public void drawColoredRect(Rectangle r, Color color, 
+			double xPos, double yPos) {
 
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glBegin(GL.GL_QUADS);
@@ -512,7 +524,9 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		
 		
-		gl.glColor3d(((double) color.getRed()) / 256, ((double) color.getGreen()) / 256, ((double) color.getBlue()) / 256);
+		gl.glColor3d(((double) color.getRed()) / 256, 
+				((double) color.getGreen()) / 256, 
+				((double) color.getBlue()) / 256);
 		
 		
 		

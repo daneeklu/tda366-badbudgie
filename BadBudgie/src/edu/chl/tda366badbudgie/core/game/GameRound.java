@@ -17,9 +17,11 @@ import edu.chl.tda366badbudgie.util.*;
 public class GameRound {
 	
 	/**
-	 * Enum containing possible "passback values" from an AbstractGameObject to the GameRound
+	 * Enum containing possible signals from an 
+	 * AbstractGameObject to the GameRound.
 	 */
-	public enum GameRoundMessage{NO_EVENT, LEVEL_FINISHED, PLAYER_DIED, REMOVE_OBJECT};
+	public enum GameRoundMessage{NO_EVENT, LEVEL_FINISHED, PLAYER_DIED, 
+		REMOVE_OBJECT};
 
 	private Level currentLevel;
 	private Player player;
@@ -92,17 +94,22 @@ public class GameRound {
 		GameRoundMessage gameEvent;
 		
 		// Using iterator so that an object can be removed in the loop
-		for (Iterator<AbstractGameObject> i = currentLevel.getGameObjects().iterator(); i.hasNext(); ) {
+		for (Iterator<AbstractGameObject> i = 
+			currentLevel.getGameObjects().iterator(); i.hasNext(); ) {
+			
 			AbstractGameObject ago = i.next();
 			
 			// Update each object and receive the passed back GameRoundMessage
 			gameEvent = ago.update();
 			
-			
 			if (gameEvent == GameRoundMessage.REMOVE_OBJECT) {
 				i.remove();
 			}
-			// Forward some of the messages through return value to the InGameState object
+			
+			/*
+			 *  Forward some of the messages through return value to the 
+			 *  InGameState object.
+			 */
 			if (gameEvent == GameRoundMessage.LEVEL_FINISHED
 				|| gameEvent == GameRoundMessage.PLAYER_DIED) {
 				return gameEvent;
@@ -110,14 +117,17 @@ public class GameRound {
 
 		}
 		
-		// If any objects were scheduled for addition to the level, add them
+		/*
+		 *  If any objects were scheduled for addition to the level, add them.
+		 *  Removing them mid-iteration raises a concurrent modification 
+		 *  exception.
+		 */
 		for (AbstractGameObject ago : currentLevel.getScheduledForAddition()) {
 			currentLevel.addGameObject(ago);
 		}
 		currentLevel.getScheduledForAddition().clear();
 		
 		return GameRoundMessage.NO_EVENT;
-		
 	}
 
 	/**

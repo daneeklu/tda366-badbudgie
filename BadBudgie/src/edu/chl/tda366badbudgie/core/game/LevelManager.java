@@ -3,7 +3,6 @@ package edu.chl.tda366badbudgie.core.game;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * LevelManager
  * Singleton class that handles references 
@@ -16,6 +15,7 @@ public class LevelManager {
 		
 	//Singleton instance
 	private static LevelManager instance;
+	
 	//List of levels held by manager.
 	private List<Level> levels = new ArrayList<Level>();
 	

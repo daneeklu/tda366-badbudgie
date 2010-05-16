@@ -2,10 +2,13 @@ package edu.chl.tda366badbudgie.ctrl;
 
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
+/**
+ * Interface for the game states.
+ */
 public interface IState {
 
 	/**
-	 * Perform logical operations.
+	 * Tell the state to do all it's logic.
 	 */
 	public void logic();
 	
@@ -23,12 +26,11 @@ public interface IState {
 	public void keyboardAction(String id, boolean down);
 	
 	/**
-	 * 
-	 * Handle a mouse click/release.
+	 * Handle a mouse press/release.
 	 * @param button the mouse button that was affected
 	 * @param pressed true if the mouse button was pressed.
 	 */
-	public void mouseActionClick(int button, boolean pressed);
+	public void mouseButtonAction(int button, boolean pressed);
 	
 	/**
 	 * Handle mouse movements.

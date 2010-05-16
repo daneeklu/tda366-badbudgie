@@ -11,11 +11,13 @@ import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
+ * Interface for the graphics methods.
  * 
  * @author lumbo, d.skalle
  *
  */
 public interface IGraphics {
+	
 	/**
 	 *  Get the canvas for the Graphics object
 	 */
@@ -25,7 +27,8 @@ public interface IGraphics {
 	 * Start the rendering
 	 * 
 	 * @param cameraPosition the center position of the camera
-	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
+	 * @return true if you may proceed using the other drawing methods. 
+	 * Do not use them otherwise
 	 */
 	public boolean startRendering(Vector cameraPosition);
 	
@@ -33,7 +36,8 @@ public interface IGraphics {
 	 * Start the rendering
 	 * 
 	 * @param bounds the boundary rectangle for the camera
-	 * @return true if you may proceed using the other drawing methods. Do not use them otherwise
+	 * @return true if you may proceed using the other drawing methods. 
+	 * Do not use them otherwise
 	 */
 	public boolean startRendering(Rectangle bounds);
 	
@@ -114,7 +118,8 @@ public interface IGraphics {
 	 * @param hres the horisontal section resolution of the texture
 	 * @param vres the vertical section resolution of the texture
 	 */
-	public void drawRectSection(Vector position, Rectangle rectangle, int section, int hres, int vres);
+	public void drawRectSection(Vector position, Rectangle rectangle, 
+			int section, int hres, int vres);
 	
 	
 	/**
@@ -124,7 +129,8 @@ public interface IGraphics {
 	 * @param q the quad
 	 * @param texureId the texture id
 	 */
-	public void drawTexturedQuad(Vector position, Quad q, String textureId, double textureResolution);
+	public void drawTexturedQuad(Vector position, Quad q, String textureId, 
+			double textureResolution);
 
 	/**
 	 * Draws a quad with the specified texture id
@@ -133,7 +139,8 @@ public interface IGraphics {
 	 * @param q the quad
 	 * @param texureId the texture id
 	 */
-	public void drawTexturedPolygon(Vector position, Polygon p, String textureId, double textureResolution);
+	public void drawTexturedPolygon(Vector position, Polygon p, 
+			String textureId, double textureResolution);
 
 	
 	/**
@@ -159,7 +166,8 @@ public interface IGraphics {
 	 * @param xPos - Sets the x coordinate for the rectangle position
 	 * @param yPos - Sets the y coordinate for the rectangle position
 	 */
-	public void drawColoredRect(Rectangle r, Color color, double xPos, double yPos);
+	public void drawColoredRect(Rectangle r, Color color, 
+			double xPos, double yPos);
 
 
 	

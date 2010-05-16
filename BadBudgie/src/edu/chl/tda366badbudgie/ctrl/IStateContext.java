@@ -3,6 +3,11 @@ import javax.swing.JFrame;
 
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 
+/**
+ * Interface for the state context. The state context handles the state of the 
+ * game, whether it's in a game or in the menu, and delegates commands from the
+ * flow controller to the current state.
+ */
 public interface IStateContext {
 
 	/**

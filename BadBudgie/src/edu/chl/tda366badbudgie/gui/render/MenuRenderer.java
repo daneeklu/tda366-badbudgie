@@ -28,7 +28,6 @@ public class MenuRenderer {
 		g.setActiveTexture(menu.getTexId());
 		g.drawRect(menu.getBounds());
 		
-		
 		for (MenuItem item : menu.getMenuItems()) {
 			if(item.getEnabled())
 				renderMenuItem(item, g);
@@ -38,7 +37,6 @@ public class MenuRenderer {
 			renderConfirmDialog(menu.getConfirmDialog(), g);
 		}
 
-		
 		g.stopRendering();
 	}
 	
@@ -52,6 +50,11 @@ public class MenuRenderer {
 		g.drawSprite(item.getSprite(), item.getBounds());
 	}
 	
+	/**
+	 * Render confirm dialog.
+	 * @param dialog
+	 * @param g
+	 */
 	private static void renderConfirmDialog(ConfirmDialog dialog, IGraphics g) {
 		g.setActiveTexture(dialog.getTexId());
 		g.drawRect(new Rectangle(200, 100, 400, 400));

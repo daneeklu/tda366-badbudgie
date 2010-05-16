@@ -29,8 +29,11 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	/**
 	 * Constructs a new AbstractUnit instance.
 	 */
-	public AbstractUnit(Vector position, Vector size, boolean stationary, Sprite sprite, Polygon collisionData, double friction, double elasticity) {
-		super(position, size, stationary, sprite, collisionData, friction, elasticity);
+	public AbstractUnit(Vector position, Vector size, boolean stationary, 
+			Sprite sprite, Polygon collisionData, double friction, 
+			double elasticity) {
+		super(position, size, stationary, sprite, collisionData, friction, 
+				elasticity);
 		setWeapon(new Weapon(getPosition(), new Sprite("gun1"), this));
 		groundContactVector = new Vector();
 		weaponOffset = new Vector();
@@ -40,7 +43,9 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	@Override
 	public GameRoundMessage update() {
 		
-		getWeapon().setPosition(getPosition().add(getSprite().getMirrored() ? getWeaponOffset() : getWeaponOffset().mirrorY()));
+		getWeapon().setPosition(getPosition().add(getSprite().getMirrored() 
+				? getWeaponOffset() 
+				: getWeaponOffset().mirrorY()));
 		getWeapon().update();
 
 		getSprite().animate();
