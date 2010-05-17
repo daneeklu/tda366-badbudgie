@@ -24,6 +24,15 @@ public class MenuItem {
 	private boolean selected;
 	private boolean enabled;
 	
+	/* A MenuItem can display two different texts:
+	 * the normal text, and an alternate text. If
+	 * the alternate value == true, then the alternate
+	 * text will be drawn. A different part of the
+	 * texture will be used, described in altSprite
+	 */
+	private boolean alternate;
+	private Sprite altSprite;
+	
 	/**
 	 * Create a MenuItem.
 	 * @param action the action string for the MenuItem.
@@ -34,19 +43,30 @@ public class MenuItem {
 	public MenuItem(String action, String texId, Rectangle bounds, 
 			boolean enabled) {
 		
+		// Initiate sprite for the normal text
 		Animation idleAnim = new Animation("idle",0);
-		
 		Animation selectedAnim = new Animation("selected",1);
-		
 		List<Animation> animList = new LinkedList<Animation>();
-		
 		animList.add(idleAnim);
 		animList.add(selectedAnim);
+		
+		// Initiate altSprite for the alternate text
+		Animation altIdleAnim = new Animation("idle",2);
+		Animation altSelectedAnim = new Animation("selected",3);
+		List<Animation> altAnimList = new LinkedList<Animation>();
+		altAnimList.add(altIdleAnim);
+		altAnimList.add(altSelectedAnim);
+
 		sprite = new Sprite(texId, 1, 4, animList);
+		altSprite = new Sprite(texId, 1, 4, altAnimList);
+		
 		this.bounds = bounds;
 		this.selected = false;
 		this.action = action;
 		this.enabled = enabled;
+		
+		// The normal text is displayed by default
+		this.alternate = false;
 		
 	}
 	
@@ -67,10 +87,13 @@ public class MenuItem {
 	 */
 	public void setSelected(boolean value) {
 		selected = value;
-		if (selected) 
+		if (selected) {
 			sprite.setAnimation("selected");
-		else
+			altSprite.setAnimation("selected");
+		} else {
 			sprite.setAnimation("idle");
+			altSprite.setAnimation("idle");
+		}
 	}
 	
 	/**
@@ -104,7 +127,10 @@ public class MenuItem {
 	 * @return the associated sprite.
 	 */
 	public Sprite getSprite() {
-		return sprite;
+		if (alternate)
+			return altSprite;
+		else
+			return sprite;
 	}
 	
 	/**
@@ -122,6 +148,22 @@ public class MenuItem {
 	 */
 	public String getAction() {
 		return action;
+	}
+
+	/**
+	 * Set whether the alternate text should be displayed or not.
+	 * @param alternate true if the alternate text should be displayed.
+	 */
+	public void setAlternate(boolean alternate) {
+		this.alternate = alternate;
+	}
+	
+	/**
+	 * Get whether the alternate text is the currently set one.
+	 * @return false for normal text, true for alternate text.
+	 */
+	public boolean getAlternate() {
+		return alternate;
 	}
 
 }

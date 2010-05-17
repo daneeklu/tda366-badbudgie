@@ -111,13 +111,18 @@ public class StateContext implements IStateContext {
 	}
 	
 	@Override
-	public void toggleFullscreen() {
-    	if (graphicsFrame.getExtendedState() == JFrame.NORMAL) {
+	public void setFullscreen(boolean fullscreen) {
+    	if (fullscreen) {
     		graphicsFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     	}
     	else {
     		graphicsFrame.setExtendedState(JFrame.NORMAL);
     	}
+	}
+
+	@Override
+	public boolean getFullscreen() {
+		return (graphicsFrame.getExtendedState() == JFrame.MAXIMIZED_BOTH);
 	}
 
 	@Override
