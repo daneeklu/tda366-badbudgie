@@ -26,7 +26,6 @@ public class Weapon extends AbstractItem {
 	private int cooldown;
 	private int damage;
 	private double nozzleSpeed;
-	private String weaponId;
 	private AbstractGameObject owner;
 	private Vector nozzleOffset;
 	
