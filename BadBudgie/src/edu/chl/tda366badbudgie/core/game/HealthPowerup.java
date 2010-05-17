@@ -6,16 +6,29 @@ import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
+ * A powerup that replenishes part of the players health.
  * 
  * @author kvarfordt
  *
  */
-public class HealthPack extends AbstractCollidable {
+public class HealthPowerup extends AbstractCollidable {
 
 	private int healthPoints;
 	private boolean touchedByPlayer = false;
 	
-	public HealthPack(Vector position, Vector size, boolean stationary,
+	/**
+	 * Constructor for HealthPowerup
+	 * 
+	 * @param position
+	 * @param size
+	 * @param stationary
+	 * @param sprite
+	 * @param collisionData
+	 * @param friction
+	 * @param elasticity
+	 * @param hp
+	 */
+	public HealthPowerup(Vector position, Vector size, boolean stationary,
 			Sprite sprite, Polygon collisionData, double friction, double elasticity, int hp) {
 		super(position, size, stationary, sprite, collisionData, friction, elasticity);
 		
@@ -24,10 +37,20 @@ public class HealthPack extends AbstractCollidable {
 		addPhysicalCollision(TerrainSection.class);
 	}
 
+	/**
+	 * Sets the amount of health this item gives the player.
+	 * 
+	 * @param healthPoints
+	 */
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
 	}
 
+	/**
+	 * Returns the amount of health this item gives the player.
+	 * 
+	 * @return the amount of health
+	 */
 	public int getHealthPoints() {
 		return healthPoints;
 	}
