@@ -20,7 +20,6 @@ import com.sun.opengl.util.GLUT;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.io.impl.ImageDataHandler;
 import edu.chl.tda366badbudgie.util.Polygon;
-import edu.chl.tda366badbudgie.util.Quad;
 import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Screen;
 import edu.chl.tda366badbudgie.util.Sprite;
@@ -506,12 +505,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		
 		drawPolygon(poly, texRect);
 
-	}
-
-	@Override
-	public void drawTexturedQuad(Vector position, Quad q, String textureId,
-			double textureResolution) {
-		drawTexturedPolygon(position, q, textureId, textureResolution);
 	}
 
 	@Override
