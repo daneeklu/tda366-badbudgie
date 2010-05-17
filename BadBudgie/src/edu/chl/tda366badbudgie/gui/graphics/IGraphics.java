@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import edu.chl.tda366badbudgie.util.Polygon;
-import edu.chl.tda366badbudgie.util.Quad;
 import edu.chl.tda366badbudgie.util.Rectangle;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -121,17 +120,6 @@ public interface IGraphics {
 	public void drawRectSection(Vector position, Rectangle rectangle, 
 			int section, int hres, int vres);
 	
-	
-	/**
-	 * Draws a quad with the specified texture id
-	 * 
-	 * @param position the reference position of the quad
-	 * @param q the quad
-	 * @param texureId the texture id
-	 */
-	public void drawTexturedQuad(Vector position, Quad q, String textureId, 
-			double textureResolution);
-
 	/**
 	 * Draws a quad with the specified texture id
 	 * 
