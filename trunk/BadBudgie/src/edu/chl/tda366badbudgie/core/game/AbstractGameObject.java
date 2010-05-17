@@ -142,8 +142,8 @@ public abstract class AbstractGameObject implements Cloneable {
 	 * Sets the current force acting on the object
 	 * @param v the velocity vector
 	 */
-	public void setForce(Vector v) {
-		force = v;
+	public void setForce(Vector force) {
+		this.force = force;
 	}
 
 	/**

@@ -128,24 +128,24 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * Sets the collision data to the given polygon
 	 * @param cd the collision data polygon
 	 */
-	public void setCollisionData(Polygon cd) {
-		collisionData = cd;
+	public void setCollisionData(Polygon collisionData) {
+		this.collisionData = collisionData;
 	}
 	
 	/**
 	 * Sets the friction of the object to the given value
 	 * @param f the friction value
 	 */
-	public void setFriction(double f) {
-		friction = f;
+	public void setFriction(double friction) {
+		this.friction = friction;
 	}
 	
 	/**
 	 * Sets the elasticity of the object to the given value
 	 * @param e the elasticity value
 	 */
-	public void setElasticity(double e) {
-		elasticity = e;
+	public void setElasticity(double elasticity) {
+		this.elasticity = elasticity;
 	}
 		
 	
@@ -153,17 +153,17 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * Returns true if the two given collidable game objects should 
 	 * have a physical collision response.
 	 * 
-	 * @param class1
-	 * @param class2
-	 * @return
+	 * @param object1 - the first object of two that shall be tested for collision
+	 * @param object2 - the second object that is going to be tested for collision
+	 * @return A boolean that is true if there has been a physical collision between the two objects
 	 */
-	public static boolean isPhysicalCollision(AbstractCollidable class1, 
-			AbstractCollidable class2) {
+	public static boolean isPhysicalCollision(AbstractCollidable object1, 
+			AbstractCollidable object2) {
 		
 		// Using the static list physicalCollisions below.
 		// Implementation might change.
-		String cn1 = class1.getClass().getSimpleName();
-		String cn2 = class2.getClass().getSimpleName();
+		String cn1 = object1.getClass().getSimpleName();
+		String cn2 = object2.getClass().getSimpleName();
 		String concat;
 		
 		// Sort the two class names lexicographically
