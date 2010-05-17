@@ -215,9 +215,8 @@ public class Player extends AbstractUnit {
 		if(!getGroundContactVector().hasZeroLength() 
 				&& getFlyingEnergy() < maxFlyingEnergy){
 			setFlyingEnergy(getFlyingEnergy() + 4);
-			if(getFlyingEnergy() > 100){
-				setFlyingEnergy(100.0);
-			}
+			if (getFlyingEnergy() > maxFlyingEnergy)
+				setFlyingEnergy(maxFlyingEnergy);
 		}
 		
 		if(this.getWeapon() != null){

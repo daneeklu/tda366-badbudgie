@@ -31,6 +31,7 @@
 		<texture id="howtoplay" path="res/howtoplay.png" />
 		<texture id="instructions" path="res/instructions.png" />
 		<texture id="back" path="res/back.png" />
+		<texture id="healthpack" path="res/healthpack.png" />
 	</textures>
 	
 	<levels>
