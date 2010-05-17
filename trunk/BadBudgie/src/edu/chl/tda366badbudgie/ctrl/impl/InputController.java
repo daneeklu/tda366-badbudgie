@@ -109,7 +109,8 @@ public class InputController implements KeyListener, MouseListener,
 
 	@Override
 	public void mousePressed(MouseEvent evt) {
-		stateContext.getState().mouseButtonAction(evt.getButton(), true);
+		if(evt.getButton() == 1)
+			stateContext.getState().mouseButtonAction(evt.getButton(), true);
 	}
 
 	@Override
