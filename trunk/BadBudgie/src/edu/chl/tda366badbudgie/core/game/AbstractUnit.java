@@ -122,6 +122,8 @@ public abstract class AbstractUnit extends AbstractCollidable {
 	 */
 	public void setHealth(int health) {
 		this.health = health;
+		if (this.health > 100)
+			this.health = 100;
 	}
 
 	/**

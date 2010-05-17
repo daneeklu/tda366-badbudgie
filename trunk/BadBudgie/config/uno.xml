@@ -37,6 +37,8 @@
 		
 		<sprite id="reagan" animated="false" textureid="reagan" />
 		
+		<sprite id="healthpack" animated="false" textureid="healthpack" />
+		
 	</sprites>
 	
 	<!--Animations used by sprites * UNUSED FOR NOW! * -->
@@ -76,6 +78,7 @@
 		<object obid="catghost" type="enemy" colid="cat" spriteid="catghost" friction="1" elasticity="0" damage="35" direction="1" sizeX="100" sizeY="100"/>
 		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" sizeX="60" sizeY="60" />
 		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" sizeX="100" sizeY="100" />
+		<object obid="healthpack" type="healthpack" colid="test" spriteid="healthpack" sizeX="50" sizeY="50" healthamount="30" />
 	</definedobjects>
 	
 	<!--placed game objects-->
@@ -131,6 +134,10 @@
 		
 		<gameobject id="smoothrock" scale="2">
 			<position x="1500" y="2000" />
+		</gameobject>
+		
+		<gameobject id="healthpack" scale="1">
+			<position x="1500" y="400" />
 		</gameobject>
 		
 	</placedobjects>

@@ -1,25 +1,20 @@
 package edu.chl.tda366badbudgie.core.game;
 
 import edu.chl.tda366badbudgie.core.game.GameRound.GameRoundMessage;
-import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**
- * A class describing a weapon
+ * A class describing a weapon carried by a unit.
  * 
  * @author lumbo
  *
  */
 
-public class Weapon extends AbstractItem {
+public class Weapon extends AbstractGameObject {
 	
 	// Default constructor parameters
 	private static final Vector WEAPON_SIZE = new Vector(120, 120);
-	private static final Polygon WEAPON_COLLISION_DATA = 
-		AbstractCollidable.defaultCollisionData;
-	private static final double WEAPON_FRICTION = 0.5;
-	private static final double WEAPON_ELASTICITY = 0.2;
 	private static final int WEAPON_DAMAGE = 10;
 	private static final int WEAPON_COOLDOWN = 10;
 	
@@ -47,10 +42,8 @@ public class Weapon extends AbstractItem {
 	 * @param owner
 	 */
 	public Weapon(Vector position, int damage, int cooldown, Vector size, 
-			Sprite sprite, Polygon collisionData, double friction, 
-			double elasticity, AbstractGameObject owner) {
-		super(position, size, false, sprite, collisionData, friction, 
-				elasticity);
+			Sprite sprite, AbstractGameObject owner) {
+		super(position, size, false, sprite);
 		setDamage(damage);
 		setCooldown(cooldown);
 		setOwner(owner);
@@ -66,8 +59,7 @@ public class Weapon extends AbstractItem {
 	 * @param owner
 	 */
 	public Weapon(Vector position, Sprite sprite, AbstractGameObject owner) {
-		this(position, WEAPON_DAMAGE, WEAPON_COOLDOWN, WEAPON_SIZE, sprite, 
-				WEAPON_COLLISION_DATA, WEAPON_FRICTION, WEAPON_ELASTICITY, 
+		this(position, WEAPON_DAMAGE, WEAPON_COOLDOWN, WEAPON_SIZE, sprite,
 				owner);
 	}
 	
