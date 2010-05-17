@@ -4,12 +4,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-import edu.chl.tda366badbudgie.core.game.Enemy;
 import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.core.game.Level;
 import edu.chl.tda366badbudgie.core.game.LevelExit;
 import edu.chl.tda366badbudgie.core.game.LevelManager;
-import edu.chl.tda366badbudgie.core.game.Obstacle;
 import edu.chl.tda366badbudgie.core.game.Player;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
 import edu.chl.tda366badbudgie.ctrl.impl.InGameState;
