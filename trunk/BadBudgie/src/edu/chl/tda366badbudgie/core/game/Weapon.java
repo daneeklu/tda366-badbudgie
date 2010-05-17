@@ -74,8 +74,8 @@ public class Weapon extends AbstractItem {
 	/**
 	 * Aims the weapon towards the given world coordinates.
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x - The x Coordinate for the aiming
+	 * @param y - The y Coordinate for the aiming
 	 */
 	public void setAim(double x, double y) {
 		double dx = x - getX();
