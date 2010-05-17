@@ -77,12 +77,18 @@ public interface IStateContext {
 	public void shutDown();
 	
     /**
-     * Toggles the frame between fullscreen and windowed mode.
-     * Requres that setFrame has been called.
+     * Set whether the game should be displayed in fullscreen.
      * 
-     * @throws an IllegalStateException if setFrame() has not been called.
+     * @param fullscreen true for fullscreen.
      */
-	public void toggleFullscreen();
+	public void setFullscreen(boolean fullscreen);
+	
+    /**
+     * Get whether the game is currently displayed in fullscreen.
+     * 
+     * @return true if fullscreen.
+     */
+	public boolean getFullscreen();
 
 	/**
 	 * Sets the GUI frame

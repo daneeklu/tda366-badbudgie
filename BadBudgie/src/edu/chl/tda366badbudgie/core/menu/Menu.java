@@ -168,11 +168,19 @@ public class Menu {
 	}
 	
 	/**
-	 * Get the menu items this menu has
-	 * @return the menu items
+	 * Get the MenuItem objects this menu has
+	 * @return the MenuItem array
 	 */
 	public MenuItem[] getMenuItems() {
 		return menuItems;
+	}
+	
+	/**
+	 * Get the selected MenuItem of this menu
+	 * @return the selected MenuItem
+	 */
+	public MenuItem getCurrentMenuItem() {
+		return menuItems[currentItem];
 	}
 
 	public void setGameRunning(boolean gameIsActive){

@@ -25,8 +25,9 @@ public class MenuState implements IState {
 	@Override
 	public void logic() {
 		
-		// Signal to the menu whether the game is running or not,
-		// then let the menu handle its logic
+		/* Signal to the menu whether the game is running or not,
+		 * then let the menu handle its logic
+		 */
 		menu.setGameRunning(StateContext.getInstance().getGameState() != null);
 		menu.logic();
 	}
@@ -46,15 +47,14 @@ public class MenuState implements IState {
 			
 			if (selected == null) return;
 			
-			
 			if (selected.equals("newgame")) {
-				
 				if (StateContext.getInstance().getGameState() == null) {
 					StateContext.getInstance().setGameState();
 					menu.setGameRunning(true);
 				} else {
 					menu.showConfirmDialog();
 				}
+				
 			} else if (selected.equals("resume")) {
 				StateContext.getInstance().setGameState();
 
@@ -67,18 +67,26 @@ public class MenuState implements IState {
 			} else if (selected.equals("confirm:newgame")) {
 				StateContext.getInstance().setGameState(
 					new InGameState(new GameRound()));
+				
 			} else if (selected.equals("mainmenu")) {
 				menu = MenuManager.getInstance().getMenu("mainmenu");
+				
 			} else if (selected.equals("optionsmenu")) {
 				menu = MenuManager.getInstance().getMenu("optionsmenu");
-				//StateContext.getInstance().toggleFullscreen();
+				
 			} else if (selected.equals("helpmenu")) {
 				menu = MenuManager.getInstance().getMenu("helpmenu");
+				
+			} else if (selected.equals("fullscreen")) {
+				/* Toggle fullscreen, and toggle alternate
+				 * text for "fullscreen" MenuItem
+				 */
+				boolean fullscreen = !StateContext.getInstance().getFullscreen();
+				menu.getCurrentMenuItem().setAlternate(fullscreen);
+				StateContext.getInstance().setFullscreen(fullscreen);
 			}
-
-			return;
+			
 		}
-		
 	}
 
 
