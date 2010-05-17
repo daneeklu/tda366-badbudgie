@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
 import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.game.Enemy;
-import edu.chl.tda366badbudgie.core.game.HealthPack;
+import edu.chl.tda366badbudgie.core.game.HealthPowerup;
 import edu.chl.tda366badbudgie.core.game.Level;
 import edu.chl.tda366badbudgie.core.game.LevelExit;
 import edu.chl.tda366badbudgie.core.game.LevelManager;
@@ -243,7 +243,7 @@ public class LevelParser extends AbstractParser{
 				
 				int hp = Integer.parseInt(e.getAttribute("healthamount"));
 				
-				obj = new HealthPack(z, z, false, new Sprite(spriteMap.get(sID)), collisionMap.get(cID), fric, elas, hp);
+				obj = new HealthPowerup(z, z, false, new Sprite(spriteMap.get(sID)), collisionMap.get(cID), fric, elas, hp);
 				
 			} 
 			//ENEMY
