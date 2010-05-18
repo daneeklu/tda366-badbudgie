@@ -158,7 +158,13 @@ public class GameRound {
 	 * @param y the y-coordinate of the mouse position.
 	 */
 	public void mouseMove(double x, double y) {
-		getPlayer().setAimScreenCoords(x, y);
+		
+		// Convert from screen coordinates to world coordinates
+		Vector worldAim = 
+			Screen.screenToWorldCoordinates(new Vector(x, y), 
+					getPlayer().getPosition());
+		
+		getPlayer().setAim(worldAim.getX(), worldAim.getY());
 		
 	}
 	
