@@ -247,25 +247,13 @@ public class Player extends AbstractUnit {
 		return grMessage;
 	}
 
-	/**
-	 * Transform the screen coordinates to world coordinates,
-	 * then aim at them
-	 * @param mx the screen x coordinate
-	 * @param my the screen y coordinate
-	 */
-	public void setAimScreenCoords(double mx, double my) {
+	@Override
+	public void setAim(double mx, double my) {
 		
-		int screenWidth = Screen.getScreenWidth();
-		int screenHeight = Screen.getScreenHeight();
+		super.setAim(mx, my);
 		
-		setAim(getX() - screenWidth/2 + mx, getY() - screenHeight/2 + screenHeight - my);
-		
-		double dx = mx - screenWidth/2;
-		double dy = screenHeight/2 - my;
-		
-		double rotation = Math.toDegrees(Math.atan2(dx, dy)) + 90;
-		
-		if (rotation > 90 && rotation < 270)
+		// Mirror the player to always face in the direction of the gun.
+		if (getWeapon().getSprite().getMirrored())
 			getSprite().setMirrored(true);
 		else
 			getSprite().setMirrored(false);

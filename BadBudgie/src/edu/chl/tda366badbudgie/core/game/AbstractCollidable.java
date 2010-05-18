@@ -153,9 +153,9 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * Returns true if the two given collidable game objects should 
 	 * have a physical collision response.
 	 * 
-	 * @param object1 - the first object of two that shall be tested for collision
-	 * @param object2 - the second object that is going to be tested for collision
-	 * @return A boolean that is true if there has been a physical collision between the two objects
+	 * @param object1 - the first object
+	 * @param object2 - the second object
+	 * @return true if the two objects should have a physical collision response
 	 */
 	public static boolean isPhysicalCollision(AbstractCollidable object1, 
 			AbstractCollidable object2) {
