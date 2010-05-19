@@ -34,24 +34,21 @@ public class Player extends AbstractUnit {
 	private static final double PLAYER_FRICTION = 0.9;
 	private static final double PLAYER_ELASTICITY = 0.2;
 	
-	// Movement constants
+	// Constants
 	private static final double GROUND_MOVE_FORCE = 5.0;
 	private static final double AIR_MOVE_FORCE = 0.2;
 	private static final double JUMP_FORCE = 15.0;
 	private static final double MAXIMUM_WALK_SPEED = 10.0;
 	private static final double MAXIMUM_AIR_SPEED = 5.0;
 	
-	
-	private boolean isMovingLeft;
-	private boolean isMovingRight;
+	private boolean wantsToMoveLeft;
+	private boolean wantsToMoveRight;
 	private boolean isJumping;
 	private boolean isShooting;
+	private boolean flying;
 	private double flyingEnergy;
 	private double maxFlyingEnergy;
-	private boolean flying = false;
 	
-
-
 	/**
 	 * Constructor
 	 * 
@@ -105,7 +102,7 @@ public class Player extends AbstractUnit {
 	 * @param down true if the key was pressed, false if released
 	 */
 	public void moveLeft(boolean down) {
-		isMovingLeft = down;
+		wantsToMoveLeft = down;
 	}
 
 	/**
@@ -114,7 +111,7 @@ public class Player extends AbstractUnit {
 	 * @param down true if the key was pressed, false if released
 	 */
 	public void moveRight(boolean down) {
-		isMovingRight = down;
+		wantsToMoveRight = down;
 	}
 	
 	/**
@@ -144,10 +141,10 @@ public class Player extends AbstractUnit {
 	public void updateForces() {
 		
 		// The booleans are needed to make the controls work nicely.
-		if (isMovingLeft && !isMovingRight) {
+		if (wantsToMoveLeft && !wantsToMoveRight) {
 			setDirection(-1);
 		}
-		else if (isMovingRight && !isMovingLeft) {
+		else if (wantsToMoveRight && !wantsToMoveLeft) {
 			setDirection(1);
 		}
 		else {
@@ -187,7 +184,7 @@ public class Player extends AbstractUnit {
 		// Player should jump
 		if (isJumping) {
 			applyForce(getGroundContactVector().normalize()
-					.project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
+				   .project(new Vector(0, 1)).scalarMultiplication(JUMP_FORCE));
 			isJumping = false;
 		}
 		
@@ -341,12 +338,11 @@ public class Player extends AbstractUnit {
 		if (otherClass.equals(Enemy.class)) {
 			if (getInvincibilityTimer() == 0) {
 				setHealth(getHealth() - ((Enemy)other).getMeleeDamage()) ;
-				setInvincibilityTimer(20);
-				
-				// Bump player away from enemy
-				int dir = (int) Math.signum(getX() - other.getX());
-				applyForce(new Vector(dir * 6, 6));
+				setInvincibilityTimer(40);
 			}
+			// Bump player away from enemy
+			int dir = (int) Math.signum(getX() - other.getX());
+			setVelocity(new Vector(dir * 8, 8));
 		}
 		
 		if (otherClass.equals(Projectile.class)) {

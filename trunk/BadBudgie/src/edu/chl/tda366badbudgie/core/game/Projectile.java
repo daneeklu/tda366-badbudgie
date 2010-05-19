@@ -18,7 +18,8 @@ public class Projectile extends AbstractCollidable {
 	// Default constructor parameters
 	private static final Vector PROJECTILE_SIZE = new Vector(10, 10);
 	private static final Sprite PROJECTILE_SPRITE = new Sprite("bullet1");
-	private static final Polygon PROJECTILE_COLLISION_DATA = new Rectangle(-5,-5,10,10);
+	private static final Polygon PROJECTILE_COLLISION_DATA = 
+		new Rectangle(-5,-5,10,10);
 	private static final int PROJECTILE_DAMAGE = 10;
 	
 	private int damage = 10;
@@ -38,7 +39,9 @@ public class Projectile extends AbstractCollidable {
 	 * @param collisionData
 	 * @param owner
 	 */
-	public Projectile(Vector position, Vector direction, double speed, int damage, Vector size, Sprite sprite, Polygon collisionData, AbstractGameObject owner) {
+	public Projectile(Vector position, Vector direction, double speed, 
+			int damage, Vector size, Sprite sprite, Polygon collisionData, 
+			AbstractGameObject owner) {
 		super(position, size, false, sprite, collisionData, 1, 1);
 		
 		setMass(0.1);
@@ -55,8 +58,10 @@ public class Projectile extends AbstractCollidable {
 	 * @param speed
 	 * @param owner
 	 */
-	public Projectile(Vector position, Vector direction, double speed, AbstractGameObject owner) {
-		this(position, direction, speed, PROJECTILE_DAMAGE, PROJECTILE_SIZE, PROJECTILE_SPRITE, PROJECTILE_COLLISION_DATA, owner);
+	public Projectile(Vector position, Vector direction, double speed, 
+			AbstractGameObject owner) {
+		this(position, direction, speed, PROJECTILE_DAMAGE, PROJECTILE_SIZE, 
+				PROJECTILE_SPRITE, PROJECTILE_COLLISION_DATA, owner);
 	}
 	
 	/**

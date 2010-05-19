@@ -21,7 +21,7 @@ public class EnemyAI implements IAI {
 	
 	//Offset for checking for the ground.
 	private static double checkOffsetX = 10;
-	private static double checkOffsetY = 10;
+	private static double checkOffsetY = 25;
 	
 	public EnemyAI() {}
 
@@ -148,8 +148,13 @@ public class EnemyAI implements IAI {
 				if (rightHindrance) {
 					e.setDirection(-1);
 				}
-				if (leftHindrance) {
+				else if (leftHindrance) {
 					e.setDirection(1);
+				}
+				else if (e.getTimeInCurrDir() > 100 
+						&& (e.getVelocity().getLength()) < 0.1) {
+					// stops e from getting stuck
+					e.setDirection(e.getDirection()*-1); 
 				}
 				
 			}
