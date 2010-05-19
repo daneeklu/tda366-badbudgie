@@ -8,6 +8,7 @@ import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
 import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.game.GameRound;
 import edu.chl.tda366badbudgie.core.game.Player;
+import edu.chl.tda366badbudgie.core.game.TerrainSection;
 import edu.chl.tda366badbudgie.core.menu.Menu;
 import edu.chl.tda366badbudgie.gui.graphics.IGraphics;
 import edu.chl.tda366badbudgie.util.Vector;
@@ -69,7 +70,8 @@ public class DebugInfoRenderer {
 	}
 
 	/**
-	 * Gets the objects of a gameRounds level and displays various information about them, such as velocities and forces.
+	 * Gets the objects of a gameRounds level and visualizes various information
+	 * about them, such as velocities, forces and collision data.
 	 * 
 	 * @param gameRound the gameRound
 	 * @param g the IGraphics to use
@@ -77,23 +79,27 @@ public class DebugInfoRenderer {
 	public void drawDebugInfo(GameRound gameRound, IGraphics g) {
 		
 		if (isDebugInfoEnabled()) {
-			for (AbstractGameObject ago : gameRound.getLevel().getGameObjects()) {
+			
+			// Player info
+			Player p = gameRound.getPlayer();
+			addDebugText("Player");
+			addDebugText("x:" + p.getX() + " y:" + p.getY());
+			addDebugText("vx:" + p.getVelocity().getX() 
+					+ " vy:" + p.getVelocity().getY());
+			addDebugText("fx:" + p.getForce().getX() 
+					+ " fy:" + p.getForce().getY());
+			addDebugText("FlyingEnergy:" + p.getFlyingEnergy());
+			addDebugText("Health:" + p.getHealth());
+			
+			
+			for (AbstractGameObject ago : gameRound.getLevel()
+					.getGameObjects()) {
 				
-				// Player data
-				if (ago instanceof Player) {
-					Player p = (Player) ago;
-					addDebugText("Player");
-					addDebugText("x:" + p.getX() + " y:" + p.getY());
-					addDebugText("vx:" + p.getVelocity().getX() + " vy:" + p.getVelocity().getY());
-					addDebugText("fx:" + p.getForce().getX() + " fy:" + p.getForce().getY());
-					addDebugText("FlyingEnergy:" + p.getFlyingEnergy());
-					addDebugText("Health:" + p.getHealth());
-				}
-				
-				// Collision data
+				// Draw collision data of collidables
 				if (ago instanceof AbstractCollidable) {
 					AbstractCollidable ac = (AbstractCollidable) ago;
-					List<Vector> verts = ac.getCollisionData(true).getVertices();
+					List<Vector> verts = ac.getCollisionData(true)
+							.getVertices();
 					for (int i = 0; i < verts.size(); i++) {
 						Vector v1 = verts.get(i);
 						Vector v2 = verts.get((i + 1) % verts.size());
@@ -101,11 +107,27 @@ public class DebugInfoRenderer {
 					}
 				}
 				
-				addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getForce().scalarMultiplication(100)), Color.red);
-				addDebugLine(ago.getPosition(), ago.getPosition().add(ago.getVelocity().scalarMultiplication(7)), Color.blue);
+				addDebugLine(ago.getPosition(), ago.getPosition()
+						.add(ago.getForce().scalarMultiplication(100)), 
+						Color.red);
+				addDebugLine(ago.getPosition(), ago.getPosition()
+						.add(ago.getVelocity().scalarMultiplication(7)), 
+						Color.blue);
 				
 				
 			}
+			
+			// Terrain sections
+			for (TerrainSection t : gameRound.getLevel().getTerrainSections()) {
+				List<Vector> cdvs = t.getCollisionData(true).getVertices();
+				for (int i = 0; i < cdvs.size(); i++) {
+					Vector v1 = cdvs.get(i);
+					Vector v2 = cdvs.get((i + 1) % cdvs.size());
+
+					addDebugLine(v1, v2, Color.black);
+				}
+			}
+			
 			renderDebugInfo(g);
 		}
 		

@@ -329,22 +329,17 @@ public class CollisionHandler {
 			double vaTangent2 = vaTangent / totalFriction;
 			double vbTangent2 = vbTangent / totalFriction;
 
+			
+			b.setVelocity(collisionNormal
+					.scalarMultiplication(vbNormal2 * totalRestitution * -1)
+					.add(collisionTangent
+							.scalarMultiplication(vbTangent2 / totalFriction)));
 
-			// Calculate required forces
-			double faN = (vaNormal2 - vaNormal) * ma 
-					+ b.getForce().dotProduct(collisionNormal);
-			double fbN = (vbNormal2 - vbNormal) * mb 
-					+ a.getForce().dotProduct(collisionNormal);
-			double faT = (vaTangent2 - vaTangent) * ma;
-			double fbT = (vbTangent2 - vbTangent) * mb;
-			
-			
-			// Apply force
-			a.applyForce(collisionNormal.scalarMultiplication(faN).add(
-					collisionTangent.scalarMultiplication(faT)));
-			b.applyForce(collisionNormal.scalarMultiplication(fbN).add(
-					collisionTangent.scalarMultiplication(fbT)));
-			
+            a.setVelocity(collisionNormal
+            		.scalarMultiplication(vaNormal2 * totalRestitution * -1)
+            		.add(collisionTangent
+            				.scalarMultiplication(vaTangent2 / totalFriction)));
+
 		} else if (a.isStationary()) {
 			
 			// Needed vectors and constants
@@ -356,15 +351,11 @@ public class CollisionHandler {
 			// Normal and tangential velocity
 			double vbNormal = b.getVelocity().dotProduct(collisionNormal);
 			double vbTangent = b.getVelocity().dotProduct(collisionTangent);
-			
-			// Calculate required forces
-			double fN = 
-				(vbNormal + vbNormal * totalRestitution) *  -1 * b.getMass();
-			double fT = (vbTangent / totalFriction - vbTangent) * b.getMass(); 
-			
-			// Apply force???
-			b.applyForce(collisionNormal.scalarMultiplication(fN).add(
-					collisionTangent.scalarMultiplication(fT)));
+
+            b.setVelocity(collisionNormal
+            		.scalarMultiplication(vbNormal * totalRestitution * -1)
+            		.add(collisionTangent
+            				.scalarMultiplication(vbTangent / totalFriction)));
 
 		} else if (b.isStationary()) {
 
@@ -377,16 +368,11 @@ public class CollisionHandler {
 			// Normal and tangential velocity
 			double vaNormal = a.getVelocity().dotProduct(collisionNormal);
 			double vaTangent = a.getVelocity().dotProduct(collisionTangent);
-			
-			// Calculate required forces
-			double fN = 
-				(vaNormal + vaNormal * totalRestitution) *  -1 * a.getMass();
-			double fT = (vaTangent / totalFriction - vaTangent) * a.getMass(); 
-			
-			// Apply force???
-			a.applyForce(collisionNormal.scalarMultiplication(fN).add(
-					collisionTangent.scalarMultiplication(fT)));
 
+            a.setVelocity(collisionNormal
+            		.scalarMultiplication(vaNormal * totalRestitution * -1)
+            		.add(collisionTangent
+            				.scalarMultiplication(vaTangent / totalFriction)));
 		}
 		
 	}
