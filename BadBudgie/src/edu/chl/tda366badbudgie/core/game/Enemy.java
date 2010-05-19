@@ -35,7 +35,7 @@ public class Enemy extends AbstractUnit {
 	private int meleeDamage;
 	private double sightDistance = 400;
 	
-	
+	private int timeInCurrDir = 0;
 	private int attackTimer = 0;
 	
 	/**
@@ -105,6 +105,7 @@ public class Enemy extends AbstractUnit {
 			getWeapon().getSprite().setRotation(0);
 			getWeapon().getSprite().setMirrored(getDirection() > 0);
 			getSprite().setAnimation("run");
+			timeInCurrDir++;
 		}
 		
 		if (getHealth() <= 0)
@@ -174,6 +175,10 @@ public class Enemy extends AbstractUnit {
 	 */
 	@Override
 	public void setDirection(int direction) {
+		
+		if (getDirection() != direction)
+			setTimeInCurrDir(0);
+		
 		super.setDirection(direction);
 		if(direction == 1) 
 			getSprite().setMirrored(true);
@@ -230,6 +235,24 @@ public class Enemy extends AbstractUnit {
 			}
 		}
 		
+	}
+
+	/**
+	 * Returns the number of frames the enemy has been walking in the current 
+	 * direction.
+	 * @return the number of frames
+	 */
+	public int getTimeInCurrDir() {
+		return timeInCurrDir;
+	}
+
+	/**
+	 * Sets the number of frames the enemy has been walking in the current 
+	 * direction.
+	 * @param timeInCurrDir the number of frames
+	 */
+	private void setTimeInCurrDir(int timeInCurrDir) {
+		this.timeInCurrDir = timeInCurrDir;
 	}	
 	
 }

@@ -151,7 +151,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	/**
 	 * Returns true if the two given collidable game objects should 
-	 * have a physical collision response.
+	 * have a <i>physical</i> collision response.
 	 * 
 	 * @param object1 - the first object
 	 * @param object2 - the second object
@@ -215,7 +215,7 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	
 	/**
 	 * Collision effect method to be overridden by subclasses that have 
-	 * side effects from a collision.
+	 * side effects from a collision (except the physical response).
 	 * 
 	 * This method is called whether the two object have a physical collision 
 	 * response or not, to apply other effects such as damage or finishing the 
