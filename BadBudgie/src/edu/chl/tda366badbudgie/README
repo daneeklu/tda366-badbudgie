@@ -1,0 +1,78 @@
+tda366-badbudgie
+
+Description
+-----------
+A platform side-scrolling game using OpenGL for rendering graphics
+
+Installing and running
+----------------------
+This game needs JOGL (Java OpenGL bindings) to run.
+To run the game, create a directory called lib in the BadBudgie trunk folder.
+Put the "jogl.jar" and "gluegen-rt.jar" files in the folder.
+
+MVC and the game loop
+---------------------
+The program uses an alternative adaption of the MVC model. In addition to
+actions causing the control to make changes to the model, a game loop is used.
+This game loop is running through a timer in the background, and at even
+intervals the loop causes game logic to update the model while also triggering
+a redraw after the update. This would happen approximately 60 times / second on
+an optimal computer. The method the timer calls is FlowController.loop().
+
+Note: the redraw is triggered at every loop call, even if the model wasn't updated.
+This is because redraws are cheap, and when playing the game almost every single
+frame would need a redraw anyway. This is because objects such as enemies are constantly
+moving and sprites are animated, changing their looks. Checking for whether redraws are
+needed would be inefficient since many things would need to be checked, so the better
+solution is to redraw every frame, which wouldn't cause a problem on a modern computer
+(for which the game is intended).
+
+
+Program Flow
+------------
+The first class of the program to be called is naturally the Main class. The Main class
+creates a FlowController, which sets up the rest of the program. It briefly shows a
+splash screen, then initiates the GraphicsFrame used for displaying everything, and
+connects it to the StateContext which keeps track of the application state. The
+FlowController also creates an InputController, which keeps track of mouse and keyboard
+input. After this the FlowController sets up the previously described game loop timer.
+
+
+
+Short description of classes and packages
+---------------------------------------------------
+
+ctrl.impl.FlowController: 	initiates the program and controls the game loop
+ctrl.impl.InputController:	handles keyboard and mouse input
+
+ctrl.impl.StateContext:	keeps track of what state the game is in
+ctrl.impl.InGameState:	the active state when the game is playing
+ctrl.impl.MenuState:	the active state when the user is in the game menu
+
+gui.SplashScreen:		the splash screen displayed at the start of the application
+gui.GraphicsFrame:		the main frame, displaying the game
+
+gui.graphics.IGraphics:	an interface for a graphics object: an object which has the
+						drawing functionality needed for the game, such as rendering
+						geometric primitives.
+gui.graphics.impl.*:	classes related to certain implementations of the IGraphics
+						interface. The currently used implementation is GLGraphics
+
+gui.render:				a class which reads data from the models, interprets what needs
+						to be drawn and forwards the graphic data to the graphics object
+
+core.game:				the part of the model related to the ingame state
+core.menu:				the part of the model related to the menu state
+
+io:						subsystem for loading assets from the file system.
+
+ai:						subsystem for AI, has methods for controlling enemy units
+
+physics:				subsystem containing functionality regarding natural laws and 
+						collision between objects
+
+
+util:					general utilities package
+
+
+
