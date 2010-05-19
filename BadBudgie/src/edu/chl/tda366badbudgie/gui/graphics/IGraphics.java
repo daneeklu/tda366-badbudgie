@@ -18,12 +18,16 @@ import edu.chl.tda366badbudgie.util.Vector;
 public interface IGraphics {
 	
 	/**
-	 *  Get the canvas for the Graphics object
+	 *  Get the canvas for the Graphics object.
+	 *  The reference that is returned must of the same
+	 *  Canvas that is used by the IGraphics object.
 	 */
 	public Canvas getCanvas();
 	
 	/**
-	 * Start the rendering
+	 * Start the rendering.
+	 * Initiate anything needed to begin rendering.
+	 * May not be necessary to all implementations.
 	 * 
 	 * @param cameraPosition the center position of the camera
 	 * @return true if you may proceed using the other drawing methods. 
@@ -32,7 +36,9 @@ public interface IGraphics {
 	public boolean startRendering(Vector cameraPosition);
 	
 	/**
-	 * Start the rendering
+	 * Start the rendering.
+	 * Initiate anything needed to begin rendering.
+	 * May not be necessary to all implementations.
 	 * 
 	 * @param bounds the boundary rectangle for the camera
 	 * @return true if you may proceed using the other drawing methods. 
@@ -65,6 +71,7 @@ public interface IGraphics {
 	
 	/**
 	 * Draws a line
+	 * 
 	 * @param start
 	 * @param end
 	 */
@@ -156,7 +163,4 @@ public interface IGraphics {
 	 */
 	public void drawColoredRect(Rectangle r, Color color, 
 			double xPos, double yPos);
-
-
-	
 }

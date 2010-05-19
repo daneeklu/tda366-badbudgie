@@ -35,11 +35,8 @@
 	</textures>
 	
 	<levels>
-		<level nr="2" path="config/due.xml" />
-		<level nr="1" path="config/uno.xml" />
-		<!--<level nr="2" path="config/level1.xml"/>
-		<level nr="3" path="config/level2.xml"/>
-		<level nr="4" path="config/level3.xml"/>-->
+		<level nr="2" path="config/level2.xml" />
+		<level nr="1" path="config/level1.xml" />
 	</levels>
 	
 </gamedata>

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RoundedRectangle extends Polygon {
 
-	private static int RESOLUTION = 4;
+	private static int RESOLUTION = 2;
 	
 	public RoundedRectangle(Vector position, double width, double height, 
 			double cornerRadius, int resolution){
