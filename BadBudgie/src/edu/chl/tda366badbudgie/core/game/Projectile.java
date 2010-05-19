@@ -13,7 +13,7 @@ import edu.chl.tda366badbudgie.util.Vector;
  *
  */
 
-public class Projectile extends AbstractItem {
+public class Projectile extends AbstractCollidable {
 
 	// Default constructor parameters
 	private static final Vector PROJECTILE_SIZE = new Vector(10, 10);
