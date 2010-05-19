@@ -49,15 +49,6 @@
 	
 	<!--Defined collision data-->
 	<collisiondata>
-		<!--<col id="cat" type="polygon">
-			<vector x="-20" y="40" />
-			<vector x="-30" y="20" />
-			<vector x="-30" y="0" />
-			<vector x="-10" y="-40" />
-			<vector x="30" y="-40" />
-			<vector x="40" y="0" />
-			<vector x="30" y="40" />
-		</col>-->
 		<col id="cat" type="rectangle" width="45" height="70" radius="20" />
 		
 		<col id="rock" type="polygon">
@@ -75,10 +66,9 @@
 	<!--Defined game objects-->
 	<definedobjects>
 		<object obid="catsoldier" type="enemy" colid="cat" spriteid="catgreen" friction="0.5" elasticity="0.4" damage="10" direction="-1" sizeX="100" sizeY="100"/>
-		<object obid="catghost" type="enemy" colid="cat" spriteid="catghost" friction="1" elasticity="0" damage="35" direction="1" sizeX="100" sizeY="100"/>
 		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" sizeX="60" sizeY="60" />
 		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" sizeX="100" sizeY="100" />
-		<object obid="healthpack" type="healthpack" colid="test" spriteid="healthpack" sizeX="50" sizeY="50" healthamount="30" />
+		<object obid="healthpack" type="healthpack" colid="test" spriteid="healthpack" sizeX="100" sizeY="100" healthamount="30" />
 	</definedobjects>
 	
 	<!--placed game objects-->
@@ -120,11 +110,7 @@
 			<position x="900" y="1510" />
 		</gameobject>-->
 		
-		<gameobject id="catghost" scale="1">
-			<position x="2600" y="2000"/>
-		</gameobject>
-		
-		<gameobject id="catghost" scale="2">
+		<gameobject id="catsoldier" scale="2">
 			<position x="2800" y="2000"/>
 		</gameobject>
 		
@@ -136,7 +122,7 @@
 			<position x="1500" y="2000" />
 		</gameobject>
 		
-		<gameobject id="healthpack" scale="1">
+		<gameobject id="healthpack" scale="0.4">
 			<position x="1500" y="400" />
 		</gameobject>
 		

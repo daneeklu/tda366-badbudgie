@@ -31,8 +31,6 @@ public class GameRound {
 	 * Makes a new GameRound
 	 */
 	public GameRound() {
-		score = 0;
-		currentLevel = null;
 		player = new Player(new Vector(0,0));
 		player.setCollisionData(new RoundedRectangle(40, 80, 15));
 	}
@@ -50,9 +48,9 @@ public class GameRound {
 	 * @param level the level to set as active
 	 */
 	public void setLevel(Level level) {
-		this.currentLevel = level;
-		currentLevel.setPlayer(player);
+		currentLevel = level;
 		player.setPosition(level.getStartPosition());
+		currentLevel.setPlayer(player);
 	}
 
 	/**

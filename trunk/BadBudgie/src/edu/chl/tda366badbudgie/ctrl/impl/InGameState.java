@@ -54,6 +54,7 @@ public class InGameState implements IState {
 		if (gameAction == GameRoundMessage.LEVEL_FINISHED) {
 			gameRound.setLevel(LevelManager.getInstance().getLevel(
 					gameRound.getLevel().getNumber() + 1));
+			gameRound.getPlayer().setPosition(gameRound.getLevel().getStartPosition());
 			
 		// If the player died, terminate the game state and return to menu
 		} else if (gameAction == GameRoundMessage.PLAYER_DIED) {

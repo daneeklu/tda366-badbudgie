@@ -2,7 +2,7 @@
 <leveldata>
 
 	<!--The starting location of the player. -->
-	<playerposition x="300" y="20"/>
+	<playerposition x="100" y="20"/>
 	
 	<!--World scale, different strokes for different levels-->
 	<worldscale scale="1" />
@@ -76,9 +76,9 @@
 	<definedobjects>
 		<object obid="catsoldier" type="enemy" colid="cat" spriteid="catgreen" friction="0.5" elasticity="0.4" damage="10" direction="-1" sizeX="100" sizeY="100"/>
 		<object obid="catghost" type="enemy" colid="cat" spriteid="catghost" friction="1" elasticity="0" damage="35" direction="1" sizeX="100" sizeY="100"/>
-		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" sizeX="60" sizeY="60" />
+		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" sizeX="100" sizeY="100" />
 		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" sizeX="100" sizeY="100" />
-		<object obid="healthpack" type="healthpack" colid="test" spriteid="healthpack" sizeX="50" sizeY="50" healthamount="30" />
+		<object obid="healthpack" type="healthpack" colid="test" spriteid="healthpack" sizeX="100" sizeY="100" healthamount="30" />
 	</definedobjects>
 	
 	<!--placed game objects-->
@@ -108,8 +108,8 @@
 			<position x="2200" y="300" />
 		</gameobject>
 		
-		<gameobject id="healthpack" scale="1">
-			<position x="2100" y="300" />
+		<gameobject id="healthpack" scale="0.4">
+			<position x="2860" y="300" />
 		</gameobject>
 		
 	</placedobjects>
