@@ -32,7 +32,8 @@ public class EnemyAI implements IAI {
 		for (Enemy e : enemies) {
 			if (e.getGroundContactVector().getLength() != 0 
 					&& e.getAttackTimer() == 0) {
-				// The object is AI controlled, has ground contact and is currently not attacking
+				// The object is AI controlled, 
+				// has ground contact and is currently not attacking
 				
 				// See if player is nearby
 				Player p = gr.getPlayer();
@@ -151,8 +152,8 @@ public class EnemyAI implements IAI {
 				else if (leftHindrance) {
 					e.setDirection(1);
 				}
-				else if (e.getTimeInCurrDir() > 100 
-						&& (e.getVelocity().getLength()) < 0.1) {
+				else if (e.getTimeInCurrDir() > 30 
+						&& (e.getVelocity().getLength()) < 0.3) {
 					// stops e from getting stuck
 					e.setDirection(e.getDirection()*-1); 
 				}
