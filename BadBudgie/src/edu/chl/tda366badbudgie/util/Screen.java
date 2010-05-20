@@ -58,7 +58,7 @@ public class Screen {
 										   Vector cameraWorldPosition) {
 		return new Vector(cameraWorldPosition.getX() - getScreenWidth() / 2
 				+ screenCoords.getX(), cameraWorldPosition.getY()
-				- getScreenHeight() / 2 + getScreenHeight()
+				- (double) getScreenHeight() / 2 + (double) getScreenHeight()
 				- screenCoords.getY());
 	}
 

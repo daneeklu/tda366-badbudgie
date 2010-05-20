@@ -203,7 +203,7 @@ public class Vector {
 			coeff = v.x / x;
 		} else if(y == 0 || v.y == 0) {
 			coeff = 0;
-		} else if(v.x /x == v.y /y){ // TODO: Fix equality check between doubles
+		} else if(Math.abs(v.x /x - v.y /y) < 0.00000001){ 
 			coeff = v.x /x;
 		}
 		
