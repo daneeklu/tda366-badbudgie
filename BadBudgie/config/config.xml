@@ -32,11 +32,12 @@
 		<texture id="instructions" path="res/instructions.png" />
 		<texture id="back" path="res/back.png" />
 		<texture id="healthpack" path="res/healthpack.png" />
+		<texture id="rubber" path="res/bluerubber.png" />
 	</textures>
 	
 	<levels>
-		<level nr="2" path="config/level2.xml" />
-		<level nr="1" path="config/level1.xml" />
+		<level nr="2" path="config/level1.xml" />
+		<level nr="1" path="config/level2.xml" />
 	</levels>
 	
 </gamedata>

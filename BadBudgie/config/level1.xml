@@ -2,7 +2,7 @@
 <leveldata>
 
 	<!--The starting location of the player. -->
-	<playerposition x="300" y="20"/>
+	<playerposition x="300" y="30"/>
 	
 	<!--World scale, different strokes for different levels-->
 	<worldscale scale="1" />
@@ -38,6 +38,8 @@
 		<sprite id="reagan" animated="false" textureid="reagan" />
 		
 		<sprite id="healthpack" animated="false" textureid="healthpack" />
+		
+		<sprite id="rubber" animated="false" textureid="rubber" />
 		
 	</sprites>
 	
@@ -126,6 +128,10 @@
 			<position x="1500" y="400" />
 		</gameobject>
 		
+		<gameobject id="healthpack" scale="0.4">
+			<position x="100" y="900" />
+		</gameobject>
+		
 	</placedobjects>
 
 	<!--Terrain segments used in the level -->
@@ -182,14 +188,6 @@
 		
 		<!--FLOATING PLATFORMS-->
 		
-		<terrain x="500" y="700" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
-			<surface type="rectangle" width="200" height="100" />
-		</terrain>		
-		
-		<terrain x="500" y="770" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
-			<surface type="roundrectangle" width="250" height="40" radius="15"/>
-		</terrain>
-		
 		<terrain x="500" y="1100" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
 			<surface type="rectangle" width="200" height="100" />
 		</terrain>		
@@ -206,20 +204,12 @@
 			<surface type="roundrectangle" width="250" height="40" radius="15"/>
 		</terrain>
 		
-		<terrain x="1400" y="1700" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
-			<surface type="rectangle" width="400" height="100" />
+		<terrain x="1600" y="1700" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
+			<surface type="rectangle" width="530" height="100" />
 		</terrain>		
 		
-		<terrain x="1400" y="1770" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
-			<surface type="roundrectangle" width="450" height="40" radius="15"/>
-		</terrain>
-		
-		<terrain x="1800" y="1700" sprite="mud" friction="1.0" elasticity="0.0" resolution="0.003">
-			<surface type="rectangle" width="400" height="100" />
-		</terrain>		
-		
-		<terrain x="1800" y="1770" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
-			<surface type="roundrectangle" width="450" height="40" radius="15"/>
+		<terrain x="1600" y="1770" sprite="grass2" friction="0.5" elasticity="0.0" resolution="0.003">
+			<surface type="roundrectangle" width="580" height="40" radius="15"/>
 		</terrain>
 		
 		<!--Ice blocks-->
@@ -235,110 +225,187 @@
 			<surface type="rectangle" width="100" height="330"/>
 		</terrain>
 		
-		<terrain x="1970" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
-				<vector x="30" y="0" />
-				<vector x="30" y="340" />
 				<vector x="0" y="420" />
+				<vector x="30" y="0" />
 			</surface>
 		</terrain>
-		
-		<terrain x="2000" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
-				<vector x="30" y="0" />
-				<vector x="30" y="280" />
+				<vector x="0" y="400" />
+				<vector x="70" y="0" />
+			</surface>
+		</terrain>		
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="380" />
+				<vector x="100" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="360" />
+				<vector x="140" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
 				<vector x="0" y="340" />
+				<vector x="190" y="0" />
 			</surface>
 		</terrain>
-		
-		<terrain x="2030" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
 			<surface type="polygon">
 				<vector x="0" y="0" />
-				<vector x="30" y="0" />
-				<vector x="30" y="240" />
-				<vector x="0" y="280" />
-			</surface>
-		</terrain>
-		
-		<terrain x="2060" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="30" y="0" />
-				<vector x="30" y="210" />
-				<vector x="0" y="240" />
-			</surface>
-		</terrain>
-		
-		<terrain x="2090" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="30" y="0" />
-				<vector x="30" y="190" />
-				<vector x="0" y="210" />
-			</surface>
-		</terrain>
-		
-		<terrain x="2120" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="30" y="0" />
-				<vector x="30" y="180" />
-				<vector x="0" y="190" />
-			</surface>
-		</terrain>
-		
-		<terrain x="2150" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="100" y="0" />
-				<vector x="100" y="150" />
-				<vector x="0" y="180" />
-			</surface>
-		</terrain>
-		
-		<terrain x="2250" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="100" y="0" />
-				<vector x="100" y="140" />
-				<vector x="0" y="150" />
-			</surface>
-		</terrain>
-		
-		<terrain x="2350" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
+				<vector x="0" y="320" />
 				<vector x="250" y="0" />
-				<vector x="250" y="120" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="300" />
+				<vector x="320" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="280" />
+				<vector x="400" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="260" />
+				<vector x="490" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="240" />
+				<vector x="590" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="220" />
+				<vector x="700" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="200" />
+				<vector x="820" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="180" />
+				<vector x="950" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="160" />
+				<vector x="1090" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
 				<vector x="0" y="140" />
+				<vector x="1240" y="0" />
+			</surface>
+		</terrain>
+		<terrain x="1970" y="0" sprite="ice1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="0" y="120" />
+				<vector x="1400" y="0" />
 			</surface>
 		</terrain>
 		
-		<terrain x="2600" y="0" sprite="ice1" friction="0.01" elasticity="0.0" resolution="0.009">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="400" y="0" />
-				<vector x="400" y="110" />
-				<vector x="0" y="120" />
-			</surface>
-		</terrain>
 		
 		<!--BOUNCY BIT-->
-		<terrain x="2950" y="190" sprite="asphalt1" friction="1" elasticity="20.0" resolution="0.009">
-			<surface type="rectangle" width="100" height ="170" />
+		<terrain x="2960" y="130" sprite="asphalt1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="7" y="7" />
+				<vector x="13" y="7" />
+				<vector x="20" y="0" />
+				<vector x="13" y="-7" />
+				<vector x="7" y="-7" />
+			</surface>
 		</terrain>
-		<terrain x="2950" y="285" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.009">
-			<surface type="rectangle" width="100" height ="20" />
+		<terrain x="2975" y="130" sprite="asphalt1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="7" y="7" />
+				<vector x="13" y="7" />
+				<vector x="20" y="0" />
+				<vector x="13" y="-7" />
+				<vector x="7" y="-7" />
+			</surface>
+		</terrain>
+		<terrain x="2960" y="90" sprite="asphalt1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="7" y="7" />
+				<vector x="13" y="7" />
+				<vector x="20" y="0" />
+				<vector x="13" y="-7" />
+				<vector x="7" y="-7" />
+			</surface>
+		</terrain>
+		<terrain x="2975" y="90" sprite="asphalt1" friction="0.002" elasticity="0.0" resolution="0.009">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="7" y="7" />
+				<vector x="13" y="7" />
+				<vector x="20" y="0" />
+				<vector x="13" y="-7" />
+				<vector x="7" y="-7" />
+			</surface>
+		</terrain>
+		<terrain x="3000" y="110" sprite="asphalt1" friction="1" elasticity="0.0" resolution="0.009">
+			<surface type="rectangle" width="20" height ="70" />
+		</terrain>
+		<terrain x="2920" y="110" sprite="rubber" friction="1" elasticity="20.0" resolution="0.004">
+			<surface type="rectangle" width="30" height ="120" />
+		</terrain>
+		<terrain x="2950" y="110" sprite="rubber" friction="1" elasticity="20.0" resolution="0.004">
+			<surface type="rectangle" width="30" height ="90" />
 		</terrain>
 		
-		
+		<terrain x="2950" y="650" sprite="grass1" friction="1" elasticity="0.0" resolution="0.0015">
+			<surface type="rectangle" width="100" height ="900" />
+		</terrain>
 		
 		<!--EXIT PLATEAU-->
-		<terrain x="2800" y="1700" sprite="grass1" friction="0.5" elasticity="0.0" resolution="0.003">
+		<terrain x="2800" y="1700" sprite="grass1" friction="0.5" elasticity="0.2" resolution="0.0015">
 			<surface type="rectangle" width="500" height="60" />
 		</terrain>
+		<terrain x="2550" y="1670" sprite="grass1" friction="0.5" elasticity="0.2" resolution="0.0015">
+			<surface type="polygon">
+				<vector x="0" y="0" />
+				<vector x="500" y="0" />
+				<vector x="500" y="-850" />
+			</surface>
+		</terrain>
+		
 		<terrain x="2800" y="1740" sprite="rocktex" friction="1.0" elasticity="0.0" resolution="0.009">
 			<surface type="rectangle" width="580" height="20" />
 		</terrain>
