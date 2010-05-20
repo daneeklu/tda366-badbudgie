@@ -138,7 +138,8 @@ public class GameRenderer {
 		
 		//Draws Energy text
 		g.drawText("Energy", xPos, 133, 6);
-		g.drawText((int)gameRound.getPlayer().getFlyingEnergy() + "/100", xPos, 148, 6);
+		g.drawText((int)gameRound.getPlayer().getFlyingEnergy() + "/100", xPos,
+				148, 6);
 		
 		//Draws the score points
 		//g.drawText("Current score " + gameRound.getScore(), 600, 50, 5);

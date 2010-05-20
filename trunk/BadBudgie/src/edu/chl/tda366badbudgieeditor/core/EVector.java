@@ -81,7 +81,7 @@ public class EVector {
 		} else if(y == 0 || v.y == 0) {
 			coeff = 0;
 		} else if(v.x /x == v.y /y){
-			coeff = v.x /x;
+			coeff = (double) v.x / x;
 		}
 		
 		return coeff;

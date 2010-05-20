@@ -50,8 +50,11 @@ public class Enemy extends AbstractUnit {
 	 * @param meleeDamage
 	 * @param direction
 	 */
-	public Enemy(Vector position, Vector size, Sprite sprite, Polygon collisionData, double friction, double elasticity, int meleeDamage, int direction) {
-		super(position, size, false, sprite, collisionData, friction, elasticity);
+	public Enemy(Vector position, Vector size, Sprite sprite, 
+			Polygon collisionData, double friction, double elasticity, 
+			int meleeDamage, int direction) {
+		super(position, size, false, sprite, collisionData, friction, 
+				elasticity);
 
 		setHealth(40);
 		setMeleeDamage(meleeDamage);
@@ -85,7 +88,9 @@ public class Enemy extends AbstractUnit {
 		// Walking
 		if (getAttackTimer() == 0 && !getGroundContactVector().hasZeroLength() 
 				&& Math.abs(getVelocity().getX()) < MAXIMUM_WALK_SPEED) 
-			applyForce(getGroundContactVector().perpendicularCW().scalarMultiplication((GROUND_MOVE_FORCE * getScale()) * Math.signum(getDirection())));
+			applyForce(getGroundContactVector().perpendicularCW()
+					.scalarMultiplication((GROUND_MOVE_FORCE * getScale()) 
+							* Math.signum(getDirection())));
 
 	}
 	

@@ -33,7 +33,8 @@ public class Animation implements Cloneable {
 	 * @param indices the sequence of frame indices 
 	 * @param durationTime the duration time for every frame
 	 */
-	public Animation(String animId, int[] indices, double durationTime, boolean loop){
+	public Animation(String animId, int[] indices, 
+					 double durationTime, boolean loop){
 		frames = new Frame[indices.length];
 		
 		for(int i = 0; i < indices.length; i ++){

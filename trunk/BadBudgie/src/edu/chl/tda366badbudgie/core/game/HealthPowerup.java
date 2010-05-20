@@ -29,8 +29,10 @@ public class HealthPowerup extends AbstractCollidable {
 	 * @param hp
 	 */
 	public HealthPowerup(Vector position, Vector size, boolean stationary,
-			Sprite sprite, Polygon collisionData, double friction, double elasticity, int hp) {
-		super(position, size, stationary, sprite, collisionData, friction, elasticity);
+			Sprite sprite, Polygon collisionData, double friction,
+			double elasticity, int hp) {
+		super(position, size, stationary, sprite, collisionData, friction, 
+				elasticity);
 		
 		setHealthPoints(hp);
 		

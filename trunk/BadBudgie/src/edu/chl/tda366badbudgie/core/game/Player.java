@@ -327,10 +327,13 @@ public class Player extends AbstractUnit {
 		if (		otherClass.equals(TerrainSection.class)
 				||	otherClass.equals(Obstacle.class) ) {
 			if (mtv.getY() > 0) {
-				// Player has "ground" beneath his feet
+				// Player has "ground" beneath his feet, set ground contact 
+				// vector to the mean of new and any current
 				setGroundContactVector(getGroundContactVector().add(
-						mtv.normalize().scalarMultiplication(other.getFriction() + 0.000001)
-						.scalarDivision(2))); // +0.000001 to avoid a zero-length vector in case of zero friction
+						mtv.normalize()
+						.scalarMultiplication(other.getFriction() + 0.000001)
+						.scalarDivision(2))); // +0.000001 to avoid a 
+								//zero-length vector in case of zero friction
 				flying = false;
 			}
 		}
@@ -354,7 +357,8 @@ public class Player extends AbstractUnit {
 				}
 				
 				// Total transfer of momentum
-				applyForce(p.getVelocity().scalarMultiplication(p.getMass()/getMass()));
+				applyForce(p.getVelocity()
+						.scalarMultiplication(p.getMass()/getMass()));
 			}
 		}
 	}
