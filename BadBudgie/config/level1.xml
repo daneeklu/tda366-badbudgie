@@ -383,10 +383,10 @@
 		<terrain x="3000" y="110" sprite="asphalt1" friction="1" elasticity="0.0" resolution="0.009">
 			<surface type="rectangle" width="20" height ="70" />
 		</terrain>
-		<terrain x="2920" y="110" sprite="rubber" friction="1" elasticity="20.0" resolution="0.004">
+		<terrain x="2920" y="110" sprite="rubber" friction="1" elasticity="200.0" resolution="0.004">
 			<surface type="rectangle" width="30" height ="120" />
 		</terrain>
-		<terrain x="2950" y="110" sprite="rubber" friction="1" elasticity="20.0" resolution="0.004">
+		<terrain x="2950" y="110" sprite="rubber" friction="1" elasticity="200.0" resolution="0.004">
 			<surface type="rectangle" width="30" height ="90" />
 		</terrain>
 		

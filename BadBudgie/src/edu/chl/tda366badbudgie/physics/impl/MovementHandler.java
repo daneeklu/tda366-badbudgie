@@ -33,6 +33,11 @@ public class MovementHandler {
 				ago.setVelocity(ago.getVelocity()
 						.scalarDivision(ago.getAirResistance()));
 				
+				//Limit velocity
+				if (ago.getVelocity().getLength() > ago.getMaxVelocity())
+					ago.setVelocity(ago.getVelocity().normalize()
+							.scalarMultiplication(ago.getMaxVelocity()));
+				
 				// Apply gravity
 				ago.applyForce(new Vector(0, -Physics.g * ago.getMass()));
 				
@@ -44,7 +49,7 @@ public class MovementHandler {
 				ago.setPosition(ago.getPosition().add(ago.getVelocity()));
 				
 				// Reset the force on the object
-				ago.setForce(new Vector(0, 0));
+				ago.setForce(new Vector());
 			}
 			
 		}
