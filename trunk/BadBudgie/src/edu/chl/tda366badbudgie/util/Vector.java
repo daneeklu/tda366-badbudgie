@@ -52,10 +52,10 @@ public class Vector {
 	 */
 	public double getLength() {
 		if (x == 0) {
-			return y;
+			return Math.abs(y);
 		}
 		else if (y == 0) {
-			return x;
+			return Math.abs(x);
 		}
 		
 		return Math.sqrt(x * x + y * y);
