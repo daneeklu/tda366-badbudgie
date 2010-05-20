@@ -27,6 +27,8 @@ public abstract class AbstractGameObject implements Cloneable {
 	private double scale = 1;
 	private boolean stationary;
 	private double airResistance = 1.001;
+	private double maxVelocity = 72;
+	
 	
 	private double rotation = 0;
 	
@@ -327,6 +329,22 @@ public abstract class AbstractGameObject implements Cloneable {
 	 */
 	public double getRotation() {
 		return rotation;
+	}
+
+	/**
+	 * Sets the maximum velocity of the object.
+	 * @param maxVelocity the maxVelocity to set
+	 */
+	public void setMaxVelocity(double maxVelocity) {
+		this.maxVelocity = maxVelocity;
+	}
+
+	/**
+	 * Returns the maximum velocity of the object.
+	 * @return the maxVelocity
+	 */
+	public double getMaxVelocity() {
+		return maxVelocity;
 	}
 	
 }
