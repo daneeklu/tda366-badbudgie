@@ -342,9 +342,6 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		GLUT glut = new GLUT();
 		
 		gl.glColor3d(1.0,1.0,1.0);
-		System.out.println(text);
-		System.out.println(-width / 2 + x + ((float) cameraPosition.getX()));
-		System.out.println(height / 2 - y - 30 + ((float) cameraPosition.getY()));
 		gl.glRasterPos2d(-width / 2 + x + ((float) cameraPosition.getX()),
 						 height / 2 - y - 30 + ((float) cameraPosition.getY()));
 		
@@ -522,17 +519,12 @@ public class GLGraphics implements GLEventListener, IGraphics{
 		double width = this.width/2;
 		
 		gl.glColor3d(1.0,1.0,1.0);
-		
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glBegin(GL.GL_QUADS);
-		
-
-		
 		gl.glColor3d(((double) color.getRed()) / 256, 
 				((double) color.getGreen()) / 256, 
 				((double) color.getBlue()) / 256);
-		
-		
+
 		gl.glVertex2d(-width + xPos + camPosX, height + yPos-r.getY() + camPosY);
 		gl.glVertex2d(-width + xPos-r.getX() + camPosX, height + yPos-r.getY() + camPosY);
 		gl.glVertex2d(-width + xPos-r.getX() + camPosX, height + yPos + camPosY);

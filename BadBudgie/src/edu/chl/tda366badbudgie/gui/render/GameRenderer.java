@@ -92,7 +92,7 @@ public class GameRenderer {
 		
 		
 		/*
-		 * Calculate the correct coordinates for the HUD position.
+		 * Coordinates for the HUD position.
 		 */
 		double hudXPos = 30;
 		double hudYPos = -50;
