@@ -90,59 +90,73 @@ public class GameRenderer {
 		
 		int health = gameRound.getPlayer().getHealth();
 		
-		int xPos;
-		xPos = (int)(g.getCanvas().getWidth()*0.12);
 		
-		//This is health converted to a multiple of 2.55 to make the 
-		//color of the health bar right
+		/*
+		 * Calculate the correct coordinates for the HUD position.
+		 */
+		double hudXPos = 30;
+		double hudYPos = -50;
+		
+		
+		/*
+		 * Health converted to a multiple of 2.55 to make the 
+		 * color of the health bar right.
+		 * Also adds 1 to all values to secure that no division with zero
+		 * will happen.
+		 */
+		
 		if(health<0){
 			health = 0;
 		}
-		int healthHigh = (int)(health*2.55);
-		int healthLow = (int)((100-health)*2.55);
+		int healthHigh = (int)(health*2.55)+1;
+		int healthLow = (int)(((100-health)*2.55)+1);
 		
-		//Depending on how much health the player has, it will change color. 
-		//Also adds 1 (one) to all values to secure that no division with zero 
-		//will happen. 
-		Color c1 = new Color(healthLow+1, healthHigh+1, 1);
+		/*
+		 * Depending on how much health the player has, it will change color.
+		 */ 
+		
+		Color c1 = new Color(healthLow, healthHigh, 1);
+
 		
 		//Draw the health bar Background
 		g.drawColoredRect(
 				new Rectangle(400, 55), 
 				Color.BLACK, 
-				gameRound.getPlayer().getX()-400,
-				gameRound.getPlayer().getY()+200);
-		//Draws the energy bar Background
-		g.drawColoredRect(
-				new Rectangle(400, 55),
-				Color.BLACK,
-				gameRound.getPlayer().getX()-400,
-				gameRound.getPlayer().getY()+120);
-
+				hudXPos,
+				hudYPos);		
+		
 		//Draw the health bar
 		g.drawColoredRect(
 				new Rectangle(health*4, 55), 
 				c1, 
-				gameRound.getPlayer().getX()-400,
-				gameRound.getPlayer().getY()+200);
+				hudXPos,
+				hudYPos);
+		
+		//Draws Health text
+		g.drawText("Health", hudXPos, 1, 6);
+		g.drawText(health + "/100", hudXPos, 15, 6);
+		
+		
+		//To get the Y distance between the Health and Energy bars
+		hudYPos -= 100;
+		
+		//Draws the energy bar Background
+		g.drawColoredRect(
+				new Rectangle(400, 55),
+				Color.BLACK,
+				hudXPos,
+				hudYPos);
+		
 		//Draws the energy bar
 		g.drawColoredRect(
 				new Rectangle(gameRound.getPlayer().getFlyingEnergy()*4, 55),
 				Color.GRAY,
-				gameRound.getPlayer().getX()-400,
-				gameRound.getPlayer().getY()+120);
-		
-		//Draws Health text
-		g.drawText("Health", xPos, 53, 6);
-		g.drawText(health + "/100", xPos, 68, 6);
-		
+				hudXPos,
+				hudYPos);
+
 		//Draws Energy text
-		g.drawText("Energy", xPos, 133, 6);
-		g.drawText((int)gameRound.getPlayer().getFlyingEnergy() + "/100", xPos,
-				148, 6);
-		
-		//Draws the score points
-		//g.drawText("Current score " + gameRound.getScore(), 600, 50, 5);
+		g.drawText("Energy", hudXPos, 101, 6);
+		g.drawText((int)gameRound.getPlayer().getFlyingEnergy() + "/100", hudXPos, 117, 6);
 		
 	}
 
