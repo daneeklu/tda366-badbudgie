@@ -12,9 +12,7 @@ import javax.imageio.ImageIO;
 
 /**
  * SplashScreen
- * 
- * TEMPORARY, WILL PROBABLY BE ALTERED.
- * 
+ *  
  * @author jesper
  *
  */
@@ -34,7 +32,7 @@ public class SplashScreen extends JFrame {
 		
 		try {
 			
-			BufferedImage img = ImageIO.read(new File("res/splashscreen.png"));
+			BufferedImage img = ImageIO.read(new File("res/textures/splashscreen.png"));
 			image = img;
 			this.repaint();
 			

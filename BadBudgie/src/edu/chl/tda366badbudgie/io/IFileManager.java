@@ -1,8 +1,5 @@
 package edu.chl.tda366badbudgie.io;
 
-import java.awt.image.BufferedImage;
-import java.util.Map;
-
 /**
  * An interface for loading all assets
  * used by the game.
@@ -19,8 +16,4 @@ public interface IFileManager {
 	 */
 	public void loadData(String configPath);
 	
-	/**
-	 * Returns loaded image data.
-	 */
-	public Map<String, BufferedImage> getImageData();
 }
