@@ -23,9 +23,9 @@ public class TerrainSection extends AbstractCollidable {
 	private double texRes = 0.0005;
 
 	/**
-	 * Creates a new TerrainQuad from the given polygon and properties.
+	 * Creates a new Terrain instance from the given polygon and properties.
 	 * 
-	 * @param vertices list of vectors representing the vertices of the quad.
+	 * @param vertices list of vectors representing the vertices of the polygon.
 	 * @param friction 
 	 * @param elasticity
 	 */

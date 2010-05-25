@@ -4,287 +4,379 @@
 	<!--The starting location of the player. -->
 	<playerposition x="100" y="20"/>
 	
-	<!--World scale, different strokes for different levels-->
-	<worldscale scale="1" />
+	<!--Defined game objects-->
+	<defobjects>
 	
-	<!--Sprites used in the level -->
-	<sprites>
-		<sprite id="grass1" animated="false" textureid="grass1" />
-		
-		<sprite id="grass2" animated="false" textureid="grass2" />
-		
-		<sprite id="rock" animated="false" textureid="rock" />
-		
-		<sprite id="rocktex" animated="false" textureid="rocktex" />
-		
-		<sprite id="mud" animated="false" textureid="mud1" />
-		
-		<sprite id="asphalt1" animated="false" textureid="asphalt1" />
-		
-		<sprite id="ice1" animated="false" textureid="ice1" />
-		
-		<sprite id="catgreen" animated="true" textureid="enemy">
-			<segments x="4" y="4" />
-			<animation id="run" duration="5" indices="4,5,6,7" />
-			<animation id="idle" duration="0" indices="0" />
-		</sprite>
-		
-		<sprite id="catghost" animated="true" textureid="enemy2">
-			<segments x="4" y="4" />
-			<animation id="run" duration="2" indices="4,5,6,7" />
-			<animation id="idle" duration="0" indices="0" />
-		</sprite>
-		
-		<sprite id="reagan" animated="false" textureid="reagan" />
-		
-		<sprite id="healthpack" animated="false" textureid="healthpack" />
-		
-	</sprites>
-	
-	<!--Animations used by sprites * UNUSED FOR NOW! * -->
-	<animations>
-		<animation id="run" duration="5" indices="4,5,6,7" />
-		<animation id="idle" duration="0" indices="0" />
-	</animations>
-	
-	<!--Defined collision data-->
-	<collisiondata>
-		<!--<col id="cat" type="polygon">
-			<vector x="-20" y="40" />
-			<vector x="-30" y="20" />
-			<vector x="-30" y="0" />
-			<vector x="-10" y="-40" />
-			<vector x="30" y="-40" />
-			<vector x="40" y="0" />
-			<vector x="30" y="40" />
-		</col>-->
-		<col id="cat" type="rectangle" width="45" height="70" radius="20" />
-		
-		<col id="rock" type="polygon">
-			<vector x="-20" y="15" />
-			<vector x="-30" y="0" />
-			<vector x="-20" y="-22" />
-			<vector x="20" y="-22" />
-			<vector x="30" y="0" />
-			<vector x="20" y="15" />
-		</col>
-		
-		<col id="test" type="rectangle" width="100" height="100" />
-	</collisiondata>
-	
-	<!--Defined game objects MAY BE REVISED-->
-	<definedobjects>
-		<object obid="catsoldier" type="enemy" colid="cat" spriteid="catgreen" friction="0.5" elasticity="0.4" damage="10" direction="-1" sizeX="100" sizeY="100"/>
-		<object obid="catghost" type="enemy" colid="cat" spriteid="catghost" friction="1" elasticity="0" damage="35" direction="1" sizeX="100" sizeY="100"/>
-		<object obid="smoothrock" type="obstacle" stationary="false" colid="rock" spriteid="rock" friction="0.2" elasticity="0.2" sizeX="100" sizeY="100" />
-		<object obid="reaganexit" type="exit" colid="test" spriteid="reagan" sizeX="100" sizeY="100" />
-		<object obid="healthpack" type="healthpack" colid="test" spriteid="healthpack" sizeX="100" sizeY="100" healthamount="30" />
-	</definedobjects>
+		<enemy 
+			id="cat"
+			friction="0.5" 
+			elasticity="0.4" 
+			damage="10" 
+			direction="-1" 
+			health="50"
+			mass="2"
+			scale="1"
+			stationary="false">
+			<coldata><rectangle width="45" height="70" /></coldata>
+			<size x="100" y="100" />
+			<sprite animated="true" textureid="enemy">
+				<segments x="4" y="4" />
+				<animation id="run" duration="5" indices="4,5,6,7" />
+				<animation id="idle" duration="0" indices="0" />
+			</sprite>
+			<position x="0" y="0" />
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+		</enemy>
+	</defobjects>
 	
 	<!--placed game objects-->
-	<placedobjects>
+	<instobjects>
 		
-		<gameobject id="reaganexit" scale="1">
+		<levelexit
+			friction="0.5" 
+			elasticity="0.4" 
+			mass="2"
+			scale="1"
+			stationary="true">
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+			<size x="100" y="100" />
 			<position x="2950" y="440" />
-		</gameobject>
+			<sprite animated="false" textureid="reagan" />
+			<coldata><rectangle width="100" height="100" /></coldata>
+		</levelexit>
 		
-		<gameobject id="catsoldier" scale="1">
+		<enemy target="cat" scale="1">
 			<position x="450" y="100" />
-		</gameobject>
+		</enemy>
 		
-		<gameobject id="catsoldier" scale="1.2">
+		<enemy target="cat" scale="1.2">
 			<position x="750" y="100" />
-		</gameobject>
+		</enemy>
 		
-		<gameobject id="catsoldier" scale="1.4">
+		<enemy target="cat" scale="1.4">
 			<position x="1050" y="300" />
-		</gameobject>
+		</enemy>
 		
-		<gameobject id="catsoldier" scale="1.6">
+		<enemy target="cat" scale="1.6">
 			<position x="1350" y="300" />
-		</gameobject>
+		</enemy>
 		
-		<gameobject id="catsoldier" scale="2.5">
+		<enemy target="cat" scale="2.5" health="500">
 			<position x="2200" y="300" />
-		</gameobject>
+		</enemy>
 		
-		<gameobject id="healthpack" scale="0.4">
-			<position x="2860" y="300" />
-		</gameobject>
+		<healthpowerup
+			friction="0.5" 
+			elasticity="0.0"  
+			mass="2"
+			scale="0.5"
+			healthpoints="30" 
+			stationary="false">
+			<sprite animated="false" textureid="healthpack" />
+			<size x="100" y="100" />
+			<position x="2900" y="50" />
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+			<coldata><rectangle width="100" height="100" /></coldata>
+		</healthpowerup>
 		
-	</placedobjects>
+	</instobjects>
+
+	<!--Defined Terrain objects-->
+	<defterrain>
+		
+		<terrain
+			id="roundgrass"
+			mass="0"
+			friction="0.2"
+			elasticity="0.05"
+			texres="0.0015"
+			scale="1"
+			stationary="true">
+			<sprite animated="false" textureid="grass2" />
+			<size x="0" y="0" />
+			<position x="0" y="0" />
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+			<coldata><roundedrectangle width="70" height="35" radius="15" resolution="2" /></coldata>
+		</terrain>
+		
+		<terrain
+			id="rock"
+			mass="0"
+			friction="1"
+			elasticity="0.0"
+			texres="0.0015"
+			scale="1"
+			stationary="true">
+			<sprite animated="false" textureid="rocktex" />
+			<size x="0" y="0" />
+			<position x="0" y="0" />
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+			<coldata><rectangle width="100" height="100" /></coldata>
+		</terrain>
+		
+		<terrain
+			id="mud"
+			mass="0"
+			friction="0.35"
+			elasticity="0.25"
+			texres="0.0015"
+			scale="1"
+			stationary="true">
+			<sprite animated="false" textureid="mud1" />
+			<size x="0" y="0" />
+			<position x="0" y="0" />
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+			<coldata><rectangle width="100" height="100" /></coldata>
+		</terrain>
+		
+		<terrain
+			id="trampoline"
+			mass="0"
+			friction="0.8"
+			elasticity="12.0"
+			texres="0.0015"
+			scale="1"
+			stationary="true">
+			<sprite animated="false" textureid="rubber" />
+			<size x="0" y="0" />
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+			<position x="2500" y="25" />
+			<coldata><rectangle width="140" height="20" /></coldata>
+		</terrain>
+		
+		<terrain
+			id="wire"
+			mass="0"
+			friction="0.1"
+			elasticity="0.6"
+			texres="0.0015"
+			scale="1"
+			stationary="true">
+			<sprite animated="false" textureid="asphalt1" />
+			<size x="0" y="0" />
+			<velocity x="0" y="0" />
+			<force x="0" y="0" />
+			<position x="2500" y="25" />
+			<coldata><rectangle width="140" height="10" /></coldata>
+		</terrain>
+		
+	</defterrain>
 
 	<!--Terrain segments used in the level -->
-	<terrainsections>
+	<instterrain>
 		
-		<!--ICE-->
-		<terrain x="300" y="100" sprite="grass2" friction="0.1" elasticity="0.0" resolution="0.0015">
-			<surface type="roundrectangle" width="70" height="35" radius="15" />
+		<!--SLIPPERY GRASS-->
+		<terrain target="roundgrass">
+			<position x="300" y="100" />
 		</terrain>
 		
-		<terrain x="600" y="120" sprite="grass2" friction="0.1" elasticity="0.0" resolution="0.0015">
-			<surface type="roundrectangle" width="70" height="35" radius="15" />
+		<terrain target="roundgrass">
+			<position x="600" y="120" />
 		</terrain>
 		
-		<terrain x="900" y="140" sprite="grass2" friction="0.1" elasticity="0.0" resolution="0.0015">
-			<surface type="roundrectangle" width="70" height="35" radius="15" />
+		<terrain target="roundgrass">
+			<position  x="900" y="140" />
 		</terrain>
 		
-		<terrain x="1200" y="180" sprite="grass2" friction="0.1" elasticity="0.0" resolution="0.0015">
-			<surface type="roundrectangle" width="70" height="35" radius="15" />
+		<terrain target="roundgrass">
+			<position x="1200" y="180" />
 		</terrain>
 		
-		<terrain x="1500" y="200" sprite="grass2" friction="0.1" elasticity="0.0" resolution="0.0015">
-			<surface type="roundrectangle" width="70" height="35" radius="15" />
+		<terrain target="roundgrass">
+			<position x="1500" y="200" />
 		</terrain>
 		
 		<!--ROCKS-->
-		<terrain x="300" y="50" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="70" height="100" />
+		<terrain target="rock">
+			<position x="300" y="50" />
+			<coldata><rectangle width="70" height="100" /></coldata>
 		</terrain>
 		
-		<terrain x="600" y="60" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="70" height="120" />
+		<terrain target="rock">
+			<position  x="600" y="60" />
+			<coldata><rectangle width="70" height="120" /></coldata>
 		</terrain>
 		
-		<terrain x="900" y="70" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="70" height="140" />
+		<terrain target="rock">
+			<position x="900" y="70" />
+			<coldata><rectangle width="70" height="140" /></coldata>
 		</terrain>
 		
-		<terrain x="1200" y="90" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="70" height="180" />
+		<terrain target="rock">
+			<position x="1200" y="90" />
+			<coldata><rectangle width="70" height="180" /></coldata>
 		</terrain>
 		
-		<terrain x="1500" y="100" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="70" height="200" />
+		<terrain target="rock">
+			<position x="1500" y="100" />
+			<coldata><rectangle width="70" height="200" /></coldata>
 		</terrain>
 		
 		<!--MUD-->
-		
-		<terrain x="265" y="0" sprite="mud" friction="0.4" elasticity="0.2" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="75" />
-				<vector x="-40" y="0" />
-				<vector x="0" y="0" />
-			</surface>
+		<terrain target="mud">
+			<position x="265" y="0" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="75" />
+					<vector x="-40" y="0" />
+					<vector x="0" y="0" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
-		<terrain x="265" y="0" sprite="mud" friction="0.4" elasticity="0.2" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="50" />
-				<vector x="-60" y="0" />
-				<vector x="0" y="0" />
-			</surface>
+		<terrain target="mud">
+			<position x="265" y="0" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="50" />
+					<vector x="-60" y="0" />
+					<vector x="0" y="0" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
-		<terrain x="265" y="0" sprite="mud" friction="0.4" elasticity="0.2" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="20" />
-				<vector x="-100" y="0" />
-				<vector x="0" y="0" />
-			</surface>
+		<terrain target="mud">
+			<position x="265" y="0" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="20" />
+					<vector x="-100" y="0" />
+					<vector x="0" y="0" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
-		<terrain x="327.5" y="0" sprite="mud" friction="0.4" elasticity="0.2" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="30" y="10" />
-				<vector x="90" y="20" />
-				<vector x="228" y="15" />
-				<vector x="245" y="0" />
-			</surface>
+		<terrain target="mud">
+			<position x="327.5" y="0" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="0" />
+					<vector x="30" y="10" />
+					<vector x="90" y="20" />
+					<vector x="228" y="15" />
+					<vector x="245" y="0" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
-		<terrain x="627.5" y="0" sprite="mud" friction="0.4" elasticity="0.2" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="60" y="40" />
-				<vector x="130" y="35" />
-				<vector x="200" y="15" />
-				<vector x="245" y="0" />
-			</surface>
+		<terrain target="mud">
+			<position  x="627.5" y="0" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="0" />
+					<vector x="60" y="40" />
+					<vector x="130" y="35" />
+					<vector x="200" y="15" />
+					<vector x="245" y="0" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
-		<terrain x="927.5" y="0" sprite="mud" friction="0.4" elasticity="0.2" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="30" y="10" />
-				<vector x="90" y="20" />
-				<vector x="228" y="15" />
-				<vector x="245" y="0" />
-			</surface>
+		<terrain target="mud">
+			<position x="927.5" y="0" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="0" />
+					<vector x="30" y="10" />
+					<vector x="90" y="20" />
+					<vector x="228" y="15" />
+					<vector x="245" y="0" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
-		<terrain x="1227.5" y="0" sprite="mud" friction="0.4" elasticity="0.2" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="30" y="20" />
-				<vector x="90" y="30" />
-				<vector x="198" y="15" />
-				<vector x="245" y="0" />
-			</surface>
+		<terrain target="mud">
+			<position x="1227.5" y="0" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="0" />
+					<vector x="30" y="20" />
+					<vector x="90" y="30" />
+					<vector x="198" y="15" />
+					<vector x="245" y="0" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
 		<!--TRAMPOLINE-->
-		<terrain x="2400" y="25" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="30" height="80" />
+		<terrain target="rock">
+			<position x="2400" y="25" />
+			<coldata><rectangle width="30" height="80" /></coldata>
 		</terrain>
 		
-		<terrain x="2600" y="25" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="30" height="80" />
+		<terrain target="rock">
+			<position x="2600" y="25" />
+			<coldata><rectangle width="30" height="80" /></coldata>
 		</terrain>
 		
-		<terrain x="2500" y="25" sprite="ice1" friction="1" elasticity="8.0" resolution="0.0015">
-			<surface type="rectangle" width="140" height="10" />
-		</terrain>
+		<terrain target="trampoline" />
 		
 		<!--TRAMP-WIRES-->
-		<terrain x="2415" y="65" sprite="asphalt1" friction="0.2" elasticity="0.5" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="15" y="-35" />
-				<vector x="15" y="-40" />
-				<vector x="0" y="-5" />
-			</surface>
+		<terrain target="wire">
+			<position x="2415" y="65" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="0" />
+					<vector x="15" y="-35" />
+					<vector x="15" y="-40" />
+					<vector x="0" y="-5" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
-		<terrain x="2585" y="65" sprite="asphalt1" friction="0.2" elasticity="0.5" resolution="0.0015">
-			<surface type="polygon">
-				<vector x="0" y="0" />
-				<vector x="-15" y="-35" />
-				<vector x="-15" y="-40" />
-				<vector x="0" y="-5" />
-			</surface>
+		<terrain target="wire">
+			<position x="2585" y="65" />
+			<coldata>
+				<polygon>
+					<vector x="0" y="0" />
+					<vector x="-15" y="-35" />
+					<vector x="-15" y="-40" />
+					<vector x="0" y="-5" />
+				</polygon>
+			</coldata>
 		</terrain>
 		
 		<!--EXIT SECLUSION-->
-		<terrain x="2850" y="350" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="300" height="50" />
+		<terrain target="rock">
+			<position x="2850" y="350" />
+			<coldata><rectangle width="300" height="50" /></coldata>
 		</terrain>
 		
-		<terrain x="2660" y="525" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="80" height="400" />
+		<terrain target="rock">
+			<position x="2660" y="525" />
+			<coldata><rectangle width="80" height="400" /></coldata>
 		</terrain>
 		
 		<!--OVERLAY & BOUNDARY RECTANGLES-->
 		<!--GROUND-->
-		<terrain x="1500" y="-250" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="3000" height="500" />
+		<terrain target="rock">
+			<position x="1500" y="-250" />
+			<coldata><rectangle width="3000" height="500" /></coldata>
 		</terrain>
 		
 		<!--TOP-->
-		<terrain x="1500" y="1200" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="3000" height="500" />
+		<terrain target="rock">
+			<position x="1500" y="1200" />
+			<coldata><rectangle width="3000" height="500" /></coldata>
 		</terrain>
 		
 		<!--LEFT WALL-->
-		<terrain x="-250" y="300" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="500" height="1000" />
+		<terrain target="rock">
+			<position x="-250" y="300" />
+			<coldata><rectangle width="500" height="1000" /></coldata>
 		</terrain>
 		
 		<!--RIGHT WALL-->
-		<terrain x="3250" y="300" sprite="rocktex" friction="1" elasticity="0.0" resolution="0.0015">
-			<surface type="rectangle" width="500" height="1800" />
+		<terrain target="rock">
+			<position x="3250" y="300" />
+			<coldata><rectangle width="500" height="1000" /></coldata>
 		</terrain>
-	</terrainsections>
+	</instterrain>
 </leveldata>

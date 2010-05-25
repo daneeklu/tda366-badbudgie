@@ -56,15 +56,6 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 			double elasticity) {
 		super(position, size, stationary, sprite);
 		
-		// Make sure the collision data is valid,
-		// the polygon must be convex.
-		if (!Polygon.checkConvexity(collisionData)) {
-			throw new IllegalArgumentException("Collisiondata polygon " +
-					"is not convex.");
-		} else if (!Polygon.checkCCW(collisionData)) {
-			Collections.reverse(collisionData.getVertices());
-		}
-		
 		setCollisionData(collisionData);
 		setFriction(friction);
 		setElasticity(elasticity);
@@ -129,6 +120,14 @@ public abstract class AbstractCollidable extends AbstractGameObject {
 	 * @param cd the collision data polygon
 	 */
 	public void setCollisionData(Polygon collisionData) {
+		// Make sure the collision data is valid,
+		// the polygon must be convex.
+		if (!Polygon.checkConvexity(collisionData)) {
+			throw new IllegalArgumentException("Collisiondata polygon " +
+					"is not convex.");
+		} else if (!Polygon.checkCCW(collisionData)) {
+			Collections.reverse(collisionData.getVertices());
+		}
 		this.collisionData = collisionData;
 	}
 	

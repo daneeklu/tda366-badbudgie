@@ -42,8 +42,8 @@ public class FlowController implements ActionListener {
 		IFileManager fileManager = new FileManager();
 		fileManager.loadData("config/config.xml");
 		
-		//1.5 second delay to avoid flashing
-		Thread.sleep(1500);
+		//0.5 second delay to avoid flashing
+		Thread.sleep(500);
 		
 		//Remove splash
 		splash.setVisible(false);
