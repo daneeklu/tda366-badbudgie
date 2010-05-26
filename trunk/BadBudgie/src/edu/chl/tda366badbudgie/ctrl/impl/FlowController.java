@@ -75,10 +75,10 @@ public class FlowController implements ActionListener {
 		
 
 		// Create a timer calling the loop method of this
-		// FlowController, at a rate of 60 frames / second.
+		// FlowController, at a rate of 50 frames / second.
 		//
-		// An interval of 1000 / 60 ms corresponds to 60 FPS
-		int interval = 1000 / 60;
+		// An interval of 1000 / 50 ms corresponds to 50 FPS
+		int interval = 1000 / 50;
 		Timer timer = new Timer(interval, (ActionListener) (this));
 		timer.start();
 		
