@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.impl.parsers.util;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import java.util.LinkedList;
 import java.util.List;

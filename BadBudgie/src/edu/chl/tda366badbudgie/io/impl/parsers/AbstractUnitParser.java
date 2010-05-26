@@ -1,10 +1,8 @@
-package edu.chl.tda366badbudgie.io.impl.parsers.game;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import org.w3c.dom.Element;
 
 import edu.chl.tda366badbudgie.core.game.AbstractUnit;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
 
 public abstract class AbstractUnitParser extends AbstractCollidableParser {
 

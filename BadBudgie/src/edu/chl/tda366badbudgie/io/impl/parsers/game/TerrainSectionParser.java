@@ -3,8 +3,9 @@ package edu.chl.tda366badbudgie.io.impl.parsers.game;
 import org.w3c.dom.Element;
 
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.AbstractCollidableParser;
+import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 
 public class TerrainSectionParser extends AbstractCollidableParser{
 

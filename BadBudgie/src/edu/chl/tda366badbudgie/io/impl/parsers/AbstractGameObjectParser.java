@@ -1,13 +1,8 @@
-package edu.chl.tda366badbudgie.io.impl.parsers.game;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import org.w3c.dom.Element;
 
 import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
-import edu.chl.tda366badbudgie.io.impl.parsers.AbstractElementParser;
-import edu.chl.tda366badbudgie.io.impl.parsers.geom.VectorParser;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.SpriteParser;
 import edu.chl.tda366badbudgie.util.Sprite;
 import edu.chl.tda366badbudgie.util.Vector;
 

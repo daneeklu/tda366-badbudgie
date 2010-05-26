@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList;
 
 import edu.chl.tda366badbudgie.core.menu.Menu;
 import edu.chl.tda366badbudgie.io.impl.parsers.AbstractDocumentParser;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 
 /**
  * Creates lists of Menu instances from xml-documents.

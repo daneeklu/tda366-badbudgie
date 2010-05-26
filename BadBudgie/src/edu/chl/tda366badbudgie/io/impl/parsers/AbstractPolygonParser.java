@@ -1,9 +1,7 @@
-package edu.chl.tda366badbudgie.io.impl.parsers.geom;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import org.w3c.dom.Element;
 
-import edu.chl.tda366badbudgie.io.impl.parsers.AbstractElementParser;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
 import edu.chl.tda366badbudgie.util.Polygon;
 
 public abstract class AbstractPolygonParser extends AbstractElementParser<Polygon> {

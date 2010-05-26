@@ -2,7 +2,8 @@ package edu.chl.tda366badbudgie.io.impl.parsers.game;
 
 import org.w3c.dom.Element;
 import edu.chl.tda366badbudgie.core.game.Enemy;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.AbstractUnitParser;
+import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 import edu.chl.tda366badbudgie.util.Vector;
 
 public class EnemyParser extends AbstractUnitParser {
