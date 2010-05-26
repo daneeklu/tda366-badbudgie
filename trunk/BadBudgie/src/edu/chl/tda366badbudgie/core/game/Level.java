@@ -224,4 +224,12 @@ public class Level implements Cloneable {
 		return levelNumber;
 	}
 	
+	/**
+	 * Set the level number for this level
+	 * @param levelNumber
+	 */
+	public void setNumber(int levelNumber){
+		this.levelNumber = levelNumber;
+	}
+	
 }

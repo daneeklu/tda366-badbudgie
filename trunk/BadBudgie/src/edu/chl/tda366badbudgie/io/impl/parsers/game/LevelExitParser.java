@@ -4,6 +4,7 @@ import org.w3c.dom.Element;
 
 import edu.chl.tda366badbudgie.core.game.LevelExit;
 import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.util.Vector;
 
 public class LevelExitParser extends AbstractCollidableParser{
 
@@ -13,7 +14,7 @@ public class LevelExitParser extends AbstractCollidableParser{
 
 	@Override
 	public LevelExit parseData() throws ParserException {
-		LevelExit le = new LevelExit(null);
+		LevelExit le = new LevelExit(new Vector());
 		initCollidable(le);
 		return le;
 	}

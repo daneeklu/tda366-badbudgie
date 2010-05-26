@@ -19,7 +19,7 @@ public class AnimationParser extends AbstractElementParser<Animation> {
 	@Override
 	public Animation parseData() throws ParserException {
 		
-		int duration= ElementTools.getInteger(getData(), "duration");
+		int duration = ElementTools.getInteger(getData(), "duration");
 		String animId = ElementTools.getString(getData(), "id");
 
 		String indicesStrings[] = ElementTools.getString(getData(), "indices").split(",");

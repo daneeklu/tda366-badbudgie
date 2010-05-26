@@ -14,20 +14,17 @@ public class VectorParser extends AbstractElementParser<Vector> {
 	}
 
 	@Override
-	public Vector parseData() {
-		Element source = getData();
-		double x=0, y=0;
+	public Vector parseData() throws ParserException {
 		try{
+
+			double x=0, y=0;
+			x=ElementTools.getDouble(getData(), "x");
+			y=ElementTools.getDouble(getData(), "y");
 			
-			x=ElementTools.getDouble(source, "x");
-			y=ElementTools.getDouble(source, "y");
-			
-		} catch(NumberFormatException ne){
-			ne.printStackTrace();
-		} catch (ParserException e) {
-			e.printStackTrace();
+			return new Vector(x, y);	
+		} catch(Exception e){
+			throw new ParserException("Invalid vector.");
 		}
-		return new Vector(x, y);
 	}
 	
 }

@@ -46,7 +46,7 @@ public class LevelParser extends AbstractDocumentParser<Level>{
 		Vector startPos = new Vector(ElementTools.getDouble(playerPos, "x"), ElementTools.getDouble(playerPos, "y"));
 		
 		//Init level
-		Level level = new Level(1, startPos);
+		Level level = new Level(2, startPos);
 		
 		//Loop through terrain elements, call parsers and add.
 		List<Element> terrainSections = ElementTools.

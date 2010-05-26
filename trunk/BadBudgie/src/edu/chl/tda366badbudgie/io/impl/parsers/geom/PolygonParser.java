@@ -6,6 +6,7 @@ import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 
@@ -16,7 +17,7 @@ public class PolygonParser extends AbstractPolygonParser {
 	}
 
 	@Override
-	public Polygon parseData() {
+	public Polygon parseData() throws ParserException {
 
 		Element pgonData = getData();
 		NodeList vectors = pgonData.getElementsByTagName("vector");
