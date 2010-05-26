@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.parsers.menu;
+package edu.chl.tda366badbudgie.io.impl.parsers.menu;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import edu.chl.tda366badbudgie.core.menu.Menu;
-import edu.chl.tda366badbudgie.io.parsers.AbstractDocumentParser;
-import edu.chl.tda366badbudgie.io.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.AbstractDocumentParser;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
 
 /**
  * Creates lists of Menu instances from xml-documents.

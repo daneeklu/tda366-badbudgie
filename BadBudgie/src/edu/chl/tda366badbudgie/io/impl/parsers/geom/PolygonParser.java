@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.parsers.geom;
+package edu.chl.tda366badbudgie.io.impl.parsers.geom;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.parsers.game;
+package edu.chl.tda366badbudgie.io.impl.parsers.game;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.w3c.dom.Element;
 import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.game.Level;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
-import edu.chl.tda366badbudgie.io.parsers.AbstractDocumentParser;
-import edu.chl.tda366badbudgie.io.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.parsers.util.ParserException;
-import edu.chl.tda366badbudgie.io.parsers.util.ParserTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.AbstractDocumentParser;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserTools;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**

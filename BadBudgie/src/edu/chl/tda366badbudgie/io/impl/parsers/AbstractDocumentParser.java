@@ -1,7 +1,7 @@
-package edu.chl.tda366badbudgie.io.parsers;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 import org.w3c.dom.Document;
 
-import edu.chl.tda366badbudgie.io.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
 
 /**
  * Generic, abstract class inherited by classes parsing xml-documents.
