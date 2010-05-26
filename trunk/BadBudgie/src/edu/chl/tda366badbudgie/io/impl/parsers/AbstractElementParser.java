@@ -1,10 +1,10 @@
-private package edu.chl.tda366badbudgie.io.parsers;
+private package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.w3c.dom.Element;
 
-import edu.chl.tda366badbudgie.io.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
 
 /**
  * AbstractParser

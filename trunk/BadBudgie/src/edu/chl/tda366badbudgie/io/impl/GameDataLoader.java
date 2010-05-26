@@ -17,11 +17,11 @@ import org.xml.sax.SAXException;
 import edu.chl.tda366badbudgie.core.game.LevelManager;
 import edu.chl.tda366badbudgie.core.menu.Menu;
 import edu.chl.tda366badbudgie.core.menu.MenuManager;
-import edu.chl.tda366badbudgie.io.parsers.game.LevelParser;
-import edu.chl.tda366badbudgie.io.parsers.menu.MenuListParser;
-import edu.chl.tda366badbudgie.io.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.parsers.util.ParserException;
-import edu.chl.tda366badbudgie.io.parsers.util.ParserTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.game.LevelParser;
+import edu.chl.tda366badbudgie.io.impl.parsers.menu.MenuListParser;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserTools;
 
 
 /**

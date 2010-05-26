@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.parsers.util;
+package edu.chl.tda366badbudgie.io.impl.parsers.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.w3c.dom.Element;
 
-import edu.chl.tda366badbudgie.io.parsers.AbstractElementParser;
+import edu.chl.tda366badbudgie.io.impl.parsers.AbstractElementParser;
 
 
 public class ParserTools {
