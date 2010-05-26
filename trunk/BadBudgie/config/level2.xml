@@ -6,7 +6,6 @@
 	
 	<!--Defined game objects-->
 	<defobjects>
-	
 		<enemy 
 			id="cat"
 			friction="0.5" 
