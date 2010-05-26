@@ -11,9 +11,9 @@ import edu.chl.tda366badbudgie.core.game.AbstractGameObject;
 import edu.chl.tda366badbudgie.core.game.Level;
 import edu.chl.tda366badbudgie.core.game.TerrainSection;
 import edu.chl.tda366badbudgie.io.impl.parsers.AbstractDocumentParser;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.ParserTools;
 import edu.chl.tda366badbudgie.util.Vector;
 
 /**

@@ -7,8 +7,8 @@ import org.w3c.dom.Element;
 import edu.chl.tda366badbudgie.core.menu.Menu;
 import edu.chl.tda366badbudgie.core.menu.MenuItem;
 import edu.chl.tda366badbudgie.io.impl.parsers.AbstractElementParser;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
+import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
 public class MenuParser extends AbstractElementParser<Menu>{

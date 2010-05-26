@@ -1,8 +1,7 @@
-package edu.chl.tda366badbudgie.io.impl.parsers.util;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import org.w3c.dom.Element;
 
-import edu.chl.tda366badbudgie.io.impl.parsers.AbstractElementParser;
 import edu.chl.tda366badbudgie.util.Animation;
 
 /**

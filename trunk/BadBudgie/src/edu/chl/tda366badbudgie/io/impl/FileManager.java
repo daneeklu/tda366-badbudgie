@@ -9,7 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import edu.chl.tda366badbudgie.io.IFileManager;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
+import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 
 
 /** 

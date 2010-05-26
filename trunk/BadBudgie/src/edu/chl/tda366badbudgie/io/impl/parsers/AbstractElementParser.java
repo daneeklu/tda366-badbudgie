@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.w3c.dom.Element;
 
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
 
 /**
  * AbstractParser

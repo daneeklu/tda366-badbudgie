@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.impl.parsers.util;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import edu.chl.tda366badbudgie.io.impl.parsers.AbstractElementParser;
 import edu.chl.tda366badbudgie.util.Animation;
 import edu.chl.tda366badbudgie.util.Sprite;
 

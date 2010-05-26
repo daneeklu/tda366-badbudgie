@@ -1,4 +1,4 @@
-package edu.chl.tda366badbudgie.io.impl.parsers.game;
+package edu.chl.tda366badbudgie.io.impl.parsers;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -6,10 +6,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import edu.chl.tda366badbudgie.core.game.AbstractCollidable;
-import edu.chl.tda366badbudgie.io.impl.parsers.geom.AbstractPolygonParser;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ElementTools;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserException;
-import edu.chl.tda366badbudgie.io.impl.parsers.util.ParserTools;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
