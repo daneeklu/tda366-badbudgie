@@ -1,14 +1,21 @@
 tda366-badbudgie
 
+Bad Budgie team:
+Andreas Andersson, Daniel Eddeland, Daniel Kvarfordt, Jesper Lloyd
+
 Description
 -----------
 A platform side-scrolling game using OpenGL for rendering graphics
 
 Installing and running
 ----------------------
-This game needs JOGL (Java OpenGL bindings) to run.
-To run the game, create a directory called lib in the BadBudgie trunk folder.
-Put the "jogl.jar" and "gluegen-rt.jar" files in the folder.
+This game needs JOGL (Java OpenGL bindings) to run. First of all go to
+the JOGL web site to download and install JOGL:
+http://jogamp.org/jogl/www/
+
+1. You need to put the "jogl.jar" and "gluegen-rt.jar" files in the lib folder.
+2. If Java doesn't find the native libraries, make sure they are in the java lib path.
+ 
 
 MVC and the game loop
 ---------------------
@@ -16,7 +23,7 @@ The program uses an alternative adaption of the MVC model. In addition to
 actions causing the control to make changes to the model, a game loop is used.
 This game loop is running through a timer in the background, and at even
 intervals the loop causes game logic to update the model while also triggering
-a redraw after the update. This would happen approximately 60 times / second on
+a redraw after the update. This would happen approximately 50 times / second on
 an optimal computer. The method the timer calls is FlowController.loop().
 
 Note: the redraw is triggered at every loop call, even if the model wasn't updated.
@@ -75,4 +82,18 @@ physics:				subsystem containing functionality regarding natural laws and
 util:					general utilities package
 
 
+
+Dependencies
+------------
+The project has been verified to have no circular dependencies between packages by JDepend.
+
+
+
+Unit Tests
+----------
+We have tested the following classes, which we found most critical.
+ - CollisionHandler
+ - Polygon
+ - Vector
+They are JUnit tests, and are located in the "BadBudgie/test" folder.
 
