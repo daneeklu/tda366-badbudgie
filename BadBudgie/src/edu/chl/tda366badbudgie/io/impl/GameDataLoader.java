@@ -14,6 +14,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import edu.chl.tda366badbudgie.core.game.Level;
 import edu.chl.tda366badbudgie.core.game.LevelManager;
 import edu.chl.tda366badbudgie.core.menu.Menu;
 import edu.chl.tda366badbudgie.core.menu.MenuManager;
@@ -105,7 +106,9 @@ public class GameDataLoader {
 				db = dbFactory.newDocumentBuilder();
 				LevelParser levelParser = new LevelParser(db
 						.parse(xmlPath));
-				LevelManager.getInstance().addLevel(levelParser.parseData());
+				Level l = levelParser.parseData();
+				l.setNumber(ElementTools.getInteger(level, "nr"));
+				LevelManager.getInstance().addLevel(l);
 
 			} catch (Exception e){
 				e.printStackTrace();

@@ -28,7 +28,7 @@ public abstract class AbstractGameObjectParser extends AbstractElementParser<Abs
 		super(data);
 	}
 
-	protected Vector getNamedVector(String vectorName){
+	protected Vector getNamedVector(String vectorName) throws ParserException{
 		return (new VectorParser((Element)getData()
 				.getElementsByTagName(vectorName).item(0))).parseData();
 	}
