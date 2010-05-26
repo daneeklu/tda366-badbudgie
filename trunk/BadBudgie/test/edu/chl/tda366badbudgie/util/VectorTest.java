@@ -11,21 +11,45 @@ import edu.chl.tda366badbudgie.util.Vector;
 public class VectorTest {
 
 	
-	private Vector a, b, c;
+	private Vector a, b, c, d, e;
 	
 	@Before
 	public void init() {
-		a = new Vector(0,2);
-		b = new Vector(2,0);
-		c = new Vector(2,2);
-		
+		a = new Vector(0, 2);
+		b = new Vector(2, 0);
+		c = new Vector(2, 2);
+		d = new Vector(-1, 0);
+		e = new Vector(0, 0);
 	}
 	
 	@After
 	public void uninit() {
-		a = b = c = null;
+		a = b = c = d = e = null;
 	}
 	
+	@Test
+	public void testGetLength() {
+		
+		assertTrue(a.getLength() > 0);
+		assertTrue(b.getLength() > 0);
+		assertTrue(c.getLength() > 0);
+		assertTrue(d.getLength() > 0);
+		assertTrue(e.getLength() == 0);
+		
+	}
+	
+	@Test
+	public void testHasZeroLength() {
+
+		assertFalse(a.hasZeroLength());
+		assertFalse(b.hasZeroLength());
+		assertFalse(c.hasZeroLength());
+		assertFalse(d.hasZeroLength());
+		assertTrue(e.hasZeroLength());
+		
+	}
+	
+
 	@Test
 	public void testDotProduct() {
 		
