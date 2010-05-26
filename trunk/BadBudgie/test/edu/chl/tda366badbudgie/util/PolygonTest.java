@@ -87,6 +87,7 @@ public class PolygonTest {
 		assertTrue("Counter clockwise order.", Polygon.checkCCW(p));
 
 		Collections.reverse(vertices);
+		p = new Polygon(vertices);
 
 		assertFalse("Clockwise order", Polygon.checkCCW(p));
 	}
@@ -113,7 +114,7 @@ public class PolygonTest {
 		assertTrue("", Polygon.checkCCW(p));
 		
 		vertices.add(v2);
-		
+		p = new Polygon(vertices);
 		assertFalse(Polygon.checkConvexity(p));
 	}
 
