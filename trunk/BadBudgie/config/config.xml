@@ -54,21 +54,21 @@
 	
 	<!--Level data-->
 	<levels>
-		<level nr="1" path="config/level1.xml" />
-		<level nr="2" path="config/level2.xml" />
+		<level nr="1" path="config/level2.xml" />
+		<level nr="2" path="config/level1.xml" />
 	</levels>
 	
 		
 	<!--Class names associated with elements for parsing-->
 	<parserbindings>
-		<group path ="edu.chl.tda366badbudgie.io.parsers.game">
+		<group path ="edu.chl.tda366badbudgie.io.impl.parsers.game">
 			<binding element="terrain" class="TerrainSectionParser" />
 			<binding element="enemy" class="EnemyParser" />
 			<binding element="obstacle" class="ObstacleParser" />
 			<binding element="healthpowerup" class="HealthPowerupParser" />
 			<binding element="levelexit" class="LevelExitParser" />
 		</group>
-		<group path ="edu.chl.tda366badbudgie.io.parsers.geom">
+		<group path ="edu.chl.tda366badbudgie.io.impl.parsers.geom">
 			<binding element="polygon" class="PolygonParser" />
 			<binding element="rectangle" class="RectangleParser" />
 			<binding element="roundedrectangle" class="RoundedRectangleParser" />
