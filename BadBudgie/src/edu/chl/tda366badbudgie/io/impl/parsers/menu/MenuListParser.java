@@ -48,5 +48,4 @@ public class MenuListParser extends AbstractDocumentParser<List<Menu>>{
 		return menuL;
 	}
 
-	// TODO Auto-generated catch block
 }

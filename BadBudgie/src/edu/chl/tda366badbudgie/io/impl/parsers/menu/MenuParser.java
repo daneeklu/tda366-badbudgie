@@ -11,11 +11,15 @@ import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
 import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
+/**
+ * Creates a Menu instance from a DOM element.
+ * @author jesper
+ *
+ */
 public class MenuParser extends AbstractElementParser<Menu>{
 
 	public MenuParser(Element data) {
 		super(data);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

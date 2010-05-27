@@ -14,6 +14,7 @@ import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 
 /** 
  * A file manager, implementing the IFileManager interface.
+ * 
  * @author d.skalle
  *
  */

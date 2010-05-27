@@ -8,6 +8,12 @@ import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
 import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
+/**
+ * Creates a MenuItem instance from a DOM element.
+ * 
+ * @author jesper
+ *
+ */
 public class MenuItemParser extends AbstractElementParser<MenuItem> {
 
 	public MenuItemParser(Element data) {

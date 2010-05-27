@@ -12,6 +12,12 @@ import edu.chl.tda366badbudgie.io.impl.parsers.VectorParser;
 import edu.chl.tda366badbudgie.util.Polygon;
 import edu.chl.tda366badbudgie.util.Vector;
 
+/**
+ * Creates a Polygon instance from a DOM element.
+ * 
+ * @author jesper
+ *
+ */
 public class PolygonParser extends AbstractPolygonParser {
 
 	public PolygonParser(Element data) {

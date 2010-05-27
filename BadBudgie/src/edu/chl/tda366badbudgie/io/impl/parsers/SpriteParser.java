@@ -10,7 +10,7 @@ import edu.chl.tda366badbudgie.util.Animation;
 import edu.chl.tda366badbudgie.util.Sprite;
 
 /**
- * Creates sprite instances from elements.
+ * Creates a Sprite instance from a DOM element.
  * @author jesper
  *
  */
