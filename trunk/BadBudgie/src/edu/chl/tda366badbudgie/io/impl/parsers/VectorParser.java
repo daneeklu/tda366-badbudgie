@@ -4,6 +4,12 @@ import org.w3c.dom.Element;
 
 import edu.chl.tda366badbudgie.util.Vector;
 
+/**
+ * Creates vector instances from a DOM element.
+ * 
+ * @author jesper
+ *
+ */
 public class VectorParser extends AbstractElementParser<Vector> {
 
 	public VectorParser(Element data) {

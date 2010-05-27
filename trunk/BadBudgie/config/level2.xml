@@ -369,13 +369,13 @@
 		<!--LEFT WALL-->
 		<terrain target="rock">
 			<position x="-250" y="300" />
-			<coldata><rectangle width="500" height="1000" /></coldata>
+			<coldata><rectangle width="600" height="1700" /></coldata>
 		</terrain>
 		
 		<!--RIGHT WALL-->
 		<terrain target="rock">
-			<position x="3250" y="300" />
-			<coldata><rectangle width="500" height="1000" /></coldata>
+			<position x="3250" y="600" />
+			<coldata><rectangle width="500" height="1750" /></coldata>
 		</terrain>
 	</instterrain>
 </leveldata>

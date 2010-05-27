@@ -7,6 +7,11 @@ import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
 import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 import edu.chl.tda366badbudgie.util.RoundedRectangle;
 
+/**
+ * Creates a RoundedRectangle instance from a DOM element.
+ * @author jesper
+ *
+ */
 public class RoundedRectangleParser extends AbstractPolygonParser {
 
 	public RoundedRectangleParser(Element data) {

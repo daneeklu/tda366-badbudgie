@@ -7,6 +7,11 @@ import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
 import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 import edu.chl.tda366badbudgie.util.Rectangle;
 
+/**
+ * Creates a Rectangle instance from a DOM element.
+ * @author jesper
+ *
+ */
 public class RectangleParser extends AbstractPolygonParser {
 
 	public RectangleParser(Element data) {

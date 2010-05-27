@@ -72,6 +72,7 @@ core.game:				the part of the model related to the ingame state
 core.menu:				the part of the model related to the menu state
 
 io:						subsystem for loading assets from the file system.
+io.impl.parsers:		set of classes used to create object instances from xml
 
 ai:						subsystem for AI, has methods for controlling enemy units
 

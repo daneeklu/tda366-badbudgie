@@ -7,11 +7,16 @@ import edu.chl.tda366badbudgie.io.impl.parsers.ElementTools;
 import edu.chl.tda366badbudgie.io.impl.parsers.ParserException;
 import edu.chl.tda366badbudgie.util.Circle;
 
+/**
+ * Creates a Circle from a DOM element.
+ * 
+ * @author jesper
+ *
+ */
 public class CircleParser extends AbstractPolygonParser {
 
 	public CircleParser(Element data) {
 		super(data);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

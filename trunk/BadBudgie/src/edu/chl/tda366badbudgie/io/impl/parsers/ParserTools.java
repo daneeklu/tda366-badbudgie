@@ -7,7 +7,12 @@ import java.util.Map;
 import org.w3c.dom.Element;
 
 
-
+/**
+ * Tools used by parser classes.
+ * 
+ * @author jesper
+ *
+ */
 public class ParserTools {
 	
 	//Map holding parser names, keys are element tag names
